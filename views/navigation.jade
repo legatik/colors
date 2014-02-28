@@ -1,0 +1,12 @@
+#headerbg
+	//#login-cont-button
+		if user
+			span#login-user-txt #{user.firstName}&nbsp#{user.lastName} &nbsp
+			a(href="/logout") Logout
+		else
+			a#login-button.regist-log-button(href="#") Войти
+			a#sing-up-button.regist-log-button(href="#") Зарегистрироваться
+
+
+
+
