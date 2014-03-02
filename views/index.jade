@@ -3,11 +3,42 @@ extends layout
 
 block content
   include navigation
-  include left-column
-  include right-column
-  //!= css('style-home')
   != js('home')
-  #center-column
-    div Hello Dasha!
-
+  #myCarousel.carousel.slide(data-ride="carousel")
+    ol.carousel-indicators
+      li.active(data-target="#myCarousel",data-slide-to="0")
+      li(data-target="#myCarousel",data-slide-to="1")
+      li(data-target="#myCarousel",data-slide-to="2")
+      li(data-target="#myCarousel",data-slide-to="3")
+      li(data-target="#myCarousel",data-slide-to="4")
+    .carousel-inner
+      .item.active
+        img(src="http://i.nenuna.net/2013/03/16/15706/15706_1363442026_2.jpg")
+      .item
+        img(src="http://aptekaforte.ru/netcat_files/Image/tonymoly.jpg")
+      .item
+        img(src="http://062012.imgbb.ru/f/2/1/f213fea1e9a4d01a621dbe230acb616a.jpg")
+      .item
+        img(src="http://forum.ngs.ru/preview/forum/upload_files/1673a8d7dd8907489258876ba219465d_bf018319ae2b0c9a627d3826e5232dec_133951277057_800px.jpg")
+    a.left.carousel-control(href="#myCarousel",data-slide="prev")
+    a.right.carousel-control(href="#myCarousel",data-slide="next")
+  #advantage-cont
+    .advantage.quality
+      .pict
+      .text Гарантия качества
+    .advantage.safety
+      .pict
+      .text Безопасность
+    .advantage.delivery
+      .pict
+      .text Быстрая доставка
+    .advantage.gifts
+      .pict
+      .text Подарки
+    .advantage.easy-payment
+      .pict
+      .text Удобные способы оплаты
+    .advantage.back-guarantee
+      .pict
+      .text Гарантия возврата
 

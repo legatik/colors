@@ -1,21 +1,24 @@
 doctype 5
 html
-	head
-		title= title
-		!= css('style-layout')
-		!= css('lib/bootstrap.min')
-		!= css('lib/jquery-ui')
-		!= js('libs/jquery-2.0.3.min')
-		!= js('libs/bootstrap.min')
-		!= js('libs/parsley')
-		!= js('libs/underscore-min')
-		!= js("libs/backbone-min")
-		!= js("libs/jquery-ui")
-		!= js("global")
-	body
-		.container-my
-			block content
-		
-		include footer
-		
-				
+  head
+    title= title
+    != css('style-layout')
+    != css('style')
+    != css('lib/carousel')
+    != css('lib/jquery-ui')
+    != js('libs/jquery-2.0.3.min')
+    != js('libs/carousel')
+    != js('libs/parsley')
+    != js('libs/underscore-min')
+    != js("libs/backbone-min")
+    != js("libs/jquery-ui")
+    != js("global")
+  body
+    .header-fake
+    .container
+      block content
+    .gradient
+
+
+    include footer
+
