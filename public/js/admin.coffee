@@ -43,11 +43,9 @@ $(document).ready () ->
           $option = $($option).text(brend.title)
           $("#brend-select").prepend($option)
         renderType()
-      console.log "sadsa", $("#add-brend")
 
       $("#add-brend-btn").click () ->
-        console.log "add-brend"
-        productObj = {
+        productObj = 
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
           obem             : $("#brend-obem").val()
@@ -58,27 +56,44 @@ $(document).ready () ->
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
           brend            : $("#brend-select").val()
-##  picture          : Array
-##  isFace           : {type: ObjectId, ref: 'Face'}
-        }
-
-        createType (typeobj) ->
-          alert()
-
-      createType = (cb) ->
+#          picture          : Array
+#          isFace           : {type: ObjectId, ref: 'Face'}
+        
          checkType = $("#brend-tip").val()
          switch checkType
           when "face"
-            key = "isFace"
-            createTypeFace (typeobj, key) ->
-              cb()
-            
-            
-##  ottenok         : String
-##  type            : String
-##  kozha           : String
-##  nesovershenstva : String
-      createTypeFace = (cb) ->
-        cb()
+            createProdFace(productObj)
       
       
+      createProdFace = (productObj) ->
+        type = 
+          ottenok         : $("#brend-tone").val()
+          type            : $("#tip-tip").val()
+          kozha           : $("#brend-koza").val()
+          nesovershenstva : $("#brend-nesovershenstva").val()
+        data = 
+          product : productObj
+          type    : type
+        
+        $.ajax
+          type    : 'POST'
+          data    : data
+          url     : "/create/face"
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
+            $("#brend-tone").val('')
+            $("#tip-tip").val('')
+            $("#brend-koza").val('')
+            $("#brend-nesovershenstva").val('')
+      
+      clearProduct = () ->
+        $("#brend-title").val('')
+        $("#brend-min-disc").val('')
+        $("#brend-obem").val('')
+        $("#brend-ves").val('')
+        $("#brend-id").val('')
+        $("#brend-old-cost").val('')
+        $("#brend-cost").val('')
+        $("#brend-desc").val('')
+        $("#brend-prim").val('')
