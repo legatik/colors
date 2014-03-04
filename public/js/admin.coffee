@@ -11,8 +11,9 @@ $(document).ready () ->
           when "face"
             templateJQ = $("#faceTemplate")
             template = _.template($(templateJQ[0]).html())
-            console.log "template", template()
             $("#add-dish-table").append(template())
+
+
       $("#brend-show").click (e) ->
         $(".form-admin").hide()
         $("#brend-form").show()
@@ -43,4 +44,29 @@ $(document).ready () ->
           $option = $($option).text(brend.title)
           $("#brend-select").prepend($option)
         renderType()
+      console.log "sadsa", $("#add-brend")
+
+      $("#add-brend").click () ->
+        console.log "add-brend"
+#        productObj = {
+#          title            : $("#brend-title").val()
+#          minOpisanie      : $("#brend-min-disc").val()
+#          obem             : $("#brend-obem").val()
+#          ves              : $("#brend-ves").val()
+#          id               : $("#brend-id").val()
+#          oldCost          : $("#brend-old-cost").val()
+#          cost             : $("#brend-cost").val()
+#          opisanie         : $("#brend-disc").val()
+#          primenenie       : $("#brend-prim").val()
+##  isFace           : {type: ObjectId, ref: 'Face'}
+##  brend            : {type: ObjectId, ref: 'Brend'}
+##  picture          : Array
+
+##  ottenok         : String
+##  type            : String
+##  kozha           : String
+##  nesovershenstva : String
+
+#        }
+#        console.log "productObj",productObj
 

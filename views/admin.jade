@@ -20,6 +20,10 @@ block content
     #product-form.form-admin
       table#add-dish-table
         tr
+          td Выберите название&nbsp
+          td
+            input#brend-title
+        tr
           td Выберите бренд&nbsp
           td
             select#brend-select
@@ -30,23 +34,23 @@ block content
         tr
           td Объем&nbsp
           td
-            input#brend-obem
+            input(type="number")#brend-obem
         tr
           td Вес&nbsp
           td
-            input#brend-ves
+            input(type="number")#brend-ves
         tr
           td ID&nbsp
           td
-            input#brend-id
+            input(type="number")#brend-id
         tr
           td Старая цена&nbsp
           td
-            input#brend-old-cost
+            input(type="number")#brend-old-cost
         tr
           td Цена&nbsp
           td
-            input#brend-cost
+            input(type="number")#brend-cost
         tr
           td Описание&nbsp
           td
