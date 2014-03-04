@@ -1,0 +1,91 @@
+extends layout
+
+
+block content
+  include navigation
+  != js('admin')
+  != css('admin')
+  #admin-cont
+    h3#admin-hello Привет админ
+    button#brend-show Добавить бренд
+    button#product-show Добавить продукт
+
+    #brend-form.form-admin
+      span Ведите название бренда
+      br
+      input#brend-name
+      button#add-brend Добавить
+      span#success-brend.hide &nbsp Бренд успешно добавлен
+    br
+    #product-form.form-admin
+      table#add-dish-table
+        tr
+          td Выберите название&nbsp
+          td
+            input#brend-title
+        tr
+          td Выберите бренд&nbsp
+          td
+            select#brend-select
+        tr
+          td Ведите краткое описание&nbsp
+          td
+            input#brend-min-disc
+        tr
+          td Объем&nbsp
+          td
+            input(type="number")#brend-obem
+        tr
+          td Вес&nbsp
+          td
+            input(type="number")#brend-ves
+        tr
+          td ID&nbsp
+          td
+            input(type="number")#brend-id
+        tr
+          td Старая цена&nbsp
+          td
+            input(type="number")#brend-old-cost
+        tr
+          td Цена&nbsp
+          td
+            input(type="number")#brend-cost
+        tr
+          td Описание&nbsp
+          td
+            input#brend-desc
+        tr
+          td Применение&nbsp
+          td
+            input#brend-prim
+        tr
+          td Применение&nbsp
+          td
+            input#brend-prim
+        tr
+          td Выберите тип&nbsp
+          td
+            select#brend-tip
+              option(value="face") Для лица
+      div
+        button#add-brend Добавить продукт
+
+  script#faceTemplate(type="text/template")
+      tr.add-param
+        td Оттенок&nbsp
+        td
+          input#brend-tone
+      tr.add-param
+        td Тип товара&nbsp
+        td
+          input#brend-tip
+      tr.add-param
+        td Кожа&nbsp
+        td
+          input#brend-koza
+      tr.add-param
+        td Несовершенства&nbsp
+        td
+          input#brend-nesovershenstva
+

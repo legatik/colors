@@ -1,7 +1,13 @@
 @font-face
     font-family: CenturyGothic
-    src: local("CenturyGothic"),
+    src: local("CenturyGothic-Regular"),
          url('fonts/GOTHIC.TTF')
+@font-face
+    font-family: CenturyGothic-Bold
+    src: local("CenturyGothic-Bold"),
+         url('fonts/946379.ttf')
+
+
 
 
 body
@@ -156,35 +162,140 @@ ul.navigation
     background: url('../img/right.png') no-repeat 50% 50%
     right: -147px
 
+
+#myCarousel2
+  .item
+    width: 980px
+    height: 291px
+    text-align: start
+    .prod
+      width: 155px
+      margin-left: 70px
+      display: inline-block
+      vertical-align: top
+      position: relative
+      text-align: center
+      .title
+        color: #231F20
+        font-size: 12.5px
+        width: 155px
+        text-align: center
+        font-family: CenturyGothic-Bold
+      .descr
+        color: #231F20
+        font-size: 11px
+        width: 155px
+        text-align: center
+      .old-price
+         text-align: end
+         color: #333333
+         font-size: 15px
+         text-decoration: line-through
+         font-family: CenturyGothic-Bold
+      .new-price
+        color: #CC3333
+        text-align: end
+        font-size: 31px
+        font-family: CenturyGothic-Bold
+      .in-basket
+        width: 110px
+        height: 23px
+        background: #333333
+        float: right
+        color: #fff
+        margin-top: 4px
+        font-size: 14.37px
+        line-height: 23px
+        text-align: middle
+        cursor: pointer
+
+  a.left
+    background: url('../img/left.png') no-repeat 50% 50%
+    left: -147px
+  a.right
+    background: url('../img/right.png') no-repeat 50% 50%
+    right: -147px
+
+
+
 #advantage-cont
   margin-top: 73px
   .advantage
     display: inline-block
-    vertical-align: middle
+    vertical-align: top
     .text
       font-size: 14px
       color: #333333
       text-transform: uppercase
       text-align: center
-      margin-top: 10px
   .advantage.quality
+    margin-left: 12px
     .pict
       width: 86px
       height: 66px
       background: url('../img/pl1.png') no-repeat
+      margin-top: 10px
     .text
       width: 86px
   .advantage.safety
+    margin-left: 71px
     .pict
       width: 67px
       height: 61px
       background: url('../img/pl2.png') no-repeat
       margin-left: 28px
+      margin-top: 7.5px
+    .text
+      margin-top: 13.5px
   .advantage.delivery
+    margin-left: 47px
     .pict
       width: 110px
       height: 48px
       background: url('../img/pl3.png') no-repeat
+      margin-top: 17px
     .text
       width: 125px
+      margin-top: 11px
+  .advantage.gifts
+    margin-left: 68px
+    .pict
+      width: 54px
+      height: 60px
+      margin-left: 8px
+      background: url('../img/pl4.png') no-repeat
+      margin-top: 4px
+    .text
+      margin-top: 16px
+  .advantage.easy-payment
+    margin-left: 63.5px
+    .pict
+      width: 64px
+      height: 66px
+      background: url('../img/pl5.png') no-repeat
+      margin-left: 38px
+    .text
+      width: 142px
+      margin-top: 11.5px
+  .advantage.back-guarantee
+    margin-left: 31px
+    .pict
+      width: 74px
+      height: 67px
+      background: url('../img/pl6.png') no-repeat
+      margin-left: 28px
+      margin-top: 7px
+    .text
+      margin-top: 6.5px
+.bestsellers-title
+.novelty-title
+.brands-title
+.reviews-title
+  margin-top: 70px
+  text-align: center
+  width: 100%
+  font-size: 42px
+  text-transform: uppercase
+  color: #333333
+  background: url('../img/line.png') -65px 27px no-repeat
 
