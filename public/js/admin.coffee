@@ -6,7 +6,6 @@ $(document).ready () ->
 
       renderType = () ->
          checkType = $("#brend-tip").val()
-         console.log "checkType",checkType
          switch checkType
           when "face"
             templateJQ = $("#faceTemplate")
@@ -46,27 +45,40 @@ $(document).ready () ->
         renderType()
       console.log "sadsa", $("#add-brend")
 
-      $("#add-brend").click () ->
+      $("#add-brend-btn").click () ->
         console.log "add-brend"
-#        productObj = {
-#          title            : $("#brend-title").val()
-#          minOpisanie      : $("#brend-min-disc").val()
-#          obem             : $("#brend-obem").val()
-#          ves              : $("#brend-ves").val()
-#          id               : $("#brend-id").val()
-#          oldCost          : $("#brend-old-cost").val()
-#          cost             : $("#brend-cost").val()
-#          opisanie         : $("#brend-disc").val()
-#          primenenie       : $("#brend-prim").val()
-##  isFace           : {type: ObjectId, ref: 'Face'}
-##  brend            : {type: ObjectId, ref: 'Brend'}
+        productObj = {
+          title            : $("#brend-title").val()
+          minOpisanie      : $("#brend-min-disc").val()
+          obem             : $("#brend-obem").val()
+          ves              : $("#brend-ves").val()
+          id               : $("#brend-id").val()
+          oldCost          : $("#brend-old-cost").val()
+          cost             : $("#brend-cost").val()
+          opisanie         : $("#brend-desc").val()
+          primenenie       : $("#brend-prim").val()
+          brend            : $("#brend-select").val()
 ##  picture          : Array
+##  isFace           : {type: ObjectId, ref: 'Face'}
+        }
 
+        createType (typeobj) ->
+          alert()
+
+      createType = (cb) ->
+         checkType = $("#brend-tip").val()
+         switch checkType
+          when "face"
+            key = "isFace"
+            createTypeFace (typeobj, key) ->
+              cb()
+            
+            
 ##  ottenok         : String
 ##  type            : String
 ##  kozha           : String
 ##  nesovershenstva : String
-
-#        }
-#        console.log "productObj",productObj
-
+      createTypeFace = (cb) ->
+        cb()
+      
+      
