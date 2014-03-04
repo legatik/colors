@@ -21,10 +21,10 @@ app = express()
 
 
 #console.log "Brend.createThis",Brend.createThis
-Brend.createThis (brend) ->
-  Face.createThis (face) ->
-    Product.createThis brend, face, (Product) ->
-      console.log 'merch', Product
+#Brend.createThis (brend) ->
+#  Face.createThis (face) ->
+#    Product.createThis brend, face, (Product) ->
+#      console.log 'merch', Product
 
 app.configure () ->
 	app.set "port", process.env.PORT or 3000
