@@ -49,6 +49,8 @@ options = {db:{type: 'mongo'}}
 
 app.namespace '', require('./controllers/home').boot.bind @, app
 app.namespace '/tool', require('./controllers/tool').boot.bind @, app
+app.namespace '/header', require('./controllers/header').boot.bind @, app
+app.namespace '/nav', require('./controllers/nav').boot.bind @, app
 
 app.get '/register', (req, res) ->
 	res.render 'registration', {title: 'Onlile JS Compiller'}
