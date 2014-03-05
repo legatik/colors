@@ -18,7 +18,7 @@ block content
       span#success-brend.hide &nbsp Бренд успешно добавлен
     br
     #product-form.form-admin
-      table#add-dish-table
+      table#add-dish-table(style="display:inline-block")
         tr
           td Выберите название&nbsp
           td
@@ -60,17 +60,21 @@ block content
           td
             input#brend-prim
         tr
-          td Применение&nbsp
-          td
-            input#brend-prim
-        tr
           td Выберите тип&nbsp
           td
             select#brend-tip
               option(value="face") Для лица
+
+      #im-cont-step(style="display:inline-block")
+        div
+          b Выберите картинки товара
+        div.small-cont
+          input.step-inp#step-inp-0(type="file")
+          img.step-img#step-img-0(src="http://i.imgur.com/AeUEdJb.png")
+          img#del-step-0.del.del-step(src="/img/close.png")
+
       div
         button#add-brend-btn Добавить продукт
-
   script#faceTemplate(type="text/template")
       tr.add-param
         td Оттенок&nbsp
@@ -88,4 +92,11 @@ block content
         td Несовершенства&nbsp
         td
           input#brend-nesovershenstva
+
+  script#stepTemplate(type="text/template")
+    div.small-cont
+      input.step-inp(type="file",id!="step-inp-<%=number%>")
+      img.step-img(id!="step-img-<%=number%>",src="http://i.imgur.com/AeUEdJb.png")
+      img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
+
 
