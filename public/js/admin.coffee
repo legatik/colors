@@ -6,6 +6,7 @@ $(document).ready () ->
 
       renderType = () ->
          checkType = $("#brend-tip").val()
+         $(".add-param").remove()
          switch checkType
           when "face"
             templateJQ = $("#faceTemplate")
@@ -37,6 +38,7 @@ $(document).ready () ->
       $("#product-show").click (e) ->
         $(".form-admin").hide()
         $("#product-form").show()
+        $("#brend-select").empty()
         brendArr.forEach (brend) ->
           $option = $("<option/>")
           $option = $($option).val(brend["_id"])
