@@ -377,6 +377,26 @@ ul.navigation
         text-transform: uppercase
         text-decoration: underline
 
+<<<<<<< HEAD
+#footer-cont
+  position: relative
+  height: 270px
+  background: #231F20
+  .stolb
+    display: inline-block
+    vertical-align: top
+    margin-top: 36px
+    margin-left: 55px
+    .title
+      font-size: 16px
+      color: #fff
+    .link
+      color: #fff
+      font-size: 14px
+      display: block
+     a.link
+      margin-top: 20px
+=======
 .novelty-left
 .novelty-right
   display: inline-block
@@ -422,23 +442,5 @@ ul.navigation
   .buy
     width: 137px
     margin-left: 48px
-
-#footer-cont
-  position: relative
-  height: 270px
-  background: #231F20
-  .stolb
-    display: inline-block
-    vertical-align: top
-    margin-top: 36px
-    margin-left: 55px
-    .title
-      font-size: 16px
-      color: #fff
-    .link
-      color: #fff
-      font-size: 14px
-      display: block
-     a.link
-      margin-top: 20px
+>>>>>>> 70ee3e1b785ebbe2c1560811f226907b55eab2bc
 

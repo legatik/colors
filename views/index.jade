@@ -112,11 +112,37 @@ block content
     input.name(placeholder="Ваше имя")
     input.email(placeholder="Ваш email")
     a.discount(href="#") Получить скидку!
-
-
-
   .novelty-title Новинки
+  .novelty-left
+    img(width="372", height="302")
+  .novelty-right
+    .title Returning Starfish Eye Cream от MIZON
+    .descr интенсивный восстанавливающий крем для контура глаз с экстрактом морской звезды
+    .price 779р
+    .detail Подробнее
+    .buy Купить
   .brands-title Бренды
+  #myCarousel3.carousel.slide(data-ride="carousel")
+    .carousel-inner
+      .item.active
+        .brand
+        .brand
+        .brand
+        .brand
+        .brand
+        .brand
+      .item
+        .brand
+        .brand
+        .brand
+        .brand
+        .brand
+        .brand
+    a.left.carousel-control(data-slide="prev",href="#myCarousel3")
+    a.right.carousel-control(data-slide="next",href="#myCarousel3")
+
+
+
   .reviews-title Отзывы
   include footer
 
