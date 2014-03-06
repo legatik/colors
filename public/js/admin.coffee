@@ -6,6 +6,7 @@ $(document).ready () ->
 
       renderType = () ->
          checkType = $("#brend-tip").val()
+         $(".add-param").remove()
          switch checkType
           when "face"
             templateJQ = $("#faceTemplate")
@@ -37,6 +38,7 @@ $(document).ready () ->
       $("#product-show").click (e) ->
         $(".form-admin").hide()
         $("#product-form").show()
+        $("#brend-select").empty()
         brendArr.forEach (brend) ->
           $option = $("<option/>")
           $option = $($option).val(brend["_id"])
@@ -56,16 +58,20 @@ $(document).ready () ->
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
           brend            : $("#brend-select").val()
-#          picture          : Array
-#          isFace           : {type: ObjectId, ref: 'Face'}
+          picture          : []      
+        imgArr = []
+        $(".step-inp").each (index, one) ->
+          if one.files.length != 0
+            imgArr.push one.files[0]
         
-         checkType = $("#brend-tip").val()
-         switch checkType
+        checkType = $("#brend-tip").val()
+          
+        switch checkType
           when "face"
-            createProdFace(productObj)
+              createProdFace(productObj, imgArr)
       
       
-      createProdFace = (productObj) ->
+      createProdFace = (productObj, imgArr) ->
         type = 
           ottenok         : $("#brend-tone").val()
           type            : $("#tip-tip").val()
@@ -75,10 +81,17 @@ $(document).ready () ->
           product : productObj
           type    : type
         
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append("step"+index, one)
         $.ajax
           type    : 'POST'
-          data    : data
+          data    : newForm
           url     : "/create/face"
+          cache: false
+          contentType: false
+          processData: false
           success : (data) ->
             alert("Добавлен!")
             clearProduct()
@@ -97,3 +110,49 @@ $(document).ready () ->
         $("#brend-cost").val('')
         $("#brend-desc").val('')
         $("#brend-prim").val('')
+        i = 0
+        arrDelStep = $(".del-step")
+        while i < arrDelStep.length
+          $item = arrDelStep[i]
+          display = $($item).css("display")
+          $($item).click() if display isnt "none"
+          i++
+        
+        
+#      for picture
+
+  readURLStep = (input,idImg) =>
+    template = _.template(jQuery('#stepTemplate').html())
+    if input.files and input.files[0]
+      if input.files[0].type.indexOf("image") != -1
+        reader = new FileReader()
+        reader.readAsDataURL input.files[0]
+        reader.onload = (e) =>
+          $(idImg).attr "src", e.target.result
+          number = (Number idImg.replace("#step-img-",""))
+          idDel = "#" + "del-step-" + number
+          $(idDel).show()
+          #для довления нового инпута
+          all = ($("#im-cont-step").find(".step-inp")).length
+          cheked = (Number idImg.replace("#step-img-",""))+1
+          if cheked is all || all < cheked
+            $("#im-cont-step").append(template({number:cheked}))
+            addEvent()
+      else
+        alert("Такой фармат картинки не поддерживается")
+
+
+  addEvent = (e) =>
+    $(".step-inp").unbind("change")
+    $(".del-step").unbind("click")
+    $(".step-inp").change (e) ->
+      id = $(@).attr("id")
+      idImg = "#" + id.replace("inp","img")
+      readURLStep this,idImg
+
+    $(".del-step").click () ->
+      $($(@).parent()).remove()
+
+  addEvent()
+
+        

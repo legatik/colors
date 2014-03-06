@@ -13,6 +13,8 @@ body
 .hide
   display:none
 
+
+
 #admin-cont
   #admin-hello
     text-align:center
@@ -20,6 +22,37 @@ body
     margin-top:10px
     display:none
     #add-dish-table
+      display: inline-block;
+      vertical-align: top;
       tr
         height:31px
-
+    #im-cont-step
+      display: inline-block;
+      vertical-align: top;
+      width: 562px;
+      padding-left: 10px;
+.small-cont:hover
+    img
+      opacity:0.7
+    .del
+      opacity:1
+  .small-cont
+    position:relative
+    width:160px
+    height:160px
+    display:inline-block
+    margin-right:10px
+    input
+      position:absolute
+      z-index: 1;
+      width: 165px;
+      height: 165px;
+      opacity: 0;
+    img
+      position:absolute
+      width:160px
+      height:160px
+    .del
+      display:none
+      opacity:0
+      z-index:2

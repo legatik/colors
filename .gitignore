@@ -1,4 +1,5 @@
 node_modules
+public/img/products
 lib-cov
 *.seed
 *.log
