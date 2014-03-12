@@ -1,4 +1,4 @@
 $(document).ready () ->
-  console.log "HOME JS"
+  $(".item-vetrina").first().addClass("active")
+  console.log "HOME JS", $(".item-vetrina")
   $('.carousel').carousel()
-

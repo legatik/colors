@@ -14,6 +14,7 @@ product = new Schema
   picture          : Array
   opisanie         : String
   primenenie       : String
+  vetrina          : Boolean
   isFace           : {type: ObjectId, ref: 'Face'}
   brend            : {type: ObjectId, ref: 'Brend'}
   
