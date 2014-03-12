@@ -58,7 +58,8 @@ $(document).ready () ->
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
           brend            : $("#brend-select").val()
-          picture          : []      
+          picture          : []
+          vetrina          : $("#vetrina").is(':checked')      
         imgArr = []
         $(".step-inp").each (index, one) ->
           if one.files.length != 0
