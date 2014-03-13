@@ -12,7 +12,7 @@ $(document).ready () ->
             templateJQ = $("#faceTemplate")
             template = _.template($(templateJQ[0]).html())
             $("#add-dish-table").append(template())
-
+         addEventOnProductTip()
 
       $("#brend-show").click (e) ->
         $(".form-admin").hide()
@@ -71,6 +71,15 @@ $(document).ready () ->
           when "face"
               createProdFace(productObj, imgArr)
       
+      
+      
+      addEventOnProductTip = () ->
+          idPodTip = "#" + $("#product-tip").val()
+          $(idPodTip).show()
+          $("#product-tip").click (e) ->
+            $(".podtip").hide()
+            idPodTip = "#" + $(@).val()
+            $(idPodTip).show()
       
       createProdFace = (productObj, imgArr) ->
         type = 
