@@ -64,10 +64,11 @@ block content
           td
             input#vetrina(type="checkbox")
         tr
-          td Оттенок/вид&nbsp
+          td 
+            span Оттенок/вид&nbsp
+            div через запятую без пробела&nbsp
           td
             textarea#brend-tone
-          td &nbspчерез запятую без пробела
         tr
           td Изображение оттенок/вид&nbsp
           td
@@ -82,7 +83,7 @@ block content
               option(value="face") Для лица
               option(value="body") Для тела
       #im-cont-step(style="display:inline-block")
-        div(style="text-align:center")
+        div(style="text-align:center;height:35px")
           b Выберите картинки товара
         div.small-cont
           input.step-inp#step-inp-0(type="file")
