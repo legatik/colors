@@ -1,8 +1,10 @@
 extends layout
 
+
 block content
   include navigation
-  .for-afisha
+  != js('face')
+  .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
   .left-side
     .switch
       .catalog.active Каталог
@@ -64,12 +66,33 @@ block content
       li b1
       li b1
 
+  .right-side
+    .filter-block
+        .select-price-cont
+            .title Цена
+            #slider-price
+            #slider-price-fake
+            label.min-price-label От
+            input.min-price(value="49")
+            label.max-price-label До
+            input.max-price(value="2599")
+        input.search-product
+        .sort-cont
+            .title Сортировать
+            select.sort-product
+                option По популярности
+
+    .res-search
+      .prod
+        img(src="../img/prod.jpg", width="124px", height="144px")
+        .title TONYMOLY Peach Anti-Aging Hand Cream
+        .descr Утрапитательный крем для рук против старения кожи
+        .old-price 417
+        .new-price 339 р
+        .in-basket В КОРЗИНУ
 
 
 
-
-
-  .right-side ПРАВООООО
 
 
 
