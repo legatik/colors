@@ -47,7 +47,7 @@ $(document).ready () ->
           $("#brend-select").prepend($option)
         renderType()
 
-      $("#add-brend-btn").click () ->
+      $("#add-product-btn").click () ->
         productObj = 
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
@@ -163,7 +163,22 @@ $(document).ready () ->
 
     $(".del-step").click () ->
       $($(@).parent()).remove()
-
   addEvent()
 
+  #for tone
+  $("#pic-tone").change (e) ->
+    if @.files and @.files[0]
+      if @.files[0].type.indexOf("image") != -1
+        reader = new FileReader()
+        reader.readAsDataURL @.files[0]
+        reader.onload = (e) =>
+          $("#tone-prev").attr "src", e.target.result
+          $("#del-img-tone").show()
+          
+  $("#del-img-tone").click () ->
+    $("#pic-tone").val("")
+    $("#tone-prev").attr "src", "/img/add-bg.png"
+    $("#del-img-tone").hide()
+    
+          
         
