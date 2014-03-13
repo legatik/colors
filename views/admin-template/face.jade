@@ -73,8 +73,21 @@ script#faceTemplate(type="text/template")
     tr.add-param
       td Кожа&nbsp
       td
-        input#brend-koza
+        select#brend-koza
+          option(value="face-kozh-norm") Нормальная
+          option(value="face-kozh-zhir") Жирная/Комбениров.
+          option(value="face-kozh-suh") Сухая/Оч. сухая
+          option(value="face-kozh-prob") Проблеммная
+          option(value="face-kozh-chuv") Чувствительная
     tr.add-param
       td Несовершенства&nbsp
       td
-        input#brend-nesovershenstva
+        select#brend-nesovershenstva
+          option(value="face-nes-akne") Лечение акне и постакне
+          option(value="face-nes-cher") Против черных точек
+          option(value="face-nes-suzh") Сужение пор
+          option(value="face-nes-otb") Отбеливание
+          option(value="face-nes-morch") Разглаживание морщин
+          option(value="face-nes-lif") Лифтинг
+          option(value="face-nes-suh") Сухость, шелушение
+          option(value="face-nes-ust") Усталость, уст. цвет лица
