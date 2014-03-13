@@ -5,14 +5,16 @@ $(document).ready () ->
     success : (brendArr) ->
 
       renderType = () ->
-         checkType = $("#brend-tip").val()
-         $(".add-param").remove()
-         switch checkType
-          when "face"
-            templateJQ = $("#faceTemplate")
-            template = _.template($(templateJQ[0]).html())
-            $("#add-dish-table").append(template())
-         addEventOnProductTip()
+        checkType = $("#gl-product-tip").val()
+        $(".add-param").remove()
+        idTemplate = "#" + checkType + "Template"
+        templateJQ = $(idTemplate)
+        template = _.template($(templateJQ[0]).html())
+        $("#add-dish-table").append(template())
+        addEventOnProductTip()
+
+      $("#gl-product-tip").click () ->
+        renderType()
 
       $("#brend-show").click (e) ->
         $(".form-admin").hide()
@@ -32,7 +34,6 @@ $(document).ready () ->
             $("#success-brend").hide()
             $("#success-brend").fadeIn("slow")
             console.log "brendArr",brendArr
-
 
 
       $("#product-show").click (e) ->
@@ -65,7 +66,7 @@ $(document).ready () ->
           if one.files.length != 0
             imgArr.push one.files[0]
         
-        checkType = $("#brend-tip").val()
+        checkType = $("#gl-product-tip").val()
           
         switch checkType
           when "face"
