@@ -96,7 +96,7 @@ $(document).ready () ->
       createProdFace = (productObj, imgArr, vidImg) ->
         type = 
           type            : $("#product-tip").val()
-          podType         : $(".activePodType").val()
+          podType         : $(".activePodType > td > select").val()
           kozha           : $("#face-koza").val()
           nesovershenstva : $("#face-nesovershenstva").val()
         data = 
