@@ -48,6 +48,8 @@ $(document).ready () ->
         renderType()
 
       $("#add-product-btn").click () ->
+        vidString = $("#prod-vid").val()
+        vidArr = vidString.split(",")
         productObj = 
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
@@ -58,10 +60,15 @@ $(document).ready () ->
           cost             : $("#brend-cost").val()
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
+          vetrina          : $("#vetrina").is(':checked')
+          ostatok          : $("#ostatok").val()
+          vid              : vidArr
+          imgVid           : ''
           brend            : $("#brend-select").val()
           picture          : []
-          vetrina          : $("#vetrina").is(':checked')
         imgArr = []
+        
+        vidImg = ($("#pic-tone"))[0].files[0]
         $(".step-inp").each (index, one) ->
           if one.files.length != 0
             imgArr.push one.files[0]
@@ -70,32 +77,43 @@ $(document).ready () ->
           
         switch checkType
           when "face"
-              createProdFace(productObj, imgArr)
+              createProdFace(productObj, imgArr, vidImg)
       
       
       
       addEventOnProductTip = () ->
+          $("body").removeClass("activePodType")
           idPodTip = "#" + $("#product-tip").val()
           $(idPodTip).show()
+          $(idPodTip).addClass("activePodType")
           $("#product-tip").click (e) ->
+            $("body").removeClass("activePodType")
             $(".podtip").hide()
             idPodTip = "#" + $(@).val()
+            $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
       
-      createProdFace = (productObj, imgArr) ->
+      createProdFace = (productObj, imgArr, vidImg) ->
         type = 
-          ottenok         : $("#brend-tone").val()
-          type            : $("#tip-tip").val()
-          kozha           : $("#brend-koza").val()
-          nesovershenstva : $("#brend-nesovershenstva").val()
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType").val()
+          kozha           : $("#face-koza").val()
+          nesovershenstva : $("#face-nesovershenstva").val()
         data = 
           product : productObj
           type    : type
+        
+        
+        console.log "data", data
+        console.log "imgArr", imgArr
+        console.log "vidImg", vidImg
+        return
         
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
           newForm.append("step"+index, one)
+        newForm.append("vidImg", vidImg)
         $.ajax
           type    : 'POST'
           data    : newForm
@@ -106,12 +124,12 @@ $(document).ready () ->
           success : (data) ->
             alert("Добавлен!")
             clearProduct()
-            $("#brend-tone").val('')
             $("#tip-tip").val('')
-            $("#brend-koza").val('')
-            $("#brend-nesovershenstva").val('')
+            $("#face-koza").val('')
+            $("#face-nesovershenstva").val('')
       
       clearProduct = () ->
+        $("#prod-vid").val('')
         $("#brend-title").val('')
         $("#brend-min-disc").val('')
         $("#brend-obem").val('')
