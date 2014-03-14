@@ -15,6 +15,9 @@ product = new Schema
   opisanie         : String
   primenenie       : String
   vetrina          : Boolean
+  ostatok          : Number
+  vid              : Array
+  imgVid           : String
   isFace           : {type: ObjectId, ref: 'Face'}
   brend            : {type: ObjectId, ref: 'Brend'}
   

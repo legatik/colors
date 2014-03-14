@@ -4,8 +4,8 @@ ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
 face = new Schema
-  ottenok         : String
   type            : String
+  podType         : String
   kozha           : String
   nesovershenstva : String 
   
