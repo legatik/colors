@@ -82,12 +82,12 @@ $(document).ready () ->
       
       
       addEventOnProductTip = () ->
-          $("body").removeClass("activePodType")
+          $(".activePodType").removeClass("activePodType")
           idPodTip = "#" + $("#product-tip").val()
           $(idPodTip).show()
           $(idPodTip).addClass("activePodType")
           $("#product-tip").click (e) ->
-            $("body").removeClass("activePodType")
+            $(".activePodType").removeClass("activePodType")
             $(".podtip").hide()
             idPodTip = "#" + $(@).val()
             $(idPodTip).addClass("activePodType")
@@ -107,13 +107,12 @@ $(document).ready () ->
         console.log "data", data
         console.log "imgArr", imgArr
         console.log "vidImg", vidImg
-        return
         
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
-          newForm.append("step"+index, one)
-        newForm.append("vidImg", vidImg)
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
         $.ajax
           type    : 'POST'
           data    : newForm
@@ -124,9 +123,6 @@ $(document).ready () ->
           success : (data) ->
             alert("Добавлен!")
             clearProduct()
-            $("#tip-tip").val('')
-            $("#face-koza").val('')
-            $("#face-nesovershenstva").val('')
       
       clearProduct = () ->
         $("#prod-vid").val('')
@@ -139,6 +135,10 @@ $(document).ready () ->
         $("#brend-cost").val('')
         $("#brend-desc").val('')
         $("#brend-prim").val('')
+        $("#ostatok").val('')
+        $("#pic-tone").val("")
+        $("#tone-prev").attr "src", "/img/add-bg.png"
+        $("#del-img-tone").hide()
         i = 0
         arrDelStep = $(".del-step")
         while i < arrDelStep.length
