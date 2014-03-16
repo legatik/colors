@@ -88,7 +88,15 @@ $(document).ready () ->
       if checked == liArr.length
         liArr.each (i, el) ->
           $(el).attr("ischecked", "false")
-      $(@).attr("ischecked", "true")
+        $(@).attr("ischecked", "true")
+      else 
+        if $(@).attr("ischecked") == "true"
+          $(@).attr("ischecked", "false")
+          if checked == 1
+            liArr.each (i, el) ->
+              $(el).attr("ischecked", "true")
+        else
+          $(@).attr("ischecked", "true")
       collectParams()
       
     $(".filter-type").click (e) ->
@@ -115,7 +123,15 @@ $(document).ready () ->
         liArr = $(el).find("li[ischecked='true']")
         liArr.each (j, el2) ->
           searchParams[key].push($(el2).attr("value"))
-      console.log "searchParams",searchParams
+      sendRequest()
         
-        
+      
+    sendRequest = () ->
+      $.ajax
+        type    : 'POST'
+        url     : "/search/filter"
+        data    : searchParams
+        success : (products) ->
+          console.log "products", products
+      
       
