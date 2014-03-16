@@ -4,7 +4,10 @@ $(document).ready () ->
   min = 49
   max = 2599
   brendArr = false
-  searchParams = {}
+  searchParams = {
+    special : {}
+    product : {}
+  }
   $("#slider-price").slider
     range: true
     min: min
@@ -68,6 +71,10 @@ $(document).ready () ->
   else
     renderFilter("face")
     
+    
+  $(".sort-product").click () ->
+    collectParams()
+    
   addEvent = () ->
     $("#nav-type").unbind("click")
     $(".select-params > li").unbind("click")
@@ -101,37 +108,54 @@ $(document).ready () ->
       
     $(".filter-type").click (e) ->
       type = $(@).attr("value")
-      searchParams = {}
-      searchParams.type = type
+      searchParams.special = {}
+      searchParams.special.type = type
       collectParams()
       
     $(".filter-pod-type").click (e) ->
-      searchParams = {}
+      searchParams.special = {}
       type = $(@).attr("value")
-      searchParams.podType = type
+      searchParams.special.podType = type
       collectParams() 
            
     $(".select-price-cont").click (e) ->
       collectParams()
+     
+  collectOtherParams = () ->
+    searchParams.product.min_price = $(".min-price").val()
+    searchParams.product.max_price = $(".max-price").val()
+    searchParams.product.sort = $(".sort-product").val()
+    
+    paramsArr = $("#brend-filter")
+    paramsArr.each (i, el) ->
+      key = $(el).attr("value")
+      searchParams.product[key] = [] 
+      liArr = $(el).find("li[ischecked='true']")
+      liArr.each (j, el2) ->
+        searchParams.product[key].push($(el2).attr("value"))
+    sendRequest()
+    
+  collectParams = () ->
+    paramsArr = $(".special-params")
+    paramsArr.each (i, el) ->
+      key = $(el).attr("value")
+      searchParams.special[key] = [] 
+      liArr = $(el).find("li[ischecked='true']")
+      liArr.each (j, el2) ->
+        searchParams.special[key].push($(el2).attr("value"))
+    collectOtherParams()
       
-      
-    collectParams = () ->
-      paramsArr = $(".select-params")
-      paramsArr.each (i, el) ->
-        key = $(el).attr("value")
-        searchParams[key] = [] 
-        liArr = $(el).find("li[ischecked='true']")
-        liArr.each (j, el2) ->
-          searchParams[key].push($(el2).attr("value"))
-      sendRequest()
         
       
-    sendRequest = () ->
-      $.ajax
-        type    : 'POST'
-        url     : "/search/filter"
-        data    : searchParams
-        success : (products) ->
+  sendRequest = () ->
+    console.log "searchParams",searchParams
+    type = $("#nav-type").val()
+    url = "/search/filter/" + type
+    $.ajax
+      type    : 'POST'
+      url     : "/search/filter"
+      data    : searchParams
+      success : (products) ->
           console.log "products", products
       
       

@@ -9,9 +9,13 @@ exports.boot = (app) ->
     Brend.find {}, (err, arrBrend) ->
       res.send arrBrend
 
-  app.post '/filter', (req, res) ->
+  app.post '/filter/body', (req, res) ->
     data = req.body
-    console.log "data",data
     Product.find {}, (err, products)-> 
       res.send products
 
+
+  app.post '/filter/face', (req, res) ->
+    data = req.body
+    Product.find {}, (err, products)-> 
+      res.send products

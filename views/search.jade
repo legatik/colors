@@ -22,7 +22,9 @@ block content
         .sort-cont
             .title Сортировать
             select.sort-product
-                option По популярности
+                option(value="popular") По популярности
+                option(value="new") По новизне
+                option(value="cost") По цене
 
     .res-search
       .prod
@@ -51,12 +53,12 @@ block content
         <% }); %>
       <% }); %>
     <% _.each(data.dop, function(data, key) { %>
-    ul.select-params(value!="<%=data.key%>") <%=data.title%>
+    ul.select-params.special-params(value!="<%=data.key%>") <%=data.title%>
       <% _.each(data.list, function(data, key) { %>
       li(ischecked="true", value!="<%=data.key%>") <%=data.title%>
       <% }); %>
     <% }); %>  
-    ul.select-params(value!="brend") Бренды
+    ul#brend-filter.select-params(value!="brend") Бренды
       <% _.each(bdata, function(data, key) { %>
       li(ischecked="true", value!="<%=data['_id']%>") <%=data.title%>
       <% }); %>  
