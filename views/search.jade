@@ -6,65 +6,7 @@ block content
   != js('search')
   .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
   .left-side
-    .switch
-      .catalog.active Каталог
-      .brands Бренды
-    select.nav
-      option Для лица
-      option Для тела
-    div.types
-      ul.type-product ОЧИЩЕНИЕ
-        li Для снятия макияжа
-        li Гидрофильные масла
-        li Гели для умывания
-        li Пенки для умывания
-        li Кремы, пудры для умывания
-      ul.type-product ТОНИЗИРОВАНИЕ
-        li Бустеры
-        li Тонеры, стартеры
-        li Мисты (спреи)
-        li Тампоны-патчи
-      ul.type-product ОСНОВНОЙ УХОД
-        li Ампулы
-        li Сыворотки и эссенции
-        li Лосьоны и эмульсии
-        li Гели
-      ul.type-product СПЕЦИАЛЬНЫЙ УХОД
-        li Бальзамы и концентраты
-        li Точенчные средства
-        li Масла
-        li Массажные средства
-      ul.type-product СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА
-      ul.type-product ОТШЕЛУШИВАНИЕ
-        li Скрабы и гаммажи
-        li Пилинги
-      ul.type-product МАСКИ
-        li Ночные маски
-        li Маски: посты, кремы, пенки
-        li Тканевые, листовые маски
-        li Точенчные маски-патчи
-    ul.select-params.skin Тип кожи
-      li(checked="true") Нормальная
-      li Жирная/комбинированная
-      li Сухая/очень сухая
-      li Проблемная
-      li Чувствительная
-    ul.select-params.nesovershenstva Несовершенства
-      li Лечение акне и постакне
-      li Против черных точек
-      li Сужение пор
-      li Отбеливание
-      li Разглаживание морщин
-      li Лифтинг
-      li Сухость, шелушение
-      li Усталость, тусклый цвет лица
-    ul.select-params.brands Бренды
-      li b1
-      li b1
-      li b1
-      li b1
-      li b1
-      li b1
+
 
   .right-side
     .filter-block
@@ -94,8 +36,35 @@ block content
 
 
 
-
+  script#filerTemplate(type="text/template")
+    .switch
+      .catalog.active Каталог
+      .brands Бренды
+    select.nav
+      <% _.each(gdata, function(data, key) { %>  <option value=<%=key%>><%= data.title %></option> <% }); %>
+    div.types
+      <% _.each(data.tip, function(data, key) { %>  
+      ul.type-product 
+        span(value !="<%=data.key%>") <%=data.title%>
+        <% _.each(data.podtip, function(data, key) { %>  
+        li <%=data.title%>
+        <% }); %>
+      <% }); %>
+    <% _.each(data.dop, function(data, key) { %>
+    ul.select-params <%=data.title%>
+      <% _.each(data.list, function(data, key) { %>
+      li(checked="true", !="<%=data.key%>") <%=data.title%>
+      <% }); %>
+    <% }); %>  
+    ul.select-params.brands Бренды
+      <% _.each(bdata, function(data, key) { %>
+      li(checked="true", value !="<%=data['_id']%>") <%=data.title%>
+      <% }); %>  
 
 
   include footer
+
+
+
+
 

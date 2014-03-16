@@ -10,6 +10,7 @@ $(document).ready () ->
   
   window.nav = {
     body:{
+      title: "Для тела"
       tip:[
         {
           title : "УХОД ЗА ТЕЛОМ"
@@ -150,7 +151,8 @@ $(document).ready () ->
     }
     
     face:{
-      tip:[
+      title : "Для лица"
+      tip : [
         {
           title : "ОЧИЩЕНИЕ"
           key : "face-ochishenie"

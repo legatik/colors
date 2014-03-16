@@ -3,6 +3,7 @@ $(document).ready () ->
   max_price=2599
   min = 49
   max = 2599
+  brendArr = false
   $("#slider-price").slider
     range: true
     min: min
@@ -38,4 +39,25 @@ $(document).ready () ->
       ]
     else
       $('.max-price').val max_price
+
+  getBrend = (cb) ->
+    if brendArr
+      cb(brendArr)
+      
+    else
+      $.ajax
+        type    : 'GET'
+        url     : "/search/q_brend"
+        success : (brends) ->
+          brendArr = brends
+          cb(brends)
+  renderFilter = () ->
+    getBrend (brends) ->
+      console.log "brends",brends
+      key = "face"
+      template = _.template(jQuery('#filerTemplate').html())
+      $(".left-side").append(template(gdata: window.nav, data:window.nav[key], bdata:brends))
+    
+  renderFilter()
+    
 
