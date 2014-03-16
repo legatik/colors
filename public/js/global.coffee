@@ -157,7 +157,8 @@ $(document).ready () ->
       dop : [
         {
           title : "Тип кожи"
-          list : [
+          key   : "kozha"
+          list  : [
             {
               title : "Нормальная"
               key   : "face-kozh-norm"
@@ -182,7 +183,8 @@ $(document).ready () ->
         }
         {
           title : "Несовершенства"
-          list : [
+          key   : "nesovershenstva"
+          list  : [
             {
               title : "Лечение акне и постакне"
               key   : "face-nes-akne"
@@ -338,6 +340,7 @@ $(document).ready () ->
       dop : [
         {
           title : "Несовершенства"
+          key : "nesovershenstva"
           list : [
             {
               title : "Против сухости кожи"

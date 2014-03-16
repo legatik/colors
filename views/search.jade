@@ -45,18 +45,18 @@ block content
     div.types
       <% _.each(data.tip, function(data, key) { %>  
       ul.type-product 
-        span.filter-type(value !="<%=data.key%>") <%=data.title%>
+        span.filter-type(value!="<%=data.key%>") <%=data.title%>
         <% _.each(data.podtip, function(data, key) { %>  
-        li.filter-pod-type <%=data.title%>
+        li.filter-pod-type(value!="<%=data.key%>") <%=data.title%>
         <% }); %>
       <% }); %>
     <% _.each(data.dop, function(data, key) { %>
-    ul.select-params <%=data.title%>
+    ul.select-params(value!="<%=data.key%>") <%=data.title%>
       <% _.each(data.list, function(data, key) { %>
       li(ischecked="true", value!="<%=data.key%>") <%=data.title%>
       <% }); %>
     <% }); %>  
-    ul.select-params.brands Бренды
+    ul.select-params(value!="brend") Бренды
       <% _.each(bdata, function(data, key) { %>
       li(ischecked="true", value!="<%=data['_id']%>") <%=data.title%>
       <% }); %>  

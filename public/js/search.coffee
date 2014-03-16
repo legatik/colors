@@ -4,6 +4,7 @@ $(document).ready () ->
   min = 49
   max = 2599
   brendArr = false
+  searchParams = {}
   $("#slider-price").slider
     range: true
     min: min
@@ -70,10 +71,14 @@ $(document).ready () ->
   addEvent = () ->
     $("#nav-type").unbind("click")
     $(".select-params > li").unbind("click")
+    $(".filter-type").unbind("click")
+    $(".filter-pod-type").unbind("click")
+    $(".select-price-cont").unbind("click")
+    
     $("#nav-type").click (e) ->
       key = $(@).val()
       renderFilter(key)
-      
+ 
     $(".select-params > li").click () ->
       checked = 0
       $ul = $(@).parent()
@@ -81,9 +86,36 @@ $(document).ready () ->
       liArr.each (i, el) ->
         checked++ if $(el).attr("ischecked") == "true"
       if checked == liArr.length
-        console.log "D"
         liArr.each (i, el) ->
           $(el).attr("ischecked", "false")
       $(@).attr("ischecked", "true")
-    
+      collectParams()
+      
+    $(".filter-type").click (e) ->
+      type = $(@).attr("value")
+      searchParams = {}
+      searchParams.type = type
+      collectParams()
+      
+    $(".filter-pod-type").click (e) ->
+      searchParams = {}
+      type = $(@).attr("value")
+      searchParams.podType = type
+      collectParams() 
+           
+    $(".select-price-cont").click (e) ->
+      collectParams()
+      
+      
+    collectParams = () ->
+      paramsArr = $(".select-params")
+      paramsArr.each (i, el) ->
+        key = $(el).attr("value")
+        searchParams[key] = [] 
+        liArr = $(el).find("li[ischecked='true']")
+        liArr.each (j, el2) ->
+          searchParams[key].push($(el2).attr("value"))
+      console.log "searchParams",searchParams
+        
+        
       
