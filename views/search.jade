@@ -4,9 +4,9 @@ extends layout
 block content
   include navigation
   != js('search')
+  input#firstData(type="hidden", search=search)
   .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
   .left-side
-
 
   .right-side
     .filter-block
@@ -40,7 +40,7 @@ block content
     .switch
       .catalog.active Каталог
       .brands Бренды
-    select.nav
+    select#nav-type.nav
       <% _.each(gdata, function(data, key) { %>  <option value=<%=key%>><%= data.title %></option> <% }); %>
     div.types
       <% _.each(data.tip, function(data, key) { %>  

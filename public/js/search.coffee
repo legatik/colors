@@ -43,7 +43,6 @@ $(document).ready () ->
   getBrend = (cb) ->
     if brendArr
       cb(brendArr)
-      
     else
       $.ajax
         type    : 'GET'
@@ -51,13 +50,25 @@ $(document).ready () ->
         success : (brends) ->
           brendArr = brends
           cb(brends)
-  renderFilter = () ->
+          
+          
+  renderFilter = (key) ->
     getBrend (brends) ->
-      console.log "brends",brends
-      key = "face"
+      $(".left-side").empty()
       template = _.template(jQuery('#filerTemplate').html())
       $(".left-side").append(template(gdata: window.nav, data:window.nav[key], bdata:brends))
+      $("#nav-type > option[value="+key+"]").attr("selected", true)
+      addEvent()
+  
+  
+  firstKey = $("#firstData").attr("search")
+  if firstKey
+    renderFilter(firstKey)
+  else
+    renderFilter("face")
     
-  renderFilter()
-    
-
+  addEvent = () ->
+    $("#nav-type").unbind("click")
+    $("#nav-type").click (e) ->
+      key = $(@).val()
+      renderFilter(key)

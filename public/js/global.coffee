@@ -9,147 +9,6 @@ $(document).ready () ->
   jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
   
   window.nav = {
-    body:{
-      title: "Для тела"
-      tip:[
-        {
-          title : "УХОД ЗА ТЕЛОМ"
-          key : "body-body"
-          podtip: [
-            {
-              title : "Для ванны и душа"
-              key : "body-body1"
-            }
-            {
-              title : "Лосьены, кремы и бальзамы"
-              key : "body-body2"
-            }
-            {
-              title : "Спреи"
-              key : "body-body3"
-            }
-            {
-              title : "Масла"
-              key : "body-body4"
-            }
-            {
-              title : "Массажные средства"
-              key : "body-body5"
-            }
-            {
-              title : "Скрабы"
-              key : "body-body6"
-            }
-          ]
-        }
-        
-        
-        {
-          title : "УХОД ЗА РУКАМИ"
-          key : "body-hend"
-          podtip: [
-            {
-              title : "Кремы и лосьоны"
-              key : "body-hend1"
-            }
-            {
-              title : "Маски и скрабы"
-              key : "body-hend2"
-            }
-            {
-              title : "Уход за ногтями"
-              key : "body-hend3"
-            }
-          ]
-        }
-        
-        
-        {
-          title : "УХОД ЗА НОГАМИ"
-          key : "body-footer"
-          podtip: [
-            {
-              title : "Скрабы и пилинги"
-              key : "body-footer1"
-            }
-            {
-              title : "Маски и патчи"
-              key : "body-footer2"
-            }
-            {
-              title : "Лосьоны, кремы, спреи"
-              key : "body-footer3"
-            }
-            {
-              title : "Дезодорирующие средства"
-              key : "body-footer4"
-            }
-          ]
-        }
-        
-        {
-          title : "ДЛЯ СТРОЙНОГО СИЛУЭТА"
-          key : "body-stroin"
-          podtip: [
-            {
-              title : "Гели, кремы и скрабы"
-              key : "body-stroin1"
-            }
-            {
-              title : "Маски и патчи"
-              key : "body-stroin2"
-            }
-          ]
-        }
-        
-        
-        {
-          title : "ЭПИЛЯЦИЯ, ДЕПИЛЯЦИЯ"
-          key : "body-epil"
-          podtip: []
-        }
-        
-        {
-          title : "ПАРФЮМИРОВАННЫЕ И 
-ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА"
-          key : "body-epil"
-          podtip: []
-        }
-        
-        
-        {
-          title : "СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА"
-          key : "body-epil"
-          podtip: []
-        }
-      ]
-      
-      
-      dop : [
-        {
-          title : "Несовершенства"
-          list : [
-            {
-              title : "Против сухости кожи"
-              key   : "body-nes-suh"
-            }
-            {
-              title : "Против усталости"
-              key   : "body-nes-ust"
-            }
-            {
-              title : "Против морщин и потери упругости"
-              key   : "body-nes-morch"
-            }
-            {
-              title : "Отбеливающие средства"
-              key   : "body-nes-otb"
-            }
-          ]
-        }
-      ]
-    }
-    
     face:{
       title : "Для лица"
       tip : [
@@ -360,6 +219,147 @@ $(document).ready () ->
         }
       ]
     }
+
+    body:{
+      title: "Для тела"
+      tip:[
+        {
+          title : "УХОД ЗА ТЕЛОМ"
+          key : "body-body"
+          podtip: [
+            {
+              title : "Для ванны и душа"
+              key : "body-body1"
+            }
+            {
+              title : "Лосьены, кремы и бальзамы"
+              key : "body-body2"
+            }
+            {
+              title : "Спреи"
+              key : "body-body3"
+            }
+            {
+              title : "Масла"
+              key : "body-body4"
+            }
+            {
+              title : "Массажные средства"
+              key : "body-body5"
+            }
+            {
+              title : "Скрабы"
+              key : "body-body6"
+            }
+          ]
+        }
+        
+        
+        {
+          title : "УХОД ЗА РУКАМИ"
+          key : "body-hend"
+          podtip: [
+            {
+              title : "Кремы и лосьоны"
+              key : "body-hend1"
+            }
+            {
+              title : "Маски и скрабы"
+              key : "body-hend2"
+            }
+            {
+              title : "Уход за ногтями"
+              key : "body-hend3"
+            }
+          ]
+        }
+        
+        
+        {
+          title : "УХОД ЗА НОГАМИ"
+          key : "body-footer"
+          podtip: [
+            {
+              title : "Скрабы и пилинги"
+              key : "body-footer1"
+            }
+            {
+              title : "Маски и патчи"
+              key : "body-footer2"
+            }
+            {
+              title : "Лосьоны, кремы, спреи"
+              key : "body-footer3"
+            }
+            {
+              title : "Дезодорирующие средства"
+              key : "body-footer4"
+            }
+          ]
+        }
+        
+        {
+          title : "ДЛЯ СТРОЙНОГО СИЛУЭТА"
+          key : "body-stroin"
+          podtip: [
+            {
+              title : "Гели, кремы и скрабы"
+              key : "body-stroin1"
+            }
+            {
+              title : "Маски и патчи"
+              key : "body-stroin2"
+            }
+          ]
+        }
+        
+        {
+          title : "ЭПИЛЯЦИЯ, ДЕПИЛЯЦИЯ"
+          key : "body-epil"
+          podtip: []
+        }
+        
+        {
+          title : "ПАРФЮМИРОВАННЫЕ И 
+ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА"
+          key : "body-epil"
+          podtip: []
+        }
+        
+        
+        {
+          title : "СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА"
+          key : "body-epil"
+          podtip: []
+        }
+      ]
+      
+      
+      dop : [
+        {
+          title : "Несовершенства"
+          list : [
+            {
+              title : "Против сухости кожи"
+              key   : "body-nes-suh"
+            }
+            {
+              title : "Против усталости"
+              key   : "body-nes-ust"
+            }
+            {
+              title : "Против морщин и потери упругости"
+              key   : "body-nes-morch"
+            }
+            {
+              title : "Отбеливающие средства"
+              key   : "body-nes-otb"
+            }
+          ]
+        }
+      ]
+    }
+
   }
   
   
