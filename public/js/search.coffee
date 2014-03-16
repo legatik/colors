@@ -21,6 +21,8 @@ $(document).ready () ->
       $('.max-price').val ui.values[1]
       min_price = ui.values[0]
       max_price = ui.values[1]
+    change: (event, ui) ->
+      collectParams()
 
   $('.min-price').on 'change',  () ->
     val = $(this).val()
@@ -80,7 +82,6 @@ $(document).ready () ->
     $(".select-params > li").unbind("click")
     $(".filter-type").unbind("click")
     $(".filter-pod-type").unbind("click")
-    $(".select-price-cont").unbind("click")
     
     $("#nav-type").click (e) ->
       key = $(@).val()
@@ -117,9 +118,9 @@ $(document).ready () ->
       type = $(@).attr("value")
       searchParams.special.podType = type
       collectParams() 
-           
-    $(".select-price-cont").click (e) ->
-      collectParams()
+     
+    $("#slider-price").change () ->
+      console.log "SS"
      
   collectOtherParams = () ->
     searchParams.product.min_price = $(".min-price").val()
@@ -153,7 +154,7 @@ $(document).ready () ->
     url = "/search/filter/" + type
     $.ajax
       type    : 'POST'
-      url     : "/search/filter"
+      url     : url
       data    : searchParams
       success : (products) ->
           console.log "products", products
