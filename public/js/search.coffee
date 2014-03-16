@@ -147,6 +147,15 @@ $(document).ready () ->
     collectOtherParams()
       
         
+  renderResults = (products) ->
+    products.forEach (product) ->
+      $(".res-search").empty()
+      template = _.template(jQuery('#productTemplate').html())
+      el = $(template({data:product}))
+      $(".res-search").append(el)
+      $(el).hide().fadeIn("slow")
+    
+        
       
   sendRequest = () ->
     console.log "searchParams",searchParams
@@ -157,6 +166,6 @@ $(document).ready () ->
       url     : url
       data    : searchParams
       success : (products) ->
-          console.log "products", products
+        renderResults(products)
       
       

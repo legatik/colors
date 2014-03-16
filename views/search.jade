@@ -27,16 +27,9 @@ block content
                 option(value="cost") По цене
 
     .res-search
-      .prod
-        img(src="../img/prod.jpg", width="124px", height="144px")
-        .title TONYMOLY Peach Anti-Aging Hand Cream
-        .descr Утрапитательный крем для рук против старения кожи
-        .old-price 417
-        .new-price 339 р
-        .in-basket В КОРЗИНУ
 
 
-
+  include footer
 
   script#filerTemplate(type="text/template")
     .switch
@@ -63,10 +56,13 @@ block content
       li(ischecked="true", value!="<%=data['_id']%>") <%=data.title%>
       <% }); %>  
 
-
-  include footer
-
-
-
+  script#productTemplate(type="text/template")
+    .prod
+      img(src!="../img/products/<%=data['_id']%>/0.<%=data.picture[0]%>", width="124px", height="144px")
+      .title <%=data.title%>
+      .descr <%=data.minOpisanie%>
+      .old-price <%=data.oldCost%>
+      .new-price <%=data.cost%> р
+      .in-basket В КОРЗИНУ
 
 
