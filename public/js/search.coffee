@@ -69,6 +69,21 @@ $(document).ready () ->
     
   addEvent = () ->
     $("#nav-type").unbind("click")
+    $(".select-params > li").unbind("click")
     $("#nav-type").click (e) ->
       key = $(@).val()
       renderFilter(key)
+      
+    $(".select-params > li").click () ->
+      checked = 0
+      $ul = $(@).parent()
+      liArr = $($ul).find("li")
+      liArr.each (i, el) ->
+        checked++ if $(el).attr("ischecked") == "true"
+      if checked == liArr.length
+        console.log "D"
+        liArr.each (i, el) ->
+          $(el).attr("ischecked", "false")
+      $(@).attr("ischecked", "true")
+    
+      
