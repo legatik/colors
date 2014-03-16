@@ -13,10 +13,10 @@ exports.boot = (app) ->
       res.render 'index', {title: 'Бренды', user: req.user, loc:'home'}
 
   app.get '/face', (req, res) ->
-      res.render 'face', {title: 'Для лица', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face"}
 
   app.get '/body', (req, res) ->
-      res.render 'index', {title: 'Для тела', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body"}
 
   app.get '/hair', (req, res) ->
       res.render 'index', {title: 'Для волос', user: req.user, loc:'home'}

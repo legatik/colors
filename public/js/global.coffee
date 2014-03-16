@@ -147,8 +147,6 @@ $(document).ready () ->
           ]
         }
       ]
-      
-      
     }
     
     face:{
