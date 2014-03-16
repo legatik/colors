@@ -78,7 +78,9 @@ $(document).ready () ->
         switch checkType
           when "face"
               createProdFace(productObj, imgArr, vidImg)
-      
+        switch checkType
+          when "body"
+              createProdBody(productObj, imgArr, vidImg)
       
       
       addEventOnProductTip = () ->
@@ -93,6 +95,33 @@ $(document).ready () ->
             $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
       
+      
+      createProdBody = (productObj, imgArr, vidImg) ->
+        type = 
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType > td > select").val()
+          nesovershenstva : $("#body-nesovershenstva").val()
+        data = 
+          product : productObj
+          type    : type
+        
+        
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/body"
+          cache: false
+          contentType: false
+          processData: false
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
+      
       createProdFace = (productObj, imgArr, vidImg) ->
         type = 
           type            : $("#product-tip").val()
@@ -102,11 +131,6 @@ $(document).ready () ->
         data = 
           product : productObj
           type    : type
-        
-        
-        console.log "data", data
-        console.log "imgArr", imgArr
-        console.log "vidImg", vidImg
         
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)

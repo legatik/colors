@@ -19,6 +19,7 @@ product = new Schema
   vid              : Array
   imgVid           : String
   isFace           : {type: ObjectId, ref: 'Face'}
+  isBody           : {type: ObjectId, ref: 'Body'}
   brend            : {type: ObjectId, ref: 'Brend'}
   
 Model = mongoose.model 'Product', product
