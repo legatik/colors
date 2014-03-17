@@ -16,6 +16,7 @@ $(document).ready () ->
       $("#gl-product-tip").click () ->
         renderType()
 
+
       $("#brend-show").click (e) ->
         $(".form-admin").hide()
         $("#brend-form").show()

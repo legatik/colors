@@ -18,12 +18,6 @@ exports.boot = (app) ->
 
 
 
-
-  app.get '/admin/create_brend', (req, res) ->
-    newBrend = new Brend {title:req.query.brendName}
-    newBrend.save (err, brend) ->
-      res.send brend
-
   app.get '/admin/q_brend', (req, res) ->
     Brend.find {}, (err, arrBrend) ->
       res.send arrBrend

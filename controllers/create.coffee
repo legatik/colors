@@ -7,6 +7,22 @@ fs = require "fs-extra"
 
 exports.boot = (app) ->
 
+  app.post '/brend', (req, res) ->
+    body = JSON.parse req.body.data
+    newBrend = new Brend(body)
+    newBrend.save (err, brend) ->
+      _.each req.files, (data,key)->
+        type = data.mime.replace("image/", "")
+        path = './public/img/brends/' + brend["_id"]
+        brend[key] = type
+        fs.mkdir path, (err) ->
+          fs.copy data.path, path + "/" + key + "." + type, (err) ->
+      brend.save()
+      res.send 200
+
+
+
+
   app.post '/face', (req, res) ->
     body = JSON.parse req.body.data
     newFace = new Face(body.type)
