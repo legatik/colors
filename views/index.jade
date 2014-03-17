@@ -85,20 +85,11 @@ block content
   .brands-title Бренды
   #myCarousel3.carousel.slide(data-ride="carousel")
     .carousel-inner
-      .item.active
-        .brand
-        .brand
-        .brand
-        .brand
-        .brand
-        .brand
-      .item
-        .brand
-        .brand
-        .brand
-        .brand
-        .brand
-        .brand
+      - each itemArr in brend
+        .item.item-brend
+          - each item in itemArr
+            a(href="/#")
+              img.brand(src !="../img/brends/#{item['_id']}/img.#{item.img}")
     a.left.carousel-control(data-slide="prev",href="#myCarousel3")
     a.right.carousel-control(data-slide="next",href="#myCarousel3")
 
