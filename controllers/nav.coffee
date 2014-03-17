@@ -10,7 +10,7 @@ exports.boot = (app) ->
       res.render 'index', {title: 'Новинки', user: req.user, loc:'home'}
 
   app.get '/brend', (req, res) ->
-      res.render 'index', {title: 'Бренды', user: req.user, loc:'home'}
+      res.render 'brands', {title: 'Бренды', user: req.user, loc:'home'}
 
   app.get '/face', (req, res) ->
       res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face"}
