@@ -33,7 +33,8 @@ block content
   script#filerTemplate(type="text/template")
     .switch
       .catalog.active Каталог
-      .brands Бренды
+      .brands 
+        a(href="/nav/brend") Бренды
     select#nav-type.nav
       <% _.each(gdata, function(data, key) { %>  <option value=<%=key%>><%= data.title %></option> <% }); %>
     div.types

@@ -2,7 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 nodemailer = require 'nodemailer'
 
-{Dish} = db.models
+{Brend} = db.models
 
 exports.boot = (app) ->
 
@@ -10,7 +10,9 @@ exports.boot = (app) ->
       res.render 'index', {title: 'Новинки', user: req.user, loc:'home'}
 
   app.get '/brend', (req, res) ->
-      res.render 'brands', {title: 'Бренды', user: req.user, loc:'home'}
+      Brend.find {active:true}, (err, brends) ->
+        console.log "brend", brends
+        res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends}
 
   app.get '/face', (req, res) ->
       res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face"}
