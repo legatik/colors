@@ -496,6 +496,8 @@ ul.navigation
       margin-left: -1px
     div.active
       background: rgba(31,31,31, 0.2)
+    .brands.active
+      background: #FF5F81
   select.nav
     width: 203px
     height: 23px
@@ -536,8 +538,22 @@ ul.navigation
       cursor: pointer
     li[ischecked="true"]
       background: url("../img/check-true.png") 21px 4px no-repeat #fff;
+  ul.select-params.brands
+    li
+      padding-left: 117px
+      background: url("../img/check-false.png") 98px 4px no-repeat #fff;
+    li[ischecked="true"]
+      background: url("../img/check-true.png") 98px 4px no-repeat #fff;
+
+
 .right-side
   margin-left: 55px
+  .brand-info
+    font-size: 17px
+    color: #231F20
+    width: 718px
+    p
+      text-indent: 40px
   .filter-block
     .select-price-cont
     .search-product
@@ -701,4 +717,10 @@ ul.navigation
         margin-left: 26px
       .weight-lab
         margin-left: 43px
+
+#brands-picture
+  width: 980px
+  height: 170px
+  border: 1px solid #000
+  margin-bottom: 15px
 

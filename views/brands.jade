@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  include navigation
+  #brands-picture ТУТ БУДЕТ КАРТИНКА
+  .left-side
+    .switch
+       .catalog Каталог
+       .brands.active Бренды
+    ul.select-params.brands
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд2
+        li(ischecked="true") Бренд3
+        li(ischecked="true") Бренд14
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1ф4
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1фпу
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1
+        li(ischecked="true") Бренд1фуп
+        li(ischecked="true") Бренд1
+
+
+  .right-side
+    .brand-info
+      p Бренд Innifsree появился в 2000 году как первый корейский бренд натуральной, органической косме	тики. Также, как и бренды Etude House, A’Pieu и многие другие марка входит в корпорацию Amore Pacific, уже 65 лет прочно занимающую лидирующие позиции на азиатском рынке косметики.
+      p Сочетая новейшие научные разработки и уникальные целебные компоненты, получаемые из природных богатств острова Чеджу, бренд Иннисфри создает эффективную натуральную косметику, направленую на поддержание естественной человеческой красоты.
+    .filter-block
+        .select-price-cont
+            .title Цена
+            #slider-price
+            #slider-price-fake
+            label.min-price-label От
+            input.min-price(value="49")
+            label.max-price-label До
+            input.max-price(value="2599")
+        input.search-product
+        .sort-cont
+            .title Сортировать
+            select.sort-product
+                option(value="popular") По популярности
+                option(value="new") По новизне
+                option(value="cost") По цене
+    .res-search
+
