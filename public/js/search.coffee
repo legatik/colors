@@ -148,8 +148,8 @@ $(document).ready () ->
       
         
   renderResults = (products) ->
+    $(".res-search").empty()
     products.forEach (product) ->
-      $(".res-search").empty()
       template = _.template(jQuery('#productTemplate').html())
       el = $(template({data:product}))
       $(".res-search").append(el)

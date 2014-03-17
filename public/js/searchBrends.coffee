@@ -53,6 +53,16 @@ $(document).ready () ->
 
   firstRender = $($(".brands > li").first()).attr("key")
 
+
+  getProducts = (key) ->
+    $.ajax
+      type    : 'POST'
+      url     : '/search/productByBrend'
+      data    : {key:key}
+      success : (products) ->
+        renderResults(products)
+    
+
   renderBrendInfo = (key) ->
     brend = false
     brends.forEach (item) ->
@@ -61,12 +71,19 @@ $(document).ready () ->
     $("#brands-picture").attr("src", src)
     $(".brand-info > p").text('')
     $(".brand-info > p").text(brend.description)
-    
+    liarr = $(".select-params > li")
+    liarr.each (i, el)->
+      $(el).attr("ischecked", "false")
+    $(".select-params > li[key="+key+"]").attr("ischecked","true")
+    getProducts(key)
 
-
-
+  $(".select-params > li").click () ->
+    key = $(@).attr("key")
+    renderBrendInfo(key)
 
   renderBrendInfo(firstRender)
+
+
 
 #  collectParams = () ->
 #    paramsArr = $(".special-params")
@@ -79,13 +96,13 @@ $(document).ready () ->
 #    collectOtherParams()
       
         
-#  renderResults = (products) ->
-#    products.forEach (product) ->
-#      $(".res-search").empty()
-#      template = _.template(jQuery('#productTemplate').html())
-#      el = $(template({data:product}))
-#      $(".res-search").append(el)
-#      $(el).hide().fadeIn("slow")
+  renderResults = (products) ->
+    $(".res-search").empty()
+    products.forEach (product) ->
+      template = _.template(jQuery('#productTemplate').html())
+      el = $(template({data:product}))
+      $(".res-search").append(el)
+      $(el).hide().fadeIn("slow")
     
         
       

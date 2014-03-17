@@ -19,3 +19,9 @@ exports.boot = (app) ->
     data = req.body
     Product.find {}, (err, products)-> 
       res.send products
+      
+  app.post '/productByBrend', (req, res) ->
+    brendId = req.body.key
+    console.log "brendId",brendId
+    Product.find {brend:brendId}, (err, products) ->
+      res.send products
