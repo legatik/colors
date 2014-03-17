@@ -6,8 +6,18 @@ fs = require 'fs-extra'
 
 exports.boot = (app) ->
 
+
   app.get '/admin', (req, res) ->
-      res.render 'admin', {title: 'Админ', user: req.user, loc:'home'}
+      res.render 'admin/page/admin', {title: 'Админ', user: req.user, loc:'home'}
+      
+  app.get '/admin/page/brend', (req, res) ->
+      res.render 'admin/page/brend', {title: 'Админ - бренды', user: req.user, loc:'home'}
+
+  app.get '/admin/page/product', (req, res) ->
+      res.render 'admin/page/product', {title: 'Админ - товары', user: req.user, loc:'home'}
+
+
+
 
   app.get '/admin/create_brend', (req, res) ->
     newBrend = new Brend {title:req.query.brendName}

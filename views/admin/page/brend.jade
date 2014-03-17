@@ -1,0 +1,27 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/brends')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    
+    
+    button#brend-show Добавить бренд
+
+    #brend-form.form-admin
+      span Ведите название бренда
+      br
+      input#brend-name
+      button#add-brend Добавить
+      span#success-brend.hide &nbsp Бренд успешно добавлен
+
+  script#stepTemplate(type="text/template")
+    div.small-cont
+      input.step-inp(type="file",id!="step-inp-<%=number%>")
+      img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
+      img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
+
+
