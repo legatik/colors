@@ -5,7 +5,6 @@ $(document).ready () ->
 #    success : (brendArr) ->
 
   $("#brend-show").click (e) ->
-    $(".form-admin").hide()
     $("#brend-form").show()
 
   $("#add-brend").click (e) ->
