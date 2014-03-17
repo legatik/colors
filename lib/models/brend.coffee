@@ -7,7 +7,7 @@ Schema = mongoose.Schema
 brend = new Schema
   title       : String
   description : String
-  active      : String
+  active      : Boolean
   img         : String
   logo        : String
   
