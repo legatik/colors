@@ -5,7 +5,11 @@ ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
 brend = new Schema
-  title : String
+  title       : String
+  description : String
+  active      : String
+  img         : String
+  logo        : String
   
 Model = mongoose.model 'Brend', brend
 
