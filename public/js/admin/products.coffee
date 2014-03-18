@@ -34,7 +34,7 @@ $(document).ready () ->
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
         vidArr = vidString.split(",")
-        productObj = 
+        productObj =
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
           obem             : $("#brend-obem").val()
@@ -50,23 +50,25 @@ $(document).ready () ->
           imgVid           : ''
           brend            : $("#brend-select").val()
           picture          : []
+          dateAdding       : new Date()
+          popular          : 0
         imgArr = []
-        
+
         vidImg = ($("#pic-tone"))[0].files[0]
         $(".step-inp").each (index, one) ->
           if one.files.length != 0
             imgArr.push one.files[0]
-        
+
         checkType = $("#gl-product-tip").val()
-          
+
         switch checkType
           when "face"
               createProdFace(productObj, imgArr, vidImg)
         switch checkType
           when "body"
               createProdBody(productObj, imgArr, vidImg)
-      
-      
+
+
       addEventOnProductTip = () ->
           $(".activePodType").removeClass("activePodType")
           idPodTip = "#" + $("#product-tip").val()
@@ -78,18 +80,18 @@ $(document).ready () ->
             idPodTip = "#" + $(@).val()
             $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
-      
-      
+
+
       createProdBody = (productObj, imgArr, vidImg) ->
-        type = 
+        type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           nesovershenstva : $("#body-nesovershenstva").val()
-        data = 
+        data =
           product : productObj
           type    : type
-        
-        
+
+
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
@@ -105,17 +107,17 @@ $(document).ready () ->
           success : (data) ->
             alert("Добавлен!")
             clearProduct()
-      
+
       createProdFace = (productObj, imgArr, vidImg) ->
-        type = 
+        type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           kozha           : $("#face-koza").val()
           nesovershenstva : $("#face-nesovershenstva").val()
-        data = 
+        data =
           product : productObj
           type    : type
-        
+
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
@@ -131,7 +133,7 @@ $(document).ready () ->
           success : (data) ->
             alert("Добавлен!")
             clearProduct()
-      
+
       clearProduct = () ->
         $("#prod-vid").val('')
         $("#brend-title").val('')
@@ -154,8 +156,8 @@ $(document).ready () ->
           display = $($item).css("display")
           $($item).click() if display isnt "none"
           i++
-        
-        
+
+
 #      for picture
 
   readURLStep = (input,idImg) =>
@@ -200,11 +202,9 @@ $(document).ready () ->
         reader.onload = (e) =>
           $("#tone-prev").attr "src", e.target.result
           $("#del-img-tone").show()
-          
+
   $("#del-img-tone").click () ->
     $("#pic-tone").val("")
     $("#tone-prev").attr "src", "/img/add-bg.png"
     $("#del-img-tone").hide()
-    
-          
-        
+

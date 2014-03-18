@@ -18,14 +18,17 @@ product = new Schema
   ostatok          : Number
   vid              : Array
   imgVid           : String
+  popular          : Number
   isFace           : {type: ObjectId, ref: 'Face'}
   isBody           : {type: ObjectId, ref: 'Body'}
   brend            : {type: ObjectId, ref: 'Brend'}
-  
+  dateAdding : Date
+
+
 Model = mongoose.model 'Product', product
 
 Model.createThis = (brend, face, cb) ->
-  testObj = 
+  testObj =
     title            : "Хуй"
     minOpisanie      : "Он охуенен"
     obem             : 18
@@ -40,5 +43,6 @@ Model.createThis = (brend, face, cb) ->
     brend            : brend["_id"]
   @create testObj, (err, product) ->
     cb(product)
-    
+
 module.exports = Model
+

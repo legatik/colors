@@ -24,6 +24,8 @@ $(document).ready () ->
     change: (event, ui) ->
       collectParams()
 
+
+
   $('.min-price').on 'change',  () ->
     val = $(this).val()
     if val>=min && val<max_price
@@ -56,8 +58,8 @@ $(document).ready () ->
         success : (brends) ->
           brendArr = brends
           cb(brends)
-          
-          
+
+
   renderFilter = (key) ->
     getBrend (brends) ->
       $(".left-side").empty()
@@ -65,28 +67,39 @@ $(document).ready () ->
       $(".left-side").append(template(gdata: window.nav, data:window.nav[key], bdata:brends))
       $("#nav-type > option[value="+key+"]").attr("selected", true)
       addEvent()
-  
-  
+      collectOtherParams()
+      sendRequest()
+
+
   firstKey = $("#firstData").attr("search")
   if firstKey
     renderFilter(firstKey)
   else
     renderFilter("face")
-    
-    
+
+
   $(".sort-product").click () ->
     collectParams()
-    
+
+  keyTime = 0
+  $(".search-product").unbind("keyup")
+  $(".search-product").on "keyup", () ->
+    clearTimeout(keyTime)
+    keyTime = setTimeout(->
+      collectParams()
+      return
+    , 1000)
+
   addEvent = () ->
     $("#nav-type").unbind("click")
     $(".select-params > li").unbind("click")
     $(".filter-type").unbind("click")
     $(".filter-pod-type").unbind("click")
-    
+
     $("#nav-type").click (e) ->
       key = $(@).val()
       renderFilter(key)
- 
+
     $(".select-params > li").click () ->
       checked = 0
       $ul = $(@).parent()
@@ -97,7 +110,7 @@ $(document).ready () ->
         liArr.each (i, el) ->
           $(el).attr("ischecked", "false")
         $(@).attr("ischecked", "true")
-      else 
+      else
         if $(@).attr("ischecked") == "true"
           $(@).attr("ischecked", "false")
           if checked == 1
@@ -106,47 +119,48 @@ $(document).ready () ->
         else
           $(@).attr("ischecked", "true")
       collectParams()
-      
+
     $(".filter-type").click (e) ->
       type = $(@).attr("value")
       searchParams.special = {}
       searchParams.special.type = type
       collectParams()
-      
+
     $(".filter-pod-type").click (e) ->
       searchParams.special = {}
       type = $(@).attr("value")
       searchParams.special.podType = type
-      collectParams() 
-     
+      collectParams()
+
     $("#slider-price").change () ->
       console.log "SS"
-     
+
   collectOtherParams = () ->
     searchParams.product.min_price = $(".min-price").val()
     searchParams.product.max_price = $(".max-price").val()
     searchParams.product.sort = $(".sort-product").val()
-    
+    searchParams.product.title = $(".search-product").val()
+
     paramsArr = $("#brend-filter")
     paramsArr.each (i, el) ->
       key = $(el).attr("value")
-      searchParams.product[key] = [] 
+      searchParams.product[key] = []
       liArr = $(el).find("li[ischecked='true']")
       liArr.each (j, el2) ->
         searchParams.product[key].push($(el2).attr("value"))
     sendRequest()
-    
+
   collectParams = () ->
     paramsArr = $(".special-params")
     paramsArr.each (i, el) ->
       key = $(el).attr("value")
-      searchParams.special[key] = [] 
+      searchParams.special[key] = []
       liArr = $(el).find("li[ischecked='true']")
       liArr.each (j, el2) ->
         searchParams.special[key].push($(el2).attr("value"))
     collectOtherParams()
-      
-        
+
+
   renderResults = (products) ->
     $(".res-search").empty()
     products.forEach (product) ->
@@ -154,11 +168,12 @@ $(document).ready () ->
       el = $(template({data:product}))
       $(".res-search").append(el)
       $(el).hide().fadeIn("slow")
-    
-        
-      
+
+
+
   sendRequest = () ->
     console.log "searchParams",searchParams
+    console.log $("#nav-type")
     type = $("#nav-type").val()
     url = "/search/filter/" + type
     $.ajax
@@ -167,5 +182,4 @@ $(document).ready () ->
       data    : searchParams
       success : (products) ->
         renderResults(products)
-      
-      
+

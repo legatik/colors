@@ -23,7 +23,7 @@ block content
             .title Сортировать
             select.sort-product
                 option(value="popular") По популярности
-                option(value="new") По новизне
+                option(value="dateAdding") По новизне
                 option(value="cost") По цене
     .res-search
 
@@ -33,7 +33,7 @@ block content
   script#filerTemplate(type="text/template")
     .switch
       .catalog.active Каталог
-      .brands 
+      .brands
         a(href="/nav/brend") Бренды
     select#nav-type.nav
       <% _.each(gdata, function(data, key) { %>  <option value=<%=key%>><%= data.title %></option> <% }); %>
