@@ -21,10 +21,11 @@ exports.boot = (app) ->
 
   getProductFilter = (data, ids, idKey) ->
     filter = {}
-    filter[idKey] = {$in: ids}
+    if idKey
+      filter[idKey] = {$in: ids}
     if data
       filter.cost = {$lte: data.max_price, $gte: data.min_price}
-      filter.brend = {$in: data.brend}
+      filter.brend = {$in: data.brend} if data.brend
       filter.title = new RegExp(data.title, "i")
     filter
 
@@ -49,8 +50,6 @@ exports.boot = (app) ->
       .exec (err, products) ->
         res.send products
 
-
-
   app.post '/filter/face', (req, res) ->
     data = req.body
     special_filter = getFilter(data.special)
@@ -65,7 +64,12 @@ exports.boot = (app) ->
 
   app.post '/productByBrend', (req, res) ->
     brendId = req.body.key
-    console.log "brendId",brendId
-    Product.find {brend:brendId}, (err, products) ->
+    data =  req.body.filter
+    product_filter = getProductFilter(data)
+    product_filter.brend = brendId
+    sort = getSort(data)
+    Product.find(product_filter)
+    .sort(sort)
+    .exec (err, products) ->
       res.send products
 

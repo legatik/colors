@@ -71,7 +71,7 @@ $(document).ready () ->
       data    : {key:renderKey, filter:filter}
       success : (products) ->
         renderResults(products)
-    
+
 
   renderBrendInfo = () ->
     brend = false
@@ -93,7 +93,7 @@ $(document).ready () ->
 
   renderBrendInfo(renderKey)
 
-        
+
   renderResults = (products) ->
     $(".res-search").empty()
     products.forEach (product) ->
@@ -106,5 +106,13 @@ $(document).ready () ->
 
   $(".sort-product").click () ->
     getProducts()
-    
-        
+
+  keyTime = 0
+  $(".search-product").unbind("keyup")
+  $(".search-product").on "keyup", () ->
+    clearTimeout(keyTime)
+    keyTime = setTimeout(->
+      getProducts()
+      return
+    , 1000)
+
