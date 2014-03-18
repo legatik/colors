@@ -50,8 +50,8 @@ $(document).ready () ->
   brends = $("#firstData").attr("brends")
   brends = JSON.parse(brends)
 
-
-  renderKey = $($(".brands > li").first()).attr("key")
+  renderKey = $("#firstData").attr("brendid")
+  renderKey = $($(".brands > li").first()).attr("key") if !renderKey
 
   getFilterParms = () ->
     objSent = {}

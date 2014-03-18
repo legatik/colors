@@ -10,9 +10,9 @@ exports.boot = (app) ->
       res.render 'index', {title: 'Новинки', user: req.user, loc:'home'}
 
   app.get '/brend', (req, res) ->
-      Brend.find {active:true}, (err, brends) ->
-        console.log "brend", brends
-        res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends}
+    brendId = req.query.key
+    Brend.find {active:true}, (err, brends) ->
+      res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends, brendId}
 
   app.get '/face', (req, res) ->
       res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face"}

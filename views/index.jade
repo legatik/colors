@@ -88,7 +88,7 @@ block content
       - each itemArr in brend
         .item.item-brend
           - each item in itemArr
-            a(href="/#")
+            a(href="/nav/brend?key="+item['_id'])
               img.brand(src !="../img/brends/#{item['_id']}/img.#{item.img}")
     a.left.carousel-control(data-slide="prev",href="#myCarousel3")
     a.right.carousel-control(data-slide="next",href="#myCarousel3")

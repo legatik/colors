@@ -3,7 +3,7 @@ extends layout
 block content
   include navigation
   != js('searchBrends')
-  input#firstData(type="hidden", brends=JSON.stringify(brends))
+  input#firstData(type="hidden", brends=JSON.stringify(brends), brendId!=brendId)
   img#brands-picture ТУТ БУДЕТ КАРТИНКА
   .left-side
     .switch
