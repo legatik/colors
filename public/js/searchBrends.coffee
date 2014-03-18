@@ -21,8 +21,8 @@ $(document).ready () ->
       $('.max-price').val ui.values[1]
       min_price = ui.values[0]
       max_price = ui.values[1]
-#    change: (event, ui) ->
-#      collectParams()
+    change: (event, ui) ->
+      getProducts()
 
   $('.min-price').on 'change',  () ->
     val = $(this).val()
@@ -51,22 +51,32 @@ $(document).ready () ->
   brends = JSON.parse(brends)
 
 
-  firstRender = $($(".brands > li").first()).attr("key")
+  renderKey = $($(".brands > li").first()).attr("key")
+
+  getFilterParms = () ->
+    objSent = {}
+    objSent.min_price = $(".min-price").val()
+    objSent.max_price = $(".max-price").val()
+    objSent.sort = $(".sort-product").val()
+    objSent.title = $(".search-product").val()
+    return objSent
 
 
-  getProducts = (key) ->
+  getProducts = () ->
+    filter = getFilterParms()
+    console.log "{key:renderKey, filter:filter}",{key:renderKey, filter:filter}
     $.ajax
       type    : 'POST'
       url     : '/search/productByBrend'
-      data    : {key:key}
+      data    : {key:renderKey, filter:filter}
       success : (products) ->
         renderResults(products)
     
 
-  renderBrendInfo = (key) ->
+  renderBrendInfo = () ->
     brend = false
     brends.forEach (item) ->
-      brend = item if item["_id"].toString() == key.toString()
+      brend = item if item["_id"].toString() == renderKey.toString()
     src = '/img/brends/' + brend['_id'] + "/" + "logo." + brend.logo
     $("#brands-picture").attr("src", src)
     $(".brand-info > p").text('')
@@ -74,27 +84,15 @@ $(document).ready () ->
     liarr = $(".select-params > li")
     liarr.each (i, el)->
       $(el).attr("ischecked", "false")
-    $(".select-params > li[key="+key+"]").attr("ischecked","true")
-    getProducts(key)
+    $(".select-params > li[key="+renderKey+"]").attr("ischecked","true")
+    getProducts()
 
   $(".select-params > li").click () ->
-    key = $(@).attr("key")
-    renderBrendInfo(key)
+    renderKey = $(@).attr("key")
+    renderBrendInfo()
 
-  renderBrendInfo(firstRender)
+  renderBrendInfo(renderKey)
 
-
-
-#  collectParams = () ->
-#    paramsArr = $(".special-params")
-#    paramsArr.each (i, el) ->
-#      key = $(el).attr("value")
-#      searchParams.special[key] = [] 
-#      liArr = $(el).find("li[ischecked='true']")
-#      liArr.each (j, el2) ->
-#        searchParams.special[key].push($(el2).attr("value"))
-#    collectOtherParams()
-      
         
   renderResults = (products) ->
     $(".res-search").empty()
@@ -103,18 +101,10 @@ $(document).ready () ->
       el = $(template({data:product}))
       $(".res-search").append(el)
       $(el).hide().fadeIn("slow")
+
+
+
+  $(".sort-product").click () ->
+    getProducts()
     
         
-      
-#  sendRequest = () ->
-#    console.log "searchParams",searchParams
-#    type = $("#nav-type").val()
-#    url = "/search/filter/" + type
-#    $.ajax
-#      type    : 'POST'
-#      url     : url
-#      data    : searchParams
-#      success : (products) ->
-#        renderResults(products)
-      
-      
