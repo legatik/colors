@@ -64,13 +64,28 @@ script#bodyTemplate(type="text/template")
         select
           option(value="")
    
-    tr.add-param
+    tr.add-param.border-b
       td Несовершенства&nbsp
       td
-        select#body-nesovershenstva
-          option(value="body-nes-suh") Против сухости кожи
-          option(value="body-nes-ust") Против усталости
-          option(value="body-nes-morch") Против морщин и потери упругости
-          option(value="body-nes-otb") Отбеливающие средства
+        div#body-nesovershenstva
+          table
+            tr
+              td(width=30)
+                input( type="checkbox", value="body-nes-suh")
+              td Против сухости кожи
+
+            tr
+              td(width=30)
+                input( type="checkbox", value="body-nes-ust")
+              td Против усталости
+
+            tr
+              td(width=30)
+                input( type="checkbox", value="body-nes-morch")
+              td Против морщин и потери упругости
+            tr
+              td(width=30)
+                input( type="checkbox", value="body-nes-otb")
+              td Отбеливающие средства
           
           
