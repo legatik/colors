@@ -160,6 +160,10 @@ $(document).ready () ->
           key   : "kozha"
           list  : [
             {
+              title : "Для всех типов кожи"
+              key   : "face-kozh-all"
+            }
+            {
               title : "Нормальная"
               key   : "face-kozh-norm"
             }
@@ -185,6 +189,10 @@ $(document).ready () ->
           title : "Несовершенства"
           key   : "nesovershenstva"
           list  : [
+            {
+              title : "Нет несовершенств"
+              key   : "face-nes-net"
+            }
             {
               title : "Лечение акне и постакне"
               key   : "face-nes-akne"
@@ -342,6 +350,10 @@ $(document).ready () ->
           title : "Несовершенства"
           key : "nesovershenstva"
           list : [
+            {
+              title : "Нет несовершенств"
+              key   : "body-nes-net"
+            }
             {
               title : "Против сухости кожи"
               key   : "body-nes-suh"
