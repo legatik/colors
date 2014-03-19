@@ -70,24 +70,65 @@ script#faceTemplate(type="text/template")
           option(value="face-mask2") Маски, пасты, кремы, пенки
           option(value="face-mask3") Тканевые, листовые маски
           option(value="face-mask4") Точечные маски-патчи
-    tr.add-param
+    tr.add-param.border-b
       td Кожа&nbsp
       td
-        select#face-koza
-          option(value="face-kozh-norm") Нормальная
-          option(value="face-kozh-zhir") Жирная/Комбениров.
-          option(value="face-kozh-suh") Сухая/Оч. сухая
-          option(value="face-kozh-prob") Проблеммная
-          option(value="face-kozh-chuv") Чувствительная
-    tr.add-param
+        div#face-koza
+          table
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-norm")
+              td Нормальная
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-zhir")
+              td  Жирная/Комбениров.
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-suh")
+              td  Сухая/Оч. сухая
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-prob")
+              td  Проблеммная
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-chuv")
+              td  Чувствительная
+    tr.add-param.border-b
       td Несовершенства&nbsp
       td
-        select#face-nesovershenstva
-          option(value="face-nes-akne") Лечение акне и постакне
-          option(value="face-nes-cher") Против черных точек
-          option(value="face-nes-suzh") Сужение пор
-          option(value="face-nes-otb") Отбеливание
-          option(value="face-nes-morch") Разглаживание морщин
-          option(value="face-nes-lif") Лифтинг
-          option(value="face-nes-suh") Сухость, шелушение
-          option(value="face-nes-ust") Усталость, уст. цвет лица
+        div#face-nesovershenstva
+          table
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-akne")
+                td Лечение акне и постакне
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-cher")
+                td Против черных точек
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-suzh")
+                td Сужение пор
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-otb")
+                td Отбеливание
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-morch")
+                td Разглаживание морщин
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-lif")
+                td Лифтинг
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-suh")
+                td Сухость, шелушение
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-ust")
+                td Усталость, уст. цвет лица
