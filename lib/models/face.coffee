@@ -6,8 +6,8 @@ Schema = mongoose.Schema
 face = new Schema
   type            : String
   podType         : String
-  kozha           : String
-  nesovershenstva : String 
+  kozha           : Array
+  nesovershenstva : Array 
   
 Model = mongoose.model 'Face', face
 
