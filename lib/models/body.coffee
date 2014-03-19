@@ -3,13 +3,12 @@ mongoose = require 'mongoose'
 ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
-face = new Schema
+body = new Schema
   type            : String
   podType         : String
-  kozha           : String
   nesovershenstva : String 
   
-Model = mongoose.model 'Face', face
+Model = mongoose.model 'Body', body
 
 Model.createThis = (cb) ->
   testObj = 

@@ -21,10 +21,10 @@ app = express()
 
 
 #console.log "Brend.createThis",Brend.createThis
-Brend.createThis (brend) ->
-  Face.createThis (face) ->
-    Product.createThis brend, face, (Product) ->
-      console.log 'merch', Product
+#Brend.createThis (brend) ->
+#  Face.createThis (face) ->
+#    Product.createThis brend, face, (Product) ->
+#      console.log 'merch', Product
 
 app.configure () ->
 	app.set "port", process.env.PORT or 3000
@@ -55,6 +55,10 @@ options = {db:{type: 'mongo'}}
 
 app.namespace '', require('./controllers/home').boot.bind @, app
 app.namespace '/tool', require('./controllers/tool').boot.bind @, app
+app.namespace '/header', require('./controllers/header').boot.bind @, app
+app.namespace '/nav', require('./controllers/nav').boot.bind @, app
+app.namespace '/create', require('./controllers/create').boot.bind @, app
+app.namespace '/search', require('./controllers/search').boot.bind @, app
 
 app.get '/register', (req, res) ->
 	res.render 'registration', {title: 'Onlile JS Compiller'}
@@ -68,7 +72,11 @@ app.post '/register', (req, res) ->
 			res.send {status:true, data:user}
 
 app.get '/login', (req, res) ->
-	res.render 'login', {title: 'Onlile JS Compiller'}
+	res.render 'login', {title: 'login'}
+
+app.get '/product', (req, res) ->
+	res.render 'product', {title: 'PROOOODDD'}
+
 
 app.post "/login", (req, res, next) ->
 	passport.authenticate("local", (err, user, info) ->

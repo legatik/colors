@@ -1,0 +1,134 @@
+script#faceTemplate(type="text/template")
+    tr.add-param
+      td Тип товара&nbsp
+      td
+        select#product-tip
+          option(value="face-ochishenie") Очищение
+          option(value="face-tonizir") Тонизирование
+          option(value="face-osnov-uhod") Основной уход
+          option(value="face-spec-uhod") Специальный уход
+          option(value="face-sonlce-zach") Солнцезащитные средства
+          option(value="face-otchelush") Отшелушивание
+          option(value="face-mask") Маски
+    tr#face-ochishenie.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-ochishenie1") Для снятия макияжа
+          option(value="face-ochishenie2") Гидрофильные масла
+          option(value="face-ochishenie3") Гели для умывания
+          option(value="face-ochishenie4") Пенки для умывания
+          option(value="face-ochishenie5") Кремы, пудры для умывания
+    
+    tr#face-tonizir.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-tonizir1") Бустеры
+          option(value="face-tonizir2") Тонеры, стартеры
+          option(value="face-tonizir3") Мисты (спрей)
+          option(value="face-tonizir4") Тампоны-патчи
+    
+    tr#face-osnov-uhod.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-osnov-uhod1") Ампулы
+          option(value="face-osnov-uhod2") Сыворотки и эссенции
+          option(value="face-osnov-uhod3") Лосьоны, эмульсии
+          option(value="face-osnov-uhod4") Гели
+          option(value="face-osnov-uhod5") Кремы
+    
+    
+    tr#face-spec-uhod.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-spec-uhod1") Бальзымы и конуентраты
+          option(value="face-spec-uhod2") Точечные средства
+          option(value="face-spec-uhod3") Масла 
+          option(value="face-spec-uhod4") Массажные средства
+    
+    tr#face-sonlce-zach.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="")
+    
+    tr#face-otchelush.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-otchelush1") Скрабы и гаммажи
+          option(value="face-otchelush2") Пилинги
+    
+    tr#face-mask.add-param.podtip
+      td Подтип
+      td
+        select
+          option(value="face-mask1") Ночные масски
+          option(value="face-mask2") Маски, пасты, кремы, пенки
+          option(value="face-mask3") Тканевые, листовые маски
+          option(value="face-mask4") Точечные маски-патчи
+    tr.add-param.border-b
+      td Кожа&nbsp
+      td
+        div#face-koza
+          table
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-norm")
+              td Нормальная
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-zhir")
+              td  Жирная/Комбениров.
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-suh")
+              td  Сухая/Оч. сухая
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-prob")
+              td  Проблеммная
+            tr
+              td(width=30)
+                input( type="checkbox", value="face-kozh-chuv")
+              td  Чувствительная
+    tr.add-param.border-b
+      td Несовершенства&nbsp
+      td
+        div#face-nesovershenstva
+          table
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-akne")
+                td Лечение акне и постакне
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-cher")
+                td Против черных точек
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-suzh")
+                td Сужение пор
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-otb")
+                td Отбеливание
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-morch")
+                td Разглаживание морщин
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-lif")
+                td Лифтинг
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-suh")
+                td Сухость, шелушение
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-ust")
+                td Усталость, уст. цвет лица

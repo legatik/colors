@@ -44,68 +44,55 @@ block content
   .bestsellers-title Бестселлеры
   #myCarousel2.carousel.slide(data-ride="carousel")
     .carousel-inner
-      .item.active
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-      .item
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
-        .prod
-          img(src="../img/prod.jpg", width="124px", height="144px")
-          .title TONYMOLY Peach Anti-Aging Hand Cream
-          .descr Утрапитательный крем для рук против старения кожи
-          .old-price 417
-          .new-price 339 р
-          .in-basket В КОРЗИНУ
+      - each itemArr in vetrina
+        .item.item-vetrina
+          - each item in itemArr
+            .prod
+              img(src !="../img/products/#{item['_id']}/0.#{item.picture[0]}", width="124px", height="144px")
+              .title #{item.title}
+              .descr #{item.minOpisanie}
+              .old-price #{item.oldCost}
+              .new-price #{item.cost} р
+              .in-basket В КОРЗИНУ
+        //.item
+          .prod
+            img(src="../img/prod.jpg", width="124px", height="144px")
+            .title TONYMOLY Peach Anti-Aging Hand Cream
+            .descr Утрапитательный крем для рук против старения кожи
+            .old-price 417
+            .new-price 339 р
+            .in-basket В КОРЗИНУ
+       
     a.left.carousel-control(data-slide="prev",href="#myCarousel2")
     a.right.carousel-control(data-slide="next",href="#myCarousel2")
 
+  .go-catalog
+    a(href="#") Перейти к каталогу  >
+  .free-delivery Бесплатная доставка по всей россии от 3000 рублей!
+  .discount-cont
+    input.name(placeholder="Ваше имя")
+    input.email(placeholder="Ваш email")
+    a.discount(href="#") Получить скидку!
   .novelty-title Новинки
+  .novelty-left
+    img(width="372", height="302")
+  .novelty-right
+    .title Returning Starfish Eye Cream от MIZON
+    .descr интенсивный восстанавливающий крем для контура глаз с экстрактом морской звезды
+    .price 779р
+    .detail Подробнее
+    .buy Купить
   .brands-title Бренды
-  .reviews-title Отзывы
+  #myCarousel3.carousel.slide(data-ride="carousel")
+    .carousel-inner
+      - each itemArr in brend
+        .item.item-brend
+          - each item in itemArr
+            a(href="/nav/brend?key="+item['_id'])
+              img.brand(src !="../img/brends/#{item['_id']}/img.#{item.img}")
+    a.left.carousel-control(data-slide="prev",href="#myCarousel3")
+    a.right.carousel-control(data-slide="next",href="#myCarousel3")
 
+
+
+  .reviews-title Отзывы
