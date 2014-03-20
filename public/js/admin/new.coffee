@@ -73,19 +73,29 @@ $(document).ready () ->
       else
         alert("Не верный формат картинки")
   addEvent()
-    
+      
+  cleanData = () ->
+    trDescArr = $("#table-desc").find("tr")
+    trDescArr.each (i, el) ->
+      first = $(el).attr("first")
+      if first
+        $($(el).find("textarea")).val("")
+      else
+        $(el).remove()
 
-
-#  cleanData = () ->
-#    $("#brend-name").val("")
-#    $("#brend-name").val("")
-#    $("#brend-desc").val("")
-#    $("#img-breng").val('')
-#    $("#prev-brend").attr "src", "/img/add-bg.png"
-#    $("#img-prev-close").hide()
-#    $("#logo-breng").val('')
-#    $("#logo-img-breng").attr "src", "/img/add-bg.png"
-#    $("#logo-prev-close").hide()
+    trImdArr = $("#table-img").find("tr")
+      
+    trImdArr.each (i, el) ->
+      first = $(el).attr("first")
+      if first
+        $("#st-inbg-im-0").attr("src", "/img/add-bg.png")
+        $("#st-inp-im-0").val("")
+        $("#st-cl-im-0").hide()
+      else
+        $(el).remove()
+    $("#v-inbg-im").attr("src", "/img/add-bg.png")
+    $("#v-inp-im").val("")
+    $("#v-cl-im").hide()
 
 
   $("#add-new").click (e) ->
@@ -126,7 +136,7 @@ $(document).ready () ->
       contentType: false
       processData: false
       success : (st) ->
-#        cleanData()
-#        $("#success-brend").hide()
-#        $("#success-brend").fadeIn("slow")
+        cleanData()
+        $("#success-new").hide()
+        $("#success-new").fadeIn("slow")
 
