@@ -6,7 +6,7 @@ Schema = mongoose.Schema
 body = new Schema
   type            : String
   podType         : String
-  nesovershenstva : String 
+  nesovershenstva : Array 
   
 Model = mongoose.model 'Body', body
 

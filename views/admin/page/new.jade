@@ -1,0 +1,78 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/new')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    
+    button#new-show Добавить новинку
+
+    #new-form.form-admin
+      div(style="display: inline-block;")
+        h4 Добавьте шаг описания
+        table#table-desc.height-tr(style="display:inline-block")
+          tr(first="true")
+            td шаг №1
+            td
+              textarea.textarea-add-m2
+        div
+          button#add-step-txt Добавить шаг описания
+      div(style="display: inline-block;margin-left: 50px; vertical-align: top")
+        h4 Шаг картинки
+        table#table-img.height-tr(style="display:inline-block")
+          tr(first="true")
+            td Изображение&nbsp
+            td
+              div.small-cont-ck
+                input#st-inp-im-0.small-inp-ck.small-inp-cks(type="file")
+                img#st-inbg-im-0.small-prev-ck(src="/img/add-bg.png")
+                img#st-cl-im-0.small-del-ck.small-del-cks(src="/img/close.png", first="true")
+        div
+          button#add-step-img Добавить шаг картинки
+
+
+      div
+        table.height-tr
+          tr
+            td На ветину&nbsp
+            td
+              input#vetrina(type="checkbox")      
+          tr
+            td Изображение для ветрины&nbsp
+            td
+              div.small-cont-ck
+                input#v-inp-im.small-inp-ck(type="file")
+                img#v-inbg-im.small-prev-ck(src="/img/add-bg.png")
+                img#v-cl-im.small-del-ck(src="/img/close.png")
+          tr
+            td
+              button#add-new Добавить&nbsp
+            td#success-new.hide
+              span &nbsp Новинка успешно добавлена
+
+
+  script#stepImg(type="text/template")
+    tr(id!="st-tr-im-<%=i%>")
+      td Изображение &nbsp
+      td
+        div.small-cont-ck
+          input(type="file", id!="st-inp-im-<%=i%>").small-inp-ck.small-inp-cks
+          img(src="/img/add-bg.png", id!="st-inbg-im-<%=i%>").small-prev-ck
+          img(src="/img/close.png", id!="st-cl-im-<%=i%>").small-del-ck.small-del-cks
+
+
+  script#stepDesc(type="text/template")
+    tr
+      td шаг №<%=i+1%>&nbsp
+      td
+        textarea.textarea-add-m2(step!="<%=i%>")
+
+  script#stepTemplate(type="text/template")
+    div.small-cont
+      input.step-inp(type="file",id!="step-inp-<%=number%>")
+      img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
+      img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
+

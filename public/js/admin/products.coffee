@@ -83,10 +83,17 @@ $(document).ready () ->
 
 
       createProdBody = (productObj, imgArr, vidImg) ->
+        nesArr = []
+        nesInp = $("#body-nesovershenstva").find("input[type='checkbox']:checked")
+        if nesInp.length
+          nesInp.each (i, data) ->
+            nesArr.push($(data).val())
+        else
+          nesArr.push("body-nes-net") 
         type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
-          nesovershenstva : $("#body-nesovershenstva").val()
+          nesovershenstva : nesArr
         data =
           product : productObj
           type    : type
@@ -109,11 +116,28 @@ $(document).ready () ->
             clearProduct()
 
       createProdFace = (productObj, imgArr, vidImg) ->
+        
+        kozhaArr = []
+        kozhaInp = $("#face-koza").find("input[type='checkbox']:checked")
+        if kozhaInp.length
+          kozhaInp.each (i, data) ->
+            kozhaArr.push($(data).val())
+        else
+          kozhaArr.push("face-kozh-all") 
+
+        nesArr = []
+        nesInp = $("#face-nesovershenstva").find("input[type='checkbox']:checked")
+        if nesInp.length
+          nesInp.each (i, data) ->
+            nesArr.push($(data).val())
+        else
+          nesArr.push("face-nes-net")
+
         type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
-          kozha           : $("#face-koza").val()
-          nesovershenstva : $("#face-nesovershenstva").val()
+          kozha           : kozhaArr
+          nesovershenstva : nesArr
         data =
           product : productObj
           type    : type

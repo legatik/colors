@@ -1,6 +1,8 @@
 node_modules
 public/img/products/*
 public/img/brends/*
+public/img/news/*
+public/img/actions/*
 lib-cov
 *.seed
 *.log

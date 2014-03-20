@@ -77,6 +77,10 @@ script#faceTemplate(type="text/template")
           table
             tr
               td(width=30)
+                input( type="checkbox", value="face-kozh-all")
+              td  Для всех типов кожи
+            tr
+              td(width=30)
                 input( type="checkbox", value="face-kozh-norm")
               td Нормальная
             tr
@@ -100,6 +104,10 @@ script#faceTemplate(type="text/template")
       td
         div#face-nesovershenstva
           table
+              tr
+                td(width=30)
+                  input( type="checkbox", value="face-nes-net")
+                td Нет несовершенств
               tr
                 td(width=30)
                   input( type="checkbox", value="face-nes-akne")
