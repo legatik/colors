@@ -13,7 +13,7 @@ block content
     #new-form.form-admin
       div(style="display: inline-block;")
         h4 Добавьте шаг описания
-        table.height-tr(style="display:inline-block")
+        table#table-desc.height-tr(style="display:inline-block")
           tr
             td шаг №1
             td
@@ -22,7 +22,7 @@ block content
           button#add-step-txt Добавить шаг описания
       div(style="display: inline-block;margin-left: 50px; vertical-align: top")
         h4 Шаг картинки
-        table.height-tr(style="display:inline-block")
+        table#table-img.height-tr(style="display:inline-block")
           tr
             td Изображение №1&nbsp
             td
@@ -31,7 +31,7 @@ block content
                 img#st-inbg-im-0.small-prev-ck(src="/img/add-bg.png")
                 img#st-cl-im-0.small-del-ck(src="/img/close.png")
         div
-          button#add-step-img Добавить шаг описания
+          button#add-step-img Добавить шаг картинки
 
 
       div
@@ -47,19 +47,19 @@ block content
               span &nbsp Новинка успешно добавлена
 
 
-  script#stepDesc(type="text/template")
+  script#stepImg(type="text/template")
     tr
       td Изображение №<%=i+1%>&nbsp
       td
         div.small-cont-ck
-          input#st-inp-im-<%=i%>.small-inp-ck(type="file")
-          img#st-inbg-im-<%=i%>.small-prev-ck(src="/img/add-bg.png")
-          img#st-cl-im-<%=i%>.small-del-ck(src="/img/close.png")
+          input(type="file").small-inp-ck#st-inp-im-<%=i%>
+          img(src="/img/add-bg.png").small-prev-ck#st-inbg-im-<%=i%>
+          img(src="/img/close.png").small-del-ck#st-cl-im-<%=i%>
 
 
   script#stepDesc(type="text/template")
     tr
-      td шаг №<%=i%>
+      td шаг №<%=i+1%>&nbsp
       td
         textarea.textarea-add-m2(step!="<%=i%>")
 
