@@ -27,9 +27,9 @@ block content
             td Изображение&nbsp
             td
               div.small-cont-ck
-                input#st-inp-im-0.small-inp-ck(type="file")
+                input#st-inp-im-0.small-inp-ck.small-inp-cks(type="file")
                 img#st-inbg-im-0.small-prev-ck(src="/img/add-bg.png")
-                img#st-cl-im-0.small-del-ck(src="/img/close.png", first="true")
+                img#st-cl-im-0.small-del-ck.small-del-cks(src="/img/close.png", first="true")
         div
           button#add-step-img Добавить шаг картинки
 
@@ -59,9 +59,9 @@ block content
       td Изображение &nbsp
       td
         div.small-cont-ck
-          input(type="file", id!="st-inp-im-<%=i%>").small-inp-ck
+          input(type="file", id!="st-inp-im-<%=i%>").small-inp-ck.small-inp-cks
           img(src="/img/add-bg.png", id!="st-inbg-im-<%=i%>").small-prev-ck
-          img(src="/img/close.png", id!="st-cl-im-<%=i%>").small-del-ck
+          img(src="/img/close.png", id!="st-cl-im-<%=i%>").small-del-ck.small-del-cks
 
 
   script#stepDesc(type="text/template")

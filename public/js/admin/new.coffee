@@ -19,16 +19,37 @@ $(document).ready () ->
     template = _.template($(templateJQ[0]).html())
     $("#table-desc").append(template({i:gDescI}))
     gDescI++
+
+
+  $("#v-inp-im").change (e) ->
+    readURILog this
+    
+  $("#v-cl-im").click (e) ->
+    $("#v-inbg-im").attr("src", "/img/add-bg.png")
+    $("#v-inp-im").val("")
+    $("#v-cl-im").hide()
+  
+    
+  readURILog = (input) ->
+    if input.files and input.files[0]
+      if input.files[0].type.indexOf("image") != -1
+        reader = new FileReader()
+        reader.readAsDataURL input.files[0]
+        reader.onload = (e) =>
+          $("#v-inbg-im").attr "src", e.target.result
+          $("#v-cl-im").show()
+      else
+        alert("Не верный формат картинки")
     
   addEvent = () ->
-    $(".small-inp-ck").unbind("change")
-    $(".small-del-ck").unbind("click")
-    $(".small-inp-ck").change (e) ->
+    $(".small-inp-cks").unbind("change")
+    $(".small-del-cks").unbind("click")
+    $(".small-inp-cks").change (e) ->
       id = $(@).attr("id")
       idImg = "#" + id.replace("inp","inbg")
       readURLStep this,idImg
 
-    $(".small-del-ck").click (e) ->
+    $(".small-del-cks").click (e) ->
       first = $(@).attr("first")
       if first
         $("#st-inbg-im-0").attr("src", "/img/add-bg.png")
@@ -39,13 +60,13 @@ $(document).ready () ->
         trId = "#" + id.replace("cl","tr")
         console.log "trId",trId
         $(trId).remove()
+        
   readURLStep = (input,idImg) =>
     if input.files and input.files[0]
       if input.files[0].type.indexOf("image") != -1
         reader = new FileReader()
         reader.readAsDataURL input.files[0]
         reader.onload = (e) =>
-          console.log "DD"
           $(idImg).attr "src", e.target.result
           idDel = idImg.replace("inbg","cl")
           $(idDel).show()
