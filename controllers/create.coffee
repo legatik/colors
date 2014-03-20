@@ -7,6 +7,11 @@ fs = require "fs-extra"
 
 exports.boot = (app) ->
 
+  app.post '/action', (req, res) ->
+    body = JSON.parse req.body.data
+    console.log "body", body
+    res.send 200
+    
   app.post '/brend', (req, res) ->
     body = JSON.parse req.body.data
     newBrend = new Brend(body)

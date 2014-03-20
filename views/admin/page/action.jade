@@ -48,11 +48,22 @@ block content
             
             
         tr
+          td Товары c акцией&nbsp
+          td
+            div#prod-ac-cont
+            input#in-ac-product
+            
+        tr
           td
             button#add-brend Добавить&nbsp
           td#success-brend.hide
             span &nbsp Акция успешно добавлена
 
+
+  script#productTemplate(type="text/template")
+    div(style="height: 28px;")
+      div.ac-del-prod(id!="<%=id%>") x
+      div(style="display:inline-block; margin-left:10px") <%=title%>
 
   script#stepTemplate(type="text/template")
     div.small-cont

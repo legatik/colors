@@ -26,3 +26,6 @@ exports.boot = (app) ->
     Brend.find {}, (err, arrBrend) ->
       res.send arrBrend
 
+  app.get '/admin/q_prod_by_name', (req, res) ->
+    Product.find {}, (err, arrProd) ->
+      res.send arrProd

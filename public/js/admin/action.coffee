@@ -56,15 +56,45 @@ $(document).ready () ->
     $("#logo-prev-close").hide()
 
 
+  arrProductAct = []
+  $("#in-ac-product").autocomplete
+    source: (request, response) ->
+      $.ajax
+        url: "/tool/admin/q_prod_by_name"
+        data: {title: $("#in-ac-product").val()}
+        success: (data) ->
+          console.log "sds", data
+          response $.map(data, (item) ->
+            label : item.title
+            value : item["_id"]
+          )
+    select: (event, ui) =>
+      id = ui.item.value
+      title = ui.item.label
+      arrProductAct.push(id)
+      templateJQ = $("#productTemplate")
+      template = _.template($(templateJQ[0]).html())
+      $("#prod-ac-cont").append(template({id:id,title:title}))
+      addEventDel()
+    close: (event, ui) =>
+      $("#in-ac-product").val("")
+    minLength: 2
+
+  addEventDel = () ->
+    $(".ac-del-prod").unbind("click")
+    $(".ac-del-prod").click () ->
+      id = $(@).attr("id")
+      arrProductAct = _.without arrProductAct, id 
+      $($(@).parent()).remove()
   $("#add-brend").click (e) ->
     brendName = $("#brend-name").val()
     desc = $("#brend-desc").val()
     active = $("#active").is(':checked')
-#    return if !brendName or !desc
     objSend = {
-        title   : brendName
+        title       : brendName
         description : desc
         active      : active
+        products    : arrProductAct
     }
     img  = ($("#img-breng"))[0].files[0]
     logo = ($("#logo-breng"))[0].files[0]
@@ -78,7 +108,7 @@ $(document).ready () ->
     $.ajax
       type    : 'POST'
       data    : newForm
-      url     : "/create/brend"
+      url     : "/create/action"
       cache: false
       contentType: false
       processData: false
