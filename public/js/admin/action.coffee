@@ -43,7 +43,7 @@ $(document).ready () ->
       else
         alert("Такой фармат картинки не поддерживается")
 
-
+  arrProductAct = []
   cleanData = () ->
     $("#brend-name").val("")
     $("#brend-name").val("")
@@ -54,16 +54,16 @@ $(document).ready () ->
     $("#logo-breng").val('')
     $("#logo-img-breng").attr "src", "/img/add-bg.png"
     $("#logo-prev-close").hide()
+    $("#prod-ac-cont > div").remove()
+    arrProductAct = []
 
 
-  arrProductAct = []
   $("#in-ac-product").autocomplete
     source: (request, response) ->
       $.ajax
         url: "/tool/admin/q_prod_by_name"
         data: {title: $("#in-ac-product").val()}
         success: (data) ->
-          console.log "sds", data
           response $.map(data, (item) ->
             label : item.title
             value : item["_id"]
@@ -71,11 +71,17 @@ $(document).ready () ->
     select: (event, ui) =>
       id = ui.item.value
       title = ui.item.label
-      arrProductAct.push(id)
-      templateJQ = $("#productTemplate")
-      template = _.template($(templateJQ[0]).html())
-      $("#prod-ac-cont").append(template({id:id,title:title}))
-      addEventDel()
+      check = true
+      arrProductAct.forEach (item)->
+        check = false if item == id
+      if check
+        arrProductAct.push(id)
+        templateJQ = $("#productTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#prod-ac-cont").append(template({id:id,title:title}))
+        addEventDel()
+      else
+        alert("Такой продукт уже имеется в списке")
     close: (event, ui) =>
       $("#in-ac-product").val("")
     minLength: 2
