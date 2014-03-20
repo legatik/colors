@@ -4,10 +4,10 @@ ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
 news = new Schema
-  logoImg         : String
+  logo            : String
   vetrina         : Boolean
-  imgArr          : String
-  descArr         : Array 
+  images          : String
+  descriptions    : Array 
   
 Model = mongoose.model 'New', news
 

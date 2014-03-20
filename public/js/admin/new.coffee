@@ -89,37 +89,44 @@ $(document).ready () ->
 
 
   $("#add-new").click (e) ->
-    alert(0)
-#    brendName = $("#brend-name").val()
-#    desc = $("#brend-desc").val()
-#    active = $("#active").is(':checked')
-##    return if !brendName or !desc
-#    objSend = {
-#        title   : brendName
-#        description : desc
-#        active      : active
-#    }
-#    img  = ($("#img-breng"))[0].files[0]
-#    logo = ($("#logo-breng"))[0].files[0]
-#    
-#    newForm = new FormData()
-#    newForm.append("data",JSON.stringify objSend)
-#    newForm.append("img", img)
-#    newForm.append("logo", logo)
-#    
-#    
-#    $.ajax
-#      type    : 'POST'
-#      data    : newForm
-#      url     : "/create/brend"
-#      cache: false
-#      contentType: false
-#      processData: false
-#      success : (brend) ->
+    vetrina = $("#vetrina").is(':checked')
+    
+    
+    descArr = []
+    trDescArr = $("#table-desc").find("tr")
+    trDescArr.each (i, el) ->
+      val = $($(el).find("textarea")).val()
+      descArr.push(val) if val
+
+    imgArr = $("#table-img").find("input[type='file']")
+
+    objSend = {
+        descriptions  : descArr
+        vetrina       : vetrina
+    }
+
+    logo = ($("#v-inp-im"))[0].files[0]
+    
+    newForm = new FormData()
+    newForm.append("data",JSON.stringify objSend)
+    newForm.append("logo", logo)
+
+    imgArr.each (index, el) ->
+      console.log "index",index
+      file = ($(el))[0].files[0]
+      newForm.append(index, file)
+
+    console.log  "newForm", newForm
+    
+    $.ajax
+      type    : 'POST'
+      data    : newForm
+      url     : "/create/news"
+      cache: false
+      contentType: false
+      processData: false
+      success : (st) ->
 #        cleanData()
 #        $("#success-brend").hide()
 #        $("#success-brend").fadeIn("slow")
-#        
 
-#  
-#        

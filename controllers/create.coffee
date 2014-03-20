@@ -20,6 +20,21 @@ exports.boot = (app) ->
       brend.save()
       res.send 200
 
+  app.post '/news', (req, res) ->
+    body = JSON.parse req.body.data
+    console.log "body",body
+    console.log "req.files", req.files
+    
+#    newBrend = new Brend(body)
+#    newBrend.save (err, brend) ->
+#      _.each req.files, (data,key)->
+#        type = data.mime.replace("image/", "")
+#        path = './public/img/brends/' + brend["_id"]
+#        brend[key] = type
+#        fs.mkdir path, (err) ->
+#          fs.copy data.path, path + "/" + key + "." + type, (err) ->
+#      brend.save()
+#      res.send 200
 
 
 
