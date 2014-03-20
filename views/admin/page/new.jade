@@ -8,48 +8,60 @@ block content
   #admin-cont
     include admin-nav
     
-    
     button#new-show Добавить новинку
 
     #new-form.form-admin
-      table#brend-table(style="display:inline-block")
-        tr
-          td Ведите название новинки&nbsp
-          td
-            input#new-name
-            
-        tr
-          td Описание новинки&nbsp
-          td
-            textarea.textarea-add-m#new-desc
-            
-        tr
-          td На ветину&nbsp
-          td
-            input#vetrina(type="checkbox")
-            
-        tr
-          td Изображение на главной&nbsp
-          td
-            div.small-cont-ck
-              input#img-new.small-inp-ck(type="file")
-              img#prev-new.small-prev-ck(src="/img/add-bg.png")
-              img#img-prev-close.small-del-ck(src="/img/close.png")
-        tr
-          td Изображение на стринице&nbsp
-          td
-            div.small-cont-ck
-              input#logo-new.small.small-inp-ck(type="file")
-              img#logo-img-new.small-prev-ck(src="/img/add-bg.png")
-              img#logo-prev-close.small-del-ck(src="/img/close.png")
-            
-            
-        tr
-          td
-            button#add-new Добавить&nbsp
-          td#success-new.hide
-            span &nbsp Новинка успешно добавлена
+      div(style="display: inline-block;")
+        h4 Добавьте шаг описания
+        table.height-tr(style="display:inline-block")
+          tr
+            td шаг №1
+            td
+              textarea.textarea-add-m2
+        div
+          button#add-step-txt Добавить шаг описания
+      div(style="display: inline-block;margin-left: 50px; vertical-align: top")
+        h4 Шаг картинки
+        table.height-tr(style="display:inline-block")
+          tr
+            td Изображение №1&nbsp
+            td
+              div.small-cont-ck
+                input#st-inp-im-0.small-inp-ck(type="file")
+                img#st-inbg-im-0.small-prev-ck(src="/img/add-bg.png")
+                img#st-cl-im-0.small-del-ck(src="/img/close.png")
+        div
+          button#add-step-img Добавить шаг описания
 
+
+      div
+        table.height-tr
+          tr
+            td На ветину&nbsp
+            td
+              input#vetrina(type="checkbox")      
+          tr
+            td
+              button#add-new Добавить&nbsp
+            td#success-new.hide
+              span &nbsp Новинка успешно добавлена
+
+
+  script#stepDesc(type="text/template")
+    tr
+      td Изображение №<%=i+1%>&nbsp
+      td
+        div.small-cont-ck
+          input#st-inp-im-<%=i%>.small-inp-ck(type="file")
+          img#st-inbg-im-<%=i%>.small-prev-ck(src="/img/add-bg.png")
+          img#st-cl-im-<%=i%>.small-del-ck(src="/img/close.png")
+
+
+  script#stepDesc(type="text/template")
+    tr
+      td шаг №<%=i%>
+      td
+        textarea.textarea-add-m2(step!="<%=i%>")
 
   script#stepTemplate(type="text/template")
     div.small-cont
