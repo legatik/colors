@@ -11,14 +11,5 @@ news = new Schema
   
 Model = mongoose.model 'New', news
 
-Model.createThis = (cb) ->
-  testObj = 
-    ottenok         : "Обычный"
-    type            : "Фалический"
-    kozha           : "Растягивающаяся"
-    nesovershenstva : "Совершенин"
-  @create testObj, (err, face) ->
-    cb(face)
-
 
 module.exports = Model

@@ -19,6 +19,8 @@ exports.boot = (app) ->
   app.get '/admin/page/new', (req, res) ->
       res.render 'admin/page/new', {title: 'Админ - новинки', user: req.user, loc:'home'}
 
+  app.get '/admin/page/action', (req, res) ->
+      res.render 'admin/page/action', {title: 'Админ - акции', user: req.user, loc:'home'}
 
   app.get '/admin/q_brend', (req, res) ->
     Brend.find {}, (err, arrBrend) ->
