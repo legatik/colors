@@ -6,7 +6,7 @@ Schema = mongoose.Schema
 news = new Schema
   logo            : String
   vetrina         : Boolean
-  images          : String
+  images          : Array
   descriptions    : Array 
   
 Model = mongoose.model 'New', news

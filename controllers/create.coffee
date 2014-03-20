@@ -3,7 +3,7 @@ _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 
-{User, Product, Face, Brend, Body} = db.models
+{User, Product, Face, Brend, Body, New} = db.models
 
 exports.boot = (app) ->
 
@@ -22,19 +22,20 @@ exports.boot = (app) ->
 
   app.post '/news', (req, res) ->
     body = JSON.parse req.body.data
-    console.log "body",body
-    console.log "req.files", req.files
-    
-#    newBrend = new Brend(body)
-#    newBrend.save (err, brend) ->
-#      _.each req.files, (data,key)->
-#        type = data.mime.replace("image/", "")
-#        path = './public/img/brends/' + brend["_id"]
-#        brend[key] = type
-#        fs.mkdir path, (err) ->
-#          fs.copy data.path, path + "/" + key + "." + type, (err) ->
-#      brend.save()
-#      res.send 200
+    body.images = []
+    newNews = new New(body)
+    newNews.save (err, news) ->
+      _.each req.files, (data,key)->
+        type = data.mime.replace("image/", "")
+        path = './public/img/news/' + news["_id"]
+        if key == "logo"
+          news[key] = type
+        else
+          news.images.push(type)
+        fs.mkdir path, (err) ->
+          fs.copy data.path, path + "/" + key + "." + type, (err) ->
+      news.save()
+      res.send 200
 
 
 
