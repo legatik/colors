@@ -14,7 +14,7 @@ block content
       div(style="display: inline-block;")
         h4 Добавьте шаг описания
         table#table-desc.height-tr(style="display:inline-block")
-          tr
+          tr(first="true")
             td шаг №1
             td
               textarea.textarea-add-m2
@@ -23,13 +23,13 @@ block content
       div(style="display: inline-block;margin-left: 50px; vertical-align: top")
         h4 Шаг картинки
         table#table-img.height-tr(style="display:inline-block")
-          tr
-            td Изображение №1&nbsp
+          tr(first="true")
+            td Изображение&nbsp
             td
               div.small-cont-ck
                 input#st-inp-im-0.small-inp-ck(type="file")
                 img#st-inbg-im-0.small-prev-ck(src="/img/add-bg.png")
-                img#st-cl-im-0.small-del-ck(src="/img/close.png")
+                img#st-cl-im-0.small-del-ck(src="/img/close.png", first="true")
         div
           button#add-step-img Добавить шаг картинки
 
@@ -41,6 +41,13 @@ block content
             td
               input#vetrina(type="checkbox")      
           tr
+            td Изображение для ветрины&nbsp
+            td
+              div.small-cont-ck
+                input#v-inp-im.small-inp-ck(type="file")
+                img#v-inbg-im.small-prev-ck(src="/img/add-bg.png")
+                img#v-cl-im.small-del-ck(src="/img/close.png")
+          tr
             td
               button#add-new Добавить&nbsp
             td#success-new.hide
@@ -48,13 +55,13 @@ block content
 
 
   script#stepImg(type="text/template")
-    tr
-      td Изображение №<%=i+1%>&nbsp
+    tr(id!="st-tr-im-<%=i%>")
+      td Изображение &nbsp
       td
         div.small-cont-ck
-          input(type="file").small-inp-ck#st-inp-im-<%=i%>
-          img(src="/img/add-bg.png").small-prev-ck#st-inbg-im-<%=i%>
-          img(src="/img/close.png").small-del-ck#st-cl-im-<%=i%>
+          input(type="file", id!="st-inp-im-<%=i%>").small-inp-ck
+          img(src="/img/add-bg.png", id!="st-inbg-im-<%=i%>").small-prev-ck
+          img(src="/img/close.png", id!="st-cl-im-<%=i%>").small-del-ck
 
 
   script#stepDesc(type="text/template")

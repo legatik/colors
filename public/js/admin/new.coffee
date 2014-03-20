@@ -9,9 +9,9 @@ $(document).ready () ->
   $("#add-step-img").click (e) ->
     templateJQ = $("#stepImg")
     template = _.template($(templateJQ[0]).html())
-    $("#table-img").append(template({i:gDescI}))
-    gDescI++
-
+    $("#table-img").append(template({i:gImageI}))
+    gImageI++
+    addEvent()
 
 
   $("#add-step-txt").click (e) ->
@@ -20,49 +20,39 @@ $(document).ready () ->
     $("#table-desc").append(template({i:gDescI}))
     gDescI++
     
-#  $("#img-breng").change () ->
-#    readURLImg(@)
-#         
-#  $("#logo-breng").change () ->
-#    readURlLogo(@)
+  addEvent = () ->
+    $(".small-inp-ck").unbind("change")
+    $(".small-del-ck").unbind("click")
+    $(".small-inp-ck").change (e) ->
+      id = $(@).attr("id")
+      idImg = "#" + id.replace("inp","inbg")
+      readURLStep this,idImg
 
-
-
-
-          
-          
-#  $("#img-prev-close").click () ->
-#    $("#img-breng").val('')
-#    $("#prev-brend").attr "src", "/img/add-bg.png"
-#    $("#img-prev-close").hide()
-#          
-
-#  $("#logo-prev-close").click () ->
-#    $("#logo-breng").val('')
-#    $("#logo-img-breng").attr "src", "/img/add-bg.png"
-#    $("#logo-prev-close").hide()
-#          
-#  readURlLogo = (input) =>
-#    if input.files and input.files[0]
-#      if input.files[0].type.indexOf("image") != -1
-#        reader = new FileReader()
-#        reader.readAsDataURL input.files[0]
-#        reader.onload = (e) =>
-#          $("#logo-img-breng").attr "src", e.target.result
-#          $("#logo-prev-close").show()
-#      else
-#        alert("Такой фармат картинки не поддерживается")
-#          
-#  readURLImg = (input) =>
-#    if input.files and input.files[0]
-#      if input.files[0].type.indexOf("image") != -1
-#        reader = new FileReader()
-#        reader.readAsDataURL input.files[0]
-#        reader.onload = (e) =>
-#          $("#prev-brend").attr "src", e.target.result
-#          $("#img-prev-close").show()
-#      else
-#        alert("Такой фармат картинки не поддерживается")
+    $(".small-del-ck").click (e) ->
+      first = $(@).attr("first")
+      if first
+        $("#st-inbg-im-0").attr("src", "/img/add-bg.png")
+        $("#st-inp-im-0").val("")
+        $("#st-cl-im-0").hide()
+      else
+        id = $(@).attr("id")
+        trId = "#" + id.replace("cl","tr")
+        console.log "trId",trId
+        $(trId).remove()
+  readURLStep = (input,idImg) =>
+    if input.files and input.files[0]
+      if input.files[0].type.indexOf("image") != -1
+        reader = new FileReader()
+        reader.readAsDataURL input.files[0]
+        reader.onload = (e) =>
+          console.log "DD"
+          $(idImg).attr "src", e.target.result
+          idDel = idImg.replace("inbg","cl")
+          $(idDel).show()
+      else
+        alert("Не верный формат картинки")
+  addEvent()
+    
 
 
 #  cleanData = () ->
@@ -77,7 +67,8 @@ $(document).ready () ->
 #    $("#logo-prev-close").hide()
 
 
-#  $("#add-brend").click (e) ->
+  $("#add-new").click (e) ->
+    alert(0)
 #    brendName = $("#brend-name").val()
 #    desc = $("#brend-desc").val()
 #    active = $("#active").is(':checked')
