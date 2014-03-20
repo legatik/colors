@@ -16,6 +16,8 @@ exports.boot = (app) ->
   app.get '/admin/page/product', (req, res) ->
       res.render 'admin/page/product', {title: 'Админ - товары', user: req.user, loc:'home'}
 
+  app.get '/admin/page/new', (req, res) ->
+      res.render 'admin/page/new', {title: 'Админ - новинки', user: req.user, loc:'home'}
 
 
   app.get '/admin/q_brend', (req, res) ->
