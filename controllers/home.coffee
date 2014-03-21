@@ -24,3 +24,9 @@ exports.boot = (app) ->
         brendArr = separatorFn(brends, 6)
         res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr}
 
+
+  app.get '/product/:idProd', (req, res) ->
+    idProd = req.params.idProd
+    Product.findById idProd, (err, product) ->
+      console.log "product", product
+      res.render 'product', {title: 'PROOOODDD', product:product}

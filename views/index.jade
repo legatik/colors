@@ -53,7 +53,8 @@ block content
               .descr #{item.minOpisanie}
               .old-price #{item.oldCost}
               .new-price #{item.cost} р
-              .in-basket В КОРЗИНУ
+              a(href != "/product/#{item['_id']}")
+                .in-basket В КОРЗИНУ
         //.item
           .prod
             img(src="../img/prod.jpg", width="124px", height="144px")
