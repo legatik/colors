@@ -29,4 +29,4 @@ exports.boot = (app) ->
     idProd = req.params.idProd
     Product.findById idProd, (err, product) ->
       console.log "product", product
-      res.render 'product', {title: 'PROOOODDD', product:product}
+      res.render 'product', {title: 'Colors - ' + product.title, product:product}

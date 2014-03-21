@@ -3,34 +3,40 @@ extends layout
 block content
   include navigation
   #product-page
+    input#firstData(type="hidden")
     .catalog Каталог
     .product-cont
       .left
-        img.product-img(src="../img/PRODUCT-BIG.png", width="402px",height="402px")
+        img.product-img(src!="../img/products/"+product['_id']+"/1."+product.picture[1]+"", width="353px",height="353px")
       .right
-        .title INNISFREE Jeju-Bija Anti Trouble Skin
-        .short-descr Заживляющий, успокаивающий тонер против акне
+        .title #{product.title}
+        .short-descr #{product.minOpisanie}
         label.ob-lab.product-label Объем:
-        .ob 200 мл
+        .ob #{product.obem} мл
         label.weight-lab.product-label Вес:
-        .weight 250 гр
+        .weight #{product.ves} гр
         br
         label.ton.product-label Оттенок:
-        select.ton
-            option One Kind
+        -if (product.vid.length == 0)
+            select.ton
+                option One Kind
+        -if (product.vid.length != 0)
+            select.ton
+                - each vid in product.vid
+                    option #{vid}
 
         br
         label.sclad.product-label Осталось на складе:
         select.sclad
-            option 1
+            option #{product.ostatok}
         br
         label.product-label ID:
-        .id 00176
+        .id #{product.id}
         br
         label.product-label.price-lab Цена:
-        .old-price 790
+        .old-price #{product.oldCost}
           span р
-        .new-price 599
+        .new-price #{product.cost}
           span р
         br
         .buy-fast Купить быстро
@@ -54,22 +60,14 @@ block content
         .f3 при любой покупке!
       label.product-label Описание:
       .description
-        p Тонер завершает процедуру очищения кожи, интенсивно увлажняя и освежая ее. Натуральный комплекс из 6 растительных экстрактов: смолы, кедра, лаванды, можжевельника и цитрусовых глубоко очищает и дезинфицируют кожу, снимают воспаления  и заживляют ранки.
-        p Тоник останавливает потерю влаги, успокаивает кожу, смягчает и подготавливает ее к нанесению последующего ухода.
+        p #{product.opisanie}
+        //p Тоник останавливает потерю влаги, успокаивает кожу, смягчает и подготавливает ее к нанесению последующего ухода.
       label.product-label Применение:
       .application
-        p Сразу же после очищения кожи, немного промокнув ее полотенцем, нанесите тонер ладонями на кожу лица в течение 3х секунд – так кожа не потеряет влагу. Лицо не обязательно должно быть полностью сухим – ничего, если оно будет немного влажное.
-        p Дайте тонеру впитаться, и приступайте к последующему уходу (сыворотка, лосьон или крем).
+        p #{product.primenenie}
+        //p Дайте тонеру впитаться, и приступайте к последующему уходу (сыворотка, лосьон или крем).
       .link1 Подробнее о тонерах в корейской косметике
       .link2 Особенности азиатского ухода за кожей
-      .ill-top
-
-
-
-
-
-
-
-
-  include footer
-
+      - if(product.imgVid)
+        img.ill-top(src!="../img/products/"+product['_id']+"/vid."+product.imgVid+"")
+            
