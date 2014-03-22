@@ -27,5 +27,6 @@ exports.boot = (app) ->
       res.send arrBrend
 
   app.get '/admin/q_prod_by_name', (req, res) ->
-    Product.find {}, (err, arrProd) ->
+    find = new RegExp(req.query.title, "i")
+    Product.find {title: find}, (err, arrProd) ->
       res.send arrProd
