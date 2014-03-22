@@ -52,8 +52,8 @@ exports.boot = (app) ->
         products.forEach (product) ->
           checkType(product, {del:true})
           
-#        path = './public/img/brends/' + brend["_id"]
-#        brend.remove()
+        path = './public/img/brends/' + brend["_id"]
+        brend.remove()
         rimraf path, (err) ->
           res.send 200
 
@@ -76,7 +76,7 @@ exports.boot = (app) ->
   checkType = (product,param) ->
     if product.isFace
       console.log "isface"
-#      delIsface(product) if param.del
+      delIsface(product) if param.del
     if product.isBody
       console.log "isbody"
       delIsbody(product) if param.del

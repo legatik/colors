@@ -128,7 +128,7 @@ $(document).ready () ->
     brends.forEach (brend) ->
         templateJQ = $("#brendListTemplate")
         template = _.template($(templateJQ[0]).html())
-        $("#list-br-body").append(template({brend:brend}))
+        $("#list-br-body").prepend(template({brend:brend}))
     addEventList()
 
   findBrends = (title) ->
@@ -174,4 +174,4 @@ $(document).ready () ->
           url: "/tool/admin/del_brend"
           data: {id:id}
           success: (data) =>
-          
+            $($($(@).parent()).parent()).remove()
