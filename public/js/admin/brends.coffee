@@ -174,5 +174,4 @@ $(document).ready () ->
           url: "/tool/admin/del_brend"
           data: {id:id}
           success: (data) =>
-            alert()
           

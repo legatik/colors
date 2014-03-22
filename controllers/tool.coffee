@@ -1,6 +1,7 @@
 db = require '../lib/db'
 _ = require 'underscore'
 fs = require 'fs-extra'
+rimraf = require "rimraf"
 
 {User, Product, Face, Brend, Body} = db.models
 
@@ -50,16 +51,28 @@ exports.boot = (app) ->
       Product.find {brend:data.id}, (err, products) ->
         products.forEach (product) ->
           checkType(product, {del:true})
-        res.send 200
+          
+#        path = './public/img/brends/' + brend["_id"]
+#        brend.remove()
+        rimraf path, (err) ->
+          res.send 200
 
+
+  delProduct = (product) ->
+    path = './public/img/products/' + product["_id"]
+    rimraf path, (err) ->
+    product.remove()
+  
   delIsface = (product) ->
     Face.findOne {_id: product.isFace}, (err, face) ->
-      console.log "dace!!!!!!!!!!!!", face
+      face.remove()
+      delProduct(product)
 
   delIsbody = (product) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
-      console.log "dace!!!!!!!!!!!!", body
-
+      body.remove()
+      delProduct(product)
+      
   checkType = (product,param) ->
     if product.isFace
       console.log "isface"
