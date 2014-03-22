@@ -30,3 +30,9 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Product.find {title: find}, (err, arrProd) ->
       res.send arrProd
+      
+  app.get '/admin/q_brend_by_name', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    Brend.find {title: find}, (err, arrBrend) ->
+      res.send arrBrend
+      

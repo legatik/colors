@@ -5,7 +5,15 @@ $(document).ready () ->
 #    success : (brendArr) ->
 
   $("#brend-show").click (e) ->
+    $(".form-admin").hide()
     $("#brend-form").show()
+
+  $("#brend-list").click (e) ->
+    $(".form-admin").hide()
+    $("#brend-list-form").show()
+
+
+# --------------------------- Для добовления бренда
 
   $("#img-breng").change () ->
     readURLImg(@)
@@ -92,5 +100,37 @@ $(document).ready () ->
         $("#success-brend").fadeIn("slow")
         
 
+# ------------------------- Для списка бредо
+
+  
+
+
+
+
+  $("#start-search-brends ").click () ->
+    title = $("#in-brend-search").val()
+    findBrends(title)
+
+  $("#in-brend-search").autocomplete
+    source: (request, response) ->
+      $.ajax
+        url: "/tool/admin/q_brend_by_name"
+        data: {title: $("#in-brend-search").val()}
+        success: (data) ->
+          response $.map(data, (item) ->
+            label : item.title
+            title : item.title
+          )
+    minLength: 2
+
+
+  findBrends = (title) ->
+    $.ajax
+      type    : 'GET'
+      data    : {title:title}
+      url     : "/tool/admin/q_brend_by_name"
+      success : (brends) ->
+        console.log "brends", brends
+  
   
         
