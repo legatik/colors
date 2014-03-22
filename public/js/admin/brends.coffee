@@ -141,6 +141,7 @@ $(document).ready () ->
   
   addEventList = () ->
     $(".fn-act").unbind("click")
+    $(".fn-del").unbind("click")
     $(".fn-act").click (e) ->
       if confirm("Вы уверенны?")
         id = ($(@).attr("id")).replace("act-", "")
@@ -163,8 +164,15 @@ $(document).ready () ->
               $(@).attr("active", "false") 
               $(@).text("Aктивировать")
               $($($($(@).parent()).parent()).find(".br-st-act")).text("false")
-        
-        
-        
-        
-        
+    
+    $(".fn-del").click () ->
+      if confirm("Вы уверенны?")
+#        if confirm("Вы точно уверенны? Последствия не обратимы!")
+        id = ($(@).attr("id")).replace("del-", "")
+        $.ajax
+          type: "POST"
+          url: "/tool/admin/del_brend"
+          data: {id:id}
+          success: (data) =>
+            alert()
+          

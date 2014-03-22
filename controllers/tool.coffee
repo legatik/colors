@@ -2,7 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 fs = require 'fs-extra'
 
-{User, Product, Face, Brend} = db.models
+{User, Product, Face, Brend, Body} = db.models
 
 exports.boot = (app) ->
 
@@ -44,5 +44,27 @@ exports.boot = (app) ->
       brend.save()
       res.send 200
       
-      
-      
+  app.post '/admin/del_brend', (req, res) ->
+    data = req.body
+    Brend.findOne {_id: data.id}, (err, brend) ->
+      Product.find {brend:data.id}, (err, products) ->
+        products.forEach (product) ->
+          checkType(product, {del:true})
+        res.send 200
+
+  delIsface = (product) ->
+    Face.findOne {_id: product.isFace}, (err, face) ->
+      console.log "dace!!!!!!!!!!!!", face
+
+  delIsbody = (product) ->
+    Body.findOne {_id: product.isBody}, (err, body) ->
+      console.log "dace!!!!!!!!!!!!", body
+
+  checkType = (product,param) ->
+    if product.isFace
+      console.log "isface"
+#      delIsface(product) if param.del
+    if product.isBody
+      console.log "isbody"
+      delIsbody(product) if param.del
+
