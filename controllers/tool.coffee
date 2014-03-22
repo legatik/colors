@@ -36,3 +36,13 @@ exports.boot = (app) ->
     Brend.find {title: find}, (err, arrBrend) ->
       res.send arrBrend
       
+  app.post '/admin/fn_act_brend', (req, res) ->
+    data = req.body
+    Brend.findOne {_id: data.id}, (err, brend) ->
+      brend.active = true if data.active == "false"
+      brend.active = false if data.active == "true"
+      brend.save()
+      res.send 200
+      
+      
+      

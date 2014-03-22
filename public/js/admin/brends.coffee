@@ -124,13 +124,47 @@ $(document).ready () ->
     minLength: 2
 
 
+  renderBrends = (brends) ->
+    brends.forEach (brend) ->
+        templateJQ = $("#brendListTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#list-br-body").append(template({brend:brend}))
+    addEventList()
+
   findBrends = (title) ->
     $.ajax
       type    : 'GET'
       data    : {title:title}
       url     : "/tool/admin/q_brend_by_name"
       success : (brends) ->
-        console.log "brends", brends
+        renderBrends(brends)
   
-  
+  addEventList = () ->
+    $(".fn-act").unbind("click")
+    $(".fn-act").click (e) ->
+      if confirm("Вы уверенны?")
+        id = ($(@).attr("id")).replace("act-", "")
+        act = $(@).attr("active")
+        data = {
+          id     : id
+          active : act
+        }
+        console.log "data", data
+        $.ajax
+          type: "POST"
+          url: "/tool/admin/fn_act_brend"
+          data: data
+          success: (data) =>
+            if act is "false"
+              $(@).attr("active", "true") 
+              $(@).text("Снять активность")
+              $($($($(@).parent()).parent()).find(".br-st-act")).text("true")
+            else
+              $(@).attr("active", "false") 
+              $(@).text("Aктивировать")
+              $($($($(@).parent()).parent()).find(".br-st-act")).text("false")
+        
+        
+        
+        
         
