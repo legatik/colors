@@ -125,6 +125,7 @@ $(document).ready () ->
 
 
   renderBrends = (brends) ->
+    $("#list-br-body").empty()
     brends.forEach (brend) ->
         templateJQ = $("#brendListTemplate")
         template = _.template($(templateJQ[0]).html())

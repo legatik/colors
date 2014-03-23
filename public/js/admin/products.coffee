@@ -260,6 +260,7 @@ $(document).ready () ->
 
 
   renderProd = (products) ->
+    $("#list-pr-body").empty()
     products.forEach (product) ->
         templateJQ = $("#prodListTemplate")
         template = _.template($(templateJQ[0]).html())
