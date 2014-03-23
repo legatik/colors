@@ -44,6 +44,14 @@ exports.boot = (app) ->
       brend.active = false if data.active == "true"
       brend.save()
       res.send 200
+
+  app.post '/admin/fn_vet_prod', (req, res) ->
+    data = req.body
+    Product.findOne {_id: data.id}, (err, prod) ->
+      prod.vetrina = true if data.active == "false"
+      prod.vetrina = false if data.active == "true"
+      prod.save()
+      res.send 200
       
   app.post '/admin/del_brend', (req, res) ->
     data = req.body
@@ -58,6 +66,15 @@ exports.boot = (app) ->
           res.send 200
 
 
+  app.post '/admin/del_product', (req, res) ->
+    data = req.body
+    console.log "!!!!!!!!data.id", data.id
+    Product.findOne {_id: data.id}, (err, product) ->
+      console.log "product", product
+      checkType(product, {del:true})
+      res.send 200
+
+
   delProduct = (product) ->
     path = './public/img/products/' + product["_id"]
     rimraf path, (err) ->
@@ -65,12 +82,12 @@ exports.boot = (app) ->
   
   delIsface = (product) ->
     Face.findOne {_id: product.isFace}, (err, face) ->
-      face.remove()
+      face.remove() if face
       delProduct(product)
 
   delIsbody = (product) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
-      body.remove()
+      body.remove() if body
       delProduct(product)
       
   checkType = (product,param) ->

@@ -22,6 +22,9 @@ block content
           tr
             td(width=200, style="max-width:200px") Название
             td(width=100) Ветрина
+            td На ветрину
+            td Удаление
+            td Дата добавления
         tbody#list-pr-body
 
 
@@ -119,7 +122,7 @@ block content
         <%}%>
       td
         button.fn-del(id!="del-<%=prod['_id']%>") Удалить продукт
-
+      td <%=data%>
   script#stepTemplate(type="text/template")
     div.small-cont
       input.step-inp(type="file",id!="step-inp-<%=number%>")

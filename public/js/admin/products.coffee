@@ -264,8 +264,9 @@ $(document).ready () ->
     products.forEach (product) ->
         templateJQ = $("#prodListTemplate")
         template = _.template($(templateJQ[0]).html())
-        $("#list-pr-body").prepend(template({prod:product}))
-#    addEventList()
+        data = (new moment(product.dateAdding)).format("DD/MM/YYYY")
+        $("#list-pr-body").prepend(template({prod:product,data:data}))
+    addEventList()
 
   findProd = (title) ->
     $.ajax
@@ -280,16 +281,15 @@ $(document).ready () ->
     $(".fn-del").unbind("click")
     $(".fn-act").click (e) ->
       if confirm("Вы уверенны?")
-        id = ($(@).attr("id")).replace("act-", "")
+        id = ($(@).attr("id")).replace("vet-", "")
         act = $(@).attr("active")
         data = {
           id     : id
           active : act
         }
-        console.log "data", data
         $.ajax
           type: "POST"
-          url: "/tool/admin/fn_act_brend"
+          url: "/tool/admin/fn_vet_prod"
           data: data
           success: (data) =>
             if act is "false"
@@ -307,7 +307,7 @@ $(document).ready () ->
         id = ($(@).attr("id")).replace("del-", "")
         $.ajax
           type: "POST"
-          url: "/tool/admin/del_brend"
+          url: "/tool/admin/del_product"
           data: {id:id}
           success: (data) =>
             $($($(@).parent()).parent()).remove()
