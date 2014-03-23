@@ -9,6 +9,21 @@ block content
     include admin-nav    
     
     button#product-show Добавить продукт
+    button#product-list Список продуктов
+
+
+    #product-list-form.form-admin
+      input#in-prod-search
+      button#start-search-prod Найти
+      br
+      br
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Название
+            td(width=100) статус
+        tbody#list-pr-body
+
 
     #product-form.form-admin
       table#add-dish-table(style="display:inline-block")

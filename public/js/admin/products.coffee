@@ -16,12 +16,16 @@ $(document).ready () ->
       $("#gl-product-tip").click () ->
         renderType()
 
-
       $("#brend-show").click (e) ->
         $(".form-admin").hide()
         $("#brend-form").show()
 
+      $("#product-list").click (e) ->
+        $(".form-admin").hide()
+        $("#product-list-form").show()
+
       $("#product-show").click (e) ->
+        $(".form-admin").hide()
         $("#product-form").show()
         $("#brend-select").empty()
         brendArr.forEach (brend) ->
