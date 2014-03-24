@@ -1,8 +1,8 @@
 $(document).ready () ->
 
   $("#brend-show").click (e) ->
-    $("#brend-form").show()
     $(".form-admin").hide()
+    $("#brend-form").show()
 
   $("#actin-list").click (e) ->
     $(".form-admin").hide()
