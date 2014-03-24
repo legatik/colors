@@ -100,11 +100,11 @@ $(document).ready () ->
     $("#v-inbg-im").attr("src", "/img/add-bg.png")
     $("#v-inp-im").val("")
     $("#v-cl-im").hide()
-
+    $("#title-news").val("")
 
   $("#add-new").click (e) ->
     vetrina = $("#vetrina").is(':checked')
-    
+    title = $("#title-news").val()
     
     descArr = []
     trDescArr = $("#table-desc").find("tr")
@@ -117,6 +117,7 @@ $(document).ready () ->
     objSend = {
         descriptions  : descArr
         vetrina       : vetrina
+        title         : title
     }
 
     logo = ($("#v-inp-im"))[0].files[0]
