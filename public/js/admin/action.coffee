@@ -3,6 +3,12 @@ $(document).ready () ->
   $("#brend-show").click (e) ->
     $("#brend-form").show()
 
+
+  $("#actin-list").click (e) ->
+    $(".form-admin").hide()
+    $("#action-list-form").show()
+
+
   $("#img-breng").change () ->
     readURLImg(@)
          
@@ -123,6 +129,77 @@ $(document).ready () ->
         $("#success-brend").hide()
         $("#success-brend").fadeIn("slow")
         
+# Для списка
+
+
+  $("#start-search-action ").click () ->
+    title = $("#in-action-search").val()
+    findAction(title)
+
+  $("#in-action-search").autocomplete
+    source: (request, response) ->
+      $.ajax
+        url: "/tool/admin/q_action_by_name"
+        data: {title: $("#in-action-search").val()}
+        success: (data) ->
+          response $.map(data, (item) ->
+            label : item.title
+            title : item.title
+          )
+    minLength: 2
+
+
+  renderAction = (actions) ->
+    $("#list-ac-body").empty()
+    actions.forEach (action) ->
+        templateJQ = $("#actListTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#list-ac-body").prepend(template({act:action}))
+    addEventList()
+
+  findAction = (title) ->
+    $.ajax
+      type    : 'GET'
+      data    : {title:title}
+      url     : "/tool/admin/q_action_by_name"
+      success : (actions) ->
+        renderAction(actions)
+  
+  addEventList = () ->
+    $(".fn-act").unbind("click")
+    $(".fn-del").unbind("click")
+    $(".fn-act").click (e) ->
+      if confirm("Вы уверенны?")
+        id = ($(@).attr("id")).replace("act-", "")
+        act = $(@).attr("active")
+        data = {
+          id     : id
+          active : act
+        }
+        $.ajax
+          type: "POST"
+          url: "/tool/admin/fn_act_action"
+          data: data
+          success: (data) =>
+            if act is "false"
+              $(@).attr("active", "true") 
+              $(@).text("Снять активность")
+              $($($($(@).parent()).parent()).find(".br-st-act")).text("true")
+            else
+              $(@).attr("active", "false") 
+              $(@).text("Aктивировать")
+              $($($($(@).parent()).parent()).find(".br-st-act")).text("false")
+    
+    $(".fn-del").click () ->
+      if confirm("Вы уверенны?")
+        if confirm("Вы точно уверенны? Последствия не обратимы!")
+          id = ($(@).attr("id")).replace("del-", "")
+          $.ajax
+            type: "POST"
+            url: "/tool/admin/del_action"
+            data: {id:id}
+            success: (data) =>
+              $($($(@).parent()).parent()).remove()
 
   
         

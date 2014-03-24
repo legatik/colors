@@ -303,13 +303,13 @@ $(document).ready () ->
     
     $(".fn-del").click () ->
       if confirm("Вы уверенны?")
-#        if confirm("Вы точно уверенны? Последствия не обратимы!")
-        id = ($(@).attr("id")).replace("del-", "")
-        $.ajax
-          type: "POST"
-          url: "/tool/admin/del_product"
-          data: {id:id}
-          success: (data) =>
-            $($($(@).parent()).parent()).remove()
+        if confirm("Вы точно уверенны? Последствия не обратимы!")
+          id = ($(@).attr("id")).replace("del-", "")
+          $.ajax
+            type: "POST"
+            url: "/tool/admin/del_product"
+            data: {id:id}
+            success: (data) =>
+              $($($(@).parent()).parent()).remove()
 
 

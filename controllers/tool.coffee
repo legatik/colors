@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body} = db.models
+{User, Product, Face, Brend, Body, Action} = db.models
 
 exports.boot = (app) ->
 
@@ -36,6 +36,12 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Brend.find {title: find}, (err, arrBrend) ->
       res.send arrBrend
+
+  app.get '/admin/q_action_by_name', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    Action.find {title: find}, (err, arrAction) ->
+      res.send arrAction
+
       
   app.post '/admin/fn_act_brend', (req, res) ->
     data = req.body
@@ -52,6 +58,16 @@ exports.boot = (app) ->
       prod.vetrina = false if data.active == "true"
       prod.save()
       res.send 200
+
+  app.post '/admin/fn_act_action', (req, res) ->
+    data = req.body
+    console.log "data.id", data.id
+    Action.findOne {_id: data.id}, (err, act) ->
+      console.log "act", act
+      act.active = true if data.active == "false"
+      act.active = false if data.active == "true"
+      act.save()
+      res.send 200
       
   app.post '/admin/del_brend', (req, res) ->
     data = req.body
@@ -66,9 +82,17 @@ exports.boot = (app) ->
           res.send 200
 
 
+  app.post '/admin/del_action', (req, res) ->
+    data = req.body
+    Action.findOne {_id: data.id}, (err, action) ->
+      path = './public/img/actions/' + action["_id"]
+      action.remove()
+      rimraf path, (err) ->
+        res.send 200
+
+
   app.post '/admin/del_product', (req, res) ->
     data = req.body
-    console.log "!!!!!!!!data.id", data.id
     Product.findOne {_id: data.id}, (err, product) ->
       console.log "product", product
       checkType(product, {del:true})
