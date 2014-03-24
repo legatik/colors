@@ -9,6 +9,24 @@ block content
     include admin-nav    
     
     button#product-show Добавить продукт
+    button#product-list Список продуктов
+
+
+    #product-list-form.form-admin
+      input#in-prod-search
+      button#start-search-prod Найти
+      br
+      br
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Название
+            td(width=100) Ветрина
+            td На ветрину
+            td Удаление
+            td Дата добавления
+        tbody#list-pr-body
+
 
     #product-form.form-admin
       table#add-dish-table(style="display:inline-block")
@@ -91,6 +109,20 @@ block content
   include ../template/face
   include ../template/body
 
+
+  script#prodListTemplate(type="text/template")
+    tr
+      td <%=prod.title%>
+      td.br-st-act <%=prod.vetrina%>
+      td 
+        <%if(prod.vetrina){%>
+        button.fn-act(active="true", id!="vet-<%=prod['_id']%>") Снять активность
+        <%}else{%>
+        button.fn-act(active="false", id!="vet-<%=prod['_id']%>") Активировать
+        <%}%>
+      td
+        button.fn-del(id!="del-<%=prod['_id']%>") Удалить продукт
+      td <%=data%>
   script#stepTemplate(type="text/template")
     div.small-cont
       input.step-inp(type="file",id!="step-inp-<%=number%>")

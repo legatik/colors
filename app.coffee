@@ -74,10 +74,6 @@ app.post '/register', (req, res) ->
 app.get '/login', (req, res) ->
 	res.render 'login', {title: 'login'}
 
-app.get '/product', (req, res) ->
-	res.render 'product', {title: 'PROOOODDD'}
-
-
 app.post "/login", (req, res, next) ->
 	passport.authenticate("local", (err, user, info) ->
 		if user

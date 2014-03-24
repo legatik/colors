@@ -53,7 +53,8 @@ block content
               .descr #{item.minOpisanie}
               .old-price #{item.oldCost}
               .new-price #{item.cost} р
-              .in-basket В КОРЗИНУ
+              a(href != "/product/#{item['_id']}")
+                .in-basket В КОРЗИНУ
         //.item
           .prod
             img(src="../img/prod.jpg", width="124px", height="144px")
@@ -74,9 +75,31 @@ block content
     input.email(placeholder="Ваш email")
     a.discount(href="#") Получить скидку!
   .novelty-title Новинки
-  .novelty-left
+  
+  #myCarousel4.carousel.slide(data-ride="carousel")
+    ol.carousel-indicators
+      li.active(data-target="#myCarousel",data-slide-to="0")
+      li(data-target="#myCarousel",data-slide-to="1")
+      li(data-target="#myCarousel",data-slide-to="2")
+      li(data-target="#myCarousel",data-slide-to="3")
+      li(data-target="#myCarousel",data-slide-to="4")
+    .carousel-inner
+      .item.active
+        img(src="http://i.nenuna.net/2013/03/16/15706/15706_1363442026_2.jpg")
+      .item
+        img(src="http://aptekaforte.ru/netcat_files/Image/tonymoly.jpg")
+      .item
+        img(src="http://062012.imgbb.ru/f/2/1/f213fea1e9a4d01a621dbe230acb616a.jpg")
+      .item
+        img(src="http://forum.ngs.ru/preview/forum/upload_files/1673a8d7dd8907489258876ba219465d_bf018319ae2b0c9a627d3826e5232dec_133951277057_800px.jpg")
+    a.left.carousel-control(data-slide="prev",href="#myCarousel4")
+    a.right.carousel-control(data-slide="next",href="#myCarousel4")
+  
+  
+  
+  //.novelty-left
     img(width="372", height="302")
-  .novelty-right
+  //.novelty-right
     .title Returning Starfish Eye Cream от MIZON
     .descr интенсивный восстанавливающий крем для контура глаз с экстрактом морской звезды
     .price 779р

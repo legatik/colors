@@ -10,6 +10,20 @@ block content
     
     
     button#brend-show Добавить бренд
+    button#brend-list Список брендов
+
+
+    #brend-list-form.form-admin
+      input#in-brend-search
+      button#start-search-brends Найти
+      br
+      br
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Название
+            td(width=100) статус
+        tbody#list-br-body
 
     #brend-form.form-admin
       table#brend-table(style="display:inline-block")
@@ -53,8 +67,20 @@ block content
           td#success-brend.hide
             span &nbsp Бренд успешно добавлен
 
+  script#brendListTemplate(type="text/template")
+    tr
+      td <%=brend.title%>
+      td.br-st-act <%=brend.active%>
+      td 
+        <%if(brend.active){%>
+        button.fn-act(active="true", id!="act-<%=brend['_id']%>") Снять активность
+        <%}else{%>
+        button.fn-act(active="false", id!="act-<%=brend['_id']%>") Активировать
+        <%}%>
+      td
+        button.fn-del(id!="del-<%=brend['_id']%>") Удалить бренд
 
-  script#stepTemplate(type="text/template")
+  script#brendListTemplate(type="text/template")
     div.small-cont
       input.step-inp(type="file",id!="step-inp-<%=number%>")
       img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")

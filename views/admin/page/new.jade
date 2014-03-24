@@ -9,6 +9,23 @@ block content
     include admin-nav
     
     button#new-show Добавить новинку
+    button#new-list-btn Список новинок
+
+    #new-list-form.form-admin
+      input#in-new-search
+      button#start-search-new Найти
+      br
+      br
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Название
+            td(width=100) Ветрина
+            td На ветрину
+            td Удаление
+        tbody#list-new-body
+
+
 
     #new-form.form-admin
       div(style="display: inline-block;")
@@ -37,6 +54,10 @@ block content
       div
         table.height-tr
           tr
+            td Название&nbsp
+            td
+              input#title-news 
+          tr
             td На ветину&nbsp
             td
               input#vetrina(type="checkbox")      
@@ -52,6 +73,19 @@ block content
               button#add-new Добавить&nbsp
             td#success-new.hide
               span &nbsp Новинка успешно добавлена
+
+  script#newListTemplate(type="text/template")
+    tr
+      td <%=news.title%>
+      td.br-st-act <%=news.vetrina%>
+      td 
+        <%if(news.vetrina){%>
+        button.fn-act(active="true", id!="act-<%=news['_id']%>") Снять активность
+        <%}else{%>
+        button.fn-act(active="false", id!="act-<%=news['_id']%>") Активировать
+        <%}%>
+      td
+        button.fn-del(id!="del-<%=news['_id']%>") Удалить новость
 
 
   script#stepImg(type="text/template")
