@@ -74,6 +74,19 @@ block content
             td#success-new.hide
               span &nbsp Новинка успешно добавлена
 
+  script#newListTemplate(type="text/template")
+    tr
+      td <%=news.title%>
+      td.br-st-act <%=news.vetrina%>
+      td 
+        <%if(news.vetrina){%>
+        button.fn-act(active="true", id!="act-<%=news['_id']%>") Снять активность
+        <%}else{%>
+        button.fn-act(active="false", id!="act-<%=news['_id']%>") Активировать
+        <%}%>
+      td
+        button.fn-del(id!="del-<%=news['_id']%>") Удалить новость
+
 
   script#stepImg(type="text/template")
     tr(id!="st-tr-im-<%=i%>")

@@ -152,9 +152,9 @@ $(document).ready () ->
 # Для списка
 
 
-  $("#start-search-new ").click () ->
+  $("#start-search-new").click () ->
     title = $("#in-new-search").val()
-    findAction(title)
+    findNews(title)
 
   $("#in-new-search").autocomplete
     source: (request, response) ->
@@ -169,21 +169,21 @@ $(document).ready () ->
     minLength: 2
 
 
-  renderAction = (actions) ->
-    $("#list-ac-body").empty()
-    actions.forEach (action) ->
-        templateJQ = $("#actListTemplate")
+  renderNews = (news) ->
+    $("#list-new-body").empty()
+    news.forEach (newOne) ->
+        templateJQ = $("#newListTemplate")
         template = _.template($(templateJQ[0]).html())
-        $("#list-ac-body").prepend(template({act:action}))
+        $("#list-new-body").prepend(template({news:newOne}))
     addEventList()
 
-  findAction = (title) ->
+  findNews = (title) ->
     $.ajax
       type    : 'GET'
       data    : {title:title}
-      url     : "/tool/admin/q_action_by_name"
+      url     : "/tool/admin/q_new_by_name"
       success : (actions) ->
-        renderAction(actions)
+        renderNews(actions)
   
   addEventList = () ->
     $(".fn-act").unbind("click")
