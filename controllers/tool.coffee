@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action} = db.models
+{User, Product, Face, Brend, Body, Action, New} = db.models
 
 exports.boot = (app) ->
 
@@ -31,6 +31,12 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Product.find {title: find}, (err, arrProd) ->
       res.send arrProd
+
+  app.get '/admin/q_new_by_name', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    New.find {title: find}, (err, arrNews) ->
+      res.send arrNews
+
       
   app.get '/admin/q_brend_by_name', (req, res) ->
     find = new RegExp(req.query.title, "i")

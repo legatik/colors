@@ -2,7 +2,7 @@ $(document).ready () ->
 
   $("#brend-show").click (e) ->
     $("#brend-form").show()
-
+    $(".form-admin").hide()
 
   $("#actin-list").click (e) ->
     $(".form-admin").hide()
