@@ -67,13 +67,21 @@ exports.boot = (app) ->
 
   app.post '/admin/fn_act_action', (req, res) ->
     data = req.body
-    console.log "data.id", data.id
     Action.findOne {_id: data.id}, (err, act) ->
       console.log "act", act
       act.active = true if data.active == "false"
       act.active = false if data.active == "true"
       act.save()
       res.send 200
+
+  app.post '/admin/fn_new_action', (req, res) ->
+    data = req.body
+    New.findOne {_id: data.id}, (err, news) ->
+      news.vetrina = true if data.active == "false"
+      news.vetrina = false if data.active == "true"
+      news.save()
+      res.send 200
+
       
   app.post '/admin/del_brend', (req, res) ->
     data = req.body
@@ -81,7 +89,6 @@ exports.boot = (app) ->
       Product.find {brend:data.id}, (err, products) ->
         products.forEach (product) ->
           checkType(product, {del:true})
-          
         path = './public/img/brends/' + brend["_id"]
         brend.remove()
         rimraf path, (err) ->
@@ -93,6 +100,14 @@ exports.boot = (app) ->
     Action.findOne {_id: data.id}, (err, action) ->
       path = './public/img/actions/' + action["_id"]
       action.remove()
+      rimraf path, (err) ->
+        res.send 200
+
+  app.post '/admin/del_news', (req, res) ->
+    data = req.body
+    New.findOne {_id: data.id}, (err, news) ->
+      path = './public/img/news/' + news["_id"]
+      news.remove()
       rimraf path, (err) ->
         res.send 200
 

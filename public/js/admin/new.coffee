@@ -198,7 +198,7 @@ $(document).ready () ->
         }
         $.ajax
           type: "POST"
-          url: "/tool/admin/fn_act_action"
+          url: "/tool/admin/fn_new_action"
           data: data
           success: (data) =>
             if act is "false"
@@ -216,7 +216,7 @@ $(document).ready () ->
           id = ($(@).attr("id")).replace("del-", "")
           $.ajax
             type: "POST"
-            url: "/tool/admin/del_action"
+            url: "/tool/admin/del_news"
             data: {id:id}
             success: (data) =>
               $($($(@).parent()).parent()).remove()
