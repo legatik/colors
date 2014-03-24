@@ -2,7 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 nodemailer = require 'nodemailer'
 
-{Product, Brend, Action} = db.models
+{Product, Brend, Action, New} = db.models
 
 exports.boot = (app) ->
 
@@ -21,8 +21,9 @@ exports.boot = (app) ->
       vetrinaArr = separatorFn(vetrins, 4)
       Brend.find {active:true}, (err, brends) ->
         Action.find {active:true}, (err, actions) ->
-          brendArr = separatorFn(brends, 6)
-          res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions}
+          New.find {vetrina:true}, (err, news) ->
+            brendArr = separatorFn(brends, 6)
+            res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news}
 
 
   app.get '/product/:idProd', (req, res) ->
