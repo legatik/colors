@@ -7,7 +7,7 @@ nodemailer = require 'nodemailer'
 exports.boot = (app) ->
 
   app.get '/new', (req, res) ->
-      res.render 'index', {title: 'Новинки', user: req.user, loc:'home'}
+      res.render 'news', {title: 'Новинки', user: req.user, loc:'home'}
 
   app.get '/brend', (req, res) ->
     brendId = req.query.key
