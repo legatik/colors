@@ -35,3 +35,6 @@ exports.boot = (app) ->
   app.get '/sets', (req, res) ->
       res.render 'index', {title: 'Наборы', user: req.user, loc:'home'}
 
+  app.get '/promotions', (req, res) ->
+    res.render 'promotions', {title: 'Акции', user: req.user, loc:'home'}
+

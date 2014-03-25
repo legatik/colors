@@ -6,10 +6,13 @@ block content
   input#firstData(type="hidden", brends=JSON.stringify(brends), brendId!=brendId)
   img#brands-picture ТУТ БУДЕТ КАРТИНКА
   .left-side
-    .switch
-       .catalog 
-         a(href="/nav/face") Каталог
-       .brands.active Бренды
+    .switch.brands
+      .catalog
+        a(href="/nav/face") Каталог
+      .promotions
+        a(href="/nav/promotions") Акции
+      .brands.active
+        a(href="/nav/brend") Бренды
     ul.select-params.brands
         - each item in brends
             li(ischecked="false", key=item['_id']) #{item.title}
@@ -45,3 +48,4 @@ block content
       .old-price <%=data.oldCost%>
       .new-price <%=data.cost%> р
       .in-basket В КОРЗИНУ
+
