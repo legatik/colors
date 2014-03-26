@@ -125,6 +125,7 @@ $(document).ready () ->
     $("#v-cl-s").hide()
     
     $("#title-news").val("")
+    $("#dec").val("")
 
   $("#add-new").click (e) ->
     vetrina = $("#vetrina").is(':checked')
@@ -145,20 +146,18 @@ $(document).ready () ->
     }
 
     logo = ($("#v-inp-im"))[0].files[0]
-    img = ($("#v-inp-s"))[0].files[0]
+    images = ($("#v-inp-s"))[0].files[0]
     
     newForm = new FormData()
     newForm.append("data",JSON.stringify objSend)
     newForm.append("logo", logo)
-    newForm.append("img", img)
+    newForm.append("images", images)
 
 #    imgArr.each (index, el) ->
 #      console.log "index",index
 #      file = ($(el))[0].files[0]
 #      newForm.append(index, file)
 
-    console.log  "newForm", newForm
-    return
     $.ajax
       type    : 'POST'
       data    : newForm

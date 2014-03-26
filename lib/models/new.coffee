@@ -7,8 +7,8 @@ news = new Schema
   title           : String
   logo            : String
   vetrina         : Boolean
-  images          : Array
-  descriptions    : Array 
+  images          : String
+  descriptions    : String
   
 Model = mongoose.model 'New', news
 
