@@ -19,13 +19,6 @@ body
   height: 45px
   background: #333333
 
-.footer-fake
-//  position: absolute
-//  right: 0
-//  left: 0
-//  bottom: 0
-//  height: 270px
-//  background: #333333
 
 
 .gradient
@@ -34,8 +27,7 @@ body
   left: 0
   height: 8px
   background: url("../img/grad.png") -24px
-  top: 220px
-
+  top: 255px
 
 
 .container
@@ -360,7 +352,6 @@ ul.navigation
 .go-catalog
   width: 980px
   height: 37px
-  background: url('../img/go-catalog.png')  no-repeat
   margin-top: 30px
   text-align: end
   line-height: 37px
@@ -373,6 +364,11 @@ ul.navigation
     &:hover
       text-decoration: none
       color: #fff
+.go-catalog.type2
+  background: url('../img/go-catalog2.png')  no-repeat
+
+.go-catalog.type1
+  background: url('../img/go-catalog.png')  no-repeat
 
 .free-delivery
   width: 980px
@@ -513,26 +509,37 @@ ul.navigation
   vertical-align: top
 .left-side
   width: 205px
+  .switch.cat
+    background: url("../img/cat-act.png") 0px no-repeat;
+  .switch.brands
+    background: url("../img/brand-act.png") 0px no-repeat;
+  .switch.prom
+    background: url("../img/prom-act.png") 0px no-repeat;
   .switch
+    width: 204px
+    height: 28px
     div
-      width: 100px
       height: 21px
       display: inline-block
       vertical-align: middle
-      border: 1px solid #333333
-      color: #333333
       font-size: 15px
       text-align: center
       font-family: CenturyGothic-Bold
       cursor: pointer
+      &:hover
+        background: rgba(0,0,20,0.22)
       a
-        color: #333333
+        color: rgba(0,0,20,0.6)
     .brands
-      margin-left: -1px
-    div.active
-      background: rgba(31,31,31, 0.2)
-    .brands.active
-      background: #FF5F81
+      width: 70px
+    .catalog
+        width: 75px
+    .promotions
+        width: 58px
+     .active
+        a
+          color: #333333
+
   select.nav
     width: 203px
     height: 23px
@@ -902,14 +909,6 @@ ul.navigation
       margin-top: 24px
       margin-bottom: 24px
 
-
-
-
-
-
-
-
-
 #brands-picture
   width: 980px
   height: 170px
@@ -924,4 +923,49 @@ ul.navigation
   #footer-cont
     margin: 0 auto;
     width:980px
+
+#promotions-page
+  #promotions-picture
+    width: 980px
+    height: 300px
+    border: 1px solid #000
+    margin-bottom: 15px
+  ul.promotions
+    list-style-type: none
+    padding: 0
+    li
+      margin-bottom:10px
+      img.prom
+        cursor:pointer
+        width: 190px
+        height: 130px
+        border: 1px solid #000
+
+#news-page
+  .title
+    width: 980px
+    background: url("../img/grad2.png") 0px 33px  no-repeat
+    height: 36px
+    font-size: 27.02px
+  .news
+    margin-top: 30px;
+    div
+      vertical-align: top
+      display: inline-block
+      width: 50%
+
+    .left
+      text-align: start
+    .right
+      text-align: end
+    .text
+      h2
+        font-size: 18px
+        width: 480px
+      h3
+        font-size: 15px
+        width: 480px
+    .pic
+      img
+        border: 1px solid #000
 

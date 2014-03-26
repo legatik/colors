@@ -73,3 +73,11 @@ exports.boot = (app) ->
     .exec (err, products) ->
       res.send products
 
+  app.post '/productByAction', (req, res) ->
+    actionId = req.body.key
+    data =  req.body.filter
+    console.log "actionId", actionId
+    console.log "data", data
+    Product.find {} , (err, arr) ->
+      res.send arr
+    

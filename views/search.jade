@@ -4,7 +4,7 @@ extends layout
 block content
   include navigation
   != js('search')
-  input#firstData(type="hidden", search=search)
+  input#firstData(type="hidden", search=search, sort=sort)
   .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
   .left-side
 
@@ -30,8 +30,11 @@ block content
 
 
   script#filerTemplate(type="text/template")
-    .switch
-      .catalog.active Каталог
+    .switch.cat
+      .catalog.active
+        a(href="/nav/face") Каталог
+      .promotions
+        a(href="/nav/promotions") Акции
       .brands
         a(href="/nav/brend") Бренды
     select#nav-type.nav

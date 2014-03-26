@@ -28,16 +28,16 @@ block content
 
 
     #new-form.form-admin
-      //div(style="display: inline-block;")
+      div(style="display: inline-block;")
         h4 Добавьте шаг описания
         table#table-desc.height-tr(style="display:inline-block")
           tr(first="true")
-            td Описание
+            td шаг №1
             td
-              textarea#dec.textarea-add-m2
+              textarea.textarea-add-m2
         div
           button#add-step-txt Добавить шаг описания
-      //div(style="display: inline-block;margin-left: 50px; vertical-align: top")
+      div(style="display: inline-block;margin-left: 50px; vertical-align: top")
         h4 Шаг картинки
         table#table-img.height-tr(style="display:inline-block")
           tr(first="true")
@@ -56,18 +56,11 @@ block content
           tr
             td Название&nbsp
             td
-              input#title-news
+              input#title-news 
           tr
-            td Описание&nbsp
+            td На ветину&nbsp
             td
-              textarea#dec.textarea-add-m2
-          tr(first="true")
-            td Изображение на странице&nbsp
-            td
-              div.small-cont-ck
-                input#v-inp-s.small-inp-ck(type="file")
-                img#v-inbg-s.small-prev-ck(src="/img/add-bg.png")
-                img#v-cl-s.small-del-ck(src="/img/close.png")
+              input#vetrina(type="checkbox")      
           tr
             td Изображение для ветрины&nbsp
             td
@@ -75,10 +68,6 @@ block content
                 input#v-inp-im.small-inp-ck(type="file")
                 img#v-inbg-im.small-prev-ck(src="/img/add-bg.png")
                 img#v-cl-im.small-del-ck(src="/img/close.png")
-          tr
-            td На ветину&nbsp
-            td
-              input#vetrina(type="checkbox")      
           tr
             td
               button#add-new Добавить&nbsp

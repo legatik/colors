@@ -43,10 +43,10 @@ exports.boot = (app) ->
       _.each req.files, (data,key)->
         type = data.mime.replace("image/", "")
         path = './public/img/news/' + news["_id"]
-        if key == "logo"
-          news[key] = type
-        else
-          news.images.push(type)
+#        if key == "logo"
+        news[key] = type
+#        else
+#          news.images.push(type)
         fs.mkdir path, (err) ->
           fs.copy data.path, path + "/" + key + "." + type, (err) ->
       news.save()

@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  include navigation
+  != js('searchPromo')
+  input#firstData(type="hidden", actions=JSON.stringify(actions), actionId=actionId)
+  #promotions-page
+    img#promotions-picture ТУТ БУДЕТ КАРТИНКА
+    .left-side
+      .switch.prom
+        .catalog
+          a(href="/nav/face") Каталог
+        .promotions.active
+          a(href="/nav/promotions") Акции
+        .brands
+          a(href="/nav/brend") Бренды
+      ul.promotions
+        - each item in actions
+          li
+            img.prom.prom-item(src!="/img/actions/#{item['_id']}/img.#{item.img}", idProm=item['_id'])
+    .right-side
+      .filter-block
+          .select-price-cont
+              .title Цена
+              #slider-price
+              #slider-price-fake
+              label.min-price-label От
+              input.min-price(value="49")
+              label.max-price-label До
+              input.max-price(value="2599")
+          input.search-product
+          .sort-cont
+              .title Сортировать
+              select.sort-product
+                  option(value="popular") По популярности
+                  option(value="new") По новизне
+                  option(value="cost") По цене
+      .res-search
+
+  script#productTemplate(type="text/template")
+    .prod
+      img(src!="../img/products/<%=data['_id']%>/0.<%=data.picture[0]%>", width="124px", height="144px")
+      .title <%=data.title%>
+      .descr <%=data.minOpisanie%>
+      .old-price <%=data.oldCost%>
+      .new-price <%=data.cost%> р
+      .in-basket В КОРЗИНУ
+

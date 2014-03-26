@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  include navigation
+  #news-page
+    .title НОВИНКИ
+    - each item in news
+      .news
+        .text.left
+          h2 #{item.arr[0].title}
+          h3 #{item.arr[0].descriptions}
+        .pic.right
+          img(width='480px', height="270px", src!="/img/news/#{item.arr[0]['_id']}/images.#{item.arr[0]['images']}")
+      - if(item.arr[1])
+        .news
+          .pic.left
+            img(width='480px', height="270px", src!="/img/news/#{item.arr[1]['_id']}/images.#{item.arr[1]['images']}")
+          .text.right
+            h2 #{item.arr[1].title}
+            h3 #{item.arr[1].descriptions}
+      .go-catalog(class!="type#{item['type']}")
+        a(href="/nav/face?sort=new") Перейти к каталогу  >

@@ -24,6 +24,7 @@ $(document).ready () ->
     change: (event, ui) ->
       getProducts()
 
+
   $('.min-price').on 'change',  () ->
     val = $(this).val()
     if val>=min && val<max_price
@@ -46,12 +47,26 @@ $(document).ready () ->
     else
       $('.max-price').val max_price
 
-
-  brends = $("#firstData").attr("brends")
-  brends = JSON.parse(brends)
-
-  renderKey = $("#firstData").attr("brendid")
-  renderKey = $($(".brands > li").first()).attr("key") if !renderKey
+#  ************************************************************  #
+  
+  globalId = false
+  
+  renderResults = (products) ->
+    $(".res-search").empty()
+    products.forEach (product) ->
+      template = _.template(jQuery('#productTemplate').html())
+      el = $(template({data:product}))
+      $(".res-search").append(el)
+      $(el).hide().fadeIn("slow")
+  
+  activAction = (id) ->
+    action = {}
+    globalId = id
+    actions.forEach (item) ->
+      action = item if item["_id"] == id
+    src = "/img/actions/" + action["_id"] + "/" + "logo." + action["logo"]
+    $("#promotions-picture").attr("src",src)
+    getProducts()
 
   getFilterParms = () ->
     objSent = {}
@@ -60,50 +75,33 @@ $(document).ready () ->
     objSent.sort = $(".sort-product").val()
     objSent.title = $(".search-product").val()
     return objSent
-
-
-  getProducts = () ->
+    
+    
+  getProducts = (id) ->
     filter = getFilterParms()
-    console.log "{key:renderKey, filter:filter}",{key:renderKey, filter:filter}
+    console.log "{key:renderKey, filter:filter}",{key:globalId, filter:filter}
     $.ajax
       type    : 'POST'
-      url     : '/search/productByBrend'
-      data    : {key:renderKey, filter:filter}
+      url     : '/search/productByAction'
+      data    : {key:globalId, filter:filter}
       success : (products) ->
         renderResults(products)
 
+  
+  actions = JSON.parse($("#firstData").attr("actions"))
+  actionId = $("#firstData").attr("actionId")
+  if actionId
+    activAction(actionId)
+  else
+    elPromFirst = $(".prom-item").first()
+    idFirst = $(elPromFirst).attr("idProm")
+    activAction(idFirst)
+    
+  $(".prom-item").click (e) ->
+    id = $(@).attr("idProm")
+    activAction(id)
 
-  renderBrendInfo = () ->
-    brend = false
-    brends.forEach (item) ->
-      brend = item if item["_id"].toString() == renderKey.toString()
-    src = '/img/brends/' + brend['_id'] + "/" + "logo." + brend.logo
-    $("#brands-picture").attr("src", src)
-    $(".brand-info").empty()
-    brend.description.forEach (desc) ->
-      $(".brand-info").append("<p>" + desc + "</p>")
-    liarr = $(".select-params > li")
-    liarr.each (i, el)->
-      $(el).attr("ischecked", "false")
-    $(".select-params > li[key="+renderKey+"]").attr("ischecked","true")
-    getProducts()
-
-  $(".select-params > li").click () ->
-    renderKey = $(@).attr("key")
-    renderBrendInfo()
-
-  renderBrendInfo(renderKey)
-
-
-  renderResults = (products) ->
-    $(".res-search").empty()
-    products.forEach (product) ->
-      template = _.template(jQuery('#productTemplate').html())
-      el = $(template({data:product}))
-      $(".res-search").append(el)
-      $(el).hide().fadeIn("slow")
-
-
+    
 
   $(".sort-product").click () ->
     getProducts()
@@ -116,4 +114,6 @@ $(document).ready () ->
       getProducts()
       return
     , 1000)
-
+    
+    
+    
