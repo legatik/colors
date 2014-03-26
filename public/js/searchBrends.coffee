@@ -79,8 +79,9 @@ $(document).ready () ->
       brend = item if item["_id"].toString() == renderKey.toString()
     src = '/img/brends/' + brend['_id'] + "/" + "logo." + brend.logo
     $("#brands-picture").attr("src", src)
-    $(".brand-info > p").text('')
-    $(".brand-info > p").text(brend.description)
+    $(".brand-info").empty()
+    brend.description.forEach (desc) ->
+      $(".brand-info").append("<p>" + desc + "</p>")
     liarr = $(".select-params > li")
     liarr.each (i, el)->
       $(el).attr("ischecked", "false")
