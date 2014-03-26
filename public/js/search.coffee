@@ -68,14 +68,6 @@ $(document).ready () ->
       $("#nav-type > option[value="+key+"]").attr("selected", true)
       addEvent()
       collectOtherParams()
-      sendRequest()
-
-
-  firstKey = $("#firstData").attr("search")
-  if firstKey
-    renderFilter(firstKey)
-  else
-    renderFilter("face")
 
 
   $(".sort-product").click () ->
@@ -182,4 +174,21 @@ $(document).ready () ->
       data    : searchParams
       success : (products) ->
         renderResults(products)
+
+
+  firstKey = $("#firstData").attr("search")
+  firstSort = $("#firstData").attr("sort")
+  
+  
+  if firstSort == "new" 
+    elFSort =$(".sort-product").find("option[value='popular']")
+    $(elFSort).attr('selected', true)
+
+
+  if firstKey
+    renderFilter(firstKey)
+  else
+    renderFilter("face")
+
+
 

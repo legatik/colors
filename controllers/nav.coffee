@@ -18,7 +18,10 @@ exports.boot = (app) ->
       res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends, brendId}
 
   app.get '/face', (req, res) ->
-      res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face"}
+    data = req.query
+    sort = ""
+    sort = data.sort if data.sort 
+    res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort}
 
   app.get '/body', (req, res) ->
       res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body"}
