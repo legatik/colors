@@ -4,36 +4,19 @@ block content
   include navigation
   #news-page
     .title НОВИНКИ
-    .news
-      .text.left
-        h2 Улучшенная серия Green Tea с экстрактом зеленого чая от Innisfree
-        h3 Компания Innisfree выпустила обновленную серию с экстрактом зеленого чая, в которую вошли новые супер-пупер формулы и она теперь ну ващеееее. А еще тут будет, возможно, и больше текста, для те, кто любит почитать, и много чего еще.
-      .pic.right
-        img(width='480px', height="270px")
-    .news
-      .pic.left
-        img(width='480px', height="270px")
-      .text.right
-        h2 Улучшенная серия Green Tea с экстрактом зеленого чая от Innisfree
-        h3 Компания Innisfree выпустила обновленную серию с экстрактом зеленого чая, в которую вошли новые супер-пупер формулы и она теперь ну ващеееее. А еще тут будет, возможно, и больше текста, для те, кто любит почитать, и много чего еще.
-
-    .go-catalog.type2
-      a(href="#") Перейти к каталогу  >
-
-
-    .news
-      .text.left
-        h2 Улучшенная серия Green Tea с экстрактом зеленого чая от Innisfree
-        h3 Компания Innisfree выпустила обновленную серию с экстрактом зеленого чая, в которую вошли новые супер-пупер формулы и она теперь ну ващеееее. А еще тут будет, возможно, и больше текста, для те, кто любит почитать, и много чего еще.
-      .pic.right
-        img(width='480px', height="270px")
-    .news
-      .pic.left
-        img(width='480px', height="270px")
-      .text.right
-        h2 Улучшенная серия Green Tea с экстрактом зеленого чая от Innisfree
-        h3 Компания Innisfree выпустила обновленную серию с экстрактом зеленого чая, в которую вошли новые супер-пупер формулы и она теперь ну ващеееее. А еще тут будет, возможно, и больше текста, для те, кто любит почитать, и много чего еще.
-
-    .go-catalog
-      a(href="#") Перейти к каталогу  >
-
+    - each item in news
+      .news
+        .text.left
+          h2 #{item.arr[0].title}
+          h3 #{item.arr[0].descriptions}
+        .pic.right
+          img(width='480px', height="270px", src!="/img/news/#{item.arr[0]['_id']}/images.#{item.arr[0]['images']}")
+      - if(item.arr[1])
+        .news
+          .pic.left
+            img(width='480px', height="270px", src!="/img/news/#{item.arr[1]['_id']}/images.#{item.arr[1]['images']}")
+          .text.right
+            h2 #{item.arr[1].title}
+            h3 #{item.arr[1].descriptions}
+      .go-catalog(class!="type#{item['type']}")
+        a(href="/nav/face") Перейти к каталогу  >
