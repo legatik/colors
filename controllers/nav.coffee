@@ -36,6 +36,7 @@ exports.boot = (app) ->
       res.render 'index', {title: 'Наборы', user: req.user, loc:'home'}
 
   app.get '/promotions', (req, res) ->
+    actionId = req.query.key
     Action.find {active:true}, (err, actions) ->
-      res.render 'promotions', {title: 'Акции', user: req.user, loc:'home', actions}
+      res.render 'promotions', {title: 'Акции', user: req.user, loc:'home', actions, actionId}
 

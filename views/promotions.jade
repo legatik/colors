@@ -3,7 +3,7 @@ extends layout
 block content
   include navigation
   != js('searchPromo')
-  input#firstData(type="hidden", actions=JSON.stringify(actions))
+  input#firstData(type="hidden", actions=JSON.stringify(actions), actionId=actionId)
   #promotions-page
     img#promotions-picture ТУТ БУДЕТ КАРТИНКА
     .left-side
@@ -36,4 +36,13 @@ block content
                   option(value="new") По новизне
                   option(value="cost") По цене
       .res-search
+
+  script#productTemplate(type="text/template")
+    .prod
+      img(src!="../img/products/<%=data['_id']%>/0.<%=data.picture[0]%>", width="124px", height="144px")
+      .title <%=data.title%>
+      .descr <%=data.minOpisanie%>
+      .old-price <%=data.oldCost%>
+      .new-price <%=data.cost%> р
+      .in-basket В КОРЗИНУ
 

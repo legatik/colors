@@ -11,7 +11,7 @@ block content
     .carousel-inner
       - each item in action
         .item.item-action
-          a(href="#")
+          a(href!="/nav/promotions?key=#{item['_id']}")
             img(src!="../img/actions/#{item['_id']}/logo.#{item.logo}")
     a.left.carousel-control(data-slide="prev",href="#myCarousel")
     a.right.carousel-control(data-slide="next",href="#myCarousel")

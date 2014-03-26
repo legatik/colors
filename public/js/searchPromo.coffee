@@ -22,7 +22,7 @@ $(document).ready () ->
       min_price = ui.values[0]
       max_price = ui.values[1]
     change: (event, ui) ->
-#      getProducts()
+      getProducts()
 
 
   $('.min-price').on 'change',  () ->
@@ -49,18 +49,71 @@ $(document).ready () ->
 
 #  ************************************************************  #
   
-  actions = JSON.parse($("#firstData").attr("actions"))
-  $(".prom-item").click (e) ->
-    id = $(@).attr("idProm")
+  globalId = false
+  
+  renderResults = (products) ->
+    $(".res-search").empty()
+    products.forEach (product) ->
+      template = _.template(jQuery('#productTemplate').html())
+      el = $(template({data:product}))
+      $(".res-search").append(el)
+      $(el).hide().fadeIn("slow")
+  
+  activAction = (id) ->
     action = {}
+    globalId = id
     actions.forEach (item) ->
       action = item if item["_id"] == id
     src = "/img/actions/" + action["_id"] + "/" + "logo." + action["logo"]
     $("#promotions-picture").attr("src",src)
+    getProducts()
+
+  getFilterParms = () ->
+    objSent = {}
+    objSent.min_price = $(".min-price").val()
+    objSent.max_price = $(".max-price").val()
+    objSent.sort = $(".sort-product").val()
+    objSent.title = $(".search-product").val()
+    return objSent
     
     
+  getProducts = (id) ->
+    filter = getFilterParms()
+    console.log "{key:renderKey, filter:filter}",{key:globalId, filter:filter}
+    $.ajax
+      type    : 'POST'
+      url     : '/search/productByAction'
+      data    : {key:globalId, filter:filter}
+      success : (products) ->
+        renderResults(products)
+
+  
+  actions = JSON.parse($("#firstData").attr("actions"))
+  actionId = $("#firstData").attr("actionId")
+  if actionId
+    activAction(actionId)
+  else
+    elPromFirst = $(".prom-item").first()
+    idFirst = $(elPromFirst).attr("idProm")
+    activAction(idFirst)
     
+  $(".prom-item").click (e) ->
+    id = $(@).attr("idProm")
+    activAction(id)
+
     
+
+  $(".sort-product").click () ->
+    getProducts()
+
+  keyTime = 0
+  $(".search-product").unbind("keyup")
+  $(".search-product").on "keyup", () ->
+    clearTimeout(keyTime)
+    keyTime = setTimeout(->
+      getProducts()
+      return
+    , 1000)
     
     
     
