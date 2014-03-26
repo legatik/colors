@@ -3,6 +3,7 @@ extends layout
 block content
   include navigation
   != js('searchPromo')
+  input#firstData(type="hidden", actions=JSON.stringify(actions))
   #promotions-page
     img#promotions-picture ТУТ БУДЕТ КАРТИНКА
     .left-side
@@ -14,14 +15,9 @@ block content
         .brands
           a(href="/nav/brend") Бренды
       ul.promotions
-         li
-          img.prom
-      ul.promotions
-         li
-          img.prom
-      ul.promotions
-         li
-          img.prom
+        - each item in actions
+          li
+            img.prom.prom-item(src!="/img/actions/#{item['_id']}/img.#{item.img}", idProm=item['_id'])
     .right-side
       .filter-block
           .select-price-cont

@@ -47,3 +47,20 @@ $(document).ready () ->
     else
       $('.max-price').val max_price
 
+#  ************************************************************  #
+  
+  actions = JSON.parse($("#firstData").attr("actions"))
+  $(".prom-item").click (e) ->
+    id = $(@).attr("idProm")
+    action = {}
+    actions.forEach (item) ->
+      action = item if item["_id"] == id
+    src = "/img/actions/" + action["_id"] + "/" + "logo." + action["logo"]
+    $("#promotions-picture").attr("src",src)
+    
+    
+    
+    
+    
+    
+    
