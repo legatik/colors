@@ -25,7 +25,9 @@ exports.boot = (app) ->
 
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
-    res.render 'admin/edit/brend', {title: 'Админ - редактирование брендов', user: req.user}
+    brendId = req.params.brendId
+    Brend.findById brendId , (err, brend) ->
+      res.render 'admin/edit/brend', {title: 'Админ - редактирование брендов', user: req.user, brend:brend}
 
 
   app.get '/admin/q_brend', (req, res) ->
@@ -123,6 +125,16 @@ exports.boot = (app) ->
       console.log "product", product
       checkType(product, {del:true})
       res.send 200
+
+
+
+  app.post '/admin/edit/brend/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    Brend.findById id, (err, brend) ->
+      path = './public/img/brends/' + id + "/" + key + "." + brend["logo"]
+      rimraf path, (err) ->
+        res.send 200
 
 
 
