@@ -6,7 +6,7 @@ $(document).ready () ->
       $("#prev-brend").attr("src",img)
       $("#img-prev-fs-del").show()
     if brend.img
-      img = "/img/brends/" + brend["_id"] + "/logo." + brend["img"]
+      img = "/img/brends/" + brend["_id"] + "/logo." + brend["logo"]
       $("#logo-img-breng").attr("src",img)
       $("#logo-prev-fs-del").show()
   
