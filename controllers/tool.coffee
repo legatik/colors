@@ -23,6 +23,11 @@ exports.boot = (app) ->
   app.get '/admin/page/action', (req, res) ->
       res.render 'admin/page/action', {title: 'Админ - акции', user: req.user, loc:'home'}
 
+
+  app.get '/admin/edit/brend/:brendId', (req, res) ->
+    res.render 'admin/edit/brend', {title: 'Админ - редактирование брендов', user: req.user}
+
+
   app.get '/admin/q_brend', (req, res) ->
     Brend.find {}, (err, arrBrend) ->
       res.send arrBrend
@@ -118,6 +123,8 @@ exports.boot = (app) ->
       console.log "product", product
       checkType(product, {del:true})
       res.send 200
+
+
 
 
   delProduct = (product) ->
