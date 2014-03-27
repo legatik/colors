@@ -69,60 +69,77 @@ $(document).ready () ->
     $(".brend-desc").val('')
     
   $("#add-brend").click (e) ->
-    brendName = $("#brend-name").val()
-    desc = []
-    
-    arrDesc = $(".brend-desc")
-    arrDesc.each (i, el) ->
-      val = $(el).val()
-      desc.push(val) if val
+    delImgF () ->
+      delLogoF () ->
+        brendName = $("#brend-name").val()
+        desc = []
+        
+        arrDesc = $(".brend-desc")
+        arrDesc.each (i, el) ->
+          val = $(el).val()
+          desc.push(val) if val
 
-    active = $("#active").is(':checked')
-    objSend = {
-      id          : brend["_id"]
-      title       : brendName
-      description : desc
-      active      : active
-    }
-    
-    img  = ($("#img-breng"))[0].files[0]
-    logo = ($("#logo-breng"))[0].files[0]
-    
-    newForm = new FormData()
-    newForm.append("data",JSON.stringify objSend)
-    newForm.append("img", img)
-    newForm.append("logo", logo)
-    
-    $.ajax
-      type    : 'POST'
-      data    : newForm
-      url     : "/edit/brend"
-      cache: false
-      contentType: false
-      processData: false
-      success : (brend) ->
-        window.location.reload()
+        active = $("#active").is(':checked')
+        objSend = {
+          id          : brend["_id"]
+          title       : brendName
+          description : desc
+          active      : active
+        }
+        
+        img  = ($("#img-breng"))[0].files[0]
+        logo = ($("#logo-breng"))[0].files[0]
+        
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify objSend)
+        newForm.append("img", img)
+        newForm.append("logo", logo)
+        
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/edit/brend"
+          cache: false
+          contentType: false
+          processData: false
+          success : (brend) ->
+            window.location.reload()
         
 
   $("#logo-prev-fs-del").click (e) ->
-    $.ajax
-      type    : 'POST'
-      data    : {brend : brend["_id"], key:"logo"}
-      url     : "/tool/admin/edit/brend/del/file"
-      success : (brend) ->
-        $("#logo-prev-fs-del").hide()
-        $("#logo-img-breng").attr("src", "/img/add-bg.png")
+    delLogo = true
+    $("#logo-prev-fs-del").hide()
+    $("#logo-img-breng").attr("src", "/img/add-bg.png")
         
   $("#img-prev-fs-del").click (e) ->
-    $.ajax
-      type    : 'POST'
-      data    : {brend : brend["_id"], key:"img"}
-      url     : "/tool/admin/edit/brend/del/file"
-      success : (brend) ->
-        $("#img-prev-fs-del").hide()
-        $("#prev-brend").attr("src", "/img/add-bg.png")
+    delImg = true
+    $("#img-prev-fs-del").hide()
+    $("#prev-brend").attr("src", "/img/add-bg.png")
 
+  delImgF = (cb) ->
+    if !delImg
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : brend["_id"], key:"img"}
+        url     : "/tool/admin/edit/brend/del/file"
+        success : (brend) ->
+          cb()
 
+  delLogoF = (cb) ->
+    if !delLogo
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : brend["_id"], key:"logo"}
+        url     : "/tool/admin/edit/brend/del/file"
+        success : (brend) ->
+          cb()
+
+  delImg  = false
+  delLogo = false
   brend = JSON.parse($("#firstData").attr("brend"))
 
   renderImg()
