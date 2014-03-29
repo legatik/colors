@@ -142,10 +142,17 @@ exports.boot = (app) ->
     id = req.body.brend
     key = req.body.key
     Brend.findById id, (err, brend) ->
-      path = './public/img/brends/' + id + "/" + key + "." + brend["logo"]
+      path = './public/img/brends/' + id + "/" + key + "." + brend[key]
       rimraf path, (err) ->
         res.send 200
 
+  app.post '/admin/edit/new/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    New.findById id, (err, news) ->
+      path = './public/img/news/' + id + "/" + key + "." + news[key]
+      rimraf path, (err) ->
+        res.send 200
 
 
 

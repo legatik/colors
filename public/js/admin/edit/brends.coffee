@@ -5,7 +5,7 @@ $(document).ready () ->
       img = "/img/brends/" + brend["_id"] + "/img." + brend["img"]
       $("#prev-brend").attr("src",img)
       $("#img-prev-fs-del").show()
-    if brend.img
+    if brend.logo
       img = "/img/brends/" + brend["_id"] + "/logo." + brend["logo"]
       $("#logo-img-breng").attr("src",img)
       $("#logo-prev-fs-del").show()
@@ -98,7 +98,7 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/edit/brend"
+          url     : "/edit/new"
           cache: false
           contentType: false
           processData: false

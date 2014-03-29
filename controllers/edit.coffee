@@ -37,6 +37,22 @@ exports.boot = (app) ->
       brend.save()
       res.send 200
 
+
+  app.post '/new', (req, res) ->
+    body = JSON.parse req.body.data
+    New.findById body.id, (err, news) ->
+      news.title       = body.title
+      news.descriptions = body.description
+      news.vetrina      = body.vetrina
+      _.each req.files, (data,key)->
+        type = data.mime.replace("image/", "")
+        path = './public/img/news/' + news["_id"]
+        news[key] = type
+        fs.mkdir path, (err) ->
+          fs.copy data.path, path + "/" + key + "." + type, (err) ->
+      news.save()
+      res.send 200
+
 #  app.post '/news', (req, res) ->
 #    body = JSON.parse req.body.data
 #    body.images = []

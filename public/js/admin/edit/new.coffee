@@ -1,12 +1,18 @@
 $(document).ready () ->
 
+  renderImg = () ->
+    if news.images
+      img = "/img/news/" + news["_id"] + "/img." + news["img"]
+      console.log "img", img
+      $("#v-inbg-s").attr("src",img)
+      $("#img-prev-fs-del").show()
+    if news.logo
+      img = "/img/news/" + news["_id"] + "/logo." + news["logo"]
+      $("#v-inbg-im").attr("src",img)
+      $("#logo-prev-fs-del").show()
+  
 
-  $("#v-inp-im").change (e) ->
-    readURILog this
 
-  $("#v-inp-s").change (e) ->
-    readURILogS this
-    
   $("#v-cl-im").click (e) ->
     $("#v-inbg-im").attr("src", "/img/add-bg.png")
     $("#v-inp-im").val("")
@@ -53,34 +59,79 @@ $(document).ready () ->
     $("#title-news").val("")
     $("#dec").val("")
 
+  delImgF = (cb) ->
+    if !delImg
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : brend["_id"], key:"images"}
+        url     : "/tool/admin/edit/new/del/file"
+        success : (brend) ->
+          cb()
+
+  delLogoF = (cb) ->
+    if !delLogo
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : brend["_id"], key:"logo"}
+        url     : "/tool/admin/edit/new/del/file"
+        success : (brend) ->
+          cb()
+
+
   $("#add-new").click (e) ->
-    vetrina = $("#vetrina").is(':checked')
-    title = $("#title-news").val()
-    desc = $("#dec").val()
+    delImgF () ->
+      delLogoF () ->
+        vetrina = $("#vetrina").is(':checked')
+        title = $("#title-news").val()
+        desc = $("#dec").val()
 
-    objSend = {
-        descriptions  : desc
-        vetrina       : vetrina
-        title         : title
-    }
+        objSend = {
+            descriptions  : desc
+            vetrina       : vetrina
+            title         : title
+        }
 
-    logo = ($("#v-inp-im"))[0].files[0]
-    images = ($("#v-inp-s"))[0].files[0]
-    
-    newForm = new FormData()
-    newForm.append("data",JSON.stringify objSend)
-    newForm.append("logo", logo)
-    newForm.append("images", images)
+        logo = ($("#v-inp-im"))[0].files[0]
+        images = ($("#v-inp-s"))[0].files[0]
+        
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify objSend)
+        newForm.append("logo", logo)
+        newForm.append("images", images)
 
-    $.ajax
-      type    : 'POST'
-      data    : newForm
-      url     : "/create/news"
-      cache: false
-      contentType: false
-      processData: false
-      success : (st) ->
-        cleanData()
-        $("#success-new").hide()
-        $("#success-new").fadeIn("slow")
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/news"
+          cache: false
+          contentType: false
+          processData: false
+          success : (st) ->
+            window.location.reload()
+
+
+  $("#logo-prev-fs-del").click (e) ->
+    delLogo = true
+    $("#logo-prev-fs-del").hide()
+    $("#v-inbg-im").attr("src", "/img/add-bg.png")
+        
+  $("#img-prev-fs-del").click (e) ->
+    delImg = true
+    $("#img-prev-fs-del").hide()
+    $("#v-inbg-s").attr("src", "/img/add-bg.png")
+
+
+
+
+
+  delImg  = false
+  delLogo = false
+  news = JSON.parse($("#firstData").attr("news"))
+  
+  
+  renderImg()
 

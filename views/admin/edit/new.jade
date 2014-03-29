@@ -5,6 +5,7 @@ block content
   include ../../navigation
   != js('admin/edit/new')
   != css('admin')
+  input#firstData(type="hidden", news=JSON.stringify(news))
   #admin-cont
     include admin-nav
     
@@ -26,6 +27,7 @@ block content
               input#v-inp-s.small-inp-ck(type="file")
               img#v-inbg-s.small-prev-ck(src="/img/add-bg.png")
               img#v-cl-s.small-del-ck(src="/img/close.png")
+              img#img-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
         tr
           td Изображение для ветрины&nbsp
           td
@@ -33,6 +35,7 @@ block content
               input#v-inp-im.small-inp-ck(type="file")
               img#v-inbg-im.small-prev-ck(src="/img/add-bg.png")
               img#v-cl-im.small-del-ck(src="/img/close.png")
+              img#logo-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
         tr
           td На ветину&nbsp
           td
