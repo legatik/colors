@@ -31,7 +31,10 @@ exports.boot = (app) ->
 
   app.get '/admin/edit/action/:actionId', (req, res) ->
     actionId = req.params.actionId
-    Action.findById actionId , (err, action) ->
+    Action.findById(actionId)
+    .populate("products")
+    .exec (err, action) ->
+      console.log "action",action
       res.render 'admin/edit/action', {title: 'Админ - редактирование акций', user: req.user, action:action}
 
 
@@ -150,8 +153,6 @@ exports.boot = (app) ->
     id = req.body.brend
     key = req.body.key
     New.findById id, (err, news) ->
-      console.log "news", news
-      console.log "path", path
       path = './public/img/news/' + id + "/" + key + "." + news[key]
       rimraf path, (err) ->
         res.send 200

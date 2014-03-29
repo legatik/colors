@@ -10,7 +10,7 @@ action = new Schema
   active      : Boolean
   img         : String
   logo        : String
-  products    : Array
+  products    : [{type: ObjectId, ref: 'Product'}]
   
 Model = mongoose.model 'Action', action
 
