@@ -37,6 +37,12 @@ exports.boot = (app) ->
       console.log "action",action
       res.render 'admin/edit/action', {title: 'Админ - редактирование акций', user: req.user, action:action}
 
+  app.get '/admin/edit/product/:prodId', (req, res) ->
+    prodId = req.params.prodId
+    Product.findById prodId , (err, product) ->
+      res.render 'admin/edit/product', {title: 'Админ - редактирование продукта', user: req.user, prod:product}
+
+
 
   app.get '/admin/edit/new/:newId', (req, res) ->
     newId = req.params.newId
