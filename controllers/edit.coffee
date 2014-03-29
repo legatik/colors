@@ -53,6 +53,25 @@ exports.boot = (app) ->
       news.save()
       res.send 200
 
+
+
+  app.post '/action', (req, res) ->
+    body = JSON.parse req.body.data
+    Action.findById body.id, (err, action) ->
+      action.title       = body.title
+      action.description = body.description
+      action.active      = body.active
+      action.products    = body.products
+      _.each req.files, (data,key)->
+        type = data.mime.replace("image/", "")
+        path = './public/img/actions/' + action["_id"]
+        action[key] = type
+        fs.mkdir path, (err) ->
+          fs.copy data.path, path + "/" + key + "." + type, (err) ->
+      action.save()
+      res.send 200
+
+
 #  app.post '/news', (req, res) ->
 #    body = JSON.parse req.body.data
 #    body.images = []

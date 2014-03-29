@@ -1,12 +1,22 @@
 $(document).ready () ->
 
-  $("#brend-show").click (e) ->
-    $(".form-admin").hide()
-    $("#brend-form").show()
 
-  $("#actin-list").click (e) ->
-    $(".form-admin").hide()
-    $("#action-list-form").show()
+  delImg  = false
+  delLogo = false
+  arrProductAct = []
+
+  renderImg = () ->
+    if action.img
+      img = "/img/actions/" + action["_id"] + "/img." + action["img"]
+      $("#prev-brend").attr("src",img)
+      $("#img-prev-fs-del").show()
+    if action.logo
+      img = "/img/actions/" + action["_id"] + "/logo." + action["logo"]
+      $("#logo-img-breng").attr("src",img)
+      $("#logo-prev-fs-del").show()
+    
+    action.products.forEach (pr) ->
+      arrProductAct.push(pr["_id"])
 
 
   $("#img-breng").change () ->
@@ -49,7 +59,7 @@ $(document).ready () ->
       else
         alert("Такой фармат картинки не поддерживается")
 
-  arrProductAct = []
+  
   cleanData = () ->
     $("#brend-name").val("")
     $("#brend-name").val("")
@@ -98,108 +108,78 @@ $(document).ready () ->
       id = $(@).attr("id")
       arrProductAct = _.without arrProductAct, id 
       $($(@).parent()).remove()
+      
   $("#add-brend").click (e) ->
-    brendName = $("#brend-name").val()
-    desc = $("#brend-desc").val()
-    active = $("#active").is(':checked')
-    objSend = {
-        title       : brendName
-        description : desc
-        active      : active
-        products    : arrProductAct
-    }
-    img  = ($("#img-breng"))[0].files[0]
-    logo = ($("#logo-breng"))[0].files[0]
-    
-    newForm = new FormData()
-    newForm.append("data",JSON.stringify objSend)
-    newForm.append("img", img)
-    newForm.append("logo", logo)
-    
-    
-    $.ajax
-      type    : 'POST'
-      data    : newForm
-      url     : "/create/action"
-      cache: false
-      contentType: false
-      processData: false
-      success : (brend) ->
-        cleanData()
-        $("#success-brend").hide()
-        $("#success-brend").fadeIn("slow")
-        
-# Для списка
-
-
-  $("#start-search-action ").click () ->
-    title = $("#in-action-search").val()
-    findAction(title)
-
-  $("#in-action-search").autocomplete
-    source: (request, response) ->
-      $.ajax
-        url: "/tool/admin/q_action_by_name"
-        data: {title: $("#in-action-search").val()}
-        success: (data) ->
-          response $.map(data, (item) ->
-            label : item.title
-            title : item.title
-          )
-    minLength: 2
-
-
-  renderAction = (actions) ->
-    $("#list-ac-body").empty()
-    actions.forEach (action) ->
-        templateJQ = $("#actListTemplate")
-        template = _.template($(templateJQ[0]).html())
-        $("#list-ac-body").prepend(template({act:action}))
-    addEventList()
-
-  findAction = (title) ->
-    $.ajax
-      type    : 'GET'
-      data    : {title:title}
-      url     : "/tool/admin/q_action_by_name"
-      success : (actions) ->
-        renderAction(actions)
-  
-  addEventList = () ->
-    $(".fn-act").unbind("click")
-    $(".fn-del").unbind("click")
-    $(".fn-act").click (e) ->
-      if confirm("Вы уверенны?")
-        id = ($(@).attr("id")).replace("act-", "")
-        act = $(@).attr("active")
-        data = {
-          id     : id
-          active : act
+    delImgF () ->
+      delLogoF () ->
+        brendName = $("#brend-name").val()
+        desc = $("#brend-desc").val()
+        active = $("#active").is(':checked')
+        objSend = {
+          id          : action["_id"]
+          title       : brendName
+          description : desc
+          active      : active
+          products    : arrProductAct
         }
-        $.ajax
-          type: "POST"
-          url: "/tool/admin/fn_act_action"
-          data: data
-          success: (data) =>
-            if act is "false"
-              $(@).attr("active", "true") 
-              $(@).text("Снять активность")
-              $($($($(@).parent()).parent()).find(".br-st-act")).text("true")
-            else
-              $(@).attr("active", "false") 
-              $(@).text("Aктивировать")
-              $($($($(@).parent()).parent()).find(".br-st-act")).text("false")
-    
-    $(".fn-del").click () ->
-      if confirm("Вы уверенны?")
-        if confirm("Вы точно уверенны? Последствия не обратимы!")
-          id = ($(@).attr("id")).replace("del-", "")
-          $.ajax
-            type: "POST"
-            url: "/tool/admin/del_action"
-            data: {id:id}
-            success: (data) =>
-              $($($(@).parent()).parent()).remove()
-
-  
+        img  = ($("#img-breng"))[0].files[0]
+        logo = ($("#logo-breng"))[0].files[0]
         
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify objSend)
+        newForm.append("img", img)
+        newForm.append("logo", logo)
+        
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/edit/action"
+          cache: false
+          contentType: false
+          processData: false
+          success : (brend) ->
+            window.location.reload()
+
+
+  delImgF = (cb) ->
+    if !delImg
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : action["_id"], key:"img"}
+        url     : "/tool/admin/edit/action/del/file"
+        success : () ->
+          cb()
+
+  delLogoF = (cb) ->
+    if !delLogo
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : action["_id"], key:"logo"}
+        url     : "/tool/admin/edit/action/del/file"
+        success : () ->
+          cb()
+
+
+
+  $("#logo-prev-fs-del").click (e) ->
+    delLogo = true
+    $("#logo-prev-fs-del").hide()
+    $("#logo-img-breng").attr("src", "/img/add-bg.png")
+        
+  $("#img-prev-fs-del").click (e) ->
+    delImg = true
+    $("#img-prev-fs-del").hide()
+    $("#prev-brend").attr("src", "/img/add-bg.png")
+
+
+  action = JSON.parse($("#firstData").attr("action"))
+  
+  
+  renderImg()
+  addEventDel()
+  
+          

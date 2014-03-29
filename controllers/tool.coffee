@@ -158,6 +158,15 @@ exports.boot = (app) ->
         res.send 200
 
 
+  app.post '/admin/edit/action/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    Action.findById id, (err, action) ->
+      path = './public/img/actions/' + id + "/" + key + "." + action[key]
+      rimraf path, (err) ->
+        res.send 200
+
+
 
   delProduct = (product) ->
     path = './public/img/products/' + product["_id"]

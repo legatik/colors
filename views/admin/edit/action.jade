@@ -8,7 +8,7 @@ block content
   #admin-cont
     include admin-nav
     
-
+    input#firstData(type="hidden", action=JSON.stringify(action))
     #brend-form
       table#brend-table(style="display:inline-block")
         tr
@@ -37,6 +37,7 @@ block content
               input#img-breng.small-inp-ck(type="file")
               img#prev-brend.small-prev-ck(src="/img/add-bg.png")
               img#img-prev-close.small-del-ck(src="/img/close.png")
+              img#img-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
             
             
         tr
@@ -46,6 +47,7 @@ block content
               input#logo-breng.small.small-inp-ck(type="file")
               img#logo-img-breng.small-prev-ck(src="/img/add-bg.png")
               img#logo-prev-close.small-del-ck(src="/img/close.png")
+              img#logo-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
             
             
         tr
