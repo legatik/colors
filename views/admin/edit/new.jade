@@ -3,31 +3,14 @@ extends ../../layout
 
 block content
   include ../../navigation
-  != js('admin/new')
+  != js('admin/edit/new')
   != css('admin')
   #admin-cont
     include admin-nav
     
-    button#new-show Добавить новинку
-    button#new-list-btn Список новинок
-
-    #new-list-form.form-admin
-      input#in-new-search
-      button#start-search-new Найти
-      br
-      br
-      table.list-table
-        thead
-          tr
-            td(width=200, style="max-width:200px") Название
-            td(width=100) Ветрина
-            td На ветрину
-            td Удаление
-        tbody#list-new-body
 
 
-
-    #new-form.form-admin
+    #new-form
       //div(style="display: inline-block;")
         h4 Добавьте шаг описания
         table#table-desc.height-tr(style="display:inline-block")
@@ -97,9 +80,7 @@ block content
         <%}%>
       td
         button.fn-del(id!="del-<%=news['_id']%>") Удалить новость
-      td
-        a(href!="/tool/admin/edit/new/<%=news['_id']%>")
-          button Редактировать новость
+
 
   script#stepImg(type="text/template")
     tr(id!="st-tr-im-<%=i%>")

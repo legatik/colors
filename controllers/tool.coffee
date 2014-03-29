@@ -29,6 +29,16 @@ exports.boot = (app) ->
     Brend.findById brendId , (err, brend) ->
       res.render 'admin/edit/brend', {title: 'Админ - редактирование брендов', user: req.user, brend:brend}
 
+  app.get '/admin/edit/action/:actionId', (req, res) ->
+    actionId = req.params.actionId
+    Action.findById actionId , (err, action) ->
+      res.render 'admin/edit/action', {title: 'Админ - редактирование акций', user: req.user, action:action}
+
+
+  app.get '/admin/edit/new/:newId', (req, res) ->
+    newId = req.params.newId
+    New.findById newId , (err, news) ->
+      res.render 'admin/edit/new', {title: 'Админ - редактирование новостей', user: req.user, news:news}
 
   app.get '/admin/q_brend', (req, res) ->
     Brend.find {}, (err, arrBrend) ->

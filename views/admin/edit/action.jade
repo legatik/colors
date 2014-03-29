@@ -3,33 +3,13 @@ extends ../../layout
 
 block content
   include ../../navigation
-  != js('admin/action')
+  != js('admin/edit/action')
   != css('admin')
   #admin-cont
     include admin-nav
     
-    
-    button#brend-show Добавить акцию
-    button#actin-list Список акций
 
-
-    #action-list-form.form-admin
-      input#in-action-search
-      button#start-search-action Найти
-      br
-      br
-      table.list-table
-        thead
-          tr
-            td(width=200, style="max-width:200px") Название
-            td(width=100) Ветрина
-            td На ветрину
-            td Удаление
-        tbody#list-ac-body
-
-
-
-    #brend-form.form-admin
+    #brend-form
       table#brend-table(style="display:inline-block")
         tr
           td Ведите название акции&nbsp
@@ -78,29 +58,7 @@ block content
             span &nbsp Акция успешно добавлена
 
 
-  script#actListTemplate(type="text/template")
-    tr
-      td <%=act.title%>
-      td.br-st-act <%=act.active%>
-      td 
-        <%if(act.active){%>
-        button.fn-act(active="true", id!="act-<%=act['_id']%>") Снять активность
-        <%}else{%>
-        button.fn-act(active="false", id!="act-<%=act['_id']%>") Активировать
-        <%}%>
-      td
-        button.fn-del(id!="del-<%=act['_id']%>") Удалить акцию
-      td
-        a(href!="/tool/admin/edit/action/<%=act['_id']%>")
-          button Редактировать акцию
   script#productTemplate(type="text/template")
     div(style="height: 28px;")
       div.ac-del-prod(id!="<%=id%>") x
       div(style="display:inline-block; margin-left:10px") <%=title%>
-
-  script#stepTemplate(type="text/template")
-    div.small-cont
-      input.step-inp(type="file",id!="step-inp-<%=number%>")
-      img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
-      img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
-
