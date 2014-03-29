@@ -42,7 +42,7 @@ exports.boot = (app) ->
     body = JSON.parse req.body.data
     New.findById body.id, (err, news) ->
       news.title       = body.title
-      news.descriptions = body.description
+      news.descriptions = body.descriptions
       news.vetrina      = body.vetrina
       _.each req.files, (data,key)->
         type = data.mime.replace("image/", "")

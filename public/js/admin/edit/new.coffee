@@ -1,8 +1,11 @@
 $(document).ready () ->
 
+  delImg  = false
+  delLogo = false
+
   renderImg = () ->
     if news.images
-      img = "/img/news/" + news["_id"] + "/img." + news["img"]
+      img = "/img/news/" + news["_id"] + "/images." + news["images"]
       console.log "img", img
       $("#v-inbg-s").attr("src",img)
       $("#img-prev-fs-del").show()
@@ -11,7 +14,11 @@ $(document).ready () ->
       $("#v-inbg-im").attr("src",img)
       $("#logo-prev-fs-del").show()
   
+  $("#v-inp-im").change (e) ->
+    readURILog this
 
+  $("#v-inp-s").change (e) ->
+    readURILogS this
 
   $("#v-cl-im").click (e) ->
     $("#v-inbg-im").attr("src", "/img/add-bg.png")
@@ -65,22 +72,22 @@ $(document).ready () ->
     else
       $.ajax
         type    : 'POST'
-        data    : {brend : brend["_id"], key:"images"}
+        data    : {brend : news["_id"], key:"images"}
         url     : "/tool/admin/edit/new/del/file"
         success : (brend) ->
           cb()
 
   delLogoF = (cb) ->
+    console.log ":delLogo",news    
     if !delLogo
       cb()
     else
       $.ajax
         type    : 'POST'
-        data    : {brend : brend["_id"], key:"logo"}
+        data    : {brend : news["_id"], key:"logo"}
         url     : "/tool/admin/edit/new/del/file"
         success : (brend) ->
           cb()
-
 
   $("#add-new").click (e) ->
     delImgF () ->
@@ -90,9 +97,10 @@ $(document).ready () ->
         desc = $("#dec").val()
 
         objSend = {
-            descriptions  : desc
-            vetrina       : vetrina
-            title         : title
+          id            : news["_id"]
+          descriptions  : desc
+          vetrina       : vetrina
+          title         : title
         }
 
         logo = ($("#v-inp-im"))[0].files[0]
@@ -106,7 +114,7 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/create/news"
+          url     : "/edit/new"
           cache: false
           contentType: false
           processData: false
@@ -128,8 +136,7 @@ $(document).ready () ->
 
 
 
-  delImg  = false
-  delLogo = false
+
   news = JSON.parse($("#firstData").attr("news"))
   
   
