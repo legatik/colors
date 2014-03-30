@@ -15,7 +15,7 @@ block content
         tr
           td Выберите название&nbsp
           td
-            input#brend-title
+            input#brend-title(value=prod.title)
         tr
           td Выберите бренд&nbsp
           td
@@ -23,49 +23,52 @@ block content
         tr
           td Ведите краткое описание&nbsp
           td
-            textarea#brend-min-disc.textarea-add-m
+            textarea#brend-min-disc.textarea-add-m #{prod.minOpisanie}
         tr
           td Объем&nbsp
           td
-            input(type="number")#brend-obem
+            input(type="number", value=prod.obem)#brend-obem
         tr
           td Вес&nbsp
           td
-            input(type="number")#brend-ves
+            input(type="number", value=prod.ves)#brend-ves
         tr
           td ID&nbsp
           td
-            input(type="number")#brend-id
+            input(type="number", value=prod.id)#brend-id
         tr
           td Старая цена&nbsp
           td
-            input(type="number")#brend-old-cost
+            input(type="number", value=prod.oldCost)#brend-old-cost
         tr
           td Цена&nbsp
           td
-            input(type="number")#brend-cost
+            input(type="number", value=prod.cost)#brend-cost
         tr
           td Описание&nbsp
           td
-            textarea#brend-desc.textarea-add-m
+            textarea#brend-desc.textarea-add-m #{prod.opisanie}
         tr
           td Применение&nbsp
           td
-            textarea#brend-prim.textarea-add-m
+            textarea#brend-prim.textarea-add-m #{prod.primenenie}
         tr
           td На ветрину&nbsp
           td
-            input#vetrina(type="checkbox")
+            - if(prod.vetrina)
+              input#vetrina(type="checkbox", checked="checked")
+            - if(!prod.vetrina)
+              input#vetrina(type="checkbox")
         tr
           td Осталось на складе&nbsp
           td
-            input#ostatok(type="number")
+            input#ostatok(type="number", value=prod.ostatok)
         tr
           td 
             span Оттенок/вид&nbsp
             div через запятую без пробела&nbsp
           td
-            textarea#prod-vid.textarea-add-m
+            textarea#prod-vid.textarea-add-m #{prod.vid}
         tr
           td Изображение оттенок/вид&nbsp
           td
