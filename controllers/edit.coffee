@@ -76,7 +76,7 @@ exports.boot = (app) ->
   delStepImg = (prod, body, cb) ->
       newPicArr = []
       prod.picture.forEach (nameS)->
-         body.product.withoutImg.forEach (nameN) ->
+        body.product.withoutImg.forEach (nameN) ->
           if nameN == nameS
             path = './public/img/products/' + prod["_id"] + "/" + nameN
             rimraf path, (err) ->
@@ -84,7 +84,8 @@ exports.boot = (app) ->
             newPicArr.push nameS
       prod.picture = []
       prod.picture = newPicArr
-      cb(prod)
+      prod.save () ->
+        cb(prod)
         
 #    newFace = new Face(body.type)
 #    newProd = Product(body.product)
