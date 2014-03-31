@@ -191,6 +191,26 @@ $(document).ready () ->
           $($item).click() if display isnt "none"
           i++
 
+
+
+      renderImg = () ->
+        console.log "prod.imgVid", prod.imgVid
+        if prod.imgVid
+          img = "/img/products/" + prod["_id"] + "/vid." + prod["imgVid"]
+          $("#tone-prev").attr("src",img)
+          $("#vid-tone-fs-del").show()
+       
+        prod.picture.forEach (item, index) ->
+          template = _.template(jQuery('#stepEditTemplate').html())
+          data = 
+            id     : prod["_id"]
+            name   : item
+            number : index 
+          $("#im-cont-step").append(template({data:data}))
+        template2 = _.template(jQuery('#stepTemplate').html())
+        $("#im-cont-step").append(template2({number:0}))
+        addEvent()
+
       prod = JSON.parse($("#firstData").val())
       typeProd = JSON.parse($("#firstData").attr("typeProd"))
       brendArr.forEach (brend) ->
@@ -204,8 +224,8 @@ $(document).ready () ->
       $("option[value='" + typeProd.type + "']").attr("selected", true)
       renderType()
       selectFirstDate()
-
-
+      renderImg()
+  
 
 #      for picture
 
