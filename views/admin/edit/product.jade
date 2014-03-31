@@ -9,7 +9,7 @@ block content
     include admin-nav    
 
 
-
+    input#firstData(type="hidden", value=JSON.stringify(prod), typeProd=JSON.stringify(type))
     #product-form.form-admin(style="display:block")
       table#add-dish-table(style="display:inline-block")
         tr

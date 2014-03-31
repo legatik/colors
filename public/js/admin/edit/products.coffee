@@ -4,6 +4,7 @@ $(document).ready () ->
     url     : "/tool/admin/q_brend"
     success : (brendArr) ->
 
+
       renderType = () ->
         checkType = $("#gl-product-tip").val()
         $(".add-param").remove()
@@ -12,6 +13,21 @@ $(document).ready () ->
         template = _.template($(templateJQ[0]).html())
         $("#add-dish-table").append(template())
         addEventOnProductTip()
+
+      selectFirstDate = () ->
+        $("option[value='" + typeProd.data.type + "']").attr("selected", true)
+        $("option[value='" + typeProd.data.type + "']").click()
+        $("option[value='" + typeProd.data.podType + "']").attr("selected", true)
+        switch typeProd.type
+          when "face"
+            typeProd.data.kozha.forEach (key) ->
+              $("input[value='" + key + "']").attr("checked", true)
+            typeProd.data.nesovershenstva.forEach (key) ->
+              $("input[value='" + key + "']").attr("checked", true)
+          when "body"
+            typeProd.data.nesovershenstva.forEach (key) ->
+              $("input[value='" + key + "']").attr("checked", true)
+
 
       $("#gl-product-tip").click () ->
         renderType()
@@ -24,16 +40,6 @@ $(document).ready () ->
         $(".form-admin").hide()
         $("#product-list-form").show()
 
-      $("#product-show").click (e) ->
-        $(".form-admin").hide()
-        $("#product-form").show()
-        $("#brend-select").empty()
-        brendArr.forEach (brend) ->
-          $option = $("<option/>")
-          $option = $($option).val(brend["_id"])
-          $option = $($option).text(brend.title)
-          $("#brend-select").prepend($option)
-        renderType()
 
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
@@ -185,6 +191,21 @@ $(document).ready () ->
           $($item).click() if display isnt "none"
           i++
 
+      prod = JSON.parse($("#firstData").val())
+      typeProd = JSON.parse($("#firstData").attr("typeProd"))
+      brendArr.forEach (brend) ->
+        $option = $("<option/>")
+        $option = $($option).val(brend["_id"])
+        $option = $($option).text(brend.title)
+        if brend["_id"] == prod.brend
+          $($option).attr("selected", true)
+        $("#brend-select").prepend($option)
+
+      $("option[value='" + typeProd.type + "']").attr("selected", true)
+      renderType()
+      selectFirstDate()
+
+
 
 #      for picture
 
@@ -235,81 +256,5 @@ $(document).ready () ->
     $("#pic-tone").val("")
     $("#tone-prev").attr "src", "/img/add-bg.png"
     $("#del-img-tone").hide()
-
-
-# Для списка продуктов
-
-
-
-
-  $("#start-search-prod ").click () ->
-    title = $("#in-prod-search").val()
-    findProd(title)
-
-  $("#in-prod-search").autocomplete
-    source: (request, response) ->
-      $.ajax
-        url: "/tool/admin/q_prod_by_name"
-        data: {title: $("#in-prod-search").val()}
-        success: (data) ->
-          response $.map(data, (item) ->
-            label : item.title
-            title : item.title
-          )
-    minLength: 2
-
-
-  renderProd = (products) ->
-    $("#list-pr-body").empty()
-    products.forEach (product) ->
-        templateJQ = $("#prodListTemplate")
-        template = _.template($(templateJQ[0]).html())
-        data = (new moment(product.dateAdding)).format("DD/MM/YYYY")
-        $("#list-pr-body").prepend(template({prod:product,data:data}))
-    addEventList()
-
-  findProd = (title) ->
-    $.ajax
-      type    : 'GET'
-      data    : {title:title}
-      url     : "/tool/admin/q_prod_by_name"
-      success : (brends) ->
-        renderProd(brends)
-  
-  addEventList = () ->
-    $(".fn-act").unbind("click")
-    $(".fn-del").unbind("click")
-    $(".fn-act").click (e) ->
-      if confirm("Вы уверенны?")
-        id = ($(@).attr("id")).replace("vet-", "")
-        act = $(@).attr("active")
-        data = {
-          id     : id
-          active : act
-        }
-        $.ajax
-          type: "POST"
-          url: "/tool/admin/fn_vet_prod"
-          data: data
-          success: (data) =>
-            if act is "false"
-              $(@).attr("active", "true") 
-              $(@).text("Снять активность")
-              $($($($(@).parent()).parent()).find(".br-st-act")).text("true")
-            else
-              $(@).attr("active", "false") 
-              $(@).text("Aктивировать")
-              $($($($(@).parent()).parent()).find(".br-st-act")).text("false")
-    
-    $(".fn-del").click () ->
-      if confirm("Вы уверенны?")
-        if confirm("Вы точно уверенны? Последствия не обратимы!")
-          id = ($(@).attr("id")).replace("del-", "")
-          $.ajax
-            type: "POST"
-            url: "/tool/admin/del_product"
-            data: {id:id}
-            success: (data) =>
-              $($($(@).parent()).parent()).remove()
 
 

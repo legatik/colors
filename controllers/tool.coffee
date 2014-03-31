@@ -40,7 +40,8 @@ exports.boot = (app) ->
   app.get '/admin/edit/product/:prodId', (req, res) ->
     prodId = req.params.prodId
     Product.findById prodId , (err, product) ->
-      res.render 'admin/edit/product', {title: 'Админ - редактирование продукта', user: req.user, prod:product}
+      checkType product, {edit:true}, (type) ->
+        res.render 'admin/edit/product', {title: 'Админ - редактирование продукта', user: req.user, prod:product, type:type}
 
 
 
@@ -189,11 +190,30 @@ exports.boot = (app) ->
       body.remove() if body
       delProduct(product)
       
-  checkType = (product,param) ->
+
+  editFace = (product, cb) ->
+    Face.findOne {_id: product.isFace}, (err, face) ->
+      type =
+        type : "face"
+        data : face
+      cb(type) if face
+
+  editBody = (product, cb) ->
+    Body.findOne {_id: product.isBody}, (err, body) ->
+      type =
+        type : "body"
+        data : body
+      cb(type) if body
+      
+      
+      
+  checkType = (product, param, cb) ->
     if product.isFace
       console.log "isface"
       delIsface(product) if param.del
+      editFace(product, cb)  if param.edit
     if product.isBody
       console.log "isbody"
       delIsbody(product) if param.del
+      editBody(product, cb) if param.edit
 
