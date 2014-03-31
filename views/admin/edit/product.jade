@@ -87,7 +87,7 @@ block content
         div(style="text-align:center;height:35px")
           b Выберите картинки товара
       div(style="margin-top:8px")
-        button#add-product-btn Добавить продукт
+        button#add-product-btn Изменить продукт
   include ../template/face
   include ../template/body
 
@@ -95,7 +95,7 @@ block content
   script#stepEditTemplate(type="text/template")
     div.small-cont
       img.step-img-e(id!="step-img-e-<%=data.number%>",src!="/img/products/<%=data.id%>/<%=data.name%>")
-      img.del-e.del-step-e(src="/img/close.png", id !="del-step-e-<%=data.number%>")
+      img.del-e.del-step-e(src="/img/close.png", id !="del-e-<%=data.name%>")
 
   script#stepTemplate(type="text/template")
     div.small-cont

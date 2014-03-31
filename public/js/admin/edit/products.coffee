@@ -1,4 +1,5 @@
 $(document).ready () ->
+  withoutImg = []
   $.ajax
     type    : 'GET'
     url     : "/tool/admin/q_brend"
@@ -27,7 +28,7 @@ $(document).ready () ->
           when "body"
             typeProd.data.nesovershenstva.forEach (key) ->
               $("input[value='" + key + "']").attr("checked", true)
-
+        
 
       $("#gl-product-tip").click () ->
         renderType()
@@ -73,10 +74,10 @@ $(document).ready () ->
 
         switch checkType
           when "face"
-              createProdFace(productObj, imgArr, vidImg)
+              editProdFace(productObj, imgArr, vidImg)
         switch checkType
           when "body"
-              createProdBody(productObj, imgArr, vidImg)
+              editProdBody(productObj, imgArr, vidImg)
 
 
       addEventOnProductTip = () ->
@@ -92,7 +93,7 @@ $(document).ready () ->
             $(idPodTip).show()
 
 
-      createProdBody = (productObj, imgArr, vidImg) ->
+      editProdBody = (productObj, imgArr, vidImg) ->
         nesArr = []
         nesInp = $("#body-nesovershenstva").find("input[type='checkbox']:checked")
         if nesInp.length
@@ -125,7 +126,7 @@ $(document).ready () ->
             alert("Добавлен!")
             clearProduct()
 
-      createProdFace = (productObj, imgArr, vidImg) ->
+      editProdFace = (productObj, imgArr, vidImg) ->
         
         kozhaArr = []
         kozhaInp = $("#face-koza").find("input[type='checkbox']:checked")
@@ -160,14 +161,13 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/create/face"
+          url     : "/edit/face"
           cache: false
           contentType: false
           processData: false
           success : (data) ->
-            alert("Добавлен!")
-            clearProduct()
-
+            window.location.reolad()
+            
       clearProduct = () ->
         $("#prod-vid").val('')
         $("#brend-title").val('')
@@ -191,8 +191,14 @@ $(document).ready () ->
           $($item).click() if display isnt "none"
           i++
 
-
-
+      addEventE = () ->
+        $(".del-step-e").unbind("click")
+        $(".del-step-e").click () ->
+          name = $(@).attr("id")
+          name = name.replace("del-e-", "")
+          withoutImg.push(name)
+          $($(@).parent()).remove()
+          
       renderImg = () ->
         console.log "prod.imgVid", prod.imgVid
         if prod.imgVid
@@ -210,6 +216,7 @@ $(document).ready () ->
         template2 = _.template(jQuery('#stepTemplate').html())
         $("#im-cont-step").append(template2({number:0}))
         addEvent()
+        addEventE()
 
       prod = JSON.parse($("#firstData").val())
       typeProd = JSON.parse($("#firstData").attr("typeProd"))
@@ -226,6 +233,8 @@ $(document).ready () ->
       selectFirstDate()
       renderImg()
   
+      
+
 
 #      for picture
 
