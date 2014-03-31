@@ -70,10 +70,10 @@ exports.boot = (app) ->
                 product.imgVid = type
             else
                 fName = Number(new Date())
-                nameFile = fName + "." + type
+                nameFile = fName + key + "." + type
                 product.picture.push(nameFile)
             fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + fName + "." + type, (err) ->
+              fs.copy data.path, path + "/" + nameFile, (err) ->
         product.save()
         
   app.post '/body', (req, res) ->
@@ -91,9 +91,9 @@ exports.boot = (app) ->
                 fName = "vid"
                 product.imgVid = type
             else
-                fName = Number(new Date())
-                nameFile = fName + "." + type
+                fName = Number(new Date()) 
+                nameFile = fName + key + "." + type
                 product.picture.push(nameFile)
             fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + fName + "." + type, (err) ->
+              fs.copy data.path, path + "/" + nameFile, (err) ->
         product.save()
