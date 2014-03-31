@@ -41,7 +41,7 @@ block content
         .item.item-vetrina
           - each item in itemArr
             .prod
-              img(src !="../img/products/#{item['_id']}/0.#{item.picture[0]}", width="124px", height="144px")
+              img(src !="../img/products/#{item['_id']}/#{item.picture[0]}", width="124px", height="144px")
               .title #{item.title}
               .descr #{item.minOpisanie}
               .old-price #{item.oldCost}

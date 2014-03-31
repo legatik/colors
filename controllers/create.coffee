@@ -68,7 +68,8 @@ exports.boot = (app) ->
             if key == "vid"
                 product.imgVid = type
             else
-                product.picture.push(type)
+                nameFile = key + "." + type
+                product.picture.push(nameFile)
             fs.mkdir path, (err) ->
               fs.copy data.path, path + "/" + key + "." + type, (err) ->
         product.save()
@@ -87,7 +88,8 @@ exports.boot = (app) ->
             if key == "vid"
                 product.imgVid = type
             else
-                product.picture.push(type)
+                nameFile = key + "." + type
+                product.picture.push(nameFile)
             fs.mkdir path, (err) ->
               fs.copy data.path, path + "/" + key + "." + type, (err) ->
         product.save()

@@ -7,7 +7,7 @@ block content
     .catalog Каталог
     .product-cont
       .left
-        img.product-img(src!="../img/products/"+product['_id']+"/1."+product.picture[1]+"", width="353px",height="353px")
+        img.product-img(src!="../img/products/"+product['_id']+"/"+product.picture[0]+"", width="353px",height="353px")
       .right
         .title #{product.title}
         .short-descr #{product.minOpisanie}
