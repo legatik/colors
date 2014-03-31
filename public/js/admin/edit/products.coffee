@@ -46,6 +46,8 @@ $(document).ready () ->
         vidString = $("#prod-vid").val()
         vidArr = vidString.split(",")
         productObj =
+          withoutImg       : withoutImg
+          findId           : prod["_id"]
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
           obem             : $("#brend-obem").val()
@@ -102,6 +104,7 @@ $(document).ready () ->
         else
           nesArr.push("body-nes-net") 
         type =
+          id              : prod["isBody"]
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           nesovershenstva : nesArr
@@ -118,7 +121,7 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/create/body"
+          url     : "/edit/body"
           cache: false
           contentType: false
           processData: false
@@ -145,6 +148,7 @@ $(document).ready () ->
           nesArr.push("face-nes-net")
 
         type =
+          id              : prod["isFace"]
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           kozha           : kozhaArr
@@ -152,6 +156,9 @@ $(document).ready () ->
         data =
           product : productObj
           type    : type
+
+
+        console.log "data", data
 
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
