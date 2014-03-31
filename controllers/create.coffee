@@ -66,12 +66,14 @@ exports.boot = (app) ->
             type = data.mime.replace("image/", "")
             path = './public/img/products/' + product["_id"]
             if key == "vid"
+                fName = "vid"
                 product.imgVid = type
             else
-                nameFile = key + "." + type
+                fName = Number(new Date())
+                nameFile = fName + "." + type
                 product.picture.push(nameFile)
             fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + key + "." + type, (err) ->
+              fs.copy data.path, path + "/" + fName + "." + type, (err) ->
         product.save()
         
   app.post '/body', (req, res) ->
@@ -86,10 +88,12 @@ exports.boot = (app) ->
             type = data.mime.replace("image/", "")
             path = './public/img/products/' + product["_id"]
             if key == "vid"
+                fName = "vid"
                 product.imgVid = type
             else
-                nameFile = key + "." + type
+                fName = Number(new Date())
+                nameFile = fName + "." + type
                 product.picture.push(nameFile)
             fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + key + "." + type, (err) ->
+              fs.copy data.path, path + "/" + fName + "." + type, (err) ->
         product.save()

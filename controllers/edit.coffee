@@ -2,6 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
+rimraf = require "rimraf"
 
 {User, Product, Face, Brend, Body, New, Action} = db.models
 
@@ -63,12 +64,27 @@ exports.boot = (app) ->
   app.post '/face', (req, res) ->
     body = JSON.parse req.body.data
     Product.findById body.product.findId, (err, prod) ->
+      delStepImg prod, body, (prodUp) ->
+        console.log "prodUp", prodUp
+            
+            
+            
+#      Face.findById body.type.id, (err, face) ->
 
-    
-    
-      Face.findById body.type.id, (err, face) ->
-        console.log "face", face
-        console.log "prod", prod
+
+
+  delStepImg = (prod, body, cb) ->
+      newPicArr = []
+      prod.picture.forEach (nameS)->
+         body.product.withoutImg.forEach (nameN) ->
+          if nameN == nameS
+            path = './public/img/products/' + prod["_id"] + "/" + nameN
+            rimraf path, (err) ->
+          else
+            newPicArr.push nameS
+      prod.picture = []
+      prod.picture = newPicArr
+      cb(prod)
         
 #    newFace = new Face(body.type)
 #    newProd = Product(body.product)
