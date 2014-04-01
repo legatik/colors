@@ -16,9 +16,9 @@ $(document).ready () ->
         addEventOnProductTip()
 
       selectFirstDate = () ->
-        $("option[value='" + typeProd.data.type + "']").attr("selected", true)
+        $("#product-tip").val(typeProd.data.type)
         $("option[value='" + typeProd.data.type + "']").click()
-        $("option[value='" + typeProd.data.podType + "']").attr("selected", true)
+#        $("option[value='" + typeProd.data.podType + "']").attr("selected", true)
         switch typeProd.type
           when "face"
             typeProd.data.kozha.forEach (key) ->
@@ -234,7 +234,8 @@ $(document).ready () ->
           $($option).attr("selected", true)
         $("#brend-select").prepend($option)
 
-      $("option[value='" + typeProd.type + "']").attr("selected", true)
+#      $("option[value='" + typeProd.type + "']").attr("selected", true)
+      $("#gl-product-tip").val(typeProd.type)
       renderType()
       selectFirstDate()
       renderImg()
