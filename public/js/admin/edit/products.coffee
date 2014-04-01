@@ -126,8 +126,7 @@ $(document).ready () ->
           contentType: false
           processData: false
           success : (data) ->
-            alert("Добавлен!")
-            clearProduct()
+            window.location.reload()
 
       editProdFace = (productObj, imgArr, vidImg) ->
         
@@ -173,7 +172,7 @@ $(document).ready () ->
           contentType: false
           processData: false
           success : (data) ->
-            window.location.reolad()
+            window.location.reload()
             
       clearProduct = () ->
         $("#prod-vid").val('')

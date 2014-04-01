@@ -66,7 +66,7 @@ exports.boot = (app) ->
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
         console.log "prodUp", prodUp
-            
+        res.send 200
             
             
 #      Face.findById body.type.id, (err, face) ->
@@ -76,12 +76,14 @@ exports.boot = (app) ->
   delStepImg = (prod, body, cb) ->
       newPicArr = []
       prod.picture.forEach (nameS)->
+        check = true
         body.product.withoutImg.forEach (nameN) ->
           if nameN == nameS
+            check = false
             path = './public/img/products/' + prod["_id"] + "/" + nameN
             rimraf path, (err) ->
-          else
-            newPicArr.push nameS
+        newPicArr.push nameS if check
+      
       prod.picture = []
       prod.picture = newPicArr
       prod.save () ->
