@@ -68,7 +68,7 @@ exports.boot = (app) ->
             if key == "vid"
                 fName = "vid"
                 product.imgVid = type
-                nameFile = fName + key + "." + type
+                nameFile = fName  + "." + type
             else
                 fName = Number(new Date())
                 nameFile = fName + key + "." + type
@@ -91,7 +91,7 @@ exports.boot = (app) ->
             if key == "vid"
                 fName = "vid"
                 product.imgVid = type
-                nameFile = fName + key + "." + type
+                nameFile = fName  + "." + type
             else
                 fName = Number(new Date()) 
                 nameFile = fName + key + "." + type
