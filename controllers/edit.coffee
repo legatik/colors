@@ -65,13 +65,21 @@ exports.boot = (app) ->
     body = JSON.parse req.body.data
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
-        console.log "prodUp", prodUp
-        res.send 200
+        updateProd prodUp, body, (prodUp) ->
+          res.send 200
             
             
 #      Face.findById body.type.id, (err, face) ->
 
 
+  updateProd = (prod, body, cb) ->
+    console.log "prod", prod
+    console.log "_____________________________-"
+    console.log "body", body.product
+    cb()
+  
+  
+  
 
   delStepImg = (prod, body, cb) ->
       newPicArr = []
