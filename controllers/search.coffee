@@ -41,25 +41,32 @@ exports.boot = (app) ->
 
   app.post '/filter/body', (req, res) ->
     data = req.body
+    skip = data.skip
     Body.find {}, (err, bodys) ->
       ids = getIds(bodys)
       product_filter = getProductFilter(data.product, ids, 'isBody')
       sort = getSort(data.product)
       Product.find(product_filter)
+      .limit(24)
+      .skip(skip)
       .sort(sort)
       .exec (err, products) ->
         res.send products
 
   app.post '/filter/face', (req, res) ->
     data = req.body
+    skip = data.skip
     special_filter = getFilter(data.special)
     Face.find special_filter, (err, faces) ->
       ids = getIds(faces)
       product_filter = getProductFilter(data.product, ids, 'isFace')
       sort = getSort(data.product)
       Product.find(product_filter)
+      .limit(24)
+      .skip(skip)
       .sort(sort)
       .exec (err, products) ->
+        console.log "products", products.length
         res.send products
 
   app.post '/productByBrend', (req, res) ->

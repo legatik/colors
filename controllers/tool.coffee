@@ -217,3 +217,10 @@ exports.boot = (app) ->
       delIsbody(product) if param.del
       editBody(product, cb) if param.edit
 
+
+#  app.get '/updatecost', (req, res) ->
+#    Product.find {}, (err, pr) ->
+#      pr.forEach (p) ->
+#        p.cost = 100
+#        p.save()
+    
