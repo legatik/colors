@@ -46,6 +46,7 @@ $(document).ready () ->
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
         vidArr = vidString.split(",")
+        vidArr = [] if vidArr.length is 1 and vidArr[0] is ""
         productObj =
           withoutImg       : withoutImg
           findId           : prod["_id"]
