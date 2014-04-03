@@ -76,7 +76,6 @@ $(document).ready () ->
       success : (products) =>
         @inProgress = false
         skip = skip + 24
-        console.log "skip", skip
         renderResults(products, scrollWindow)
 
 

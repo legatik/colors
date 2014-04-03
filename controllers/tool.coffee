@@ -224,3 +224,15 @@ exports.boot = (app) ->
 #        p.cost = 100
 #        p.save()
     
+    
+#  app.get '/updateact', (req, res) ->
+#    Action.findById "5336fb66bd0431571f000001", (err, action) ->
+#      Product.find {}, (err, prods) ->
+#        prods.forEach (p) ->
+#          console.log "s", p["_id"]
+#          action.products.push(p["_id"])
+#        console.log "action",action
+#        action.save()
+    
+    
+    

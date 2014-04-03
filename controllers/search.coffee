@@ -86,13 +86,15 @@ exports.boot = (app) ->
   app.post '/productByAction', (req, res) ->
     actionId = req.body.key
     data =  req.body.filter
+    skip = req.body.skip
     product_filter = getProductFilter(data)
     sort = getSort(data)
     Action.findById actionId, (err, action) ->
       product_filter._id = {$in: action.products}
       Product.find(product_filter)
+      .limit(24)
+      .skip(skip)
       .sort(sort)
       .exec (err, products) ->
-        console.log "products", products.length
         res.send products
 
