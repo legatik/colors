@@ -72,10 +72,13 @@ exports.boot = (app) ->
   app.post '/productByBrend', (req, res) ->
     brendId = req.body.key
     data =  req.body.filter
+    skip = req.body.skip
     product_filter = getProductFilter(data)
     product_filter.brend = brendId
     sort = getSort(data)
     Product.find(product_filter)
+    .limit(24)
+    .skip(skip)
     .sort(sort)
     .exec (err, products) ->
       res.send products
