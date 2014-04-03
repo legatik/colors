@@ -189,6 +189,11 @@ ul.navigation
         font-size: 11px
         width: 155px
         text-align: center
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       .old-price
          text-align: end
          color: #333333
@@ -589,7 +594,7 @@ ul.navigation
 
 
 .right-side
-  margin-left: 55px
+  margin-left: 50px
   .brand-info
     font-size: 17px
     color: #231F20
@@ -689,11 +694,18 @@ ul.navigation
         color: #231F20
         font-size: 11px
         width: 155px
+        height: 48px
         text-align: center
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       .old-price
          text-align: end
          color: #333333
          font-size: 15px
+         height: 18px
          text-decoration: line-through
          font-family: CenturyGothic-Bold
       .new-price
@@ -966,6 +978,7 @@ ul.navigation
       h3
         font-size: 15px
         width: 480px
+        text-align: justify
     .pic
       img
         border: 1px solid #000

@@ -7,7 +7,7 @@ block content
   != css('admin')
   #admin-cont
     include admin-nav
-    
+
     button#new-show Добавить новинку
     button#new-list-btn Список новинок
 
@@ -20,8 +20,8 @@ block content
         thead
           tr
             td(width=200, style="max-width:200px") Название
-            td(width=100) Ветрина
-            td На ветрину
+            td(width=100) Витрина
+            td На витрину
             td Удаление
         tbody#list-new-body
 
@@ -56,13 +56,13 @@ block content
           tr
             td Название&nbsp
             td
-              input#title-news 
+              input#title-news
           tr
             td На ветину&nbsp
             td
-              input#vetrina(type="checkbox")      
+              input#vetrina(type="checkbox")
           tr
-            td Изображение для ветрины&nbsp
+            td Изображение для витрины&nbsp
             td
               div.small-cont-ck
                 input#v-inp-im.small-inp-ck(type="file")
@@ -78,7 +78,7 @@ block content
     tr
       td <%=news.title%>
       td.br-st-act <%=news.vetrina%>
-      td 
+      td
         <%if(news.vetrina){%>
         button.fn-act(active="true", id!="act-<%=news['_id']%>") Снять активность
         <%}else{%>

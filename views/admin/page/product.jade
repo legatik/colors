@@ -6,8 +6,8 @@ block content
   != js('admin/products')
   != css('admin')
   #admin-cont
-    include admin-nav    
-    
+    include admin-nav
+
     button#product-show Добавить продукт
     button#product-list Список продуктов
 
@@ -21,8 +21,8 @@ block content
         thead
           tr
             td(width=200, style="max-width:200px") Название
-            td(width=100) Ветрина
-            td На ветрину
+            td(width=100) Витрина
+            td На витрину
             td Удаление
             td Дата добавления
         tbody#list-pr-body
@@ -71,7 +71,7 @@ block content
           td
             textarea#brend-prim.textarea-add-m
         tr
-          td На ветрину&nbsp
+          td На витрину&nbsp
           td
             input#vetrina(type="checkbox")
         tr
@@ -79,7 +79,7 @@ block content
           td
             input#ostatok(type="number")
         tr
-          td 
+          td
             span Оттенок/вид&nbsp
             div через запятую без пробела&nbsp
           td
@@ -114,7 +114,7 @@ block content
     tr
       td <%=prod.title%>
       td.br-st-act <%=prod.vetrina%>
-      td 
+      td
         <%if(prod.vetrina){%>
         button.fn-act(active="true", id!="vet-<%=prod['_id']%>") Снять активность
         <%}else{%>
@@ -131,5 +131,4 @@ block content
       input.step-inp(type="file",id!="step-inp-<%=number%>")
       img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
       img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
-
 

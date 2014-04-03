@@ -12,6 +12,7 @@ exports.boot = (app) ->
 
   app.post '/brend', (req, res) ->
     body = JSON.parse req.body.data
+    console.log "rererrer", body
     Brend.findById body.id, (err, brend) ->
       brend.title       = body.title
       brend.description = body.description
@@ -67,9 +68,9 @@ exports.boot = (app) ->
       delStepImg prod, body, (prodUp) ->
         updateProd prodUp, body, req, (prodUp2) ->
           deleteOldType prodUp2, (prodUp3) ->
-            
+
 #            Непосредственно для типа
-            
+
             newBody = new Body(body.type)
             newBody.save (err, body) ->
               prodUp3.isBody = body["_id"]
@@ -83,9 +84,9 @@ exports.boot = (app) ->
       delStepImg prod, body, (prodUp) ->
         updateProd prodUp, body, req, (prodUp2) ->
           deleteOldType prodUp2, (prodUp3) ->
-            
+
 #            Непосредственно для типа
-            
+
             newFace = new Face(body.type)
             newFace.save (err, face) ->
               console.log "HEARE@@@@@@@@@@@@@@@"
@@ -141,9 +142,9 @@ exports.boot = (app) ->
           fs.copy data.path, path + "/" + nameFile, (err) ->
     prod.save () ->
         cb(prod)
-  
-  
-  
+
+
+
 
   delStepImg = (prod, body, cb) ->
       newPicArr = []
@@ -159,7 +160,7 @@ exports.boot = (app) ->
       prod.picture = newPicArr
       prod.save () ->
         cb(prod)
-        
+
 #    newFace = new Face(body.type)
 #    newProd = Product(body.product)
 #    newFace.save (err, face) ->
@@ -176,7 +177,7 @@ exports.boot = (app) ->
 #            fs.mkdir path, (err) ->
 #              fs.copy data.path, path + "/" + key + "." + type, (err) ->
 #        product.save()
-#        
+#
 #  app.post '/body', (req, res) ->
 #    body = JSON.parse req.body.data
 #    newBody = new Body(body.type)
@@ -195,3 +196,4 @@ exports.boot = (app) ->
 #            fs.mkdir path, (err) ->
 #              fs.copy data.path, path + "/" + key + "." + type, (err) ->
 #        product.save()
+

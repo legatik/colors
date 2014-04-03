@@ -9,19 +9,19 @@ $(document).ready () ->
       img = "/img/brends/" + brend["_id"] + "/logo." + brend["logo"]
       $("#logo-img-breng").attr("src",img)
       $("#logo-prev-fs-del").show()
-  
+
   $("#img-breng").change () ->
     readURLImg(@)
-         
+
   $("#logo-breng").change () ->
     readURlLogo(@)
-          
-          
+
+
   $("#img-prev-close").click () ->
     $("#img-breng").val('')
     $("#prev-brend").attr "src", "/img/add-bg.png"
     $("#img-prev-close").hide()
-          
+
 
   $("#logo-prev-close").click () ->
     $("#logo-breng").val('')
@@ -31,7 +31,7 @@ $(document).ready () ->
 
   $("#addDescStep").click () ->
     $("#brendDescCont").append("<textarea class='textarea-add-m3 brend-desc add-step'/>")
-          
+
   readURlLogo = (input) =>
     if input.files and input.files[0]
       if input.files[0].type.indexOf("image") != -1
@@ -42,7 +42,7 @@ $(document).ready () ->
           $("#logo-prev-close").show()
       else
         alert("Такой фармат картинки не поддерживается")
-          
+
   readURLImg = (input) =>
     if input.files and input.files[0]
       if input.files[0].type.indexOf("image") != -1
@@ -67,13 +67,13 @@ $(document).ready () ->
     $("#logo-prev-close").hide()
     $(".add-step").remove()
     $(".brend-desc").val('')
-    
+
   $("#add-brend").click (e) ->
     delImgF () ->
       delLogoF () ->
         brendName = $("#brend-name").val()
         desc = []
-        
+
         arrDesc = $(".brend-desc")
         arrDesc.each (i, el) ->
           val = $(el).val()
@@ -86,31 +86,31 @@ $(document).ready () ->
           description : desc
           active      : active
         }
-        
+
         img  = ($("#img-breng"))[0].files[0]
         logo = ($("#logo-breng"))[0].files[0]
-        
+
         newForm = new FormData()
         newForm.append("data",JSON.stringify objSend)
         newForm.append("img", img)
         newForm.append("logo", logo)
-        
+
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/edit/new"
+          url     : "/edit/brend"
           cache: false
           contentType: false
           processData: false
           success : (brend) ->
             window.location.reload()
-        
+
 
   $("#logo-prev-fs-del").click (e) ->
     delLogo = true
     $("#logo-prev-fs-del").hide()
     $("#logo-img-breng").attr("src", "/img/add-bg.png")
-        
+
   $("#img-prev-fs-del").click (e) ->
     delImg = true
     $("#img-prev-fs-del").hide()

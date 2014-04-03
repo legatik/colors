@@ -6,7 +6,7 @@ block content
   != js('admin/edit/products')
   != css('admin')
   #admin-cont
-    include admin-nav    
+    include admin-nav
 
 
     input#firstData(type="hidden", value=JSON.stringify(prod), typeProd=JSON.stringify(type))
@@ -53,7 +53,7 @@ block content
           td
             textarea#brend-prim.textarea-add-m #{prod.primenenie}
         tr
-          td На ветрину&nbsp
+          td На витрину&nbsp
           td
             - if(prod.vetrina)
               input#vetrina(type="checkbox", checked="checked")
@@ -64,7 +64,7 @@ block content
           td
             input#ostatok(type="number", value=prod.ostatok)
         tr
-          td 
+          td
             span Оттенок/вид&nbsp
             div через запятую без пробела&nbsp
           td
@@ -102,5 +102,4 @@ block content
       input.step-inp(type="file",id!="step-inp-<%=number%>")
       img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
       img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
-
 
