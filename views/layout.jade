@@ -32,6 +32,11 @@ html
         .title <%=data.title%>
         .descr <%=data.minOpisanie%>
         .old-price <%=data.oldCost%>
-        .new-price <%=data.cost%> р
+          <%if (data.oldCost) {%>
+          span &nbsp;р
+          <%}%>
+        .new-price <%=data.cost%>
+          span &nbsp;р
         a(href != "/product/<%=data['_id']%>")
           .in-basket В КОРЗИНУ
+

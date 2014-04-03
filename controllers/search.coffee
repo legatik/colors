@@ -2,7 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 fs = require 'fs-extra'
 
-{User, Product, Face, Brend, Body} = db.models
+{User, Product, Face, Brend, Body, Action} = db.models
 
 exports.boot = (app) ->
   getIds = (arr) ->
@@ -83,8 +83,13 @@ exports.boot = (app) ->
   app.post '/productByAction', (req, res) ->
     actionId = req.body.key
     data =  req.body.filter
-    console.log "actionId", actionId
-    console.log "data", data
-    Product.find {} , (err, arr) ->
-      res.send arr
-    
+    product_filter = getProductFilter(data)
+    sort = getSort(data)
+    Action.findById actionId, (err, action) ->
+      product_filter._id = {$in: action.products}
+      Product.find(product_filter)
+      .sort(sort)
+      .exec (err, products) ->
+        console.log "products", products.length
+        res.send products
+

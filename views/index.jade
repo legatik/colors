@@ -45,7 +45,10 @@ block content
               .title #{item.title}
               .descr #{item.minOpisanie}
               .old-price #{item.oldCost}
-              .new-price #{item.cost} р
+                - if (item.oldCost)
+                  span &nbsp;р
+              .new-price #{item.cost}
+                span &nbsp;р
               a(href != "/product/#{item['_id']}")
                 .in-basket В КОРЗИНУ
         //.item
@@ -56,7 +59,7 @@ block content
             .old-price 417
             .new-price 339 р
             .in-basket В КОРЗИНУ
-       
+
     a.left.carousel-control(data-slide="prev",href="#myCarousel2")
     a.right.carousel-control(data-slide="next",href="#myCarousel2")
 
@@ -68,7 +71,7 @@ block content
     input.email(placeholder="Ваш email")
     a.discount(href="#") Получить скидку!
   .novelty-title Новинки
-  
+
   #myCarousel4.carousel.slide(data-ride="carousel")
     ol.carousel-indicators
       - each item, index in news
@@ -80,9 +83,9 @@ block content
             img(src!="../img/news/#{item['_id']}/logo.#{item.logo}")
     a.left.carousel-control(data-slide="prev",href="#myCarousel4")
     a.right.carousel-control(data-slide="next",href="#myCarousel4")
-  
-  
-  
+
+
+
   //.novelty-left
     img(width="372", height="302")
   //.novelty-right
@@ -105,3 +108,4 @@ block content
 
 
   .reviews-title Отзывы
+
