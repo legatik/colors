@@ -8,6 +8,20 @@ $(document).ready () ->
   jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
   jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
   
+  
+  $(window).scroll =>
+    if $(window).scrollTop() >= 270
+        $("#header-top-fixed").fadeIn("slow")
+        $(".header-fake").addClass("header-fake-fixed")
+        $(".header-fake").removeClass("header-fake")
+        $(".header-fake-fixed").fadeIn("slow")
+    if $(window).scrollTop() <= 270
+        $("#header-top-fixed").hide()
+        $(".header-fake-fixed").addClass("header-fake")
+        $(".header-fake-fixed").removeClass("header-fake-fixed")
+        $(".header-fake").fadeIn("slow")
+
+  
   window.nav = {
     face:{
       title : "Для лица"
