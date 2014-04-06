@@ -65,17 +65,14 @@ exports.boot = (app) ->
     body = JSON.parse req.body.data
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
-        updateProd prodUp, body, (prodUp) ->
+        updateProd prodUp, body, req, (prodUp) ->
           res.send 200
             
             
 #      Face.findById body.type.id, (err, face) ->
 
 
-  updateProd = (prod, body, cb) ->
-    console.log "prod", prod
-    console.log "_____________________________-"
-    console.log "body", body.product
+  updateProd = (prod, body, req, cb) ->
     prod.brend = body.product.brend
     prod.cost = body.product.cost
     prod.id = body.product.id
@@ -89,6 +86,20 @@ exports.boot = (app) ->
     prod.ves = body.product.ves
     prod.vetrina = body.product.vetrina
     prod.vid = body.product.vid
+
+    _.each req.files, (data,key)->
+        type = data.mime.replace("image/", "")
+        path = './public/img/products/' + prod["_id"]
+        if key == "vid"
+            fName = "vid"
+            prod.imgVid = type
+            nameFile = fName  + "." + type
+        else
+            fName = Number(new Date())
+            nameFile = fName + key + "." + type
+            prod.picture.push(nameFile)
+        fs.mkdir path, (err) ->
+          fs.copy data.path, path + "/" + nameFile, (err) ->
     prod.save () ->
         cb()
   
@@ -105,7 +116,6 @@ exports.boot = (app) ->
             path = './public/img/products/' + prod["_id"] + "/" + nameN
 #            rimraf path, (err) ->
         newPicArr.push nameS if check
-      
       prod.picture = []
       prod.picture = newPicArr
       prod.save () ->
