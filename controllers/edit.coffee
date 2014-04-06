@@ -61,15 +61,54 @@ exports.boot = (app) ->
 
 
 
+  app.post '/body', (req, res) ->
+    body = JSON.parse req.body.data
+    Product.findById body.product.findId, (err, prod) ->
+      delStepImg prod, body, (prodUp) ->
+        updateProd prodUp, body, req, (prodUp2) ->
+          deleteOldType prodUp2, (prodUp3) ->
+            
+#            Непосредственно для типа
+            
+            newBody = new Body(body.type)
+            newBody.save (err, body) ->
+              prodUp3.isBody = body["_id"]
+              prodUp3.save ()->
+                res.send 200
+
+
   app.post '/face', (req, res) ->
     body = JSON.parse req.body.data
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
-        updateProd prodUp, body, req, (prodUp) ->
-          res.send 200
+        updateProd prodUp, body, req, (prodUp2) ->
+          deleteOldType prodUp2, (prodUp3) ->
             
+#            Непосредственно для типа
             
-#      Face.findById body.type.id, (err, face) ->
+            newFace = new Face(body.type)
+            newFace.save (err, face) ->
+              console.log "HEARE@@@@@@@@@@@@@@@"
+              prodUp3.isFace = face["_id"]
+              prodUp3.save ()->
+                res.send 200
+
+
+  deleteOldType = (prod, cb) ->
+    if prod.isFace
+      Face.findById prod.isFace, (err, face) ->
+        face.remove() if face
+        prod.set('isFace', undefined)
+        prod.save () ->
+          cb(prod)
+
+
+    if prod.isBody
+      Body.findById prod.isBody, (err, body) ->
+        body.remove() if body
+        prod.set('isBody', undefined)
+        prod.save () ->
+          cb(prod)
 
 
   updateProd = (prod, body, req, cb) ->
@@ -101,7 +140,7 @@ exports.boot = (app) ->
         fs.mkdir path, (err) ->
           fs.copy data.path, path + "/" + nameFile, (err) ->
     prod.save () ->
-        cb()
+        cb(prod)
   
   
   
@@ -112,9 +151,9 @@ exports.boot = (app) ->
         check = true
         body.product.withoutImg.forEach (nameN) ->
           if nameN == nameS
-#            check = false
+            check = false
             path = './public/img/products/' + prod["_id"] + "/" + nameN
-#            rimraf path, (err) ->
+            rimraf path, (err) ->
         newPicArr.push nameS if check
       prod.picture = []
       prod.picture = newPicArr

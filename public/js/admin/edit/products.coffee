@@ -105,7 +105,6 @@ $(document).ready () ->
         else
           nesArr.push("body-nes-net") 
         type =
-          id              : prod["isBody"]
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           nesovershenstva : nesArr
@@ -148,7 +147,6 @@ $(document).ready () ->
           nesArr.push("face-nes-net")
 
         type =
-          id              : prod["isFace"]
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
           kozha           : kozhaArr
@@ -205,6 +203,10 @@ $(document).ready () ->
           name = name.replace("del-e-", "")
           withoutImg.push(name)
           $($(@).parent()).remove()
+      
+      $("#vid-tone-fs-del").click (e) ->
+        $("#tone-prev").attr "src", "/img/add-bg.png"
+        $(@).hide()
           
       renderImg = () ->
         console.log "prod.imgVid", prod.imgVid
