@@ -11,15 +11,11 @@ $(document).ready () ->
   
   $(window).scroll =>
     if $(window).scrollTop() >= 270
+        $("#header-top-fixed").stop(true, true)
         $("#header-top-fixed").fadeIn("slow")
-        $(".header-fake").addClass("header-fake-fixed")
-        $(".header-fake").removeClass("header-fake")
-        $(".header-fake-fixed").fadeIn("slow")
     if $(window).scrollTop() <= 270
-        $("#header-top-fixed").hide()
-        $(".header-fake-fixed").addClass("header-fake")
-        $(".header-fake-fixed").removeClass("header-fake-fixed")
-        $(".header-fake").fadeIn("slow")
+        $("#header-top-fixed").stop(true, true)
+        $("#header-top-fixed").fadeOut("slow")
 
   
   window.nav = {
