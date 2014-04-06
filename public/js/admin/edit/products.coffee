@@ -18,7 +18,8 @@ $(document).ready () ->
       selectFirstDate = () ->
         $("#product-tip").val(typeProd.data.type)
         $("option[value='" + typeProd.data.type + "']").click()
-#        $("option[value='" + typeProd.data.podType + "']").attr("selected", true)
+        opPerent = $("option[value='" + typeProd.data.podType + "']").parent()
+        $(opPerent).val(typeProd.data.podType)
         switch typeProd.type
           when "face"
             typeProd.data.kozha.forEach (key) ->

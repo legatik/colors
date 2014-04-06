@@ -76,7 +76,21 @@ exports.boot = (app) ->
     console.log "prod", prod
     console.log "_____________________________-"
     console.log "body", body.product
-    cb()
+    prod.brend = body.product.brend
+    prod.cost = body.product.cost
+    prod.id = body.product.id
+    prod.minOpisanie = body.product.minOpisanie
+    prod.obem = body.product.obem
+    prod.oldCost = body.product.oldCost
+    prod.opisanie = body.product.opisanie
+    prod.ostatok = body.product.ostatok
+    prod.primenenie = body.product.primenenie
+    prod.title = body.product.title
+    prod.ves = body.product.ves
+    prod.vetrina = body.product.vetrina
+    prod.vid = body.product.vid
+    prod.save () ->
+        cb()
   
   
   
@@ -87,9 +101,9 @@ exports.boot = (app) ->
         check = true
         body.product.withoutImg.forEach (nameN) ->
           if nameN == nameS
-            check = false
+#            check = false
             path = './public/img/products/' + prod["_id"] + "/" + nameN
-            rimraf path, (err) ->
+#            rimraf path, (err) ->
         newPicArr.push nameS if check
       
       prod.picture = []
