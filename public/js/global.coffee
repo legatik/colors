@@ -375,6 +375,307 @@ $(document).ready () ->
       ]
     }
 
+
+    makeup:{
+        title: "Макияж"
+
+        tip:[
+            {
+              title : "ЛИЦО"
+              key : "makeup-face"
+              podtip: [
+                    {
+                      title : "Базы под макияж"
+                      key : "makeup-face1"
+                    }
+                    {
+                      title : "ВВ-кремы"
+                      key : "makeup-face2"
+                    }
+                    {
+                      title : "CC-кремы"
+                      key : "makeup-face3"
+                    }
+                    {
+                      title : "Пудры сухие"
+                      key : "makeup-face4"
+                    }
+                    {
+                      title : "Консилеры/корректоры"
+                      key : "makeup-face5"
+                    }
+                    {
+                      title : "Хайлайтеры и бронзеры"
+                      key : "makeup-face6"
+                    }
+                    {
+                      title : "Румяна"
+                      key : "makeup-face7"
+                    }
+                    {
+                      title : "Фиксаторы макияжа"
+                      key : "makeup-face8"
+                    }
+              ]
+            }
+            {
+                title : "ГЛАЗА"
+                key : "makeup-eyes"
+                podtip: [
+                    {
+                      title : "Базы под тушь, фиксаторы"
+                      key : "makeup-eyes1"
+                    }
+                    {
+                      title : "Туши"
+                      key : "makeup-eyes2"
+                    }
+                    {
+                      title : "Базы под тени"
+                      key : "makeup-eyes3"
+                    }
+                    {
+                      title : "Тени для век"
+                      key : "makeup-eyes4"
+                    }
+                    {
+                      title : "Карандаши для глаз"
+                      key : "makeup-eyes5"
+                    }
+                    {
+                      title : "Подводки"
+                      key : "makeup-eyes6"
+                    }
+                ]
+            }
+            
+            {
+                title : "ГУБЫ"
+                key : "makeup-lips"
+                podtip: [
+                    {
+                      title : "Базы под макияж губ"
+                      key : "makeup-lips1"
+                    }
+                    {
+                      title : "Тинты"
+                      key : "makeup-lips2"
+                    }
+                    {
+                      title : "Блески"
+                      key : "makeup-lips3"
+                    }
+                    {
+                      title : "Помады"
+                      key : "makeup-lips4"
+                    }
+                ]
+            }
+        ]
+    }
+    
+    
+    forman:{
+        title: "Для мужчин"
+
+        tip:[
+            {
+              title : "БАЗОВЫЙ УХОД"
+              key : "forman-baza"
+              podtip: [
+                    {
+                      title : "Пенки, гели для умывания"
+                      key : "forman-baza1"
+                    }
+                    {
+                      title : "Скрабы"
+                      key : "forman-baza2"
+                    }
+                    {
+                      title : "Тонеры"
+                      key : "forman-baza3"
+                    }
+                    {
+                      title : "Спреи (мисты)"
+                      key : "forman-baza4"
+                    }
+                    {
+                      title : "Лосьоны, эмульсии, кремы"
+                      key : "forman-baza5"
+                    }
+                    {
+                      title : "Бальзамы для губ"
+                      key : "forman-baza6"
+                    }
+                    {
+                      title : "Листовые маски"
+                      key : "forman-baza7"
+                    }
+              ]
+            }
+            {
+                title : "ДЛЯ ТЕЛА И ВОЛОС"
+                key : "forman-body"
+                
+            }
+            {
+                title : "ПАРФЮМИРОВАННЫЕ СРЕДСТВА"
+                key : "forman-porf"
+            }
+            {
+                title : "ПОСЛЕ БРИТЬЯ"
+                key : "forman-brit"
+            }
+            {
+                title : "МУЖСКИЕ ВВ-КРЕМЫ"
+                key : "forman-bbkrem"
+            }
+        ]
+        dop : [
+            {
+                title : "Тип кожи"
+                key   : "forman-kozha"
+            list  : [
+                {
+                    title : "Для всех типов кожи"
+                    key   : "forman-kozha-all"
+                }
+                {
+                    title : "Нормальная"
+                    key   : "forman-kozha-norm"
+                }
+                {
+                    title : "Жирная/комбинированная"
+                    key   : "forman-kozha-zhir"
+                }
+                {
+                    title : "Сухая/очень сухая"
+                    key   : "forman-kozha-suh"
+                }
+                {
+                    title : "Cклонная к воспалениям"
+                    key   : "forman-kozha-vosp"
+                }
+                {
+                    title : "Чувствительная"
+                    key   : "forman-kozha-chuv"
+                } 
+            ]
+            }
+        ]
+    }
+
+
+    nabor:{
+        title: "Наборы"
+        tip:[
+            {
+              title : "НАБОРЫ"
+              key : "nabor-nabor"
+              podtip: [
+                    {
+                      title : "Уход за лицом"
+                      key : "nabor-nabor1"
+                    }
+                    {
+                      title : "Уход за телом"
+                      key : "nabor-nabor2"
+                    }
+                    {
+                      title : "Уход за волосами"
+                      key : "nabor-nabor3"
+                    }
+                    {
+                      title : "Для мужчин"
+                      key : "nabor-nabor4"
+                    }
+                    {
+                      title : "Макияж"
+                      key : "nabor-nabor5"
+                    }
+                    {
+                      title : "Маникюр"
+                      key : "nabor-nabor6"
+                    }
+              ]
+            }
+            {
+                title : "СЭМПЛ-НАБОРЫ"
+                key : "nabor-semple"
+            }
+        ]
+    }
+
+    accessories:{
+        title: "Аксессуары"
+        tip:[
+            {
+              title : "ДЛЯ ОЧИЩЕНИЯ КОЖИ"
+              key : "access-ochish"
+              podtip: [
+                    {
+                      title : "Щеточки, губки"
+                      key : "access-ochish1"
+                    }
+                    {
+                      title : "Спонжи конняку"
+                      key : "access-ochish2"
+                    }
+                    {
+                      title : "Хлопковые тампоны и диски"
+                      key : "access-ochish3"
+                    }
+                    {
+                      title : "Прочее"
+                      key : "access-ochish4"
+                    }
+              ]
+            }
+            {
+                title : "ДЛЯ МАСОК"
+                key : "access-mask"
+            }
+            {
+                title : "ДЛЯ МАССАЖА"
+                key : "access-massazh"
+            }
+            
+            {
+              title : "ДЛЯ МАКИЯЖА"
+              key : "access-makeup"
+              podtip: [
+                    {
+                      title : "Кисти для макияжа"
+                      key : "access-makeup1"
+                    }
+                    {
+                      title : "Пуховки, спонжи"
+                      key : "access-makeup2"
+                    }
+                    {
+                      title : "Матирующие салфетки"
+                      key : "access-makeup3"
+                    }
+                    {
+                      title : "Очищающие средства для спонжей и кистей"
+                      key : "access-makeup4"
+                    }
+              ]
+            }
+            {
+                title : "ДЛЯ ВОЛОС"
+                key : "access-header"
+            }
+            {
+                title : "ДЛЯ МАНИКЮРА И ПЕДИКЮРА"
+                key : "access-manikur"
+            }
+            {
+                title : "РАЗНОЕ"
+                key : "access-raznoe"
+            }
+        ]
+    }
   }
   
   
