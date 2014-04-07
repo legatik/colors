@@ -23,7 +23,8 @@ block content
             td(width=200, style="max-width:200px") Название
             td(width=100) Витрина
             td На витрину
-            td Удаление
+            td Редактирование
+            td(style="text-align:center") Удаление
             td Дата добавления
         tbody#list-pr-body
 
@@ -121,11 +122,11 @@ block content
         button.fn-act(active="false", id!="vet-<%=prod['_id']%>") Активировать
         <%}%>
       td
-        button.fn-del(id!="del-<%=prod['_id']%>") Удалить продукт
-      td <%=data%>
-      td
         a(href!="/tool/admin/edit/product/<%=prod['_id']%>")
           button Редактировать
+      td
+        button.fn-del(id!="del-<%=prod['_id']%>") Удалить продукт
+      td <%=data%>
   script#stepTemplate(type="text/template")
     div.small-cont
       input.step-inp(type="file",id!="step-inp-<%=number%>")

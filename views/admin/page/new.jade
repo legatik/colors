@@ -22,6 +22,7 @@ block content
             td(width=200, style="max-width:200px") Название
             td(width=100) Витрина
             td На витрину
+            td Редактирование
             td Удаление
         tbody#list-new-body
 
@@ -96,10 +97,10 @@ block content
         button.fn-act(active="false", id!="act-<%=news['_id']%>") Активировать
         <%}%>
       td
-        button.fn-del(id!="del-<%=news['_id']%>") Удалить новость
-      td
         a(href!="/tool/admin/edit/new/<%=news['_id']%>")
           button Редактировать новость
+      td
+        button.fn-del(id!="del-<%=news['_id']%>") Удалить новость
 
   script#stepImg(type="text/template")
     tr(id!="st-tr-im-<%=i%>")

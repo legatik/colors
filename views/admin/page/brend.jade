@@ -22,7 +22,10 @@ block content
         thead
           tr
             td(width=200, style="max-width:200px") Название
-            td(width=100) статус
+            td(width=100) Статус
+            td(width=200) Изменить статус
+            td(width=220) Редактирование
+            td(width=200) Удаление
         tbody#list-br-body
 
     #brend-form.form-admin
@@ -79,10 +82,10 @@ block content
         button.fn-act(active="false", id!="act-<%=brend['_id']%>") Активировать
         <%}%>
       td
-        button.fn-del(id!="del-<%=brend['_id']%>") Удалить бренд
-      td
         a(href!="/tool/admin/edit/brend/<%=brend['_id']%>")
           button Редактировать бренд
+      td
+        button.fn-del(id!="del-<%=brend['_id']%>") Удалить бренд
 
 
   script#brendListTemplate(type="text/template")

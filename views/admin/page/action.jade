@@ -24,6 +24,7 @@ block content
             td(width=200, style="max-width:200px") Название
             td(width=100) Витрина
             td На витрину
+            td Редоктирование
             td Удаление
         tbody#list-ac-body
 
@@ -89,10 +90,10 @@ block content
         button.fn-act(active="false", id!="act-<%=act['_id']%>") Активировать
         <%}%>
       td
-        button.fn-del(id!="del-<%=act['_id']%>") Удалить акцию
-      td
         a(href!="/tool/admin/edit/action/<%=act['_id']%>")
           button Редактировать акцию
+      td
+        button.fn-del(id!="del-<%=act['_id']%>") Удалить акцию
   script#productTemplate(type="text/template")
     div(style="height: 28px;")
       div.ac-del-prod(id!="<%=id%>") x
