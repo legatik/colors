@@ -27,19 +27,19 @@ exports.boot = (app) ->
       res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body"}
 
   app.get '/hair', (req, res) ->
-      res.render 'index', {title: 'Для волос', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Для волос', user: req.user, loc:'home', search:"body"}
 
   app.get '/makeup', (req, res) ->
-      res.render 'index', {title: 'Макияж', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Макияж', user: req.user, loc:'home', search:"makeup"}
 
   app.get '/accessories', (req, res) ->
-      res.render 'index', {title: 'Аксессуары', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Аксессуары', user: req.user, loc:'home', search:"accessories"}
 
   app.get '/man', (req, res) ->
-      res.render 'index', {title: 'Для мужчин', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Для мужчин', user: req.user, loc:'home', search:"forman"}
 
   app.get '/sets', (req, res) ->
-      res.render 'index', {title: 'Наборы', user: req.user, loc:'home'}
+      res.render 'search', {title: 'Наборы', user: req.user, loc:'home', search:"nabor"}
 
   app.get '/promotions', (req, res) ->
     actionId = req.query.key
