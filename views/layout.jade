@@ -24,3 +24,14 @@ html
     #footer-bg
         include footer
 
+
+
+    script#productTemplate(type="text/template")
+      .prod
+        img(src!="../img/products/<%=data['_id']%>/<%=data.picture[0]%>", width="124px", height="144px")
+        .title <%=data.title%>
+        .descr <%=data.minOpisanie%>
+        .old-price <%=data.oldCost%>
+        .new-price <%=data.cost%> р
+        a(href != "/product/<%=data['_id']%>")
+          .in-basket В КОРЗИНУ
