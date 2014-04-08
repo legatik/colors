@@ -20,6 +20,7 @@ $(document).ready () ->
   
   window.nav = {
     face:{
+      key   : "face"
       title : "Для лица"
       tip : [
         {
@@ -241,7 +242,8 @@ $(document).ready () ->
     }
 
     body:{
-      title: "Для тела"
+      title : "Для тела"
+      key   : "body"
       tip:[
         {
           title : "УХОД ЗА ТЕЛОМ"
@@ -387,8 +389,8 @@ $(document).ready () ->
 
 
     makeup:{
-        title: "Макияж"
-
+        title : "Макияж"
+        key   : "makeup"
         tip:[
             {
               title : "ЛИЦО"
@@ -486,8 +488,8 @@ $(document).ready () ->
     
     
     forman:{
-        title: "Для мужчин"
-
+        title : "Для мужчин"
+        key   : "forman"
         tip:[
             {
               title : "БАЗОВЫЙ УХОД"
@@ -577,7 +579,8 @@ $(document).ready () ->
 
 
     nabor:{
-        title: "Наборы"
+        title : "Наборы"
+        key   : "nabor"
         tip:[
             {
               title : "НАБОРЫ"
@@ -617,7 +620,8 @@ $(document).ready () ->
     }
 
     accessories:{
-        title: "Аксессуары"
+        title : "Аксессуары"
+        key   : "accessories" 
         tip:[
             {
               title : "ДЛЯ ОЧИЩЕНИЯ КОЖИ"
