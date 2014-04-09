@@ -132,12 +132,12 @@ $(document).ready () ->
       editProdFace = (productObj, imgArr, vidImg) ->
         
         kozhaArr = []
-        kozhaInp = $("#face-koza").find("input[type='checkbox']:checked")
+        kozhaInp = $("#face-kozha").find("input[type='checkbox']:checked")
         if kozhaInp.length
           kozhaInp.each (i, data) ->
             kozhaArr.push($(data).val())
         else
-          kozhaArr.push("face-kozh-all") 
+          kozhaArr.push("face-kozha-all") 
 
         nesArr = []
         nesInp = $("#face-nesovershenstva").find("input[type='checkbox']:checked")

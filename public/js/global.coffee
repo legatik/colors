@@ -172,27 +172,27 @@ $(document).ready () ->
           list  : [
             {
               title : "Для всех типов кожи"
-              key   : "face-kozh-all"
+              key   : "face-kozha-all"
             }
             {
               title : "Нормальная"
-              key   : "face-kozh-norm"
+              key   : "face-kozha-norm"
             }
             {
               title : "Жирная/комбинированная"
-              key   : "face-kozh-zhir"
+              key   : "face-kozha-zhir"
             }
             {
               title : "Сухая/очень сухая"
-              key   : "face-kozh-suh"
+              key   : "face-kozha-suh"
             }
             {
               title : "Проблемная"
-              key   : "face-kozh-prob"
+              key   : "face-kozha-prob"
             }
             {
               title : "Чувствительная"
-              key   : "face-kozh-chuv"
+              key   : "face-kozha-chuv"
             } 
           ]
         }
