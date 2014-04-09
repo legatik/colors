@@ -133,6 +133,21 @@ block content
             option(value!="<%=podtip.key%>") <%=podtip.title%>
             <% }); %>
       <% }); %>
+      
+      <% _.each(item.dop, function(dop) { %>
+      tr.add-param.border-b
+        td <%=dop.title%>
+        td
+          div(id!="<%=key%><%=dop.key%>")
+            table
+                <% _.each(dop.list, function(sItem) { %> 
+                tr
+                  td(width=30)
+                    input( type="checkbox", value!="<%=sItem.key%>")
+                  td <%=sItem.title%>
+                <% }); %>
+      <% }); %>
+      
       <% print("</sc"+"ript>"); %>
       <% }); %>
 
