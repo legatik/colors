@@ -33,7 +33,14 @@ $(document).ready () ->
           $option = $($option).val(brend["_id"])
           $option = $($option).text(brend.title)
           $("#brend-select").prepend($option)
-        renderType()
+          
+        renderProdTemplate()
+#        renderType()
+
+      renderProdTemplate = () ->
+        templateJQ = $("#prodTypeTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#admin-cont").append(template({data:window.nav}))
 
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
@@ -220,6 +227,7 @@ $(document).ready () ->
 
     $(".del-step").click () ->
       $($(@).parent()).remove()
+      
   addEvent()
 
   #for tone

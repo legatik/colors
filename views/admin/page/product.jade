@@ -111,6 +111,17 @@ block content
   include ../template/body
 
 
+
+
+
+  script#prodTypeTemplate(type="text/template")
+      <% _.each(data, function(item, key) { %>  
+      <% print("<sc" + "ript type='text/template'>"); %>
+      div asdasdasa
+      <% print("</sc"+"ript>"); %>
+      <% }); %>
+
+
   script#prodListTemplate(type="text/template")
     tr
       td <%=prod.title%>
