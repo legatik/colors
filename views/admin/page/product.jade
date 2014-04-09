@@ -117,8 +117,22 @@ block content
   script#prodTypeTemplate(type="text/template")
       <% _.each(data, function(item, key) { %>  
       <% print("<sc" + "ript type='text/template', id='"+key+"Template'>"); %>
-      div asdasdasa
-        span asdas
+      tr.add-param
+        td Тип товара&nbsp
+        td
+          select#product-tip
+            <% _.each(item.tip, function(tip) { %> 
+            option(value!="<%=tip.key%>") <%=tip.title%>
+            <% }); %>
+      <% _.each(item.tip, function(tip) { %>
+      tr.add-param.podtip(id!="<%=tip.key%>")
+        td Подтип
+        td
+          select
+            <% _.each(tip.podtip, function(podtip) { %> 
+            option(value!="<%=podtip.key%>") <%=podtip.title%>
+            <% }); %>
+      <% }); %>
       <% print("</sc"+"ript>"); %>
       <% }); %>
 

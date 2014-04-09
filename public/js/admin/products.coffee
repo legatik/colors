@@ -35,7 +35,7 @@ $(document).ready () ->
           $("#brend-select").prepend($option)
           
         renderProdTemplate()
-#        renderType()
+        renderType()
 
       renderProdTemplate = () ->
         templateJQ = $("#prodTypeTemplate")
