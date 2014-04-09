@@ -34,13 +34,8 @@ $(document).ready () ->
           $option = $($option).text(brend.title)
           $("#brend-select").prepend($option)
           
-        renderProdTemplate()
         renderType()
 
-      renderProdTemplate = () ->
-        templateJQ = $("#prodPodTypeTemplate")
-        template = _.template($(templateJQ[0]).html())
-        $("#admin-cont").append(template({data:window.nav}))
 
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
@@ -196,10 +191,16 @@ $(document).ready () ->
 
 
 
-  templateJQ = $("#prodTypeTemplate")
-  template = _.template($(templateJQ[0]).html())
-  $("#gl-product-tip").append(template({data:window.nav}))
+  renderProdTemplate = () ->
+    templateJQ = $("#prodTypeTemplate")
+    template = _.template($(templateJQ[0]).html())
+    $("#gl-product-tip").append(template({data:window.nav}))
+    templateJQ = $("#prodPodTypeTemplate")
+    template = _.template($(templateJQ[0]).html())
+    $("#admin-cont").append(template({data:window.nav}))
 
+
+  renderProdTemplate()
 
 
 #      for picture

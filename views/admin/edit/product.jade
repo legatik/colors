@@ -88,8 +88,50 @@ block content
           b Выберите картинки товара
       div(style="margin-top:8px")
         button#add-product-btn Изменить продукт
-  include ../template/face
-  include ../template/body
+
+
+
+  script#prodTypeTemplate(type="text/template")
+    <% _.each(data, function(item, key) { %>
+    option(value!="<%=key%>") <%=item.title%>
+    <% }); %>
+
+  script#prodPodTypeTemplate(type="text/template")
+      <% _.each(data, function(item, key) { %>  
+      <% print("<sc" + "ript type='text/template', id='"+key+"Template'>"); %>
+      tr.add-param
+        td Тип товара&nbsp
+        td
+          select#product-tip
+            <% _.each(item.tip, function(tip) { %> 
+            option(value!="<%=tip.key%>") <%=tip.title%>
+            <% }); %>
+      <% _.each(item.tip, function(tip) { %>
+      tr.add-param.podtip(id!="<%=tip.key%>")
+        td Подтип
+        td
+          select
+            <% _.each(tip.podtip, function(podtip) { %> 
+            option(value!="<%=podtip.key%>") <%=podtip.title%>
+            <% }); %>
+      <% }); %>
+      
+      <% _.each(item.dop, function(dop) { %>
+      tr.add-param.border-b
+        td <%=dop.title%>
+        td
+          div(id!="<%=key%>-<%=dop.key%>")
+            table
+                <% _.each(dop.list, function(sItem) { %> 
+                tr
+                  td(width=30)
+                    input( type="checkbox", value!="<%=sItem.key%>")
+                  td <%=sItem.title%>
+                <% }); %>
+      <% }); %>
+      
+      <% print("</sc"+"ript>"); %>
+      <% }); %>
 
 
   script#stepEditTemplate(type="text/template")

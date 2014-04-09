@@ -228,6 +228,18 @@ $(document).ready () ->
         addEvent()
         addEventE()
 
+
+
+      renderProdTemplate = () ->
+        templateJQ = $("#prodTypeTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#gl-product-tip").append(template({data:window.nav}))
+        templateJQ = $("#prodPodTypeTemplate")
+        template = _.template($(templateJQ[0]).html())
+        $("#admin-cont").append(template({data:window.nav}))
+
+      renderProdTemplate()
+
       prod = JSON.parse($("#firstData").val())
       typeProd = JSON.parse($("#firstData").attr("typeProd"))
       brendArr.forEach (brend) ->
@@ -239,6 +251,11 @@ $(document).ready () ->
         $("#brend-select").prepend($option)
 
 #      $("option[value='" + typeProd.type + "']").attr("selected", true)
+      
+      
+      
+      
+      
       $("#gl-product-tip").val(typeProd.type)
       renderType()
       selectFirstDate()
