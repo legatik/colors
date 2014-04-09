@@ -38,7 +38,7 @@ $(document).ready () ->
         renderType()
 
       renderProdTemplate = () ->
-        templateJQ = $("#prodTypeTemplate")
+        templateJQ = $("#prodPodTypeTemplate")
         template = _.template($(templateJQ[0]).html())
         $("#admin-cont").append(template({data:window.nav}))
 
@@ -192,6 +192,14 @@ $(document).ready () ->
           display = $($item).css("display")
           $($item).click() if display isnt "none"
           i++
+
+
+
+
+  templateJQ = $("#prodTypeTemplate")
+  template = _.template($(templateJQ[0]).html())
+  $("#gl-product-tip").append(template({data:window.nav}))
+
 
 
 #      for picture
