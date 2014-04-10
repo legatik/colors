@@ -67,13 +67,19 @@ $(document).ready () ->
             imgArr.push one.files[0]
 
         checkType = $("#gl-product-tip").val()
-
+        console.log "checkType", checkType
         switch checkType
           when "face"
               createProdFace(productObj, imgArr, vidImg)
-        switch checkType
+
           when "body"
               createProdBody(productObj, imgArr, vidImg)
+
+          when "makeup"
+              createProdMakeup(productObj, imgArr, vidImg)
+
+          when "forman"
+              createProdForman(productObj, imgArr, vidImg)
 
 
       addEventOnProductTip = () ->
@@ -88,6 +94,70 @@ $(document).ready () ->
             $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
 
+
+      createProdForman = (productObj, imgArr, vidImg) ->
+        
+        kozhaArr = []
+        kozhaInp = $("#forman-forman-kozha").find("input[type='checkbox']:checked")
+        if kozhaInp.length
+          kozhaInp.each (i, data) ->
+            kozhaArr.push($(data).val())
+        else
+          kozhaArr.push("face-kozha-all") 
+
+        type =
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType > td > select").val()
+          kozha           : kozhaArr
+        data =
+          product : productObj
+          type    : type
+
+
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/forman"
+          cache: false
+          contentType: false
+          processData: false
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
+
+
+
+      createProdMakeup = (productObj, imgArr, vidImg) ->
+        nesArr = []
+        type =
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType > td > select").val()
+
+        data =
+          product : productObj
+          type    : type
+
+
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/makeup"
+          cache: false
+          contentType: false
+          processData: false
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
 
       createProdBody = (productObj, imgArr, vidImg) ->
         nesArr = []

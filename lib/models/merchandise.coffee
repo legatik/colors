@@ -21,6 +21,8 @@ product = new Schema
   popular          : Number
   isFace           : {type: ObjectId, ref: 'Face'}
   isBody           : {type: ObjectId, ref: 'Body'}
+  isMakeup         : {type: ObjectId, ref: 'Makeup'}
+  isForman         : {type: ObjectId, ref: 'Forman'}
   brend            : {type: ObjectId, ref: 'Brend'}
   dateAdding : Date
 
