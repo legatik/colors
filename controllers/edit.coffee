@@ -95,6 +95,8 @@ exports.boot = (app) ->
                 res.send 200
 
 
+
+
   deleteOldType = (prod, cb) ->
     if prod.isFace
       Face.findById prod.isFace, (err, face) ->

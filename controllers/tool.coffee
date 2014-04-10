@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access} = db.models
 
 exports.boot = (app) ->
 
@@ -191,6 +191,8 @@ exports.boot = (app) ->
       delProduct(product)
       
 
+ #For Edit
+
   editFace = (product, cb) ->
     Face.findOne {_id: product.isFace}, (err, face) ->
       type =
@@ -205,6 +207,37 @@ exports.boot = (app) ->
         data : body
       cb(type) if body
       
+
+  editMakeup = (product, cb) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, body) ->
+      type =
+        type : "makeup"
+        data : body
+      cb(type) if body
+
+
+
+  editSet = (product, cb) ->
+    Set.findOne {_id: product.isSet}, (err, body) ->
+      type =
+        type : "nabor"
+        data : body
+      cb(type) if body
+
+  editAccess = (product, cb) ->
+    Access.findOne {_id: product.isAccess}, (err, body) ->
+      type =
+        type : "access"
+        data : body
+      cb(type) if body
+
+
+  editForman = (product, cb) ->
+    Access.findOne {_id: product.isForman}, (err, body) ->
+      type =
+        type : "forman"
+        data : body
+      cb(type) if body
       
       
   checkType = (product, param, cb) ->
@@ -212,10 +245,31 @@ exports.boot = (app) ->
       console.log "isface"
       delIsface(product) if param.del
       editFace(product, cb)  if param.edit
+      
     if product.isBody
       console.log "isbody"
       delIsbody(product) if param.del
       editBody(product, cb) if param.edit
+      
+    if product.isMakeup
+      console.log "isMakeup"
+      delIsface(product) if param.del
+      editMakeup(product, cb)  if param.edit
+      
+    if product.isSet
+      console.log "isSet"
+      delIsbody(product) if param.del
+      editSet(product, cb) if param.edit
+      
+    if product.isAccess
+      console.log "isAccess"
+      delIsface(product) if param.del
+      editAccess(product, cb)  if param.edit
+      
+    if product.isForman
+      console.log "isForman"
+      delIsbody(product) if param.del
+      editForman(product, cb) if param.edit
 
 
 #  app.get '/updatecost', (req, res) ->
