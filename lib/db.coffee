@@ -8,9 +8,11 @@ New = require './models/new'
 Action = require './models/action'
 Makeup = require './models/makeup'
 Forman = require './models/forman'
+Set = require './models/set'
+Access = require './models/access'
 
 module.exports =
-	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman}
+	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access}
 	connection:
 		connect: (path) ->
 			db = mongoose.connect path

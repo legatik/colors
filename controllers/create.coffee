@@ -3,7 +3,7 @@ _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 
-{User, Product, Face, Brend, Body, New, Action, Makeup, Forman} = db.models
+{User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access} = db.models
 
 exports.boot = (app) ->
 
@@ -129,6 +129,29 @@ exports.boot = (app) ->
     newProd = Product(body.product)
     newBody.save (err, body) ->
       newProd.isForman = body["_id"]
+      newProd.save (err, product) ->
+        res.send 200
+        _.each req.files, (data,key)->
+            type = data.mime.replace("image/", "")
+            path = './public/img/products/' + product["_id"]
+            if key == "vid"
+                fName = "vid"
+                product.imgVid = type
+                nameFile = fName  + "." + type
+            else
+                fName = Number(new Date()) 
+                nameFile = fName + key + "." + type
+                product.picture.push(nameFile)
+            fs.mkdir path, (err) ->
+              fs.copy data.path, path + "/" + nameFile, (err) ->
+        product.save()
+
+  app.post '/nabor', (req, res) ->
+    body = JSON.parse req.body.data
+    newBody = new Set(body.type)
+    newProd = Product(body.product)
+    newBody.save (err, body) ->
+      newProd.isSet = body["_id"]
       newProd.save (err, product) ->
         res.send 200
         _.each req.files, (data,key)->

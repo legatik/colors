@@ -81,6 +81,8 @@ $(document).ready () ->
           when "forman"
               createProdForman(productObj, imgArr, vidImg)
 
+          when "nabor"
+              createProdNabor(productObj, imgArr, vidImg)
 
       addEventOnProductTip = () ->
           $(".activePodType").removeClass("activePodType")
@@ -93,6 +95,37 @@ $(document).ready () ->
             idPodTip = "#" + $(@).val()
             $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
+
+
+
+      createProdNabor = (productObj, imgArr, vidImg) ->
+        nesArr = []
+        type =
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType > td > select").val()
+
+        data =
+          product : productObj
+          type    : type
+
+
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/nabor"
+          cache: false
+          contentType: false
+          processData: false
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
+
+
 
 
       createProdForman = (productObj, imgArr, vidImg) ->

@@ -22,6 +22,8 @@ product = new Schema
   isFace           : {type: ObjectId, ref: 'Face'}
   isBody           : {type: ObjectId, ref: 'Body'}
   isMakeup         : {type: ObjectId, ref: 'Makeup'}
+  isSet            : {type: ObjectId, ref: 'Set'}
+  isAccess         : {type: ObjectId, ref: 'Access'}
   isForman         : {type: ObjectId, ref: 'Forman'}
   brend            : {type: ObjectId, ref: 'Brend'}
   dateAdding : Date
