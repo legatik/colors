@@ -3,7 +3,7 @@ _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 
-{User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access} = db.models
+{User, Product, Brend, New, Action} = db.models
 
 exports.boot = (app) ->
 
@@ -53,13 +53,16 @@ exports.boot = (app) ->
       res.send 200
 
 
-
-  app.post '/face', (req, res) ->
+  app.post '/product', (req, res) ->
     body = JSON.parse req.body.data
-    newFace = new Face(body.type)
+    firstTypeProd = body.typeProd.charAt(0).toUpperCase()
+    typeProd = firstTypeProd + body.typeProd.substr(1)
+    modelType = db.models[typeProd]
+    newType = new modelType(body.type)
     newProd = Product(body.product)
-    newFace.save (err, face) ->
-      newProd.isFace = face["_id"]
+    newType.save (err, typeObj) ->
+      idType = "is" + typeProd
+      newProd[idType] = typeObj["_id"]
       newProd.save (err, product) ->
         res.send 200
         _.each req.files, (data,key)->
@@ -76,119 +79,5 @@ exports.boot = (app) ->
             fs.mkdir path, (err) ->
               fs.copy data.path, path + "/" + nameFile, (err) ->
         product.save()
-        
-  app.post '/body', (req, res) ->
-    body = JSON.parse req.body.data
-    newBody = new Body(body.type)
-    newProd = Product(body.product)
-    newBody.save (err, body) ->
-      newProd.isBody = body["_id"]
-      newProd.save (err, product) ->
-        res.send 200
-        _.each req.files, (data,key)->
-            type = data.mime.replace("image/", "")
-            path = './public/img/products/' + product["_id"]
-            if key == "vid"
-                fName = "vid"
-                product.imgVid = type
-                nameFile = fName  + "." + type
-            else
-                fName = Number(new Date()) 
-                nameFile = fName + key + "." + type
-                product.picture.push(nameFile)
-            fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + nameFile, (err) ->
-        product.save()
-        
-  app.post '/makeup', (req, res) ->
-    body = JSON.parse req.body.data
-    newBody = new Makeup(body.type)
-    newProd = Product(body.product)
-    newBody.save (err, body) ->
-      newProd.isMakeup = body["_id"]
-      newProd.save (err, product) ->
-        res.send 200
-        _.each req.files, (data,key)->
-            type = data.mime.replace("image/", "")
-            path = './public/img/products/' + product["_id"]
-            if key == "vid"
-                fName = "vid"
-                product.imgVid = type
-                nameFile = fName  + "." + type
-            else
-                fName = Number(new Date()) 
-                nameFile = fName + key + "." + type
-                product.picture.push(nameFile)
-            fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + nameFile, (err) ->
-        product.save()
-        
-  app.post '/forman', (req, res) ->
-    body = JSON.parse req.body.data
-    newBody = new Forman(body.type)
-    newProd = Product(body.product)
-    newBody.save (err, body) ->
-      newProd.isForman = body["_id"]
-      newProd.save (err, product) ->
-        res.send 200
-        _.each req.files, (data,key)->
-            type = data.mime.replace("image/", "")
-            path = './public/img/products/' + product["_id"]
-            if key == "vid"
-                fName = "vid"
-                product.imgVid = type
-                nameFile = fName  + "." + type
-            else
-                fName = Number(new Date()) 
-                nameFile = fName + key + "." + type
-                product.picture.push(nameFile)
-            fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + nameFile, (err) ->
-        product.save()
 
-  app.post '/nabor', (req, res) ->
-    body = JSON.parse req.body.data
-    newBody = new Set(body.type)
-    newProd = Product(body.product)
-    newBody.save (err, body) ->
-      newProd.isSet = body["_id"]
-      newProd.save (err, product) ->
-        res.send 200
-        _.each req.files, (data,key)->
-            type = data.mime.replace("image/", "")
-            path = './public/img/products/' + product["_id"]
-            if key == "vid"
-                fName = "vid"
-                product.imgVid = type
-                nameFile = fName  + "." + type
-            else
-                fName = Number(new Date()) 
-                nameFile = fName + key + "." + type
-                product.picture.push(nameFile)
-            fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + nameFile, (err) ->
-        product.save()
-        
-  app.post '/access', (req, res) ->
-    body = JSON.parse req.body.data
-    newBody = new Access(body.type)
-    newProd = Product(body.product)
-    newBody.save (err, body) ->
-      newProd.isAccess = body["_id"]
-      newProd.save (err, product) ->
-        res.send 200
-        _.each req.files, (data,key)->
-            type = data.mime.replace("image/", "")
-            path = './public/img/products/' + product["_id"]
-            if key == "vid"
-                fName = "vid"
-                product.imgVid = type
-                nameFile = fName  + "." + type
-            else
-                fName = Number(new Date()) 
-                nameFile = fName + key + "." + type
-                product.picture.push(nameFile)
-            fs.mkdir path, (err) ->
-              fs.copy data.path, path + "/" + nameFile, (err) ->
-        product.save()
-        
+

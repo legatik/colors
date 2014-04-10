@@ -546,7 +546,7 @@ $(document).ready () ->
         dop : [
             {
                 title : "Тип кожи"
-                key   : "forman-kozha"
+                key   : "kozha"
             list  : [
                 {
                     title : "Для всех типов кожи"
@@ -578,50 +578,50 @@ $(document).ready () ->
     }
 
 
-    nabor:{
+    set:{
         title : "Наборы"
-        key   : "nabor"
+        key   : "set"
         tip:[
             {
               title : "НАБОРЫ"
-              key : "nabor-nabor"
+              key : "set-set"
               podtip: [
                     {
                       title : "Уход за лицом"
-                      key : "nabor-nabor1"
+                      key : "set-set1"
                     }
                     {
                       title : "Уход за телом"
-                      key : "nabor-nabor2"
+                      key : "set-set2"
                     }
                     {
                       title : "Уход за волосами"
-                      key : "nabor-nabor3"
+                      key : "set-set3"
                     }
                     {
                       title : "Для мужчин"
-                      key : "nabor-nabor4"
+                      key : "set-set4"
                     }
                     {
                       title : "Макияж"
-                      key : "nabor-nabor5"
+                      key : "set-set5"
                     }
                     {
                       title : "Маникюр"
-                      key : "nabor-nabor6"
+                      key : "set-set6"
                     }
               ]
             }
             {
                 title : "СЭМПЛ-НАБОРЫ"
-                key : "nabor-semple"
+                key : "set-semple"
             }
         ]
     }
 
-    accessories:{
+    access:{
         title : "Аксессуары"
-        key   : "accessories" 
+        key   : "access" 
         tip:[
             {
               title : "ДЛЯ ОЧИЩЕНИЯ КОЖИ"

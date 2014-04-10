@@ -19,7 +19,6 @@ app = express()
 
 {User, Product, Face, Brend} = db.models
 
-
 #console.log "Brend.createThis",Brend.createThis
 #Brend.createThis (brend) ->
 #  Face.createThis (face) ->

@@ -81,7 +81,6 @@ $(document).ready () ->
         switch checkType
           when "face"
               editProdFace(productObj, imgArr, vidImg)
-        switch checkType
           when "body"
               editProdBody(productObj, imgArr, vidImg)
 
