@@ -8,6 +8,7 @@ $(document).ready () ->
 
       renderType = () ->
         checkType = $("#gl-product-tip").val()
+        console.log "checkType", checkType
         $(".add-param").remove()
         idTemplate = "#" + checkType + "Template"
         templateJQ = $(idTemplate)
@@ -255,8 +256,7 @@ $(document).ready () ->
       
       
       
-      
-      
+      console.log "typeProd", typeProd
       $("#gl-product-tip").val(typeProd.type)
       renderType()
       selectFirstDate()

@@ -227,7 +227,7 @@ exports.boot = (app) ->
   editAccess = (product, cb) ->
     Access.findOne {_id: product.isAccess}, (err, body) ->
       type =
-        type : "access"
+        type : "accessories"
         data : body
       cb(type) if body
 
