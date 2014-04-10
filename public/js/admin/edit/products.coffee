@@ -77,12 +77,13 @@ $(document).ready () ->
             imgArr.push one.files[0]
 
         checkType = $("#gl-product-tip").val()
-
-        switch checkType
-          when "face"
-              editProdFace(productObj, imgArr, vidImg)
-          when "body"
-              editProdBody(productObj, imgArr, vidImg)
+        
+        editProd(productObj, imgArr, vidImg, checkType)
+#        switch checkType
+#          when "face"
+#              editProdFace(productObj, imgArr, vidImg)
+#          when "body"
+#              editProdBody(productObj, imgArr, vidImg)
 
 
       addEventOnProductTip = () ->
@@ -97,69 +98,41 @@ $(document).ready () ->
             $(idPodTip).addClass("activePodType")
             $(idPodTip).show()
 
-
-      editProdBody = (productObj, imgArr, vidImg) ->
-        nesArr = []
-        nesInp = $("#body-nesovershenstva").find("input[type='checkbox']:checked")
-        if nesInp.length
-          nesInp.each (i, data) ->
-            nesArr.push($(data).val())
-        else
-          nesArr.push("body-nes-net") 
+      editProd = (productObj, imgArr, vidImg, typeprod) ->
         type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
-          nesovershenstva : nesArr
+      
+        idKozha = "#"+typeprod+"-kozha"
+        if $(idKozha).length
+          kozhaArr = []
+          kozhaInp = $(idKozha).find("input[type='checkbox']:checked")
+          if kozhaInp.length
+            kozhaInp.each (i, data) ->
+              kozhaArr.push($(data).val())
+          else
+            kozhaAll = typeprod + "-kozha-all"
+            kozhaArr.push(kozhaAll) 
+          type.kozha = kozhaArr
+          
+        idNesovershenstva = "#"+typeprod+"-nesovershenstva"
+        if $(idNesovershenstva).length
+          nesArr = []
+          nesInp = $(idNesovershenstva).find("input[type='checkbox']:checked")
+          if nesInp.length
+            nesInp.each (i, data) ->
+              nesArr.push($(data).val())
+          else
+            nesAll = typeprod + "-nes-net"
+            nesArr.push(nesAll)
+          type.nesovershenstva = nesArr
+
+
         data =
-          product : productObj
-          type    : type
-
-
-        newForm = new FormData()
-        newForm.append("data",JSON.stringify data)
-        imgArr.forEach (one, index) ->
-          newForm.append(index, one)
-        newForm.append("vid", vidImg)
-        $.ajax
-          type    : 'POST'
-          data    : newForm
-          url     : "/edit/body"
-          cache: false
-          contentType: false
-          processData: false
-          success : (data) ->
-            window.location.reload()
-
-      editProdFace = (productObj, imgArr, vidImg) ->
-        
-        kozhaArr = []
-        kozhaInp = $("#face-kozha").find("input[type='checkbox']:checked")
-        if kozhaInp.length
-          kozhaInp.each (i, data) ->
-            kozhaArr.push($(data).val())
-        else
-          kozhaArr.push("face-kozha-all") 
-
-        nesArr = []
-        nesInp = $("#face-nesovershenstva").find("input[type='checkbox']:checked")
-        if nesInp.length
-          nesInp.each (i, data) ->
-            nesArr.push($(data).val())
-        else
-          nesArr.push("face-nes-net")
-
-        type =
-          type            : $("#product-tip").val()
-          podType         : $(".activePodType > td > select").val()
-          kozha           : kozhaArr
-          nesovershenstva : nesArr
-        data =
-          product : productObj
-          type    : type
-
-
+          product  : productObj
+          type     : type
+          typeProd : typeprod
         console.log "data", data
-
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
@@ -168,12 +141,91 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/edit/face"
+          url     : "/edit/product"
           cache: false
           contentType: false
           processData: false
           success : (data) ->
             window.location.reload()
+
+
+
+#      editProdBody = (productObj, imgArr, vidImg) ->
+#        nesArr = []
+#        nesInp = $("#body-nesovershenstva").find("input[type='checkbox']:checked")
+#        if nesInp.length
+#          nesInp.each (i, data) ->
+#            nesArr.push($(data).val())
+#        else
+#          nesArr.push("body-nes-net") 
+#        type =
+#          type            : $("#product-tip").val()
+#          podType         : $(".activePodType > td > select").val()
+#          nesovershenstva : nesArr
+#        data =
+#          product : productObj
+#          type    : type
+
+
+#        newForm = new FormData()
+#        newForm.append("data",JSON.stringify data)
+#        imgArr.forEach (one, index) ->
+#          newForm.append(index, one)
+#        newForm.append("vid", vidImg)
+#        $.ajax
+#          type    : 'POST'
+#          data    : newForm
+#          url     : "/edit/body"
+#          cache: false
+#          contentType: false
+#          processData: false
+#          success : (data) ->
+#            window.location.reload()
+
+#      editProdFace = (productObj, imgArr, vidImg) ->
+#        
+#        kozhaArr = []
+#        kozhaInp = $("#face-kozha").find("input[type='checkbox']:checked")
+#        if kozhaInp.length
+#          kozhaInp.each (i, data) ->
+#            kozhaArr.push($(data).val())
+#        else
+#          kozhaArr.push("face-kozha-all") 
+
+#        nesArr = []
+#        nesInp = $("#face-nesovershenstva").find("input[type='checkbox']:checked")
+#        if nesInp.length
+#          nesInp.each (i, data) ->
+#            nesArr.push($(data).val())
+#        else
+#          nesArr.push("face-nes-net")
+
+#        type =
+#          type            : $("#product-tip").val()
+#          podType         : $(".activePodType > td > select").val()
+#          kozha           : kozhaArr
+#          nesovershenstva : nesArr
+#        data =
+#          product : productObj
+#          type    : type
+
+
+#        console.log "data", data
+
+#        newForm = new FormData()
+#        newForm.append("data",JSON.stringify data)
+#        imgArr.forEach (one, index) ->
+#          newForm.append(index, one)
+#        newForm.append("vid", vidImg)
+#        $.ajax
+#          type    : 'POST'
+#          data    : newForm
+#          url     : "/edit/face"
+#          cache: false
+#          contentType: false
+#          processData: false
+#          success : (data) ->
+#            window.location.reload()
             
       clearProduct = () ->
         $("#prod-vid").val('')

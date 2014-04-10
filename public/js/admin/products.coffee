@@ -97,7 +97,8 @@ $(document).ready () ->
             kozhaInp.each (i, data) ->
               kozhaArr.push($(data).val())
           else
-            kozhaArr.push("face-kozha-all") 
+            kozhaAll = typeprod + "-kozha-all"
+            kozhaArr.push(kozhaAll) 
           type.kozha = kozhaArr
           
         idNesovershenstva = "#"+typeprod+"-nesovershenstva"
@@ -108,7 +109,8 @@ $(document).ready () ->
             nesInp.each (i, data) ->
               nesArr.push($(data).val())
           else
-            nesArr.push("face-nes-net")
+            nesAll = typeprod + "-nes-net"
+            nesArr.push(nesAll)
           type.nesovershenstva = nesArr
 
 

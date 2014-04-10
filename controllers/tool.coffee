@@ -220,20 +220,20 @@ exports.boot = (app) ->
   editSet = (product, cb) ->
     Set.findOne {_id: product.isSet}, (err, body) ->
       type =
-        type : "nabor"
+        type : "set"
         data : body
       cb(type) if body
 
   editAccess = (product, cb) ->
     Access.findOne {_id: product.isAccess}, (err, body) ->
       type =
-        type : "accessories"
+        type : "access"
         data : body
       cb(type) if body
 
 
   editForman = (product, cb) ->
-    Access.findOne {_id: product.isForman}, (err, body) ->
+    Forman.findOne {_id: product.isForman}, (err, body) ->
       type =
         type : "forman"
         data : body
