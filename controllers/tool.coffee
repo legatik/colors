@@ -142,7 +142,6 @@ exports.boot = (app) ->
   app.post '/admin/del_product', (req, res) ->
     data = req.body
     Product.findOne {_id: data.id}, (err, product) ->
-      console.log "product", product
       checkType(product, {del:true})
       res.send 200
 
@@ -189,7 +188,27 @@ exports.boot = (app) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
       body.remove() if body
       delProduct(product)
-      
+
+  delIsset = (product) ->
+    Set.findOne {_id: product.isSet}, (err, set) ->
+      set.remove() if set
+      delProduct(product)
+
+  delIsmakeup = (product) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, makeup) ->
+      makeup.remove() if makeup
+      delProduct(product)
+
+  delIsaccess = (product) ->
+    Access.findOne {_id: product.isAccess}, (err, access) ->
+      access.remove() if access
+      delProduct(product)
+
+  delIsforman = (product) ->
+    Forman.findOne {_id: product.isForman}, (err, forman) ->
+      forman.remove() if forman
+      delProduct(product)
+
 
  #For Edit
 
@@ -253,24 +272,23 @@ exports.boot = (app) ->
       
     if product.isMakeup
       console.log "isMakeup"
-      delIsface(product) if param.del
+      delIsmakeup(product) if param.del
       editMakeup(product, cb)  if param.edit
       
     if product.isSet
       console.log "isSet"
-      delIsbody(product) if param.del
+      delIsset(product) if param.del
       editSet(product, cb) if param.edit
       
     if product.isAccess
       console.log "isAccess"
-      delIsface(product) if param.del
+      delIsaccess(product) if param.del
       editAccess(product, cb)  if param.edit
       
     if product.isForman
       console.log "isForman"
-      delIsbody(product) if param.del
+      delIsforman(product) if param.del
       editForman(product, cb) if param.edit
-
 
 #  app.get '/updatecost', (req, res) ->
 #    Product.find {}, (err, pr) ->
