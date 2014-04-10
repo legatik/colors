@@ -169,3 +169,26 @@ exports.boot = (app) ->
               fs.copy data.path, path + "/" + nameFile, (err) ->
         product.save()
         
+  app.post '/access', (req, res) ->
+    body = JSON.parse req.body.data
+    newBody = new Access(body.type)
+    newProd = Product(body.product)
+    newBody.save (err, body) ->
+      newProd.isAccess = body["_id"]
+      newProd.save (err, product) ->
+        res.send 200
+        _.each req.files, (data,key)->
+            type = data.mime.replace("image/", "")
+            path = './public/img/products/' + product["_id"]
+            if key == "vid"
+                fName = "vid"
+                product.imgVid = type
+                nameFile = fName  + "." + type
+            else
+                fName = Number(new Date()) 
+                nameFile = fName + key + "." + type
+                product.picture.push(nameFile)
+            fs.mkdir path, (err) ->
+              fs.copy data.path, path + "/" + nameFile, (err) ->
+        product.save()
+        

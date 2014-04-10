@@ -84,6 +84,10 @@ $(document).ready () ->
           when "nabor"
               createProdNabor(productObj, imgArr, vidImg)
 
+          when "accessories"
+              createProdAccess(productObj, imgArr, vidImg)
+
+
       addEventOnProductTip = () ->
           $(".activePodType").removeClass("activePodType")
           idPodTip = "#" + $("#product-tip").val()
@@ -98,7 +102,7 @@ $(document).ready () ->
 
 
 
-      createProdNabor = (productObj, imgArr, vidImg) ->
+      createProdAccess = (productObj, imgArr, vidImg) ->
         nesArr = []
         type =
           type            : $("#product-tip").val()
@@ -108,6 +112,32 @@ $(document).ready () ->
           product : productObj
           type    : type
 
+        newForm = new FormData()
+        newForm.append("data",JSON.stringify data)
+        imgArr.forEach (one, index) ->
+          newForm.append(index, one)
+        newForm.append("vid", vidImg)
+        $.ajax
+          type    : 'POST'
+          data    : newForm
+          url     : "/create/access"
+          cache: false
+          contentType: false
+          processData: false
+          success : (data) ->
+            alert("Добавлен!")
+            clearProduct()
+
+
+      createProdNabor = (productObj, imgArr, vidImg) ->
+        nesArr = []
+        type =
+          type            : $("#product-tip").val()
+          podType         : $(".activePodType > td > select").val()
+
+        data =
+          product : productObj
+          type    : type
 
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
