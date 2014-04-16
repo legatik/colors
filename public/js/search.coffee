@@ -175,7 +175,8 @@ $(document).ready () ->
   sendRequest = (scrollWindow) =>
     searchParams.skip = skip
     type = $("#nav-type").val()
-    url = "/search/filter/" + type
+    searchParams.type = type
+    url = "/search/filter"
     $.ajax
       type    : 'POST'
       url     : url

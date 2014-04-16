@@ -22,16 +22,12 @@ $(document).ready () ->
         opPerent = $("option[value='" + typeProd.data.podType + "']").parent()
         $(opPerent).val(typeProd.data.podType)
         console.log "typeProd.type", typeProd.type
-        switch typeProd.type
-          when "face"
-            typeProd.data.kozha.forEach (key) ->
-              $("input[value='" + key + "']").attr("checked", true)
-            typeProd.data.nesovershenstva.forEach (key) ->
-              $("input[value='" + key + "']").attr("checked", true)
-          when "body"
-            typeProd.data.nesovershenstva.forEach (key) ->
-              $("input[value='" + key + "']").attr("checked", true)
-        
+
+        typeProd.data.kozha?.forEach (key) ->
+          $("input[value='" + key + "']").attr("checked", true)
+        typeProd.data.nesovershenstva?.forEach (key) ->
+          $("input[value='" + key + "']").attr("checked", true)
+
 
       $("#gl-product-tip").click () ->
         renderType()
@@ -133,6 +129,7 @@ $(document).ready () ->
           type     : type
           typeProd : typeprod
         console.log "data", data
+        
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
