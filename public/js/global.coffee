@@ -24,6 +24,10 @@ $(document).ready () ->
       title : "Для лица"
       tip : [
         {
+            title : "ВО ВСЕХ КАТЕГОРИЯХ"
+            key : ""
+        }
+        {
           title : "ОЧИЩЕНИЕ"
           key : "face-ochishenie"
           podtip: [
@@ -246,6 +250,10 @@ $(document).ready () ->
       key   : "body"
       tip:[
         {
+            title : "ВО ВСЕХ КАТЕГОРИЯХ"
+            key : ""
+        }
+        {
           title : "УХОД ЗА ТЕЛОМ"
           key : "body-body"
           podtip: [
@@ -393,6 +401,10 @@ $(document).ready () ->
         key   : "makeup"
         tip:[
             {
+                title : "ВО ВСЕХ КАТЕГОРИЯХ"
+                key : ""
+            }
+            {
               title : "ЛИЦО"
               key : "makeup-face"
               podtip: [
@@ -492,6 +504,10 @@ $(document).ready () ->
         key   : "forman"
         tip:[
             {
+                title : "ВО ВСЕХ КАТЕГОРИЯХ"
+                key : ""
+            }
+            {
               title : "БАЗОВЫЙ УХОД"
               key : "forman-baza"
               podtip: [
@@ -583,6 +599,10 @@ $(document).ready () ->
         key   : "set"
         tip:[
             {
+                title : "ВО ВСЕХ КАТЕГОРИЯХ"
+                key : ""
+            }
+            {
               title : "НАБОРЫ"
               key : "set-set"
               podtip: [
@@ -623,6 +643,10 @@ $(document).ready () ->
         title : "Аксессуары"
         key   : "access" 
         tip:[
+            {
+                title : "ВО ВСЕХ КАТЕГОРИЯХ"
+                key : ""
+            }
             {
               title : "ДЛЯ ОЧИЩЕНИЯ КОЖИ"
               key : "access-ochish"

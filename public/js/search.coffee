@@ -120,21 +120,23 @@ $(document).ready () ->
       collectParams()
 
     $(".filter-type").click (e) ->
+      $(".active-type").removeClass("active-type")
+      $(@).addClass("active-type")
       type = $(@).attr("value")
       searchParams.special = {}
-      searchParams.special.type = type
+      searchParams.special.type = type if type
       skip = 0
       collectParams()
 
     $(".filter-pod-type").click (e) ->
+      $(".active-type").removeClass("active-type")
+      $(@).addClass("active-type")
       searchParams.special = {}
       type = $(@).attr("value")
       searchParams.special.podType = type
       skip = 0
       collectParams()
 
-    $("#slider-price").change () ->
-      console.log "SS"
 
   collectOtherParams = (scrollWindow) ->
     searchParams.product.min_price = $(".min-price").val()
