@@ -166,15 +166,117 @@ ul.navigation
       padding-left: 48px;
       position:relative
       z-index:10
-      
+
 #navbar-my
   position: relative
   ul.navigation
     li
-      margin-left: 19px
+      margin-left: 15px
+      height: 26px
+      position: relative
       a
-        color: #333
-        font-size: 19px
+        color: #000
+        font-size: 17px
+        padding-left: 6px
+        padding-right: 6px
+      .menu-cont
+        position: absolute;
+        z-index: 100;
+        top: 25px;
+        .col1
+          display: inline-block
+          vertical-align: top
+          margin-left: 11px
+          &:first-of-type
+            margin-left: 18px
+          ul.ul2
+            margin-top: 35px
+          ul
+            display: block
+            padding: 0px
+            font-family: CenturyGothic-Bold
+            font-size: 10px
+            margin-top: 20px
+            max-width: 127px
+            li
+              padding: 0px
+              display: block
+              margin: 0px
+              font-family: CenturyGothic
+              font-size: 10px
+              height: 11px
+              margin-top: 9px
+    li.news
+      background: #FFF7B0
+    li.brands
+      background: #F9D895
+    li.face
+      background: #ED987E
+      .menu-cont
+        width: 539px
+        height: 238px
+        background: #FFE2DC
+        left: -203px
+        border: 3px solid #ED987E
+    li.body
+      background: #E26082
+      .menu-cont
+        width: 482px
+        height: 238px
+        background: #FFE2DC
+        left: -243px
+        border: 3px solid #E26082
+        ul
+          max-width: 147px
+
+    li.hair
+      background: #9255A0
+    li.make
+      background: #46579E
+      .menu-cont
+        width: 418px
+        height: 238px
+        background: #C0CCED
+        left: -170px
+        border: 3px solid #46579E
+        ul
+          max-width: 147px
+
+    li.acces
+      background: #4F7D84
+      .menu-cont
+        width: 457px
+        height: 238px
+        background: #D3EBED
+        left: -170px
+        border: 3px solid #4F7D84
+        ul.ul3
+          margin-top: 115px
+        ul.ul4
+          margin-top: 70px
+        ul
+          max-width: 147px
+          li.spec
+            position: absolute
+    li.mans
+      background: #5A8740
+      .menu-cont
+        width: 316px
+        height: 238px
+        background: #DAF4C9
+        left: -106px
+        border: 3px solid #5A8740
+        ul
+          max-width: 141px
+    li.sets
+      background: #C0C685
+      .menu-cont
+        width: 136px
+        height: 238px
+        background: #F2F4C9
+        left: -32px
+        border: 3px solid #C0C685
+
 
 
 #myCarousel
@@ -326,6 +428,29 @@ ul.navigation
     background: url('../img/right.png') no-repeat 50% 50%
     right: -147px
 
+#dop-cont
+  position: relative
+  margin-top: 48px
+  height: 247px
+  span
+    position: absolute
+    font-size: 28px
+    color: #000
+  .sp1
+    top: 0px
+    left: 84px
+  .sp2
+    top: 54px
+    left: 286px
+  .sp3
+    top: 143px
+    left: 119px
+  .line4
+    width: 663px
+    height: 2px
+    top: 119px
+    left: 129px
+    background: url('../img/line4.png')
 
 #advantage-cont
   margin-top: 73px
@@ -1056,3 +1181,4 @@ ul.navigation
   color:black !important
   font-weight: bolder
   text-decoration: underline
+
