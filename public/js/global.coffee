@@ -464,6 +464,10 @@ $(document).ready () ->
                       title : "Фиксаторы макияжа"
                       key : "makeup-face8"
                     }
+                    {
+                      title : "Крем-пудры, бальзамы"
+                      key : "makeup-face9"
+                    }
               ]
             }
             {
