@@ -19,27 +19,80 @@ exports.boot = (app) ->
 
   app.get '/face', (req, res) ->
     data = req.query
+    console.log "data", data
     sort = ""
-    sort = data.sort if data.sort 
-    res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort}
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort, pType, type}
 
   app.get '/body', (req, res) ->
-      res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body", sort, pType, type}
 
   app.get '/hair', (req, res) ->
-      res.render 'search', {title: 'Для волос', user: req.user, loc:'home', search:"body"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Для волос', user: req.user, loc:'home', search:"body", sort, pType, type}
 
   app.get '/makeup', (req, res) ->
-      res.render 'search', {title: 'Макияж', user: req.user, loc:'home', search:"makeup"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Макияж', user: req.user, loc:'home', search:"makeup", sort, pType, type}
 
   app.get '/accessories', (req, res) ->
-      res.render 'search', {title: 'Аксессуары', user: req.user, loc:'home', search:"access"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Аксессуары', user: req.user, loc:'home', search:"access", sort, pType, type}
 
   app.get '/man', (req, res) ->
-      res.render 'search', {title: 'Для мужчин', user: req.user, loc:'home', search:"forman"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Для мужчин', user: req.user, loc:'home', search:"forman", sort, pType, type}
 
   app.get '/sets', (req, res) ->
-      res.render 'search', {title: 'Наборы', user: req.user, loc:'home', search:"set"}
+    data = req.query
+    console.log "data", data
+    sort = ""
+    type = ""
+    pType = ""
+    sort = data.sort if data.sort
+    type = data.type if data.type
+    pType = data.pType if data.pType
+    res.render 'search', {title: 'Наборы', user: req.user, loc:'home', search:"set", sort, pType, type}
 
   app.get '/promotions', (req, res) ->
     actionId = req.query.key

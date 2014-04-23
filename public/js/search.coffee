@@ -193,7 +193,13 @@ $(document).ready () ->
 
   firstKey = $("#firstData").attr("search")
   firstSort = $("#firstData").attr("sort")
+  firstType = $("#firstData").attr("oType")
+  firstPType = $("#firstData").attr("pType")
   
+  searchParams.special.type = firstType if firstType
+  searchParams.special.podType = firstPType if firstPType
+  
+  console.log "searchParams", searchParams
   
   if firstSort == "new" 
     elFSort =$(".sort-product").find("option[value='popular']")

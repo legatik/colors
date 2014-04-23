@@ -17,6 +17,22 @@ $(document).ready () ->
         $("#header-top-fixed").stop(true, true)
         $("#header-top-fixed").fadeOut("slow")
 
+
+  $(".navigation > li").mouseenter ()->
+    $($(@).find(".menu-cont")).fadeIn(150)
+
+  $(".navigation > li").mouseleave ()->
+    $($(@).find(".menu-cont")).fadeOut(150)
+  
+  $(".sub-title").click ()->
+    window.location.href = $(@).attr("value")
+  
+  liNav = $(".menu-cont").find("li")
+  
+  $(liNav).click ()->
+    window.location.href = $(@).attr("value")
+  
+  
   
   window.nav = {
     face:{
@@ -50,6 +66,10 @@ $(document).ready () ->
             {
               title : "Кремы, пудры для умывания"
               key : "face-ochishenie5"
+            }
+            {
+              title : "Мыло"
+              key : "face-ochishenie6"
             }
           ]
         }
