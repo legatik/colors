@@ -14,6 +14,7 @@ exports.boot = (app) ->
       _.each req.files, (data,key)->
         type = data.mime.replace("image/", "")
         path = './public/img/actions/' + action["_id"]
+        console.log "keaggg", key
         action[key] = type
         fs.mkdir path, (err) ->
           fs.copy data.path, path + "/" + key + "." + type, (err) ->
