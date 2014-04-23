@@ -79,15 +79,15 @@ $(document).ready () ->
           key : "face-tonizir"
           podtip: [
             {
-              title : "Бустеры"
+              title : "Тонеры, стартеры"
               key : "face-tonizir1"
             }
             {
-              title : "Тонеры, стартеры"
+              title : "Мисты (спреи)"
               key : "face-tonizir2"
             }
             {
-              title : "Мисты (спреи)"
+              title : "Бустеры"
               key : "face-tonizir3"
             }
             {
@@ -445,29 +445,30 @@ $(document).ready () ->
                       key : "makeup-face3"
                     }
                     {
-                      title : "Пудры сухие"
+                      title : "Крем-пудры, бальзамы"
                       key : "makeup-face4"
                     }
                     {
-                      title : "Консилеры/корректоры"
+                      title : "Пудры сухие"
                       key : "makeup-face5"
                     }
                     {
-                      title : "Хайлайтеры и бронзеры"
+                      title : "Консилеры/корректоры"
                       key : "makeup-face6"
                     }
                     {
-                      title : "Румяна"
+                      title : "Хайлайтеры и бронзеры"
                       key : "makeup-face7"
                     }
                     {
-                      title : "Фиксаторы макияжа"
+                      title : "Румяна"
                       key : "makeup-face8"
                     }
                     {
-                      title : "Крем-пудры, бальзамы"
+                      title : "Фиксаторы макияжа"
                       key : "makeup-face9"
                     }
+
               ]
             }
             {
