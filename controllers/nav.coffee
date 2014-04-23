@@ -18,15 +18,17 @@ exports.boot = (app) ->
       res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends, brendId}
 
   app.get '/face', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort, pType, type}
+    Action.findOne {active:true}, (err, action) ->
+      console.log "action",action
+      data = req.query
+      console.log "data", data
+      sort = ""
+      type = ""
+      pType = ""
+      sort = data.sort if data.sort
+      type = data.type if data.type
+      pType = data.pType if data.pType
+      res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort, pType, type}
 
   app.get '/body', (req, res) ->
     data = req.query
