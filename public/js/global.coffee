@@ -117,6 +117,10 @@ $(document).ready () ->
               title : "Гели"
               key : "face-osnov-uhod4"
             }
+            {
+              title : "Кремы"
+              key : "face-osnov-uhod5"
+            }
           ]
         }
       
@@ -372,14 +376,14 @@ $(document).ready () ->
         {
           title : "ПАРФЮМИРОВАННЫЕ И 
 ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА"
-          key : "body-epil"
+          key : "body-porf"
           podtip: []
         }
         
         
         {
           title : "СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА"
-          key : "body-epil"
+          key : "body-solnc"
           podtip: []
         }
       ]
