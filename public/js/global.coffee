@@ -19,10 +19,14 @@ $(document).ready () ->
 
 
   $(".navigation > li").mouseenter ()->
-    $($(@).find(".menu-cont")).fadeIn(150)
+    $a = $(@).find("a")
+    newCalss = $($a).attr("hClass")
+    $(".navigation > li").attr("class", "")
+    $(@).addClass(newCalss)
+    $($(@).find(".menu-cont")).fadeIn(120)
 
   $(".navigation > li").mouseleave ()->
-    $($(@).find(".menu-cont")).fadeOut(150)
+    $($(@).find(".menu-cont")).fadeOut(120)
   
   $(".sub-title").click ()->
     window.location.href = $(@).attr("value")
