@@ -17,84 +17,25 @@ exports.boot = (app) ->
     Brend.find {active:true}, (err, brends) ->
       res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends, brendId}
 
-  app.get '/face', (req, res) ->
-    Action.findOne {active:true}, (err, action) ->
-      console.log "action",action
-      data = req.query
-      console.log "data", data
-      sort = ""
-      type = ""
-      pType = ""
-      sort = data.sort if data.sort
-      type = data.type if data.type
-      pType = data.pType if data.pType
-      res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort, pType, type}
+  app.get '/product', (req, res) ->
+    Action.count {}, (err, count)->
+      skip = Math.floor(Math.random() * count)
+      console.log 'skip',skip
+      Action.find({active:true}).skip(skip).limit(1).exec (err, actionArr) ->
+        if actionArr.length
+          action = "../img/actions/"+actionArr[0]._id+"/poster."+actionArr[0].poster+""
+        console.log "action", action
+        data = req.query
+        console.log "data", data
+        search = data.search
+        sort = ""
+        type = ""
+        pType = ""
+        sort = data.sort if data.sort
+        type = data.type if data.type
+        pType = data.pType if data.pType
+        res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search, sort, pType, type, action}
 
-  app.get '/body', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body", sort, pType, type}
-
-  app.get '/hair', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Для волос', user: req.user, loc:'home', search:"body", sort, pType, type}
-
-  app.get '/makeup', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Макияж', user: req.user, loc:'home', search:"makeup", sort, pType, type}
-
-  app.get '/accessories', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Аксессуары', user: req.user, loc:'home', search:"access", sort, pType, type}
-
-  app.get '/man', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Для мужчин', user: req.user, loc:'home', search:"forman", sort, pType, type}
-
-  app.get '/sets', (req, res) ->
-    data = req.query
-    console.log "data", data
-    sort = ""
-    type = ""
-    pType = ""
-    sort = data.sort if data.sort
-    type = data.type if data.type
-    pType = data.pType if data.pType
-    res.render 'search', {title: 'Наборы', user: req.user, loc:'home', search:"set", sort, pType, type}
 
   app.get '/promotions', (req, res) ->
     actionId = req.query.key
