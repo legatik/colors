@@ -39,6 +39,4 @@ exports.boot = (app) ->
     
   app.get '/user/favorites', (req, res) -> 
     res.render 'favorites', {title: 'Colors Project', user: req.user, loc:'home'}    
-  
-  app.get '/user/reviews', (req, res) -> 
-    res.render 'reviews', {title: 'Colors Project', user: req.user, loc:'home'}     
+    

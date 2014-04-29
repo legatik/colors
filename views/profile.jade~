@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  include navigation
+  .cabinet-cont
+    .left
+      .menu
+        ul
+          li.active ПРОФИЛЬ
+          li ИЗБРАННОЕ
+          li ОТЗЫВЫ
+          li НАКОПЛЕНИЕ
+    .right
+      .user-form
+        .str
+          .label Фото:
+          .load Загрузить
+        .str
+          .label Настоящее имя:
+          input.name(type="text")          
+        .str
+          .label Пол: 
+          select.gender
+            option Женский   
+            option Мужской          
+        .str
+          .label День рождения: 
+          select.day 
+            option 1
+          select.month 
+            option Яврунь  
+          select.year 
+            option Годик                       
+        .str
+          .label Город:
+          input.town(type="text")
+          
+        .str
+          .label В Контакте:
+          .text-vk vk.com/..
+          input.vk(type="text")
+        .str
+          .label Обо мне: 
+          textarea.about-me
+      .agree ПОДТВЕРДИТЬ  
+    .adv-div
+      .txt1  Теперь вы можете пользоваться бонусами и специальными ценами, а также получать подарки!         

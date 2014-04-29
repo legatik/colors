@@ -1464,6 +1464,4 @@ ul.navigation
             top: 4px
             left: 432px    
             font-size: 13px      
-            color: #DA1C5C  
-  .adv-div 
-    background: url("../img/adv3.png")  no-repeat                                                                                                            
+            color: #DA1C5C                                                                                                     
