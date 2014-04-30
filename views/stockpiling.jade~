@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  include navigation
+  .cabinet-cont.stockpiling
+    .left
+      .menu
+        ul
+          li ПРОФИЛЬ
+          li ИЗБРАННОЕ
+          li ОТЗЫВЫ
+          li.active НАКОПЛЕНИЯ
+    .right
+      .balance-cont
+        .label Баланс ваших балов
+        .balance 23,93 
+      a.link(href="#") Что такое баллы? 
+      a.link(href="#") За что начисляются баллы?
+      a.link(href="#") Как я могу потратить баллы?
+      a.link(href="#") Есть ли у баллов срок действия?
+    .podrobnee 
+      span ПОДРОБНЕЕ О ПРИВИЛЕНИЯХ ПОКУПАТЕЛЙ COLORS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+      
+        

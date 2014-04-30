@@ -34,11 +34,20 @@ exports.boot = (app) ->
 
 
   app.get '/user/profile', (req, res) -> 
-    res.render 'profile', {title: 'Colors Project', user: req.user, loc:'home'}
+    res.render 'profile', {title: 'Colors Профиль', user: req.user, loc:'home'}
     
     
   app.get '/user/favorites', (req, res) -> 
-    res.render 'favorites', {title: 'Colors Project', user: req.user, loc:'home'}    
+    res.render 'favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}    
+  
+  app.get '/user/un-favorites', (req, res) -> 
+    res.render 'un-favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}
   
   app.get '/user/reviews', (req, res) -> 
-    res.render 'reviews', {title: 'Colors Project', user: req.user, loc:'home'}     
+    res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}     
+    
+  app.get '/user/stockpiling', (req, res) -> 
+    res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}      
+    
+  app.get '/lending', (req, res) -> 
+    res.render 'lending', {title: 'Colors lending', user: req.user, loc:'home'}       
