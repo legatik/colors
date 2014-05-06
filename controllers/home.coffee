@@ -17,6 +17,7 @@ exports.boot = (app) ->
     return arrSend
 
   app.get '/', (req, res) ->
+    console.log "req.user", req.user
     Product.find {vetrina:true}, (err, vetrins) ->
       vetrinaArr = separatorFn(vetrins, 4)
       Brend.find {active:true}, (err, brends) ->
@@ -32,22 +33,6 @@ exports.boot = (app) ->
       console.log "product", product
       res.render 'product', {title: 'Colors - ' + product.title, product:product}
 
-
-  app.get '/user/profile', (req, res) -> 
-    res.render 'profile', {title: 'Colors Профиль', user: req.user, loc:'home'}
-    
-    
-  app.get '/user/favorites', (req, res) -> 
-    res.render 'favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}    
-  
-  app.get '/user/un-favorites', (req, res) -> 
-    res.render 'un-favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}
-  
-  app.get '/user/reviews', (req, res) -> 
-    res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}     
-    
-  app.get '/user/stockpiling', (req, res) -> 
-    res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}      
     
   app.get '/lending', (req, res) -> 
     res.render 'lending', {title: 'Colors lending', user: req.user, loc:'home'}       

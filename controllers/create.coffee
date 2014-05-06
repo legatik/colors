@@ -2,6 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
+passport = require 'passport'
 
 {User, Product, Brend, New, Action} = db.models
 
@@ -86,9 +87,10 @@ exports.boot = (app) ->
     email = req.body.email
     password = Number(new Date()) + Math.ceil(Math.random()*9)
     obj = {
-      email    : email
-      password : password
-      confirm  : false
+      email        : email
+      password     : password
+      confirm      : false
+      date_request : new Date()
     }
     user = new User(obj)
     user.save()
@@ -113,14 +115,25 @@ exports.boot = (app) ->
         console.log "Message sent: " + response.message
         res.send 200
 
-  app.get '/confirm', (req, res) ->
+  app.get '/confirm', (req, res, next) ->
     pass = req.query.pass
-    User.findOne ({confirm:false ,password:pass}), (err, user) ->
+    User.findOne ({password:pass}), (err, user) ->
       if !user
         res.redirect "/"
         return
-      console.log "user", user
-      user.confirm = true
-      user.save ()->
-        res.send 200
+      if !user.confirm
+        user.confirm = true
+        user.registered_on = new Date()
+      user.save (err, u)->
+        req.body = {
+          email:u.email
+          password:u.password
+        }
+        passport.authenticate("local", (err, user, info) ->
+          if user
+            req.logIn user, (err) ->
+              res.redirect "/"
+          else
+            res.redirect "/"
+        ) req, res, next
     

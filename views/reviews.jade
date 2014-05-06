@@ -6,10 +6,14 @@ block content
     .left
       .menu
         ul
-          li ПРОФИЛЬ
-          li ИЗБРАННОЕ
-          li.active ОТЗЫВЫ
-          li НАКОПЛЕНИЕ
+          a(href="/user/profile")
+            li ПРОФИЛЬ
+          a(href="/user/favorites")
+            li ИЗБРАННОЕ
+          a(href="/user/reviews")
+            li.active ОТЗЫВЫ
+          a(href="/user/stockpiling")
+            li НАКОПЛЕНИЕ
     .right  
       .reviews-cont
         .review

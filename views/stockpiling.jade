@@ -6,10 +6,14 @@ block content
     .left
       .menu
         ul
-          li ПРОФИЛЬ
-          li ИЗБРАННОЕ
-          li ОТЗЫВЫ
-          li.active НАКОПЛЕНИЯ
+          a(href="/user/profile")
+            li ПРОФИЛЬ
+          a(href="/user/favorites")
+            li ИЗБРАННОЕ
+          a(href="/user/reviews")
+            li ОТЗЫВЫ
+          a(href="/user/stockpiling")
+            li.active НАКОПЛЕНИЕ
     .right
       .balance-cont
         .label Баланс ваших балов

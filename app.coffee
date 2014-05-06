@@ -13,7 +13,6 @@ db = require './lib/db'
 auth = require './lib/auth'
 passport = require 'passport'
 
-
 RedisStore = require('connect-redis')(express)
 app = express()
 
@@ -59,29 +58,30 @@ app.namespace '/nav', require('./controllers/nav').boot.bind @, app
 app.namespace '/create', require('./controllers/create').boot.bind @, app
 app.namespace '/search', require('./controllers/search').boot.bind @, app
 app.namespace '/edit', require('./controllers/edit').boot.bind @, app
+app.namespace '/user', require('./controllers/user').boot.bind @, app
 
 app.get '/register', (req, res) ->
 	res.render 'registration', {title: 'Onlile JS Compiller'}
 
-app.post '/register', (req, res) ->
-	user = req.body
-	User.register user, (err,user) ->
-		if err
-			res.send {status:false, data:err}
-		else
-			res.send {status:true, data:user}
+#app.post '/register', (req, res) ->
+#	user = req.body
+#	User.register user, (err,user) ->
+#		if err
+#			res.send {status:false, data:err}
+#		else
+#			res.send {status:true, data:user}
 
-app.get '/login', (req, res) ->
-	res.render 'login', {title: 'login'}
+#app.get '/login', (req, res) ->
+#	res.render 'login', {title: 'login'}
 
-app.post "/login", (req, res, next) ->
-	passport.authenticate("local", (err, user, info) ->
-		if user
-			req.logIn user, (err) ->
-				res.send true
-		else
-			res.send false
-	) req, res, next
+#app.post "/login", (req, res, next) ->
+#	passport.authenticate("local", (err, user, info) ->
+#		if user
+#			req.logIn user, (err) ->
+#				res.send true
+#		else
+#			res.send false
+#	) req, res, next
 
 
 app.get '/logout', (req,res) ->
