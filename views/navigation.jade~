@@ -58,8 +58,8 @@
           .bask
           .mini-line
         .more Еще 11 продуктов..
-        .go-fav ПЕРЕЙТИ В ИЗБРАННОЕ
-        .go-bask ПЕРЕНЕСТИ В КОРЗИНУ  
+        .go-fav
+        .go-bask  
 #navbar-my
   ul.navigation
     li

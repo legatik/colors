@@ -311,7 +311,7 @@ ul.navigation
           font-size: 9.51px
           color: white
           text-align: center
-          padding-top: 2px             
+          padding-top: 6px             
         .go-fav
           left: 26px   
         .go-bask
