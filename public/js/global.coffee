@@ -47,6 +47,17 @@ $(document).ready () ->
     $(".log-menu").hide()
 
 
+  $(".send").click ()->
+    mail = $("#mail-pod").val()
+    reg = new RegExp("^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$")
+
+    if reg.test(mail)
+      $.ajax
+        type    : 'POST'
+        url     : "/create/step1_user"
+        data    : {email:mail}
+        success : (products) =>
+          alert("Заявка отправленна. Проверьте свою электронную почту")
 
 
   $(liNav).click ()->

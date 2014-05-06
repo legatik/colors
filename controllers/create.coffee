@@ -82,3 +82,26 @@ exports.boot = (app) ->
         product.save()
 
 
+  app.post '/step1_user', (req, res) ->
+    email = req.body.email
+    smtpTransport = nodemailer.createTransport("SMTP",
+      service: "Gmail"
+      auth:
+        user: "mir.cook.sup@gmail.com"
+        pass: "mircooksup"
+    )
+
+    mailOptions =
+      from: "mir.cook.sup@gmail.com"
+      to: "legatik@list.ru"
+      subject: "Регестрация" # Subject line
+      html: "<div>Привет</div>"
+
+    smtpTransport.sendMail mailOptions, (error, response) ->
+      if error
+        console.log error
+      else
+        console.log "Message sent: " + response.message
+        res.send 200
+
+
