@@ -24,14 +24,14 @@ exports.boot = (app) ->
         Action.find {active:true}, (err, actions) ->
           New.find {vetrina:true}, (err, news) ->
             brendArr = separatorFn(brends, 6)
-            res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news}
+            res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news, user:req.user}
 
 
   app.get '/product/:idProd', (req, res) ->
     idProd = req.params.idProd
     Product.findById idProd, (err, product) ->
       console.log "product", product
-      res.render 'product', {title: 'Colors - ' + product.title, product:product}
+      res.render 'product', {title: 'Colors - ' + product.title, product:product, user:req.user}
 
     
   app.get '/lending', (req, res) -> 

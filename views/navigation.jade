@@ -64,7 +64,13 @@
           .bask
           .mini-line
         .more Еще 11 продуктов..
-        .go-fav ПЕРЕЙТИ В ИЗБРАННОЕ
+        .go-fav
+          if(user)
+            a(href="/user/favorites", style="color:#FFF;position: relative; top: -2px;") 
+              ПЕРЕЙТИ В ИЗБРАННОЕ
+          if(!user)
+            a(href="/user/un-favorites", style="color:#FFF;position: relative; top: -2px;") 
+              ПЕРЕЙТИ В ИЗБРАННОЕ
         .go-bask ПЕРЕНЕСТИ В КОРЗИНУ  
 #navbar-my
   ul.navigation
