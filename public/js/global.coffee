@@ -40,7 +40,7 @@ $(document).ready () ->
   $(".fav-menu").mouseleave ()->
     $(".fav-menu").hide()
 
-  $(".login").mouseenter ()->
+  $("#login-btn").mouseenter ()->
     $(".log-menu").show()
 
   $(".log-menu").mouseleave ()->

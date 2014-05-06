@@ -34,8 +34,12 @@
   a(href="/")
     #logo
   #user-cont
-    .options.login
-      a Вход
+    if(user)
+      .options.login
+        a(style="position: absolute;top: 0px;left: 2px;z-index: 90;height: 65px;width: 84px;", href="/user/profile") Личный кабинет
+    if(!user)
+      #login-btn.options.login
+        a Вход
     .options.stuff
       a Избранное
     .options.busket
@@ -44,7 +48,7 @@
     .log-menu
       .bord-log
       .menu-body-log 
-        .title  Подписка
+        .title  Вход
         input(value="legatik@list.ru")#mail-pod
         .send ПОДПИСАТСЯ 
     .fav-menu
