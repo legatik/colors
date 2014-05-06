@@ -7,14 +7,15 @@ ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
 user = new Schema(
-	dishRaiting : [{type: ObjectId, ref: 'Raiting'}]
+	favorites: [{type: ObjectId, ref: 'Product'}]
 	nickname: String
 	firstName: String
 	lastName: String
 	email: String
 	password: String
 	registered_on: Date
-	comments: [{type: ObjectId, ref: 'Comment'}]
+	date_request: Date
+	confirm: Boolean
 )
 Model = mongoose.model 'User', user
 

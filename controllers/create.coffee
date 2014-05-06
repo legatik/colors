@@ -84,6 +84,15 @@ exports.boot = (app) ->
 
   app.post '/step1_user', (req, res) ->
     email = req.body.email
+    password = Number(new Date()) + Math.ceil(Math.random()*9)
+    obj = {
+      email    : email
+      password : password
+      confirm  : false
+    }
+    user = new User(obj)
+    user.save()
+    
     smtpTransport = nodemailer.createTransport("SMTP",
       service: "Gmail"
       auth:
@@ -95,7 +104,7 @@ exports.boot = (app) ->
       from: "mir.cook.sup@gmail.com"
       to: "legatik@list.ru"
       subject: "Регестрация" # Subject line
-      html: "<div>Привет</div>"
+      html: "<div>Привет</div><div><a href='http://localhost:3000/create/confirm/?pass="+password+"'>перейти по ссылке</a></div>"
 
     smtpTransport.sendMail mailOptions, (error, response) ->
       if error
@@ -104,4 +113,14 @@ exports.boot = (app) ->
         console.log "Message sent: " + response.message
         res.send 200
 
-
+  app.get '/confirm', (req, res) ->
+    pass = req.query.pass
+    User.findOne ({confirm:false ,password:pass}), (err, user) ->
+      if !user
+        res.redirect "/"
+        return
+      console.log "user", user
+      user.confirm = true
+      user.save ()->
+        res.send 200
+    
