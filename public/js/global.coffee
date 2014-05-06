@@ -33,6 +33,22 @@ $(document).ready () ->
   
   liNav = $(".menu-cont").find("li")
   
+  
+  $(".stuff").mouseenter ()->
+    $(".fav-menu").show()
+
+  $(".fav-menu").mouseleave ()->
+    $(".fav-menu").hide()
+
+  $(".login").mouseenter ()->
+    $(".log-menu").show()
+
+  $(".log-menu").mouseleave ()->
+    $(".log-menu").hide()
+
+
+
+
   $(liNav).click ()->
     window.location.href = $(@).attr("value")
   
