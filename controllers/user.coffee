@@ -23,6 +23,9 @@ exports.boot = (app) ->
     res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}      
     
   app.post '/update', (req, res) -> 
+    console.log "req.body",req.body
+    console.log "req.file",req.files
+    return
     body = req.body.data
     if req.user
       User.findOne {_id:req.user["_id"]}, (err, user)->

@@ -11,10 +11,20 @@ $(document).ready () ->
     year = $(".year").val()
     dateNew = month + "/" + day + "/" + year
     obj.birthday = new Date(dateNew)
+
+    img  = ($("#load-photo-user"))[0].files[0]
+    newForm = new FormData()
+    newForm.append("data",JSON.stringify obj)
+    newForm.append("img", img)
+
+
     $.ajax
       method:"post"
-      data: {data: obj}
+      data: newForm
       url: "/user/update"
+      cache: false
+      contentType: false
+      processData: false
       success: (data) ->
         window.location.reload()
     
