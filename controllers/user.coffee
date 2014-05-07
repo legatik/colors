@@ -32,4 +32,5 @@ exports.boot = (app) ->
         user.vk = body.vk
         user.aboutme = body.aboutme
         user.birthday = new Date body.birthday
-        user.save (u, e) ->
+        user.save()
+        res.send 200

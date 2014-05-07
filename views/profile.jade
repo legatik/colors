@@ -21,6 +21,7 @@ block content
         .str
           .label Фото:
           .load Загрузить
+          input#load-photo-user(type="file")
         .str
           .label Настоящее имя:
           input.name(type="text", value!="#{user.name}")          
