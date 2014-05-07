@@ -2,6 +2,8 @@ extends layout
 
 block content
   include navigation
+  != js('user')
+  input#firstData(user=JSON.stringify(user), type="hidden")
   .cabinet-cont
     .left
       .menu
@@ -21,31 +23,63 @@ block content
           .load Загрузить
         .str
           .label Настоящее имя:
-          input.name(type="text")          
+          input.name(type="text", value!="#{user.name}")          
         .str
           .label Пол: 
           select.gender
-            option Женский   
-            option Мужской          
+            option(value="girl") Женский   
+            option(value="man") Мужской          
         .str
           .label День рождения: 
           select.day 
             option 1
+            option 2
+            option 3
+            option 4
+            option 5
+            option 6
+            option 7
+            option 8
+            option 9
+            option 10
+            option 11
+            option 12
+            option 13
+            option 14
+            option 15
+            option 16
+            option 17
+            option 18
+            option 19
+            option 20
+            option 21
+            option 22
+            option 23
+            option 24
+            option 25
+            option 26
+            option 27
+            option 28
+            option 29
+            option 30
+            option 31
           select.month 
-            option Яврунь  
+            option(value="1") Яврунь 
+            option(value="2") Февруль  
           select.year 
-            option Годик                       
+            option(value="2000") 2000
+            option(value="1990") 1990                        
         .str
           .label Город:
-          input.town(type="text")
+          input.town(type="text", value!="#{user.town}")
           
         .str
           .label В Контакте:
           .text-vk vk.com/..
-          input.vk(type="text")
+          input.vk(type="text", value!="#{user.vk}")
         .str
           .label Обо мне: 
-          textarea.about-me
+          textarea.about-me #{user.aboutme}
       .agree ПОДТВЕРДИТЬ  
     .adv-div
       .txt1  Теперь вы можете пользоваться бонусами и специальными ценами, а также получать подарки!    

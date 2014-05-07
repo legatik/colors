@@ -14,7 +14,11 @@ user = new Schema(
 	password      : String
 	registered_on : Date
 	date_request  : Date
+	gender        : String
+	town          : String
 	confirm       : Boolean
+	aboutme       : String
+	birthday      : Date
 )
 Model = mongoose.model 'User', user
 
