@@ -15,7 +15,7 @@ $(document).ready () ->
     img  = ($("#load-photo-user"))[0].files[0]
     newForm = new FormData()
     newForm.append("data",JSON.stringify obj)
-    newForm.append("img", img)
+    newForm.append("ava", img)
 
 
     $.ajax
@@ -62,3 +62,12 @@ $(document).ready () ->
   $(".day").val(dayB)
   $(".month").val(monthB)
   $(".year").val(yearB)
+  
+  if fUser.ava
+    $("#img-prev-user").show()
+    $("#img-prev-user").attr "src", "/img/users/" + fUser["_id"] + "/" + "ava." + fUser.ava
+    $("#load-photo-user").hide()
+    $(".del-img-u").text("Удалить")
+
+
+

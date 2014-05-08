@@ -1,6 +1,8 @@
 db = require '../lib/db'
 _ = require 'underscore'
 nodemailer = require 'nodemailer'
+fs = require "fs-extra"
+rimraf = require "rimraf"
 
 {Product, Brend, Action, New, User} = db.models
 
@@ -25,8 +27,7 @@ exports.boot = (app) ->
   app.post '/update', (req, res) -> 
     console.log "req.body",req.body
     console.log "req.file",req.files
-    return
-    body = req.body.data
+    body = JSON.parse req.body.data
     if req.user
       User.findOne {_id:req.user["_id"]}, (err, user)->
         user.name = body.name
@@ -35,5 +36,26 @@ exports.boot = (app) ->
         user.vk = body.vk
         user.aboutme = body.aboutme
         user.birthday = new Date body.birthday
-        user.save()
-        res.send 200
+        _.each req.files, (data,key)->
+          type = data.mime.replace("image/", "")
+          path = './public/img/users/' + user["_id"]
+          console.log "keaggg", key
+
+          if user.ava
+            pathDel = path + "/ava." + user.ava
+            rimraf pathDel, (err) ->
+              user[key] = type
+              fs.mkdir path, (err) ->
+                fs.copy data.path, path + "/ava." + type, (err) ->
+                  user.save()
+                  res.send 200
+          else
+              user[key] = type
+              fs.mkdir path, (err) ->
+                fs.copy data.path, path + "/ava." + type, (err) ->
+                  user.save()
+                  res.send 200
+
+
+#        user.save()
+#        res.send 200

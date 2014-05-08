@@ -19,6 +19,7 @@ user = new Schema(
 	confirm       : Boolean
 	aboutme       : String
 	birthday      : Date
+	ava           : String
 )
 Model = mongoose.model 'User', user
 
