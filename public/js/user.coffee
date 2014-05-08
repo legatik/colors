@@ -9,8 +9,9 @@ $(document).ready () ->
     day = $(".day").val()
     month = $(".month").val()
     year = $(".year").val()
-    dateNew = month + "/" + day + "/" + year
-    obj.birthday = new Date(dateNew)
+    if month and day and year
+      dateNew = month + "/" + day + "/" + year
+      obj.birthday = new Date(dateNew)
 
     img  = ($("#load-photo-user"))[0].files[0]
     newForm = new FormData()

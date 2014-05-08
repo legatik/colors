@@ -35,7 +35,12 @@ exports.boot = (app) ->
         user.town = body.town
         user.vk = body.vk
         user.aboutme = body.aboutme
-        user.birthday = new Date body.birthday
+        if body.birthday
+          user.birthday = new Date body.birthday
+        if(_.isEmpty(req.files))
+          user.save()
+          res.send 200
+          return
         _.each req.files, (data,key)->
           type = data.mime.replace("image/", "")
           path = './public/img/users/' + user["_id"]

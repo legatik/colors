@@ -91,6 +91,11 @@ exports.boot = (app) ->
       password     : password
       confirm      : false
       date_request : new Date()
+      name          : ""
+      vk            : ""
+      gender        : ""
+      town          : ""
+      aboutme       : ""
     }
     user = new User(obj)
     user.save()
