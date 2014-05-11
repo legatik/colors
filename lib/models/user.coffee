@@ -20,6 +20,7 @@ user = new Schema(
 	aboutme       : String
 	birthday      : Date
 	ava           : String
+	balls         : String
 )
 Model = mongoose.model 'User', user
 
