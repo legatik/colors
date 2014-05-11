@@ -44,6 +44,19 @@ exports.boot = (app) ->
     Product.find({'_id': { $in: arrId}}).limit(2).exec (err, products) ->
       res.send products
 
+  app.post '/remove_favorites', (req, res) ->
+    arrId = req.body.idDel
+    if req.user
+      User.findOne {_id:req.user["_id"]}, (err, user)->
+        newArr = []
+        user.favorites.forEach (id) ->
+          newArr.push(id) if arrId.toString() != id.toString()
+        user.favorites = []
+        user.favorites = newArr
+        user.save()
+        res.send 200
+
+
   app.post '/update', (req, res) ->
     body = JSON.parse req.body.data
     if req.user

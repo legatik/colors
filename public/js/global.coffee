@@ -65,9 +65,34 @@ $(document).ready () ->
                     el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-cookie" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
                     $(".line-cont").append(el)
                   addEventDel()
+        else
+          $(".line-cont").empty()
+          if data.products.length > 2
+            $(".more").text("Еще " + (data.products.length-2) + " продуктов..")
+            $(".more").show()
+
+          if !data.products.length
+            $("#null-prod").show()
+          else
+            data.products.forEach (pr) ->
+              el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
+              $(".line-cont").append(el)
+            addEventDel()
+
 
   addEventDel = () ->
     $(".del-cookie").unbind("click")
+    $(".del-db").unbind("click")
+
+    $(".del-db").on "click", ->
+      idDel = $(@).attr("id")
+      $.ajax
+        type    : 'POST'
+        data    : {idDel:idDel}
+        url     : "/user/remove_favorites"
+        success : (products) =>
+          showLastFavProd()
+
     $(".del-cookie").on "click", ->
       idDel = $(@).attr("id")
       cookies_fav =  $.cookie "colors_favorites"
