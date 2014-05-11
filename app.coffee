@@ -59,6 +59,7 @@ app.namespace '/create', require('./controllers/create').boot.bind @, app
 app.namespace '/search', require('./controllers/search').boot.bind @, app
 app.namespace '/edit', require('./controllers/edit').boot.bind @, app
 app.namespace '/user', require('./controllers/user').boot.bind @, app
+app.namespace '/product', require('./controllers/product').boot.bind @, app
 
 app.get '/register', (req, res) ->
 	res.render 'registration', {title: 'Onlile JS Compiller'}

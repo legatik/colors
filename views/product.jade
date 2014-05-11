@@ -2,6 +2,7 @@ extends layout
 
 block content
   include navigation
+  != js('product')
   #product-page
     input#firstData(type="hidden")
     .catalog Каталог
@@ -41,7 +42,11 @@ block content
         br
         .buy-fast Купить быстро
         .in-basket В корзину
-        .favorites В избранное
+        if user
+          if favAdded
+            .favorites.addFav(id="#{product['_id']}") В избранное
+          if !favAdded
+            .favorites(id="#{product['_id']}") В избранном
       #adv1-block
         div.line
         div.f1 ГАРАНТИЯ КАЧЕСТВА

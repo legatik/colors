@@ -1,4 +1,5 @@
 $(document).ready () ->
+  inProgress = true
   $(".agree").click () ->
     obj = 
       name    :  $(".name").val()
@@ -70,5 +71,43 @@ $(document).ready () ->
     $("#load-photo-user").hide()
     $(".del-img-u").text("Удалить")
 
+
+#  for FAVORITES
+        
+        
+  console.log "fUser", fUser
+        
+  skip = 0
+  
+  getProd = () ->
+    prodArr = fUser.favorites.slice(skip, skip+24)
+    if prodArr.length
+      url = "/user/get/favorites"
+      $.ajax
+        type    : 'POST'
+        url     : url
+        data    : {prodArr:prodArr}
+        beforeSend: =>
+          inProgress = true
+        success : (products) =>
+          inProgress = false
+          skip = skip + 24
+          renderProd(products)
+    
+    
+        
+        
+  renderProd = (products, scrollWindow) ->
+    products.forEach (product) ->
+      template = _.template(jQuery('#productTemplate').html())
+      el = $(template({data:product}))
+      $(".product-cont").append(el)
+      $(el).hide().fadeIn("slow")
+
+  getProd()
+
+  $(window).scroll =>
+    if $(window).scrollTop() + $(window).height() >= $(document).height() - 550 and not inProgress
+      getProd()
 
 

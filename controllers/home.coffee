@@ -27,12 +27,5 @@ exports.boot = (app) ->
             res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news, user:req.user}
 
 
-  app.get '/product/:idProd', (req, res) ->
-    idProd = req.params.idProd
-    Product.findById idProd, (err, product) ->
-      console.log "product", product
-      res.render 'product', {title: 'Colors - ' + product.title, product:product, user:req.user}
-
-    
   app.get '/lending', (req, res) -> 
     res.render 'lending', {title: 'Colors lending', user: req.user, loc:'home'}       

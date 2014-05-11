@@ -12,8 +12,9 @@ exports.boot = (app) ->
     User.findOne {_id:req.user["_id"]}, (err, user)->
       res.render 'profile', {title: 'Colors Профиль', user: user, loc:'home'}
     
-  app.get '/favorites', (req, res) -> 
-    res.render 'favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}    
+  app.get '/favorites', (req, res) ->
+    User.findOne {_id:req.user["_id"]}, (err, user)->
+      res.render 'favorites', {title: 'Colors Избранное', user: user, loc:'home'}    
   
   app.get '/un-favorites', (req, res) -> 
     res.render 'un-favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}
@@ -23,10 +24,15 @@ exports.boot = (app) ->
     
   app.get '/stockpiling', (req, res) -> 
     res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}      
+  
+  app.post '/get/favorites', (req, res) -> 
+    arrId = req.body.prodArr
+    console.log "prodArr", arrId
+    Product.find ({'_id': { $in: arrId}}), (err, products) ->
+      res.send products
+    
     
   app.post '/update', (req, res) -> 
-    console.log "req.body",req.body
-    console.log "req.file",req.files
     body = JSON.parse req.body.data
     if req.user
       User.findOne {_id:req.user["_id"]}, (err, user)->

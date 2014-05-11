@@ -2,6 +2,8 @@ extends layout
 
 block content
   include navigation
+  input#firstData(type="hidden", user=JSON.stringify(user))
+  != js("user")
   .cabinet-cont.favorites
     .left
       .menu
@@ -16,46 +18,6 @@ block content
             li НАКОПЛЕНИЕ
     .right  
       .product-cont
-        .prod
-          img(src="../img/products/535fd4479b75970611000006/13987891916960.png",width="124px",height="144px")
-          .title graaergae
-          .descr efweaggggggggreageargaergaergaer
-          .old-plice 500
-            span &nbsp;р
-          .new-price 500
-            span &nbsp;р  
-          a(href="/product/535fd4479b75970611000006") 
-            .in-basket  В КОРЗИНУ 
-        .prod
-          img(src="../img/products/535fd4479b75970611000006/13987891916960.png",width="124px",height="144px")
-          .title graaergae
-          .descr efweaggggggggreageargaergaergaer
-          .old-plice 500
-            span &nbsp;р
-          .new-price 500
-            span &nbsp;р  
-          a(href="/product/535fd4479b75970611000006") 
-            .in-basket  В КОРЗИНУ 
-        .prod
-          img(src="../img/products/535fd4479b75970611000006/13987891916960.png",width="124px",height="144px")
-          .title graaergae
-          .descr efweaggggggggreageargaergaergaer
-          .old-plice 500
-            span &nbsp;р
-          .new-price 500
-            span &nbsp;р  
-          a(href="/product/535fd4479b75970611000006") 
-            .in-basket  В КОРЗИНУ 
-        .prod
-          img(src="../img/products/535fd4479b75970611000006/13987891916960.png",width="124px",height="144px")
-          .title graaergae
-          .descr efweaggggggggreageargaergaergaer
-          .old-plice 500
-            span &nbsp;р
-          .new-price 500
-            span &nbsp;р  
-          a(href="/product/535fd4479b75970611000006") 
-            .in-basket  В КОРЗИНУ      
             
     .adv-div
       .txt1  Бонусные баллы, скидки и подарки при каждом заказе    

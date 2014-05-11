@@ -290,6 +290,23 @@ exports.boot = (app) ->
       delIsforman(product) if param.del
       editForman(product, cb) if param.edit
 
+#  app.get '/updateFavUser', (req, res) ->
+#    User.findById "536f8dff96a422ec11000001", (err, user) ->
+#      Product.find {}, (err, pr) ->
+#        pr.forEach (p) ->
+#          user.favorites.push p["_id"]
+#        user.save()
+#        res.send 200
+
+
+#  app.get '/updatecost', (req, res) ->
+#    console.log "@@@@@@@"
+#    Product.find {}, (err, pr) ->
+#      pr.forEach (p) ->
+#        p.cost = 100
+#        p.save()
+
+
 #  app.get '/updatecost', (req, res) ->
 #    Product.find {}, (err, pr) ->
 #      pr.forEach (p) ->
