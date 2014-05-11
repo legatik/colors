@@ -8,30 +8,43 @@ rimraf = require "rimraf"
 
 exports.boot = (app) ->
 
-  app.get '/profile', (req, res) -> 
+  app.get '/profile', (req, res) ->
     User.findOne {_id:req.user["_id"]}, (err, user)->
       res.render 'profile', {title: 'Colors Профиль', user: user, loc:'home'}
-    
+
   app.get '/favorites', (req, res) ->
     User.findOne {_id:req.user["_id"]}, (err, user)->
-      res.render 'favorites', {title: 'Colors Избранное', user: user, loc:'home'}    
-  
-  app.get '/un-favorites', (req, res) -> 
+      res.render 'favorites', {title: 'Colors Избранное', user: user, loc:'home'}
+
+  app.get '/un-favorites', (req, res) ->
     res.render 'un-favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}
-  
-  app.get '/reviews', (req, res) -> 
-    res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}     
-    
-  app.get '/stockpiling', (req, res) -> 
-    res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}      
-  
-  app.post '/get/favorites', (req, res) -> 
+
+  app.get '/reviews', (req, res) ->
+    res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}
+
+  app.get '/stockpiling', (req, res) ->
+    res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}
+
+  app.post '/get/favorites', (req, res) ->
     arrId = req.body.prodArr
     Product.find ({'_id': { $in: arrId}}), (err, products) ->
       res.send products
-    
-    
-  app.post '/update', (req, res) -> 
+
+  app.post '/get/tow_favorites', (req, res) ->
+    if req.user
+      arrId = req.body.prodArr
+      User.findOne {_id:req.user["_id"]}, (err, user)->
+        Product.find({'_id': { $in: user.favorites}}).limit(2).exec (err, products) ->
+          res.send {user:true, products:products}
+    else
+      res.send {user:false}
+
+  app.post '/get/tow_favorites_byId', (req, res) ->
+    arrId = req.body.prodArr
+    Product.find({'_id': { $in: arrId}}).limit(2).exec (err, products) ->
+      res.send products
+
+  app.post '/update', (req, res) ->
     body = JSON.parse req.body.data
     if req.user
       User.findOne {_id:req.user["_id"]}, (err, user)->
@@ -69,3 +82,4 @@ exports.boot = (app) ->
 
 #        user.save()
 #        res.send 200
+

@@ -47,35 +47,30 @@
     input#search-input
     .log-menu
       .bord-log
-      .menu-body-log 
+      .menu-body-log
         .title  Вход
         input(value="legatik@list.ru")#mail-pod
-        .send ПОДПИСАТСЯ 
+        .send ПОДПИСАТСЯ
     .fav-menu
       .bord
-      .menu-body 
+      .menu-body
         .title  Избранное
-        .line
-          img(width="38px",height="38px")
-          .txt1 verg serg ser gesrg serg
-          .txt2 vvsvsdv wef awef waef awef awe fawef waef awef awe f
-          .bask
-          .mini-line
-        .line
-          img(width="38px",height="38px")
-          .txt1 verg serg ser gesrg serg
-          .txt2 vvsvsdv wef awef waef awef awe fawef waef awef awe f
-          .bask
-          .mini-line
-        .more Еще 11 продуктов..
+        .line-cont
+        if(user)
+          a(href="/user/favorites")
+            .more Еще 11 продуктов..
+        if(!user)
+          a(href="/user/un-favorites")
+            .more Еще 11 продуктов..
+        #null-prod У вас нет продуктов в избранном
         .go-fav
           if(user)
-            a(href="/user/favorites", style="color:#FFF;position: relative; top: -2px;") 
+            a(href="/user/favorites", style="color:#FFF;position: relative; top: -2px;")
               ПЕРЕЙТИ В ИЗБРАННОЕ
           if(!user)
-            a(href="/user/un-favorites", style="color:#FFF;position: relative; top: -2px;") 
+            a(href="/user/un-favorites", style="color:#FFF;position: relative; top: -2px;")
               ПЕРЕЙТИ В ИЗБРАННОЕ
-        .go-bask ПЕРЕНЕСТИ В КОРЗИНУ  
+        .go-bask ПЕРЕНЕСТИ В КОРЗИНУ
 #navbar-my
   ul.navigation
     li
@@ -86,7 +81,7 @@
       a(href='/nav/product?search=face', hClass="face")  Для лица
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=face-ochishenie&search=face") ОЧИЩЕНИЕ
             li(value="/nav/product?pType=face-ochishenie1&search=face") Для снятия макияжа
             li(value="/nav/product?pType=face-ochishenie2&search=face") Гидрофильные масла
@@ -94,14 +89,14 @@
             li(value="/nav/product?pType=face-ochishenie4&search=face") Пенки для умывания
             li(value="/nav/product?pType=face-ochishenie5&search=face") Кремы, пудры
             li(value="/nav/product?pType=face-ochishenie6&search=face") Мыло
-          ul.ul2 
+          ul.ul2
             span(value="/nav/product?type=face-sonlce-zach&search=face").sub-title СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА
         .col1
-          ul 
+          ul
             span(value="/nav/product?type=face-tonizir&search=face").sub-title ТОНИЗИРОВАНИЕ
             li(value="/nav/product?pType=face-tonizir1&search=face") Тонеры
             li(value="/nav/product?pType=face-tonizir2&search=face") Спреи (мисты)
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=face-osnov-uhod&search=face") ОСНОВНОЙ УХОД
             li(value="/nav/product?pType=face-osnov-uhod1&search=face") Ампулы
             li(value="/nav/product?pType=face-osnov-uhod2&search=face") Сыворотки и эссенции
@@ -116,13 +111,13 @@
             li(value="/nav/product?pType=face-spec-uhod3&search=face") Масла
             li(value="/nav/product?pType=face-spec-uhod4&search=face") Массажные средства
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=face-mask") МАСКИ
             li(value="/nav/product?pType=face-mask1&search=face") Ночные маски
             li(value="/nav/product?pType=face-mask2&search=face") Маски: пасты, кремы
             li(value="/nav/product?pType=face-mask3&search=face") Листовые маски
             li(value="/nav/product?pType=face-mask4&search=face") Точечные маски-патчи
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=face-otchelush&search=face") ОТШЕЛУШИВАНИЕ
             li(value="/nav/product?pType=face-otchelush1&search=face") Скрабы и гоммажи
             li(value="/nav/product?pType=face-otchelush2&search=face") Пилинги
@@ -130,7 +125,7 @@
       a(href='/nav/product?search=body', hClass="body")  Для тела
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=body-body&search=body") УХОД ЗА ТЕЛОМ
             li(value="/nav/product?pType=body-body1&search=body") Для ванны и душа
             li(value="/nav/product?pType=body-body2&search=body") Лосьоны, кремы, бальзамы
@@ -138,28 +133,28 @@
             li(value="/nav/product?pType=body-body4&search=body") Масла
             li(value="/nav/product?pType=body-body5&search=body") Массажные средства
             li(value="/nav/product?pType=body-body6&search=body") Скрабы
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=body-solnc&search=body") СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=body-hend&search=body") УХОД ЗА РУКАМИ
             li(value="/nav/product?pType=body-hend1&search=body") Кремы и лосьоны
             li(value="/nav/product?pType=body-hend2&search=body") Маски и скрабы
             li(value="/nav/product?pType=body-hend3&search=body") Уход за ногтями
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=body-footer&search=body") УХОД ЗА НОГАМИ
             li(value="/nav/product?pType=body-footer1&search=body") Скрабы и пилинги
             li(value="/nav/product?pType=body-footer2&search=body") Маски, патчи
             li(value="/nav/product?pType=body-footer3&search=body") Лосьоны, кремы и спреи
             li(value="/nav/product?pType=body-footer4&search=body") Дезодорирующие средства
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=body-stroin&search=body") ДЛЯ СТРОЙНОГО СИЛУЭТА
             li(value="/nav/product?pType=body-stroin1&search=body") Гели, кремы, скрабы
             li(value="/nav/product?pType=body-stroin2&search=body") Маски и патчи
-          ul.ul2  
+          ul.ul2
             span.sub-title(value="/nav/product?type=body-epil&search=body") ЭПИЛЯЦИЯ И ДЕПИЛЯЦИЯ
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=body-porf&search=body") ПАРФЮМИРОВАННЫЕ И ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА
 
     li
@@ -168,7 +163,7 @@
       a(href='/nav/product?search=makeup', hClass="make")  Макияж
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=makeup-face&search=makeup") ЛИЦО
             li(value="/nav/product?pType=makeup-face1&search=makeup") Базы под макияж
             li(value="/nav/product?pType=makeup-face2&search=makeup") ВВ-кремы
@@ -180,14 +175,14 @@
             li(value="/nav/product?pType=makeup-face8&search=makeup") Румяна
             li(value="/nav/product?pType=makeup-face9&search=makeup") Фиксаторы макияжа
         .col1
-          ul  
+          ul
             span.sub-title(value="/nav/product?type=makeup-eyes&search=makeup") ГУБЫ
             li(value="/nav/product?pType=makeup-eyes1&search=makeup") Базы под макияж губ
             li(value="/nav/product?pType=makeup-eyes2&search=makeup") Тинты
             li(value="/nav/product?pType=makeup-eyes3&search=makeup") Блески
             li(value="/nav/product?pType=makeup-eyes4&search=makeup") Помады
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=makeup-lips&search=makeup") ГЛАЗА
             li(value="/nav/product?pType=makeup-lips1&search=makeup") Базы под тушь, фиксаторы
             li(value="/nav/product?pType=makeup-lips2&search=makeup") Туши
@@ -199,29 +194,29 @@
       a(href='/nav/product?search=accessories', hClass="acces")  Аксессуары
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=access-ochish&search=accessories") ДЛЯ ОЧИЩЕНИЯ КОЖИ
             li(value="/nav/product?pType=access-ochish1&search=accessories") Щеточки, губки
             li(value="/nav/product?pType=access-ochish2&search=accessories") Спонжи конняку
             li(value="/nav/product?pType=access-ochish3&search=accessories") Хлопковые тампоны и диски
             li(value="/nav/product?pType=access-ochish4&search=accessories") Прочее
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=access-mask&search=accessories") ДЛЯ МАСОК
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=access-massazh&search=accessories") ДЛЯ МАССАЖА
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=access-makeup&search=accessories") ДЛЯ МАКИЯЖА
             li(value="/nav/product?pType=access-makeup1&search=accessories") Кисти для макияжа
             li(value="/nav/product?pType=access-makeup2&search=accessories") Пуховки, спонжи
             li(value="/nav/product?pType=access-makeup3&search=accessories") Матирующие салфетки
             li.spec(value="/nav/product?pType=access-makeup4&search=accessories") Очищающие средства для спонжей и кистей
-          ul.ul4 
+          ul.ul4
             span.sub-title(value="/nav/product?type=access-raznoe&search=accessories") РАЗНОЕ
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=access-manikur&search=accessories") ДЛЯ МАНИКЮРА И ПЕДИКЮРА
-          ul.ul3 
+          ul.ul3
             span.sub-title(value="/nav/product?type=access-header&search=accessories") ДЛЯ ВОЛОС
 
 
@@ -229,7 +224,7 @@
       a(href='/nav/product?search=man', hClass="mans")  Для мужчин
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=forman-baza&search=man") БАЗОВЫЙ УХОД
             li(value="/nav/product?pType=forman-baza1&search=man") Пенки, гели для умывания
             li(value="/nav/product?pType=forman-baza2&search=man") Скрабы
@@ -239,20 +234,20 @@
             li(value="/nav/product?pType=forman-baza6&search=man") Бальзамы для губ
             li(value="/nav/product?pType=forman-baza7&search=man") Листовые маски
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=forman-body&search=man") ДЛЯ ТЕЛА И ВОЛОС
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=forman-porf&search=man") ПАРФЮМИРОВАННЫЕ СРЕДСТВА
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=forman-brit&search=man") ПОСЛЕ БРИТЬЯ
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=forman-bbkrem&search=man") МУЖСКИЕ ВВ-КРЕМЫ
 
     li
       a(href='/nav/product?search=sets', hClass="sets")  Наборы
       .menu-cont
         .col1
-          ul 
+          ul
             span.sub-title(value="/nav/product?type=set-set&search=sets") НАБОРЫ
             li(value="/nav/product?pType=set-set1&search=sets") Уход за лицом
             li(value="/nav/product?pType=set-set2&search=sets") Уход за телом
@@ -260,6 +255,6 @@
             li(value="/nav/product?pType=set-set4&search=sets") Для мужчин
             li(value="/nav/product?pType=set-set5&search=sets") Макияж
             li(value="/nav/product?pType=set-set6&search=sets") Маникюр
-          ul.ul2 
+          ul.ul2
             span.sub-title(value="/nav/product?type=set-semple&search=sets") СЭМПЛ-НАБОРЫ
 

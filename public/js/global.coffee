@@ -1,14 +1,14 @@
 $(document).ready () ->
-  
+
   console.log "globalJS"
-  
+
   jQuery.browser = {};
   jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
   jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
   jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
   jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
-  
-  
+
+
   $(window).scroll =>
     if $(window).scrollTop() >= 270
         $("#header-top-fixed").stop(true, true)
@@ -27,15 +27,61 @@ $(document).ready () ->
 
   $(".navigation > li").mouseleave ()->
     $($(@).find(".menu-cont")).fadeOut(120)
-  
+
   $(".sub-title").click ()->
     window.location.href = $(@).attr("value")
-  
+
   liNav = $(".menu-cont").find("li")
-  
-  
+
+  showLastFavProd = () ->
+    $(".more").hide()
+    $("#null-prod").hide()
+    $.ajax
+      type    : 'POST'
+      url     : "/user/get/tow_favorites"
+      success : (data) =>
+        console.log "data", data
+        if !data.user
+          cookies_fav =  $.cookie "colors_favorites"
+          if cookies_fav and cookies_fav != "null"
+            cookieArr = JSON.parse(cookies_fav)
+            console.log "cookieArr",cookieArr
+            $.ajax
+              type    : 'POST'
+              data    : {prodArr:cookieArr}
+              url     : "/user/get/tow_favorites_byId"
+              success : (products) =>
+                $(".line-cont").empty()
+                console.log "products.length", cookieArr.length
+                if cookieArr.length > 2
+                  console.log "cookieArr.length-2", cookieArr.length-2
+                  $(".more").text("Еще " + (cookieArr.length-2) + " продуктов..")
+                  $(".more").show()
+
+                if !products.length
+                  $("#null-prod").show()
+                else
+                  products.forEach (pr) ->
+                    el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-cookie" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
+                    $(".line-cont").append(el)
+                  addEventDel()
+
+  addEventDel = () ->
+    $(".del-cookie").unbind("click")
+    $(".del-cookie").on "click", ->
+      idDel = $(@).attr("id")
+      cookies_fav =  $.cookie "colors_favorites"
+      cookieArr = JSON.parse(cookies_fav)
+      newArr = []
+      cookieArr.forEach (item) ->
+        newArr.push(item) if idDel.toString() != item.toString()
+      $.cookie "colors_favorites", JSON.stringify(newArr),
+        expires: 7
+      showLastFavProd()
+
   $(".stuff").mouseenter ()->
     $(".fav-menu").show()
+    showLastFavProd()
 
   $(".fav-menu").mouseleave ()->
     $(".fav-menu").hide()
@@ -62,9 +108,9 @@ $(document).ready () ->
 
   $(liNav).click ()->
     window.location.href = $(@).attr("value")
-  
-  
-  
+
+
+
   window.nav = {
     face:{
       key   : "face"
@@ -104,7 +150,7 @@ $(document).ready () ->
             }
           ]
         }
-      
+
         {
           title : "ТОНИЗИРОВАНИЕ"
           key : "face-tonizir"
@@ -127,7 +173,7 @@ $(document).ready () ->
             }
           ]
         }
-   
+
         {
           title : "ОСНОВНОЙ УХОД"
           key : "face-osnov-uhod"
@@ -154,7 +200,7 @@ $(document).ready () ->
             }
           ]
         }
-      
+
 
         {
           title : "СПЕЦИАЛЬНЫЙ УХОД"
@@ -252,7 +298,7 @@ $(document).ready () ->
             {
               title : "Чувствительная"
               key   : "face-kozha-chuv"
-            } 
+            }
           ]
         }
         {
@@ -282,19 +328,19 @@ $(document).ready () ->
             {
               title : "Разглаживание морщин"
               key   : "face-nes-morch"
-            } 
+            }
             {
               title : "Лифтинг"
               key   : "face-nes-lif"
-            } 
+            }
             {
               title : "Сухость, шелушение"
               key   : "face-nes-suh"
-            } 
+            }
             {
               title : "Усталость, тусклый цвет лица"
               key   : "face-nes-ust"
-            } 
+            }
           ]
         }
       ]
@@ -338,8 +384,8 @@ $(document).ready () ->
             }
           ]
         }
-        
-        
+
+
         {
           title : "УХОД ЗА РУКАМИ"
           key : "body-hend"
@@ -358,8 +404,8 @@ $(document).ready () ->
             }
           ]
         }
-        
-        
+
+
         {
           title : "УХОД ЗА НОГАМИ"
           key : "body-footer"
@@ -382,7 +428,7 @@ $(document).ready () ->
             }
           ]
         }
-        
+
         {
           title : "ДЛЯ СТРОЙНОГО СИЛУЭТА"
           key : "body-stroin"
@@ -397,29 +443,29 @@ $(document).ready () ->
             }
           ]
         }
-        
+
         {
           title : "ЭПИЛЯЦИЯ, ДЕПИЛЯЦИЯ"
           key : "body-epil"
           podtip: []
         }
-        
+
         {
-          title : "ПАРФЮМИРОВАННЫЕ И 
+          title : "ПАРФЮМИРОВАННЫЕ И
 ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА"
           key : "body-porf"
           podtip: []
         }
-        
-        
+
+
         {
           title : "СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА"
           key : "body-solnc"
           podtip: []
         }
       ]
-      
-      
+
+
       dop : [
         {
           title : "Несовершенства"
@@ -532,7 +578,7 @@ $(document).ready () ->
                     }
                 ]
             }
-            
+
             {
                 title : "ГУБЫ"
                 key : "makeup-lips"
@@ -557,8 +603,8 @@ $(document).ready () ->
             }
         ]
     }
-    
-    
+
+
     forman:{
         title : "Для мужчин"
         key   : "forman"
@@ -604,7 +650,7 @@ $(document).ready () ->
             {
                 title : "ДЛЯ ТЕЛА И ВОЛОС"
                 key : "forman-body"
-                
+
             }
             {
                 title : "ПАРФЮМИРОВАННЫЕ СРЕДСТВА"
@@ -647,7 +693,7 @@ $(document).ready () ->
                 {
                     title : "Чувствительная"
                     key   : "forman-kozha-chuv"
-                } 
+                }
             ]
             }
         ]
@@ -701,7 +747,7 @@ $(document).ready () ->
 
     access:{
         title : "Аксессуары"
-        key   : "access" 
+        key   : "access"
         tip:[
             {
                 title : "ВО ВСЕХ КАТЕГОРИЯХ"
@@ -737,7 +783,7 @@ $(document).ready () ->
                 title : "ДЛЯ МАССАЖА"
                 key : "access-massazh"
             }
-            
+
             {
               title : "ДЛЯ МАКИЯЖА"
               key : "access-makeup"
@@ -775,5 +821,4 @@ $(document).ready () ->
         ]
     }
   }
-  
-  
+
