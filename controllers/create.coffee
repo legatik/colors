@@ -21,7 +21,7 @@ exports.boot = (app) ->
           fs.copy data.path, path + "/" + key + "." + type, (err) ->
       action.save()
       res.send 200
-    
+
 
 
   app.post '/brend', (req, res) ->
@@ -99,19 +99,19 @@ exports.boot = (app) ->
     }
     user = new User(obj)
     user.save()
-    
+
     smtpTransport = nodemailer.createTransport("SMTP",
       service: "Gmail"
       auth:
-        user: "mir.cook.sup@gmail.com"
-        pass: "mircooksup"
+        user: "colors.sup@gmail.com"
+        pass: "colors1!1"
     )
 
     mailOptions =
       from: "mir.cook.sup@gmail.com"
-      to: "legatik@list.ru"
+      to: email
       subject: "Регестрация" # Subject line
-      html: "<div>Привет</div><div><a href='http://localhost:3000/create/confirm/?pass="+password+"'>перейти по ссылке</a></div>"
+      html: "<div>Привет</div><div><a href='http://localhost:3000/create/confirm/?pass="+password+"'>перейти по ссылке</a></div><div>Ваш пароль: "+password+"</div>"
 
     smtpTransport.sendMail mailOptions, (error, response) ->
       if error
@@ -141,4 +141,4 @@ exports.boot = (app) ->
           else
             res.redirect "/"
         ) req, res, next
-    
+
