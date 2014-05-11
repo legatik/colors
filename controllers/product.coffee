@@ -6,7 +6,6 @@ _ = require 'underscore'
 exports.boot = (app) ->
   app.get '/:idProd', (req, res) ->
     idProd = req.params.idProd
-    
     if req.user
       User.findById req.user["_id"], (err, user) ->
         if user
@@ -15,9 +14,12 @@ exports.boot = (app) ->
             check = false if idInFav.toString() is idProd
           Product.findById idProd, (err, product) ->
             if product
-              res.render 'product', {title: 'Colors - ' + product.title, product:product, user:req.user, favAdded:check}
+              res.render 'product', {title: 'Colors - ' + product.title, product:product, user:user, favAdded:check}
             else
               res.send 404
+    else
+      Product.findById idProd, (err, product) ->
+        res.render 'product', {title: 'Colors - ' + product.title, product:product, user:"", favAdded:""}
       
   app.post '/addFavoritesUser/:idProd', (req, res) ->
     if req.user

@@ -4,7 +4,7 @@ block content
   include navigation
   != js('product')
   #product-page
-    input#firstData(type="hidden")
+    input#firstData(type="hidden", user="#{user}")
     .catalog Каталог
     .product-cont
       .left
@@ -47,6 +47,9 @@ block content
             .favorites.addFav(id="#{product['_id']}") В избранное
           if !favAdded
             .favorites(id="#{product['_id']}") В избранном
+        if !user
+            .favorites.setCookie(id="#{product['_id']}") В избранное
+            .favorites.nsetCookie.hide(id="#{product['_id']}") В избранном
       #adv1-block
         div.line
         div.f1 ГАРАНТИЯ КАЧЕСТВА

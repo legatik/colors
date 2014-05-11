@@ -27,7 +27,6 @@ exports.boot = (app) ->
   
   app.post '/get/favorites', (req, res) -> 
     arrId = req.body.prodArr
-    console.log "prodArr", arrId
     Product.find ({'_id': { $in: arrId}}), (err, products) ->
       res.send products
     
