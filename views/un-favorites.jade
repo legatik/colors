@@ -12,4 +12,18 @@ block content
       input.inp2
       .txt3 и получите скидки, бонусы и подарки к вашим покупкам!
       .podr ПОДРОБНЕЕ
-                              
+                       
+  script#productFavoritsTemplate(type="text/template")
+    .prod.prod-fav(id!="cont-<%=data['_id']%>")
+      img.del-fav.del-cookie-page(src="/img/del-prod.jpg", id!="<%=data['_id']%>")
+      img(src!="../img/products/<%=data['_id']%>/<%=data.picture[0]%>", width="124px", height="144px")
+      .title <%=data.title%>
+      .descr <%=data.minOpisanie%>
+      .old-price <%=data.oldCost%>
+        <%if (data.oldCost) {%>
+        span &nbsp;р
+        <%}%>
+      .new-price <%=data.cost%>
+        span &nbsp;р
+      a(href != "/product/<%=data['_id']%>")
+        .in-basket В КОРЗИНУ  

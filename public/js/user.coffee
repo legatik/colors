@@ -130,14 +130,37 @@ $(document).ready () ->
         if $(window).scrollTop() + $(window).height() >= $(document).height() - 550 and not inProgress
           getProd()
 
-            
-            
+
+  addEvent = () ->
+    $(".del-cookie-page").unbind("click")
+    $(".del-db-page").unbind("click")
+    $(".del-bd-page").click ()->
+      idDel = $(@).attr("id")
+      $.ajax
+        type    : 'POST'
+        data    : {idDel:idDel}
+        url     : "/user/remove_favorites"
+        success : (products) =>
+          id = "#cont-" + idDel
+          $(id).remove()
+    $(".del-cookie-page").click ()->
+      idDel = $(@).attr("id")
+      cookies_fav =  $.cookie "colors_favorites"
+      cookieArr = JSON.parse(cookies_fav)
+      newArr = []
+      cookieArr.forEach (item) ->
+        newArr.push(item) if idDel.toString() != item.toString()
+      $.cookie "colors_favorites", JSON.stringify(newArr),
+        expires: 7
+      id = "#cont-" + idDel
+      $(id).remove()
+          
   renderProd = (products) ->
     products.forEach (product) ->
-      template = _.template(jQuery('#productTemplate').html())
+      template = _.template(jQuery('#productFavoritsTemplate').html())
       el = $(template({data:product}))
       $(".product-cont").append(el)
       $(el).hide().fadeIn("slow")
-
+    addEvent()
   
   
