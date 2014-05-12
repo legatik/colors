@@ -1,0 +1,13 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/users')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    input#first-data(type="hidden", users="#{users}")
+    div HELLO
+
+

@@ -23,6 +23,10 @@ exports.boot = (app) ->
   app.get '/admin/page/action', (req, res) ->
       res.render 'admin/page/action', {title: 'Админ - акции', user: req.user, loc:'home'}
 
+  app.get '/admin/page/user', (req, res) ->
+      User.find {confirm:true}, (err, users) ->
+        res.render 'admin/page/user', {title: 'Админ - акции', user: req.user, loc:'home', users}
+
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
     brendId = req.params.brendId
