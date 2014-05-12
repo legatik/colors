@@ -294,6 +294,14 @@ exports.boot = (app) ->
       delIsforman(product) if param.del
       editForman(product, cb) if param.edit
 
+
+  app.post '/admin/del_user', (req, res) ->
+    data = req.body
+    User.findOne {_id: data.id}, (err, user) ->
+      console.log "user", user
+      user.remove()
+      res.send 200
+
 #  app.get '/updateFavUser', (req, res) ->
 #    User.findById "536f8dff96a422ec11000001", (err, user) ->
 #      Product.find {}, (err, pr) ->

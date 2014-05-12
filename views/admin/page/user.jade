@@ -7,7 +7,29 @@ block content
   != css('admin')
   #admin-cont
     include admin-nav
-    input#first-data(type="hidden", users="#{users}")
-    div HELLO
+    input#first-data(type="hidden", users=JSON.stringify(users))
+    div Всего пользователей : 
+      span #{users.length}
+      br
+      br
+    table.list-table
+      thead
+        tr
+          td(width=100) Дата регестрации
+          td(width=200, style="max-width:200px") Имя
+          td(width=100) Email
+          td(width=200) Пароль
+          td(width=220) vk
+          td(width=200) Удаление
+      tbody#list-br-body
 
+  script#userListTemplate(type="text/template")
+    tr(id!="cont-<%=user['_id']%>")
+      td <%=(new Date(user.date_request)).toLocaleDateString()%>
+      td <%=user.name%>
+      td <%=user.email%>
+      td <%=user.password%>
+      td <%=user.vk%>
+      td
+        button.fn-del(id!="<%=user['_id']%>") Удалить
 
