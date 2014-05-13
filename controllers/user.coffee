@@ -35,7 +35,8 @@ exports.boot = (app) ->
       arrId = req.body.prodArr
       User.findOne {_id:req.user["_id"]}, (err, user)->
         Product.find({'_id': { $in: user.favorites}}).limit(2).exec (err, products) ->
-          res.send {user:true, products:products}
+          Product.find({'_id': { $in: user.favorites}}).count().exec (err, col) ->
+            res.send {user:true, products:products, col:col}
     else
       res.send {user:false}
 

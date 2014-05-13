@@ -66,9 +66,10 @@ $(document).ready () ->
                     $(".line-cont").append(el)
                   addEventDel()
         else
+          console.log "ata.products",data
           $(".line-cont").empty()
-          if data.products.length > 2
-            $(".more").text("Еще " + (data.products.length-2) + " продуктов..")
+          if data.col > 2
+            $(".more").text("Еще " + (data.col-2) + " продуктов..")
             $(".more").show()
 
           if !data.products.length
