@@ -1,0 +1,81 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/edit/action')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    
+    input#firstData(type="hidden", action=JSON.stringify(action))
+    #brend-form
+      table#brend-table(style="display:inline-block")
+        tr
+          td Ведите название акции&nbsp
+          td
+            input#brend-name(value=action.title)
+            
+        tr
+          td Описание акции&nbsp
+          td
+            textarea.textarea-add-m#brend-desc #{action.description}
+            
+        tr
+          td Активный&nbsp
+          td
+            - if(action.active)
+              input#active(type="checkbox", checked="checked")
+            - if(!action.active)
+              input#active(type="checkbox") 
+            
+            
+        tr
+          td Изображение&nbsp
+          td
+            div.small-cont-ck
+              input#img-breng.small-inp-ck(type="file")
+              img#prev-brend.small-prev-ck(src="/img/add-bg.png")
+              img#img-prev-close.small-del-ck(src="/img/close.png")
+              img#img-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+            
+            
+        tr
+          td Логотип&nbsp
+          td
+            div.small-cont-ck
+              input#logo-breng.small.small-inp-ck(type="file")
+              img#logo-img-breng.small-prev-ck(src="/img/add-bg.png")
+              img#logo-prev-close.small-del-ck(src="/img/close.png")
+              img#logo-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+            
+        tr
+          td Афиша&nbsp
+          td
+            div.small-cont-ck
+              input#poster-breng.small.small-inp-ck(type="file")
+              img#poster-img-breng.small-prev-ck(src="/img/add-bg.png")
+              img#poster-prev-close.small-del-ck(src="/img/close.png")
+              img#poster-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+            
+        tr
+          td Товары c акцией&nbsp
+          td
+            div#prod-ac-cont
+              - each item in action.products
+                  div(style="height: 28px;")
+                    div.ac-del-prod(id!=item["_id"]) x
+                    div(style="display:inline-block; margin-left:10px") #{item.title}
+            input#in-ac-product
+            
+        tr
+          td
+            button#add-brend Добавить&nbsp
+          td#success-brend.hide
+            span &nbsp Акция успешно добавлена
+
+
+  script#productTemplate(type="text/template")
+    div(style="height: 28px;")
+      div.ac-del-prod(id!="<%=id%>") x
+      div(style="display:inline-block; margin-left:10px") <%=title%>

@@ -4,8 +4,9 @@ extends layout
 block content
   include navigation
   != js('search')
-  input#firstData(type="hidden", search=search, sort=sort)
-  .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
+  input#firstData(type="hidden", search=search, sort=sort, oType=type, pType=pType)
+  - if(action)
+    img.for-afisha(src=action)
   .left-side
 
   .right-side
@@ -57,13 +58,4 @@ block content
       <% _.each(bdata, function(data, key) { %>
       li(ischecked="true", value!="<%=data['_id']%>") <%=data.title%>
       <% }); %>
-
-  script#productTemplate(type="text/template")
-    .prod
-      img(src!="../img/products/<%=data['_id']%>/0.<%=data.picture[0]%>", width="124px", height="144px")
-      .title <%=data.title%>
-      .descr <%=data.minOpisanie%>
-      .old-price <%=data.oldCost%>
-      .new-price <%=data.cost%> р
-      .in-basket В КОРЗИНУ
 

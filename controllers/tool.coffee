@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access} = db.models
 
 exports.boot = (app) ->
 
@@ -22,6 +22,37 @@ exports.boot = (app) ->
 
   app.get '/admin/page/action', (req, res) ->
       res.render 'admin/page/action', {title: 'Админ - акции', user: req.user, loc:'home'}
+
+  app.get '/admin/page/user', (req, res) ->
+      User.find {confirm:true}, (err, users) ->
+        res.render 'admin/page/user', {title: 'Админ - акции', user: req.user, loc:'home', users}
+
+
+  app.get '/admin/edit/brend/:brendId', (req, res) ->
+    brendId = req.params.brendId
+    Brend.findById brendId , (err, brend) ->
+      res.render 'admin/edit/brend', {title: 'Админ - редактирование брендов', user: req.user, brend:brend}
+
+  app.get '/admin/edit/action/:actionId', (req, res) ->
+    actionId = req.params.actionId
+    Action.findById(actionId)
+    .populate("products")
+    .exec (err, action) ->
+      console.log "action",action
+      res.render 'admin/edit/action', {title: 'Админ - редактирование акций', user: req.user, action:action}
+
+  app.get '/admin/edit/product/:prodId', (req, res) ->
+    prodId = req.params.prodId
+    Product.findById prodId , (err, product) ->
+      checkType product, {edit:true}, (type) ->
+        res.render 'admin/edit/product', {title: 'Админ - редактирование продукта', user: req.user, prod:product, type:type}
+
+
+
+  app.get '/admin/edit/new/:newId', (req, res) ->
+    newId = req.params.newId
+    New.findById newId , (err, news) ->
+      res.render 'admin/edit/new', {title: 'Админ - редактирование новостей', user: req.user, news:news}
 
   app.get '/admin/q_brend', (req, res) ->
     Brend.find {}, (err, arrBrend) ->
@@ -115,9 +146,36 @@ exports.boot = (app) ->
   app.post '/admin/del_product', (req, res) ->
     data = req.body
     Product.findOne {_id: data.id}, (err, product) ->
-      console.log "product", product
       checkType(product, {del:true})
       res.send 200
+
+
+
+  app.post '/admin/edit/brend/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    Brend.findById id, (err, brend) ->
+      path = './public/img/brends/' + id + "/" + key + "." + brend[key]
+      rimraf path, (err) ->
+        res.send 200
+
+  app.post '/admin/edit/new/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    New.findById id, (err, news) ->
+      path = './public/img/news/' + id + "/" + key + "." + news[key]
+      rimraf path, (err) ->
+        res.send 200
+
+
+  app.post '/admin/edit/action/del/file', (req, res) ->
+    id = req.body.brend
+    key = req.body.key
+    Action.findById id, (err, action) ->
+      path = './public/img/actions/' + id + "/" + key + "." + action[key]
+      rimraf path, (err) ->
+        res.send 200
+
 
 
   delProduct = (product) ->
@@ -134,12 +192,148 @@ exports.boot = (app) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
       body.remove() if body
       delProduct(product)
+
+  delIsset = (product) ->
+    Set.findOne {_id: product.isSet}, (err, set) ->
+      set.remove() if set
+      delProduct(product)
+
+  delIsmakeup = (product) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, makeup) ->
+      makeup.remove() if makeup
+      delProduct(product)
+
+  delIsaccess = (product) ->
+    Access.findOne {_id: product.isAccess}, (err, access) ->
+      access.remove() if access
+      delProduct(product)
+
+  delIsforman = (product) ->
+    Forman.findOne {_id: product.isForman}, (err, forman) ->
+      forman.remove() if forman
+      delProduct(product)
+
+
+ #For Edit
+
+  editFace = (product, cb) ->
+    Face.findOne {_id: product.isFace}, (err, face) ->
+      type =
+        type : "face"
+        data : face
+      cb(type) if face
+
+  editBody = (product, cb) ->
+    Body.findOne {_id: product.isBody}, (err, body) ->
+      type =
+        type : "body"
+        data : body
+      cb(type) if body
       
-  checkType = (product,param) ->
+
+  editMakeup = (product, cb) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, body) ->
+      type =
+        type : "makeup"
+        data : body
+      cb(type) if body
+
+
+
+  editSet = (product, cb) ->
+    Set.findOne {_id: product.isSet}, (err, body) ->
+      type =
+        type : "set"
+        data : body
+      cb(type) if body
+
+  editAccess = (product, cb) ->
+    Access.findOne {_id: product.isAccess}, (err, body) ->
+      type =
+        type : "access"
+        data : body
+      cb(type) if body
+
+
+  editForman = (product, cb) ->
+    Forman.findOne {_id: product.isForman}, (err, body) ->
+      type =
+        type : "forman"
+        data : body
+      cb(type) if body
+      
+      
+  checkType = (product, param, cb) ->
     if product.isFace
       console.log "isface"
       delIsface(product) if param.del
+      editFace(product, cb)  if param.edit
+      
     if product.isBody
       console.log "isbody"
       delIsbody(product) if param.del
+      editBody(product, cb) if param.edit
+      
+    if product.isMakeup
+      console.log "isMakeup"
+      delIsmakeup(product) if param.del
+      editMakeup(product, cb)  if param.edit
+      
+    if product.isSet
+      console.log "isSet"
+      delIsset(product) if param.del
+      editSet(product, cb) if param.edit
+      
+    if product.isAccess
+      console.log "isAccess"
+      delIsaccess(product) if param.del
+      editAccess(product, cb)  if param.edit
+      
+    if product.isForman
+      console.log "isForman"
+      delIsforman(product) if param.del
+      editForman(product, cb) if param.edit
 
+
+  app.post '/admin/del_user', (req, res) ->
+    data = req.body
+    User.findOne {_id: data.id}, (err, user) ->
+      console.log "user", user
+      user.remove()
+      res.send 200
+
+#  app.get '/updateFavUser', (req, res) ->
+#    User.findById "536f8dff96a422ec11000001", (err, user) ->
+#      Product.find {}, (err, pr) ->
+#        pr.forEach (p) ->
+#          user.favorites.push p["_id"]
+#        user.save()
+#        res.send 200
+
+
+#  app.get '/updatecost', (req, res) ->
+#    console.log "@@@@@@@"
+#    Product.find {}, (err, pr) ->
+#      pr.forEach (p) ->
+#        p.cost = 100
+#        p.save()
+
+
+#  app.get '/updatecost', (req, res) ->
+#    Product.find {}, (err, pr) ->
+#      pr.forEach (p) ->
+#        p.cost = 100
+#        p.save()
+    
+    
+#  app.get '/updateact', (req, res) ->
+#    Action.findById "5336fb66bd0431571f000001", (err, action) ->
+#      Product.find {}, (err, prods) ->
+#        prods.forEach (p) ->
+#          console.log "s", p["_id"]
+#          action.products.push(p["_id"])
+#        console.log "action",action
+#        action.save()
+    
+    
+    

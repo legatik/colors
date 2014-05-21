@@ -1,0 +1,51 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/edit/new')
+  != css('admin')
+  input#firstData(type="hidden", news=JSON.stringify(news))
+  #admin-cont
+    include admin-nav
+
+
+    #new-form
+      table.height-tr
+        tr
+          td Название&nbsp
+          td
+            input#title-news(value=news.title)
+        tr
+          td Описание&nbsp
+          td
+            textarea#dec.textarea-add-m2 #{news.descriptions}
+        tr(first="true")
+          td Изображение на странице&nbsp
+          td
+            div.small-cont-ck
+              input#v-inp-s.small-inp-ck(type="file")
+              img#v-inbg-s.small-prev-ck(src="/img/add-bg.png")
+              img#v-cl-s.small-del-ck(src="/img/close.png")
+              img#img-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+        tr
+          td Изображение для витрины&nbsp
+          td
+            div.small-cont-ck
+              input#v-inp-im.small-inp-ck(type="file")
+              img#v-inbg-im.small-prev-ck(src="/img/add-bg.png")
+              img#v-cl-im.small-del-ck(src="/img/close.png")
+              img#logo-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+        tr
+          td На ветину&nbsp
+          td
+            - if(news.vetrina)
+              input#vetrina(type="checkbox", checked="checked")
+            - if(!news.vetrina)
+              input#vetrina(type="checkbox")
+        tr
+          td
+            button#add-new Изменить&nbsp
+          td#success-new.hide
+            span &nbsp Новинка успешно изменена
+

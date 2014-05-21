@@ -7,10 +7,81 @@
     src: local("CenturyGothic-Bold"),
          url('fonts/946379.ttf')
 
+@font-face
+    font-family: CenturyGothic-Italic
+    src: local("CenturyGothic-Italic"),
+         url('fonts/GOTHICI.TTF')
+
+
 
 
 body
   font-family: CenturyGothic
+
+.hide
+  display:none
+
+.prod
+  margin-bottom: 12px
+  width: 155px
+  margin-right: 20px
+  display: inline-block
+  vertical-align: top
+  position: relative
+  text-align: center
+  .title
+    color: #231F20
+    font-size: 12.5px
+    width: 155px
+    text-align: center
+    font-family: CenturyGothic-Bold
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 32px;
+  .descr
+    color: #231F20
+    font-size: 11px
+    width: 155px
+    height: 48px
+    text-align: center
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  .old-price
+     text-align: end
+     width: 155px
+     color: #333333
+     font-size: 15px
+     height: 18px
+     text-decoration: line-through
+     font-family: CenturyGothic-Bold
+    span
+      font-size: 10px
+  .new-price
+    color: #CC3333
+    width: 155px
+    text-align: end
+    font-size: 31px
+    font-family: CenturyGothic-Bold
+    span
+      font-size: 21px
+  .in-basket
+    width: 110px;
+    height: 23px;
+    background: #333;
+    color: white;
+    margin-top: 4px;
+    font-size: 14.37px;
+    line-height: 23px;
+    text-align: middle;
+    cursor: pointer;
+    margin-left: 45px;
+
 
 .header-fake
   position: absolute
@@ -66,6 +137,46 @@ body
       color: #fff
       font-size: 23px
 
+#header-top-fixed
+  display:none;
+  position: fixed;
+  height: 45px;
+  z-index: 1000;
+  background: #333;
+  top: 0px;
+  left:0px;
+  right:0px;
+  #vn-cont
+    margin:0 auto;
+    width:980px;
+  ul.navigation
+    display:inline-block
+    margin-top: 0px;
+    li
+      margin-left: 13px
+      margin-top: 12px
+      a
+        color: #fff
+        font-size: 16px
+  #call-order-cont
+    display:inline-block
+    float:right
+    margin-top: 10px
+    #call-order
+    #phone-number
+      display: inline-block
+      vertical-align: middle
+    #call-order
+      width: 86px
+      height: 17px
+      background: #fff
+      font-size: 9.5px
+      text-align: center
+      margin-right: 13px
+      cursor: pointer
+    #phone-number
+      color: #fff
+      font-size: 23px
 
 
 ul.navigation
@@ -94,10 +205,12 @@ ul.navigation
       vertical-align: bottom
       cursor: pointer
       a
+        height:30px
         display: block
         color: #000
         font-size: 10px
     .login
+      width:30px
       height: 47px
       background: url('../img/input.png') no-repeat
       line-height: 116px
@@ -126,14 +239,269 @@ ul.navigation
       padding-left: 48px;
       position:relative
       z-index:10
+    .log-menu
+      position: absolute;
+      top: -4px;
+      left: -75px;
+      display:none;
+      .bord-log
+        position: absolute
+        background: url('../img/bord.png') no-repeat
+        width: 70px
+        height: 54px
+        top: 0px
+        left: 80px;
+      .menu-body-log
+        position: absolute
+        background: url('../img/agraege.png') no-repeat
+        width: 244px
+        height: 154px
+        top: 52px
+        left: -7px
+        z-index: 100
+        .title
+          position: absolute;
+          left: 107px;
+          font-size: 10px;
+          top: 1px;
+        .send
+          position: absolute;
+          width: 79px;
+          height: 30px;
+          background: url("../img/but.png") no-repeat;
+          top: 110px;
+          cursor: pointer;
+          font-family: CenturyGothic-Bold;
+          font-size: 9.51px;
+          color: #fff;
+          text-align: center;
+          padding-top: 6px;
+          left: 80px;
+        #mail-pod
+          position: absolute;
+          left: 30px;
+          top: 28px;
+          display: block;
+          margin-top: 29px;
+          width: 174px;
+          height: 28px;
+          outline: none;
+          border: 2px solid #333;
+          padding-left: 9px;
+
+
+    .fav-menu
+      display:none
+      position: absolute
+      top: 0px
+      left: 0px
+      .bord
+        position: absolute;
+        width: 70px;
+        height: 62px;
+        top: 0px;
+        left: 80px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        border-radius: 8px;
+        border-right: 1px solid;
+      .menu-body
+        position: absolute;
+        background: #FFF;
+        width: 244px;
+        top: 52px;
+        left: -7px;
+        z-index: 100;
+        border: 1px solid;
+        border-radius: 8px;
+        .title
+          position: absolute;
+          left: 87px;
+          font-size: 10px;
+          height: 20px;
+          z-index: 101;
+          background: #FFF;
+          top: -2px;
+          width: 70px;
+          text-align: center;
+          line-height: 15px;
+        .line
+          position: relative
+          height: 42px
+          margin-top: 7px
+          img
+            border: 1px solid black
+            margin-left: 20px
+          .txt1
+            position: absolute
+            left: 66px
+            top: 10px
+            font-family: CenturyGothic-Bold
+            font-size: 9px
+          .txt2
+            position: absolute
+            left: 66px
+            top: 19px
+            font-size: 8px;
+            width: 124px;
+            max-height: 20px
+            overflow: hidden
+          .bask
+            width: 10px
+            height: 16px
+            background: url('../img/bask.png') no-repeat
+            position: absolute
+            left: 211px
+            top: 16px
+            cursor: pointer
+          .mini-line
+            width: 225px
+            height: 3px
+            position: absolute
+            background: url('../img/mini-line.png') no-repeat
+            left: 9px
+            top: 43px
+        a
+          color:black
+          .more
+            display:none
+            margin-top: 6px
+            margin-left: 66px
+            font-family: CenturyGothic-Bold
+            font-size: 9px
+        #null-prod
+          display:none
+          text-align: center;
+          margin-top: 21px;
+        .go-fav
+        .go-bask
+          margin-top:18px
+          display:inline-block
+          width: 79px
+          height: 30px
+          background: url('../img/but.png') no-repeat
+          top: 118px
+          cursor: pointer
+          font-family: CenturyGothic-Bold
+          font-size: 9.51px
+          color: white
+          text-align: center
+          padding-top: 2px
+        .go-fav
+          margin-left: 26px
+        .go-bask
+          margin-left: 30px
+
 #navbar-my
   position: relative
   ul.navigation
     li
-      margin-left: 19px
+      margin-left: 15px
+      height: 26px
+      position: relative
       a
-        color: #333
-        font-size: 19px
+        color: #000
+        font-size: 17px
+        padding-left: 6px
+        padding-right: 6px
+      .menu-cont
+        position: absolute;
+        z-index: 100;
+        top: 25px;
+        .col1
+          display: inline-block
+          vertical-align: top
+          margin-left: 11px
+          &:first-of-type
+            margin-left: 18px
+          ul.ul2
+            margin-top: 35px
+          ul
+            display: block
+            padding: 0px
+            font-family: CenturyGothic-Bold
+            font-size: 10px
+            margin-top: 20px
+            max-width: 127px
+            li
+              padding: 0px
+              display: block
+              margin: 0px
+              font-family: CenturyGothic
+              font-size: 10px
+              height: 11px
+              margin-top: 9px
+    li.news
+      background: #FFF7B0
+    li.brands
+      background: #F9D895
+    li.face
+      background: #ED987E
+      .menu-cont
+        width: 539px
+        height: 238px
+        background: #FFE2DC
+        left: -203px
+        border: 3px solid #ED987E
+    li.body
+      background: #E26082
+      .menu-cont
+        width: 482px
+        height: 238px
+        background: #FFE2DC
+        left: -243px
+        border: 3px solid #E26082
+        ul
+          max-width: 147px
+
+    li.hair
+      background: #9255A0
+    li.make
+      background: #46579E
+      .menu-cont
+        width: 418px
+        height: 238px
+        background: #C0CCED
+        left: -170px
+        border: 3px solid #46579E
+        ul
+          max-width: 147px
+
+    li.acces
+      background: #4F7D84
+      .menu-cont
+        width: 457px
+        height: 238px
+        background: #D3EBED
+        left: -170px
+        border: 3px solid #4F7D84
+        ul.ul3
+          margin-top: 115px
+        ul.ul4
+          margin-top: 70px
+        ul
+          max-width: 147px
+          li.spec
+            position: absolute
+    li.mans
+      background: #5A8740
+      .menu-cont
+        width: 316px
+        height: 238px
+        background: #DAF4C9
+        left: -106px
+        border: 3px solid #5A8740
+        ul
+          max-width: 141px
+    li.sets
+      background: #C0C685
+      .menu-cont
+        width: 136px
+        height: 238px
+        background: #F2F4C9
+        left: -32px
+        border: 3px solid #C0C685
+
 
 
 #myCarousel
@@ -169,7 +537,7 @@ ul.navigation
 #myCarousel2
   .item
     width: 980px
-    height: 291px
+    height: 310px
     text-align: start
     .prod
       width: 155px
@@ -184,33 +552,52 @@ ul.navigation
         width: 155px
         text-align: center
         font-family: CenturyGothic-Bold
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 32px;
       .descr
         color: #231F20
         font-size: 11px
         width: 155px
+        height: 48px
         text-align: center
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       .old-price
          text-align: end
+         width: 155px
          color: #333333
          font-size: 15px
+         height: 18px
          text-decoration: line-through
          font-family: CenturyGothic-Bold
+        span
+          font-size: 10px
       .new-price
         color: #CC3333
+        width: 155px
         text-align: end
         font-size: 31px
         font-family: CenturyGothic-Bold
+        span
+          font-size: 21px
       .in-basket
-        width: 110px
-        height: 23px
-        background: #333333
-        float: right
-        color: #fff
-        margin-top: 4px
-        font-size: 14.37px
-        line-height: 23px
-        text-align: middle
-        cursor: pointer
+        width: 110px;
+        height: 23px;
+        background: #333;
+        color: white;
+        margin-top: 4px;
+        font-size: 14.37px;
+        line-height: 23px;
+        text-align: middle;
+        cursor: pointer;
+        margin-left: 45px;
   a.left
     background: url('../img/left.png') no-repeat 50% 50%
     left: -147px
@@ -266,6 +653,29 @@ ul.navigation
     background: url('../img/right.png') no-repeat 50% 50%
     right: -147px
 
+#dop-cont
+  position: relative
+  margin-top: 48px
+  height: 247px
+  span
+    position: absolute
+    font-size: 28px
+    color: #000
+  .sp1
+    top: 0px
+    left: 163px
+  .sp2
+    top: 54px
+    left: 286px
+  .sp3
+    top: 143px
+    left: 151px
+  .line4
+    width: 663px
+    height: 2px
+    top: 119px
+    left: 129px
+    background: url('../img/line4.png')
 
 #advantage-cont
   margin-top: 73px
@@ -589,14 +999,16 @@ ul.navigation
 
 
 .right-side
-  margin-left: 55px
+  margin-left: 50px
   .brand-info
+    text-align: justify
     font-size: 17px
     color: #231F20
     width: 718px
     p
       text-indent: 40px
   .filter-block
+    margin-bottom: 30px
     .select-price-cont
     .search-product
     .sort-cont
@@ -671,9 +1083,11 @@ ul.navigation
         font-size: 11px
         margin-top: 10px
   .res-search
+    width:715px
     .prod
+      margin-bottom: 12px
       width: 155px
-      margin-left: 0px
+      margin-right: 20px
       display: inline-block
       vertical-align: top
       position: relative
@@ -684,34 +1098,52 @@ ul.navigation
         width: 155px
         text-align: center
         font-family: CenturyGothic-Bold
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 32px;
       .descr
         color: #231F20
         font-size: 11px
         width: 155px
+        height: 48px
         text-align: center
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       .old-price
          text-align: end
+         width: 155px
          color: #333333
          font-size: 15px
+         height: 18px
          text-decoration: line-through
          font-family: CenturyGothic-Bold
+        span
+          font-size: 10px
       .new-price
         color: #CC3333
+        width: 155px
         text-align: end
         font-size: 31px
         font-family: CenturyGothic-Bold
+        span
+          font-size: 21px
       .in-basket
-        width: 110px
-        height: 23px
-        background: #333333
-        float: right
-        color: #fff
-        margin-top: 4px
-        font-size: 14.37px
-        line-height: 23px
-        text-align: middle
-        cursor: pointer
-
+        width: 110px;
+        height: 23px;
+        background: #333;
+        color: white;
+        margin-top: 4px;
+        font-size: 14.37px;
+        line-height: 23px;
+        text-align: middle;
+        cursor: pointer;
+        margin-left: 45px;
 #product-page
   position: relative
   .catalog
@@ -804,6 +1236,7 @@ ul.navigation
          width: 113px
          margin-left: 30px
       .favorites
+        width:90px
         margin-top: 28px
         height: 25px
         line-height: 25px
@@ -908,6 +1341,109 @@ ul.navigation
       height: 160px
       margin-top: 24px
       margin-bottom: 24px
+  #rewiew-block 
+    margin-top: 47px
+    width: 818px
+    .rewiew-title
+      width: 100%
+      text-align: center
+      color: #333333
+      font-size: 18px
+      font-family: CenturyGothic-Bold
+    .line
+      width: 818px
+      height: 3px
+      background: url("../img/line6.png")  no-repeat
+      margin-top: 8px
+    .rew-block
+      margin-top: 26px
+      .you-photo
+      .text-block
+      .photo
+        display: inline-block
+        vertical-align: top
+      .text-block
+        margin-left: 11px  
+    .photo
+      width: 73px
+      height: 73px
+      background: #333
+      margin-left: 10px
+    .rew-block
+      .text-block
+        .inp-name
+          width: 268px
+          height: 17px
+          border: 1px solid #231F20
+          padding-left: 5px
+          color: #000
+          font-size: 13px
+          font-family: CenturyGothic-Bold
+          display: block
+        .inp-rew 
+          width: 705px
+          max-width: 705px
+          padding-left: 5px
+          height: 71px
+          border: 1px solid #231F20
+          color: #000
+          font-size: 13px
+          font-family: CenturyGothic-Bold     
+          display: block 
+          margin-top: 14px    
+        .name
+        .date
+        .time
+          display: inline-block
+          vertical-align: bottom
+          color: #000
+          font-size: 14px
+        .name
+          font-family: CenturyGothic-Bold
+        .date
+          margin-left: 28px
+        .time
+          margin-left: 17px
+        .rewiew              
+          width: 700px
+          font-size: 12px
+          overflow: hidden
+          height: 30px
+          margin-top: 3px
+          position: relative
+          .over
+            position: absolute
+            height: 15px
+            background: #fff
+            top: 15px
+            right: 0
+            padding-left: 2px
+            font-size: 14px
+            span
+              color: #9E1F63
+              cursor: pointer
+        .actions
+          margin-top: 3px;
+          a
+            display: inline-block
+            color: #9E1F63
+            font-size: 14px
+            font-family: CenturyGothic-Bold 
+          a.answer
+            margin-left: 20px 
+          a.yes
+            margin-right: 15px     
+          a.pol
+            margin-right: 15px                                
+          .left
+            float: left
+          .right
+            float: right        
+  a.go-catalog    
+    font-size: 15px    
+    font-family: CenturyGothic-Bold   
+    color: #333   
+
 
 #brands-picture
   width: 980px
@@ -918,7 +1454,7 @@ ul.navigation
 
 #footer-bg
   background: #231F20
-  height: 270px;
+  height: 329px;
   margin-top:40px
   #footer-cont
     margin: 0 auto;
@@ -965,7 +1501,514 @@ ul.navigation
       h3
         font-size: 15px
         width: 480px
+        text-align: justify
     .pic
       img
         border: 1px solid #000
 
+.active-type
+  color:black !important
+  font-weight: bolder
+  text-decoration: underline
+
+.menu-cont
+  display:none
+
+.col1
+  ul
+    li:hover
+      text-decoration:underline
+
+.sub-title:hover
+   text-decoration:underline
+
+.cabinet-cont
+  .left
+    display: inline-block
+    vertical-align: top
+    width: 305px
+    .menu
+      margin-left: 78px
+      margin-top: 55px
+      height: 200px
+      ul
+        list-style-type: none
+        padding: 0
+        li
+          width: 177px
+          height: 35px
+          border: 1px solid #333333
+          background: #333333
+          color: white
+          text-align: center
+          line-height: 35px
+          margin-bottom: 7px
+          font-size: 21px
+          cursor: pointer
+        li.active
+          background: white
+          color: #333333
+  .right
+    display: inline-block
+    vertical-align: top
+    .user-form
+      margin-left: 47px
+      margin-top: 60px
+      .str
+        position:relative
+        margin-bottom: 11px
+        div
+          display: inline-block
+          vertical-align: top
+        .label
+          font-family: CenturyGothic-Bold
+          font-size: 21px
+          color: #000
+          width: 224px
+        .del-img-u
+          width: 113px
+          height: 30px
+          text-align: center
+          line-height: 30px
+          font-size: 19px
+          border: 1px solid #231F20
+          background: #E6E7E8
+          color: #000
+          cursor: pointer
+        input[type=text]
+          height: 30px
+          border: 1px solid #231F20
+          outline: none
+          padding-left: 10px
+        input.name
+          width: 182px
+        input.town
+          width: 228px
+        input.vk
+          width: 146px
+          margin-left: 10px
+        select
+          height: 30px
+          border: 1px solid #231F20
+          outline: none
+          -webkit-appearance: none
+          background: url("../img/select-userform.png")  no-repeat #fff
+        select.gender
+          width: 121px
+          background-position: 109px 50%
+        select.day
+          width: 35px
+          background-position: 23px 50%
+        select.month
+          width: 120px
+          background-position: 108px 50%
+          margin-left: 6px
+        select.year
+          width: 62px
+          background-position: 50px 50%
+          margin-left: 6px
+        .text-vk
+          font-size: 17px
+          color: #000
+        textarea.about-me
+          height: 167px
+          width: 228px
+          max-width: 228px
+          border: 1px solid #231F20
+          outline: none
+          padding-left: 10px
+    .agree
+      margin-left: 73px
+      margin-top: 40px
+      height: 45px
+      width: 193px
+      text-align: center
+      line-height: 45px
+      font-size: 25px
+      font-family: CenturyGothic-Bold
+      border: 1px solid #231F20
+      background: #D1D3D4
+      color: #231F20
+      cursor: pointer
+      &:hover
+        text-decoration: underline
+  .adv-div
+    width: 980px
+    height: 200px
+    margin-top: 66px
+    background: url("../img/adv1.png")  no-repeat
+    position: relative
+    .txt1
+      width: 980px
+      height: 95px
+
+      position: absolute
+      top: 22px
+      text-align: center
+      font-size: 34px
+      font-family: CenturyGothic-Bold
+      color: #ffffff
+      background: rgba(35, 31, 32, 0.5)
+    .txt2
+      width: 289px
+      height: 60px
+      position: absolute
+      top: 129px
+      left: 343px
+      text-align: center
+      font-size: 32px
+      font-family: CenturyGothic-Bold
+      line-height: 60px
+      color: #ffffff
+      background: url("../img/uzn-bol.png")  no-repeat
+      cursor: pointer
+      &:hover
+        text-decoration: underline
+.cabinet-cont.favorites
+  .right
+    .product-cont
+       margin-top: 54px
+       margin-left: 65px
+       width: 595px
+       .prod
+         margin-right: 35px
+         margin-bottom: 40px
+  .adv-div
+    background: url("../img/adv2.png")  no-repeat
+    .txt1
+      line-height: 95px
+
+.cabinet-cont.reviews
+  .right
+    .reviews-cont
+       margin-top: 54px
+       margin-left: 23px
+       .review
+         width: 564px
+         height: 104px
+         margin-bottom: 19px
+         background: url("../img/rew-phone.png")  no-repeat
+         position: relative
+         .date
+            position: absolute
+            top: 6px
+            left: 27px
+            font-size: 13px
+            color: #231F20
+         .title
+            position: absolute
+            top: 4px
+            left: 120px
+            font-size: 13px
+            color: #231F20
+         .line
+            position: absolute
+            top: 22px
+            left: 0px
+            width: 563px
+            height: 3px
+            background: url("../img/line5.png")  no-repeat
+          img
+            position: absolute
+            top: 28px
+            left: 17px
+            border: 1px solid red
+          .text
+            position: absolute
+            top: 38px
+            left: 108px
+            width: 450px
+            height: 56px
+            font-size: 15px
+            color: #231F20
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          a.go-rew
+            position: absolute
+            top: 4px
+            left: 432px
+            font-size: 13px
+            color: #DA1C5C
+  .adv-div
+    background: url("../img/adv3.png")  no-repeat
+
+
+.cabinet-cont.stockpiling
+  .right
+    .balance-cont
+      margin-top: 54px
+      margin-left: 7px
+      width: 564px
+      height: 159px
+      background: url("../img/balance-phone.png")  no-repeat
+      position: relative
+      .label
+        position: absolute
+        top: 26px
+        left: 290px
+        font-size: 24px
+        color: #000000
+      .balance
+        position: absolute
+        top: 87px
+        left: 460px
+        font-size: 37px
+        color: #000000
+        font-family: CenturyGothic-Bold
+    .link
+      margin-top: 20px
+      margin-left: 10px
+      font-size: 24px
+      display: block
+      color: #000000
+  .podrobnee
+      margin-top: 53px
+      width: 980px
+      height: 37px
+      background: url("../img/go-catalog.png")  no-repeat
+      text-align: right
+      line-height: 37px
+      span
+        font-size: 21.91px
+        margin-right: 15px
+        color: #ffffff
+
+.cabinet-cont.un-favorites
+  .product-cont
+    width: 892px
+    padding-left: 88px
+    .prod
+      margin-bottom: 20px
+      margin-right: 50px
+  .for-user-cont
+    margin-top: 70px
+    width: 980px
+    height: 401px
+    background: url("../img/adv4.png")  no-repeat
+    position: relative
+    .txt1
+    .txt2
+    .txt3
+      position: absolute
+      font-family: CenturyGothic-Bold
+      color: #fff
+    .txt1
+      font-size: 39px
+      top: 37px
+      left: 50%
+      width: 324px
+      margin-left: -162px
+    .txt2
+      font-size: 39px
+      top: 110px
+      left: 50%
+      width: 20px
+      margin-left: -10px
+    .txt3
+      font-size: 43px
+      top: 180px
+      left: 50%
+      width: 946px
+      margin-left: -473px
+      text-align: center
+    input
+      position: absolute
+      width: 310px
+      height: 52px
+      border: 1px solid #A7A9AC
+      outline: none
+      padding-left: 10px
+      top: 90px
+    .inp1
+      left: 70px
+    .inp2
+      left: 595px
+    .podr
+      position: absolute
+      width: 380px
+      height: 78px
+      top: 301px
+      left: 300px
+      text-align: center
+      font-size: 42px
+      font-family: CenturyGothic-Bold
+      line-height: 78px
+      color: #ffffff
+      background: url("../img/podr.png")  no-repeat
+      cursor: pointer
+      &:hover
+        text-decoration: underline
+
+.lending-cont
+  .header
+    width: 980px
+    height: 113px
+    background: #58595B
+    position: relative
+    .menu
+      padding-top: 15px
+      margin-left: 12px
+      .item
+        display: inline-block
+        vertical-align: top
+        width: 120px
+        height: 78px
+        margin-right: 20px
+        font-family: CenturyGothic-Italic
+        font-size: 14px
+        text-align: center
+        background: #fff
+        line-height: 78px
+        cursor:pointer
+        &:first-of-type
+          line-height: 18px
+          padding-top: 10px
+          height: 68px
+        &:hover
+          text-decoration: underline
+    .call-cont
+      position: absolute
+      width: 293px
+      height: 106px
+      top: 0px
+      left: 687px
+      background: url("../img/call.png")  no-repeat
+      .num
+        position: absolute
+        top: 11px
+        left: 56px
+        font-size: 27px
+        color: #fff
+      .label
+        position: absolute
+        top: 39px
+        left: 60px
+        font-size: 12px
+        color: #fff
+      .order-call
+        position: absolute
+        top: 61px
+        left: 55px
+        width: 192px
+        height: 23px
+        font-size: 13px
+        text-align: center
+        background: #fff
+        line-height: 23px
+        cursor:pointer
+  .adv-cont1
+    width: 980px
+    height: 612px
+    background: url("../img/adv5.png") 370px -1px no-repeat
+    position: relative
+    .txt
+      position: absolute
+    .txt1
+      top: 240px
+      left: 68px
+      font-size: 36px
+      font-family: CenturyGothic-Bold
+    .txt2
+      top: 314px
+      left: 72px
+      font-size: 36px
+      span
+        font-family: CenturyGothic-Bold
+    .txt3
+      top: 356px
+      left: 73px
+      font-size: 36px
+      font-family: CenturyGothic-Bold
+    .txt4
+      top: 414px
+      left: 214px
+      font-size: 36px
+      font-family: CenturyGothic-Bold
+
+
+#load-photo-user
+  position: absolute;
+  left: 223px;
+  width: 116px;
+  height: 33px;
+  opacity: 0;
+  cursor: pointer;
+  top:0px;
+
+#load-photo-user:hover
+  cursor:pointer
+
+#img-prev-user
+  display:none;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-top: 41px;
+  margin-left: -148px;
+
+.prod-fav
+  position:relative;
+  .del-fav
+    position:absolute;
+    width: 22px;
+    right: 16px;
+    cursor: pointer;
+    
+.popup-cont
+  width: 501px
+  height: 301px
+  background: url("../img/popup-phone.png")  no-repeat 
+  position: relative
+  .close
+    float:right
+    width: 24px
+    height: 25px  
+    background: url("../img/close2.png")  no-repeat 
+    margin-right: 12px
+    margin-top: 7px  
+    cursor:pointer
+  input
+    width: 336px
+    height: 35px
+    border: 1px solid #231F20
+    font-size: 20.88px
+    position: absolute
+    left: 81px 
+    padding-left: 5px 
+  .button
+    width: 336px
+    height: 53px
+    background: url("../img/but2.png")  no-repeat
+    line-height: 44px
+    text-align: center
+    color: #ffffff
+    font-size: 27px
+    position: absolute
+    left: 81px 
+    cursor: pointer        
+    
+.popup-cont.type1
+  .email
+    top: 65px
+  .pass
+    top: 116px
+  .enter
+    top: 184px
+  a
+    position: absolute
+    top: 157px 
+    color: #ffffff
+    font-size: 17px
+  a.register
+    left: 83px
+  a.forgot-pass           
+    left: 278px    
+.popup-cont.type2
+  .email
+    top: 93px
+  .button
+    top: 156px  
+      

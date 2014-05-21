@@ -3,6 +3,7 @@ public/img/products/*
 public/img/brends/*
 public/img/news/*
 public/img/actions/*
+public/img/users/*
 lib-cov
 *.seed
 *.log

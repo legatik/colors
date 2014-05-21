@@ -17,29 +17,25 @@ exports.boot = (app) ->
     Brend.find {active:true}, (err, brends) ->
       res.render 'brands', {title: 'Бренды', user: req.user, loc:'home', brends, brendId}
 
-  app.get '/face', (req, res) ->
-    data = req.query
-    sort = ""
-    sort = data.sort if data.sort 
-    res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search:"face", sort}
+  app.get '/product', (req, res) ->
+    Action.count {}, (err, count)->
+      skip = Math.floor(Math.random() * count)
+      console.log 'skip',skip
+      Action.find({active:true}).skip(skip).limit(1).exec (err, actionArr) ->
+        if actionArr.length
+          action = "../img/actions/"+actionArr[0]._id+"/poster."+actionArr[0].poster+""
+        console.log "action", action
+        data = req.query
+        console.log "data", data
+        search = data.search
+        sort = ""
+        type = ""
+        pType = ""
+        sort = data.sort if data.sort
+        type = data.type if data.type
+        pType = data.pType if data.pType
+        res.render 'search', {title: 'Для лица', user: req.user, loc:'home', search, sort, pType, type, action}
 
-  app.get '/body', (req, res) ->
-      res.render 'search', {title: 'Для тела', user: req.user, loc:'home', search:"body"}
-
-  app.get '/hair', (req, res) ->
-      res.render 'index', {title: 'Для волос', user: req.user, loc:'home'}
-
-  app.get '/makeup', (req, res) ->
-      res.render 'index', {title: 'Макияж', user: req.user, loc:'home'}
-
-  app.get '/accessories', (req, res) ->
-      res.render 'index', {title: 'Аксессуары', user: req.user, loc:'home'}
-
-  app.get '/man', (req, res) ->
-      res.render 'index', {title: 'Для мужчин', user: req.user, loc:'home'}
-
-  app.get '/sets', (req, res) ->
-      res.render 'index', {title: 'Наборы', user: req.user, loc:'home'}
 
   app.get '/promotions', (req, res) ->
     actionId = req.query.key

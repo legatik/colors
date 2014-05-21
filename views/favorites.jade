@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  include navigation
+  input#firstData(type="hidden", user=JSON.stringify(user))
+  != js("user")
+  .cabinet-cont.favorites
+    .left
+      .menu
+        ul
+          a(href="/user/profile")
+            li ПРОФИЛЬ
+          a(href="/user/favorites")
+            li.active ИЗБРАННОЕ
+          a(href="/user/reviews")
+            li ОТЗЫВЫ
+          a(href="/user/stockpiling")
+            li НАКОПЛЕНИЕ
+    .right  
+      .product-cont
+            
+    .adv-div
+      .txt1  Бонусные баллы, скидки и подарки при каждом заказе    
+      .txt2 УЗНАТЬ БОЛЬШЕ                                    
+      
+  script#productFavoritsTemplate(type="text/template")
+    .prod.prod-fav(id!="cont-<%=data['_id']%>")
+      img.del-fav.del-bd-page(src="/img/del-prod.jpg", id!="<%=data['_id']%>")
+      img(src!="../img/products/<%=data['_id']%>/<%=data.picture[0]%>", width="124px", height="144px")
+      .title <%=data.title%>
+      .descr <%=data.minOpisanie%>
+      .old-price <%=data.oldCost%>
+        <%if (data.oldCost) {%>
+        span &nbsp;р
+        <%}%>
+      .new-price <%=data.cost%>
+        span &nbsp;р
+      a(href != "/product/<%=data['_id']%>")
+        .in-basket В КОРЗИНУ

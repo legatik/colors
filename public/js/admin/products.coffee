@@ -33,11 +33,14 @@ $(document).ready () ->
           $option = $($option).val(brend["_id"])
           $option = $($option).text(brend.title)
           $("#brend-select").prepend($option)
+          
         renderType()
+
 
       $("#add-product-btn").click () ->
         vidString = $("#prod-vid").val()
         vidArr = vidString.split(",")
+        vidArr = [] if vidArr.length is 1 and vidArr[0] is ""
         productObj =
           title            : $("#brend-title").val()
           minOpisanie      : $("#brend-min-disc").val()
@@ -64,14 +67,9 @@ $(document).ready () ->
             imgArr.push one.files[0]
 
         checkType = $("#gl-product-tip").val()
-
-        switch checkType
-          when "face"
-              createProdFace(productObj, imgArr, vidImg)
-        switch checkType
-          when "body"
-              createProdBody(productObj, imgArr, vidImg)
-
+        createProd(productObj, imgArr, vidImg, checkType)
+        
+        
 
       addEventOnProductTip = () ->
           $(".activePodType").removeClass("activePodType")
@@ -86,23 +84,41 @@ $(document).ready () ->
             $(idPodTip).show()
 
 
-      createProdBody = (productObj, imgArr, vidImg) ->
-        nesArr = []
-        nesInp = $("#body-nesovershenstva").find("input[type='checkbox']:checked")
-        if nesInp.length
-          nesInp.each (i, data) ->
-            nesArr.push($(data).val())
-        else
-          nesArr.push("body-nes-net") 
+      createProd = (productObj, imgArr, vidImg, typeprod) ->
         type =
           type            : $("#product-tip").val()
           podType         : $(".activePodType > td > select").val()
-          nesovershenstva : nesArr
+      
+        idKozha = "#"+typeprod+"-kozha"
+        if $(idKozha).length
+          kozhaArr = []
+          kozhaInp = $(idKozha).find("input[type='checkbox']:checked")
+          if kozhaInp.length
+            kozhaInp.each (i, data) ->
+              kozhaArr.push($(data).val())
+          else
+            kozhaAll = typeprod + "-kozha-all"
+            kozhaArr.push(kozhaAll) 
+          type.kozha = kozhaArr
+          
+        idNesovershenstva = "#"+typeprod+"-nesovershenstva"
+        if $(idNesovershenstva).length
+          nesArr = []
+          nesInp = $(idNesovershenstva).find("input[type='checkbox']:checked")
+          if nesInp.length
+            nesInp.each (i, data) ->
+              nesArr.push($(data).val())
+          else
+            nesAll = typeprod + "-nes-net"
+            nesArr.push(nesAll)
+          type.nesovershenstva = nesArr
+
+
         data =
-          product : productObj
-          type    : type
-
-
+          product  : productObj
+          type     : type
+          typeProd : typeprod
+        console.log "data", data
         newForm = new FormData()
         newForm.append("data",JSON.stringify data)
         imgArr.forEach (one, index) ->
@@ -111,7 +127,7 @@ $(document).ready () ->
         $.ajax
           type    : 'POST'
           data    : newForm
-          url     : "/create/body"
+          url     : "/create/product"
           cache: false
           contentType: false
           processData: false
@@ -119,48 +135,7 @@ $(document).ready () ->
             alert("Добавлен!")
             clearProduct()
 
-      createProdFace = (productObj, imgArr, vidImg) ->
-        
-        kozhaArr = []
-        kozhaInp = $("#face-koza").find("input[type='checkbox']:checked")
-        if kozhaInp.length
-          kozhaInp.each (i, data) ->
-            kozhaArr.push($(data).val())
-        else
-          kozhaArr.push("face-kozh-all") 
 
-        nesArr = []
-        nesInp = $("#face-nesovershenstva").find("input[type='checkbox']:checked")
-        if nesInp.length
-          nesInp.each (i, data) ->
-            nesArr.push($(data).val())
-        else
-          nesArr.push("face-nes-net")
-
-        type =
-          type            : $("#product-tip").val()
-          podType         : $(".activePodType > td > select").val()
-          kozha           : kozhaArr
-          nesovershenstva : nesArr
-        data =
-          product : productObj
-          type    : type
-
-        newForm = new FormData()
-        newForm.append("data",JSON.stringify data)
-        imgArr.forEach (one, index) ->
-          newForm.append(index, one)
-        newForm.append("vid", vidImg)
-        $.ajax
-          type    : 'POST'
-          data    : newForm
-          url     : "/create/face"
-          cache: false
-          contentType: false
-          processData: false
-          success : (data) ->
-            alert("Добавлен!")
-            clearProduct()
 
       clearProduct = () ->
         $("#prod-vid").val('')
@@ -184,6 +159,20 @@ $(document).ready () ->
           display = $($item).css("display")
           $($item).click() if display isnt "none"
           i++
+
+
+
+
+  renderProdTemplate = () ->
+    templateJQ = $("#prodTypeTemplate")
+    template = _.template($(templateJQ[0]).html())
+    $("#gl-product-tip").append(template({data:window.nav}))
+    templateJQ = $("#prodPodTypeTemplate")
+    template = _.template($(templateJQ[0]).html())
+    $("#admin-cont").append(template({data:window.nav}))
+
+
+  renderProdTemplate()
 
 
 #      for picture
@@ -219,6 +208,7 @@ $(document).ready () ->
 
     $(".del-step").click () ->
       $($(@).parent()).remove()
+      
   addEvent()
 
   #for tone

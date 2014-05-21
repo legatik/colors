@@ -1,0 +1,55 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/edit/brends')
+  != css('admin')
+  input#firstData(type="hidden", brend=JSON.stringify(brend))
+  #admin-cont
+    include admin-nav
+    
+    #brend-form
+      table#brend-table(style="display:inline-block")
+        tr
+          td Ведите название бренда&nbsp
+          td
+            input#brend-name(value=brend.title)
+            
+        tr
+          td Описание бренда&nbsp
+          td
+            div#brendDescCont(style="width:600px")
+              - each item in brend.description
+                textarea.textarea-add-m3.brend-desc #{item}
+            button#addDescStep Добавить шаг описания
+        tr
+          td Активный&nbsp
+          td
+            - if(brend.active)
+              input#active(type="checkbox", checked="checked")
+            - if(!brend.active)
+              input#active(type="checkbox")
+        tr
+          td Изображение&nbsp
+          td
+            div.small-cont-ck
+              input#img-breng.small-inp-ck(type="file")
+              img#prev-brend.small-prev-ck(src="/img/add-bg.png")
+              img#img-prev-close.small-del-ck(src="/img/close.png")
+              img#img-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+            
+        tr
+          td Логотип&nbsp
+          td
+            div.small-cont-ck
+              input#logo-breng.small.small-inp-ck(type="file")
+              img#logo-img-breng.small-prev-ck(src="/img/add-bg.png")
+              img#logo-prev-close.small-del-ck(src="/img/close.png")
+              img#logo-prev-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+        tr
+          td
+            button#add-brend Изменить&nbsp
+          td#success-brend.hide
+            span &nbsp Бренд успешно изменён
+

@@ -2,12 +2,13 @@ extends layout
 
 block content
   include navigation
+  != js('product')
   #product-page
-    input#firstData(type="hidden")
+    input#firstData(type="hidden", user=JSON.stringify(user), product=JSON.stringify(product))
     .catalog Каталог
     .product-cont
       .left
-        img.product-img(src!="../img/products/"+product['_id']+"/1."+product.picture[1]+"", width="353px",height="353px")
+        img.product-img(src!="../img/products/"+product['_id']+"/"+product.picture[0]+"", width="353px",height="353px")
       .right
         .title #{product.title}
         .short-descr #{product.minOpisanie}
@@ -41,7 +42,14 @@ block content
         br
         .buy-fast Купить быстро
         .in-basket В корзину
-        .favorites В избранное
+        if user
+          if favAdded
+            .favorites.addFav(id="#{product['_id']}") В избранное
+          if !favAdded
+            .favorites(id="#{product['_id']}") В избранном
+        if !user
+            .favorites.setCookie(id="#{product['_id']}") В избранное
+            .favorites.nsetCookie.hide(id="#{product['_id']}") В избранном
       #adv1-block
         div.line
         div.f1 ГАРАНТИЯ КАЧЕСТВА
@@ -70,4 +78,52 @@ block content
       .link2 Особенности азиатского ухода за кожей
       - if(product.imgVid)
         img.ill-top(src!="../img/products/"+product['_id']+"/vid."+product.imgVid+"")
-            
+    #rewiew-block
+      .rewiew-title ОТЗЫВЫ
+      .line
+      .new-rew-block.rew-block
+        .you-photo.photo
+        .text-block
+          input.inp-name(type="text",placeholder="Введите имя")
+          textarea.inp-rew(placeholder="Напишите отзыв")
+      #rew-block-cont
+        .rew-block
+          .photo
+          .text-block
+            .name Константин Крестов  (36, Вологда)  
+            .date 10.02.14
+            .time 21:59    
+            .rewiew Просто зашибенный зашибись, я в афиге, какой крем! Он тааааак мажется, таааак вкусно воняет, я себе купил, жене купил, собаке купил! Охеренный крем! Не липнет, не течет, на вкус Не липнет, не течет, на вкус Не липнет, не течет, на вкус Не липнет, не течет, на вкус Не липнет, не течет, на вкус
+              .over ... 
+                span Показать полностью
+            .actions
+              .left
+                a(href="#") Комментарии (2)
+                a.answer(href="#") Ответить
+              .right  
+                a.pol(href="#") Полезный отзыв?
+                a.yes(href="#") Да (5) 
+                a.no(href="#") Нет (2)             
+                 
+
+    a(href="#").go-catalog < К Каталогу       
+    
+    
+    script#pCommentTemplate(type="text/template")
+      .photo
+      .text-block
+        .name <%=data.name%>
+        .date <%=data.sDate%>
+        .time <%=data.time%>
+        .rewiew <%=data.text%>
+          .over ... 
+            span Показать полностью
+        .actions
+          .left
+            a(href="#") Комментарии (2)
+            a.answer(href="#") Ответить
+          .right  
+            a.pol(href="#") Полезный отзыв?
+            a.yes(href="#") Да (5) 
+            a.no(href="#") Нет (2)   
+      

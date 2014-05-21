@@ -2,7 +2,7 @@ db = require '../lib/db'
 _ = require 'underscore'
 fs = require 'fs-extra'
 
-{User, Product, Face, Brend, Body} = db.models
+{User, Product, Brend, Action} = db.models
 
 exports.boot = (app) ->
   getIds = (arr) ->
@@ -39,36 +39,53 @@ exports.boot = (app) ->
     Brend.find {}, (err, arrBrend) ->
       res.send arrBrend
 
-  app.post '/filter/body', (req, res) ->
-    data = req.body
-    Body.find {}, (err, bodys) ->
-      ids = getIds(bodys)
-      product_filter = getProductFilter(data.product, ids, 'isBody')
-      sort = getSort(data.product)
-      Product.find(product_filter)
-      .sort(sort)
-      .exec (err, products) ->
-        res.send products
+#  app.post '/filter', (req, res) ->
+#    data = req.body
+#    firstTypeProd = data.type.charAt(0).toUpperCase()
+#    typeProd = firstTypeProd + data.type.substr(1)
+#    console.log "typeProd",typeProd
+#    skip = data.skip
+#    db.models[typeProd].find {}, (err, bodys) ->
+#      ids = getIds(bodys)
+#      podTypeProd = "is" + typeProd
+#      product_filter = getProductFilter(data.product, ids, podTypeProd)
+#      sort = getSort(data.product)
+#      Product.find(product_filter)
+#      .limit(24)
+#      .skip(skip)
+#      .sort(sort)
+#      .exec (err, products) ->
+#        res.send products
 
-  app.post '/filter/face', (req, res) ->
+  app.post '/filter', (req, res) ->
     data = req.body
+    skip = data.skip
+    firstTypeProd = data.type.charAt(0).toUpperCase()
+    typeProd = firstTypeProd + data.type.substr(1)
     special_filter = getFilter(data.special)
-    Face.find special_filter, (err, faces) ->
-      ids = getIds(faces)
-      product_filter = getProductFilter(data.product, ids, 'isFace')
+    db.models[typeProd].find special_filter, (err, prodArr) ->
+      ids = getIds(prodArr)
+      podTypeProd = "is" + typeProd
+      product_filter = getProductFilter(data.product, ids, podTypeProd)
       sort = getSort(data.product)
       Product.find(product_filter)
+      .limit(24)
+      .skip(skip)
       .sort(sort)
       .exec (err, products) ->
+        console.log "products", products.length
         res.send products
 
   app.post '/productByBrend', (req, res) ->
     brendId = req.body.key
     data =  req.body.filter
+    skip = req.body.skip
     product_filter = getProductFilter(data)
     product_filter.brend = brendId
     sort = getSort(data)
     Product.find(product_filter)
+    .limit(24)
+    .skip(skip)
     .sort(sort)
     .exec (err, products) ->
       res.send products
@@ -76,8 +93,18 @@ exports.boot = (app) ->
   app.post '/productByAction', (req, res) ->
     actionId = req.body.key
     data =  req.body.filter
-    console.log "actionId", actionId
-    console.log "data", data
-    Product.find {} , (err, arr) ->
-      res.send arr
-    
+    skip = req.body.skip
+    product_filter = getProductFilter(data)
+    sort = getSort(data)
+    Action.findById actionId, (err, action) ->
+      if !action
+        res.send []
+      else
+        product_filter._id = {$in: action.products}
+        Product.find(product_filter)
+        .limit(24)
+        .skip(skip)
+        .sort(sort)
+        .exec (err, products) ->
+          res.send products
+

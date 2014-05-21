@@ -1,0 +1,145 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/edit/products')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+
+
+    input#firstData(type="hidden", value=JSON.stringify(prod), typeProd=JSON.stringify(type))
+    #product-form.form-admin(style="display:block")
+      table#add-dish-table(style="display:inline-block")
+        tr
+          td Выберите название&nbsp
+          td
+            input#brend-title(value=prod.title)
+        tr
+          td Выберите бренд&nbsp
+          td
+            select#brend-select
+        tr
+          td Ведите краткое описание&nbsp
+          td
+            textarea#brend-min-disc.textarea-add-m #{prod.minOpisanie}
+        tr
+          td Объем&nbsp
+          td
+            input(type="number", value=prod.obem)#brend-obem
+        tr
+          td Вес&nbsp
+          td
+            input(type="number", value=prod.ves)#brend-ves
+        tr
+          td ID&nbsp
+          td
+            input(type="number", value=prod.id)#brend-id
+        tr
+          td Старая цена&nbsp
+          td
+            input(type="number", value=prod.oldCost)#brend-old-cost
+        tr
+          td Цена&nbsp
+          td
+            input(type="number", value=prod.cost)#brend-cost
+        tr
+          td Описание&nbsp
+          td
+            textarea#brend-desc.textarea-add-m #{prod.opisanie}
+        tr
+          td Применение&nbsp
+          td
+            textarea#brend-prim.textarea-add-m #{prod.primenenie}
+        tr
+          td На витрину&nbsp
+          td
+            - if(prod.vetrina)
+              input#vetrina(type="checkbox", checked="checked")
+            - if(!prod.vetrina)
+              input#vetrina(type="checkbox")
+        tr
+          td Осталось на складе&nbsp
+          td
+            input#ostatok(type="number", value=prod.ostatok)
+        tr
+          td
+            span Оттенок/вид&nbsp
+            div через запятую без пробела&nbsp
+          td
+            textarea#prod-vid.textarea-add-m #{prod.vid}
+        tr
+          td Изображение оттенок/вид&nbsp
+          td
+            div#small-cont-tone.small-cont-ck
+              input#pic-tone(type="file")
+              img#tone-prev(src="/img/add-bg.png")
+              img#del-img-tone(src="/img/close.png")
+              img#vid-tone-fs-del.small-del-ck(src="/img/close.png", style="cursor:pointer")
+        tr
+          td Выберите тип товара&nbsp
+          td
+            select#gl-product-tip
+      #im-cont-step(style="display:inline-block")
+        div(style="text-align:center;height:35px")
+          b Выберите картинки товара
+      div(style="margin-top:8px")
+        button#add-product-btn Изменить продукт
+
+
+
+  script#prodTypeTemplate(type="text/template")
+    <% _.each(data, function(item, key) { %>
+    option(value!="<%=key%>") <%=item.title%>
+    <% }); %>
+
+  script#prodPodTypeTemplate(type="text/template")
+      <% _.each(data, function(item, key) { %>  
+      <% print("<sc" + "ript type='text/template', id='"+key+"Template'>"); %>
+      tr.add-param
+        td Тип товара&nbsp
+        td
+          select#product-tip
+            <% _.each(item.tip, function(tip) { %> 
+            option(value!="<%=tip.key%>") <%=tip.title%>
+            <% }); %>
+      <% _.each(item.tip, function(tip) { %>
+      tr.add-param.podtip(id!="<%=tip.key%>")
+        td Подтип
+        td
+          select
+            <% _.each(tip.podtip, function(podtip) { %> 
+            option(value!="<%=podtip.key%>") <%=podtip.title%>
+            <% }); %>
+      <% }); %>
+      
+      <% _.each(item.dop, function(dop) { %>
+      tr.add-param.border-b
+        td <%=dop.title%>
+        td
+          div(id!="<%=key%>-<%=dop.key%>")
+            table
+                <% _.each(dop.list, function(sItem) { %> 
+                tr
+                  td(width=30)
+                    input( type="checkbox", value!="<%=sItem.key%>")
+                  td <%=sItem.title%>
+                <% }); %>
+      <% }); %>
+      
+      <% print("</sc"+"ript>"); %>
+      <% }); %>
+
+
+  script#stepEditTemplate(type="text/template")
+    div.small-cont
+      img.step-img-e(id!="step-img-e-<%=data.number%>",src!="/img/products/<%=data.id%>/<%=data.name%>")
+      img.del-e.del-step-e(src="/img/close.png", id !="del-e-<%=data.name%>")
+
+  script#stepTemplate(type="text/template")
+    div.small-cont
+      input.step-inp(type="file",id!="step-inp-<%=number%>")
+      img.step-img(id!="step-img-<%=number%>",src="/img/add-bg.png")
+      img.del.del-step(src="/img/close.png", id !="del-step-<%=number%>")
+

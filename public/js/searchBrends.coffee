@@ -1,4 +1,6 @@
 $(document).ready () ->
+  skip = 0
+  @inProgress = true
   min_price=49
   max_price=2599
   min = 49
@@ -22,6 +24,7 @@ $(document).ready () ->
       min_price = ui.values[0]
       max_price = ui.values[1]
     change: (event, ui) ->
+      skip = 0
       getProducts()
 
   $('.min-price').on 'change',  () ->
@@ -62,15 +65,18 @@ $(document).ready () ->
     return objSent
 
 
-  getProducts = () ->
+  getProducts = (scrollWindow) =>
     filter = getFilterParms()
-    console.log "{key:renderKey, filter:filter}",{key:renderKey, filter:filter}
     $.ajax
       type    : 'POST'
       url     : '/search/productByBrend'
-      data    : {key:renderKey, filter:filter}
-      success : (products) ->
-        renderResults(products)
+      data    : {key:renderKey, filter:filter, skip:skip}
+      beforeSend: =>
+        @inProgress = true
+      success : (products) =>
+        @inProgress = false
+        skip = skip + 24
+        renderResults(products, scrollWindow)
 
 
   renderBrendInfo = () ->
@@ -86,6 +92,7 @@ $(document).ready () ->
     liarr.each (i, el)->
       $(el).attr("ischecked", "false")
     $(".select-params > li[key="+renderKey+"]").attr("ischecked","true")
+    skip = 0
     getProducts()
 
   $(".select-params > li").click () ->
@@ -95,8 +102,8 @@ $(document).ready () ->
   renderBrendInfo(renderKey)
 
 
-  renderResults = (products) ->
-    $(".res-search").empty()
+  renderResults = (products, scrollWindow) ->
+    $(".res-search").empty() if !scrollWindow
     products.forEach (product) ->
       template = _.template(jQuery('#productTemplate').html())
       el = $(template({data:product}))
@@ -106,6 +113,7 @@ $(document).ready () ->
 
 
   $(".sort-product").click () ->
+    skip = 0
     getProducts()
 
   keyTime = 0
@@ -113,7 +121,16 @@ $(document).ready () ->
   $(".search-product").on "keyup", () ->
     clearTimeout(keyTime)
     keyTime = setTimeout(->
+      skip = 0
       getProducts()
       return
     , 1000)
+
+
+  $(window).scroll =>
+    if $(window).scrollTop() + $(window).height() >= $(document).height() - 250 and not @inProgress
+      getProducts(true)
+      
+      
+      
 
