@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  != js('deleteAll')
+  .popup-cont.type2
+    .close
+    input.email(type="text",placeholder="E-mail")

@@ -121,4 +121,4 @@ block content
               a.pol(href="#") Полезный отзыв?
               a.yes(href="#") Да (5) 
               a.no(href="#") Нет (2)   
-    a(href="#").go-catalog < К Каталогу                     
+    a.go-catalog < К Каталогу                     

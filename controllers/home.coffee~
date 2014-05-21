@@ -35,6 +35,3 @@ exports.boot = (app) ->
     
   app.get '/popup2', (req, res) -> 
     res.render 'popup2', {title: 'Colors lending', user: req.user, loc:'home'}        
-    
-  app.get '/popup3', (req, res) -> 
-    res.render 'popup3', {title: 'Colors lending', user: req.user, loc:'home'}      
