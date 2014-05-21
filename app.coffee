@@ -60,9 +60,10 @@ app.namespace '/search', require('./controllers/search').boot.bind @, app
 app.namespace '/edit', require('./controllers/edit').boot.bind @, app
 app.namespace '/user', require('./controllers/user').boot.bind @, app
 app.namespace '/product', require('./controllers/product').boot.bind @, app
+app.namespace '/comment', require('./controllers/comment').boot.bind @, app
 
 app.get '/register', (req, res) ->
-	res.render 'registration', {title: 'Onlile JS Compiller'}
+  res.render 'registration', {title: 'Onlile JS Compiller'}
 
 #app.post '/register', (req, res) ->
 #	user = req.body
