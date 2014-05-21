@@ -96,7 +96,7 @@ $(document).ready () ->
       console.log "@options", @options
    
     events:
-      "click .peview-dish"      : "render",
+      "click .yes"      : "yes",
 
     render: ->
       dateCom = new Date(@model.date)

@@ -120,10 +120,10 @@ block content
             span Показать полностью
         .actions
           .left
-            a(href="#") Комментарии (2)
+            a(href="#") Комментарии (<%=data.comments.length%>)
             a.answer(href="#") Ответить
           .right  
             a.pol(href="#") Полезный отзыв?
-            a.yes(href="#") Да (5) 
-            a.no(href="#") Нет (2)   
+            a.yes(href="#") Да (<%=data.yes%>) 
+            a.no(href="#") Нет (<%=data.no%>)   
       
