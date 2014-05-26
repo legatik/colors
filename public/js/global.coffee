@@ -113,7 +113,26 @@ $(document).ready () ->
     $(".fav-menu").hide()
 
   $("#login-btn").mouseenter ()->
-    $(".log-menu").show()
+#    $(".log-menu").show()
+
+  $("#login-btn").click ()->
+    $("#modal-bg").show()
+    $(".type1").show()
+
+  $(".register").click ()->
+    $("#modal-bg").show()
+    $(".popup-cont").hide()
+    $(".type2").show()
+
+  $(".close").click ()->
+    $(".popup-cont").hide()
+    $("#modal-bg").hide()
+
+  $(".forgot-pass").click ()->
+    $("#modal-bg").show()
+    $(".popup-cont").hide()
+    $(".type3").show()   
+
 
   $(".log-menu").mouseleave ()->
     $(".log-menu").hide()

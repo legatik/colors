@@ -1991,6 +1991,11 @@ ul.navigation
     cursor: pointer        
     
 .popup-cont.type1
+  display:none;
+  position: fixed;
+  z-index: 5001;
+  left: 33%;
+  top: 120px;
   .email
     top: 65px
   .pass
@@ -2007,8 +2012,24 @@ ul.navigation
   a.forgot-pass           
     left: 278px    
 .popup-cont.type2
+  display:none;
+  position: fixed;
+  z-index: 5001;
+  left: 33%;
+  top: 120px;
   .email
     top: 93px
   .button
     top: 156px  
-      
+     
+     
+#modal-bg
+  display:none;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: black;
+  z-index: 5000;
+  opacity: 0.5; 

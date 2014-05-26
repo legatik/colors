@@ -59,4 +59,20 @@ html
           span &nbsp;р
         a(href != "/product/<%=data['_id']%>")
           .in-basket В КОРЗИНУ
+    #modal-bg
+    .popup-cont.type1
+      .close
+      input.email(type="text",placeholder="E-mail")
+      input.pass(type="password",placeholder="Пароль")
+      a(nohref="nohref", style="cursor:pointer").register Регистрация
+      a(nohref="nohref", style="cursor:pointer").forgot-pass Забыли пароль?
+      .enter.button Вход
+    .popup-cont.type2.type3
+      .close
+      input.email(type="text",placeholder="E-mail")
+      .send-pass.button Выслать пароль
+    .popup-cont.type2
+      .close
+      input.email(type="text",placeholder="E-mail")
+      .send-pass.button Зарегистрироваться
 
