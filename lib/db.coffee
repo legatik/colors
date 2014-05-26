@@ -11,9 +11,10 @@ Forman = require './models/forman'
 Set = require './models/set'
 Access = require './models/access'
 PComment = require './models/pComment'
+Comment = require './models/comment'
 
 module.exports =
-	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access, PComment}
+	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access, PComment, Comment}
 	connection:
 		connect: (path) ->
 			db = mongoose.connect path
