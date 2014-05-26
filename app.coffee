@@ -76,14 +76,15 @@ app.get '/register', (req, res) ->
 #app.get '/login', (req, res) ->
 #	res.render 'login', {title: 'login'}
 
-#app.post "/login", (req, res, next) ->
-#	passport.authenticate("local", (err, user, info) ->
-#		if user
-#			req.logIn user, (err) ->
-#				res.send true
-#		else
-#			res.send false
-#	) req, res, next
+app.post "/login", (req, res, next) ->
+  passport.authenticate("local", (err, user, info) ->
+    console.log "user", user
+    if user
+      req.logIn user, (err) ->
+        res.send true
+    else
+      res.send false
+  ) req, res, next
 
 
 app.get '/logout', (req,res) ->
