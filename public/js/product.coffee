@@ -139,7 +139,9 @@ $(document).ready () ->
         type    : 'POST'
         data    : {data:data, id:@model['_id']}
         url     : "/comment/create/comment"
-        success : (data) =>
+        success : (com) =>
+          @model.comments.push(com)
+          $("#com-count").text("Комментарии (" + @model.comments.length + ")")
           console.log "ok"
 
     answer: ->
@@ -155,8 +157,8 @@ $(document).ready () ->
         data    : {key:key, id:@model['_id']}
         url     : "/comment/yon"
         success : (com) =>
-          $(".yes").text("Да (" + com.yes + ")")
-          $(".no").text("Нет (" + com.no + ")")
+          $(".yes", @el).text("Да (" + com.yes + ")")
+          $(".no", @el).text("Нет (" + com.no + ")")
 
     render: ->
       dateCom = new Date(@model.date)
