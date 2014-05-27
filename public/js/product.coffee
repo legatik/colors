@@ -6,7 +6,7 @@ $(document).ready () ->
   gUser = $("#firstData").attr("user")
   gUser = JSON.stringify(gUser) if gUser
   gProduct = $("#firstData").attr("product")
-  gProduct = JSON.stringify(gProduct) if gProduct
+  gProduct = JSON.parse(gProduct) if gProduct
   check = true
 
   getComments = () ->
