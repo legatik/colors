@@ -19,15 +19,34 @@ exports.boot = (app) ->
       res.send comms
 
   app.post '/yon', (req, res) ->
-    console.log "req.body", req.body
+    console.log "SSSSSS"
     id = req.body.id
-    key = req.body.key
-    PComment.findById(id)
-    .exec (err, com) ->
-      tmp = com[key] + 1
-      com[key] = tmp
-      com.save()
-      res.send com
+    st = req.body.st
+    if req.user
+      User.findById(req.user["_id"])
+      .exec (err, user) ->
+        check = true
+        user.yesorno.forEach (idyor) ->
+          check = false if idyor.toString() is id.toString()
+        if check
+          user.yesorno.push(id)
+          user.save()
+          key = req.body.key
+          PComment.findById(id)
+          .exec (err, com) ->
+            tmp = com[key] + 1
+            com[key] = tmp
+            com.save()
+            res.send com
+    if st
+      key = req.body.key
+      PComment.findById(id)
+      .exec (err, com) ->
+        tmp = com[key] + 1
+        com[key] = tmp
+        com.save()
+        res.send com
+    
     
   app.post '/create/comment', (req, res) ->
     data = req.body.data

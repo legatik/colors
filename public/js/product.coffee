@@ -153,13 +153,17 @@ $(document).ready () ->
       addCalssKeup()
 
     sendYoN: (key) ->
-      $.ajax
-        type    : 'POST'
-        data    : {key:key, id:@model['_id']}
-        url     : "/comment/yon"
-        success : (com) =>
-          $(".yes", @el).text("Да (" + com.yes + ")")
-          $(".no", @el).text("Нет (" + com.no + ")")
+      logUser = $("#firstData").attr("user")
+      logUser = JSON.parse(logUser) if logUser
+      console.log "logUser", logUser
+      if logUser
+        $.ajax
+          type    : 'POST'
+          data    : {key:key, id:@model['_id']}
+          url     : "/comment/yon"
+          success : (com) =>
+            $(".yes", @el).text("Да (" + com.yes + ")")
+            $(".no", @el).text("Нет (" + com.no + ")")
 
     render: ->
       dateCom = new Date(@model.date)
