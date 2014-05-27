@@ -155,16 +155,38 @@ $(document).ready () ->
     sendYoN: (key) ->
       logUser = $("#firstData").attr("user")
       logUser = JSON.parse(logUser) if logUser
-      console.log "logUser", logUser
       if logUser
-        $.ajax
-          type    : 'POST'
-          data    : {key:key, id:@model['_id']}
-          url     : "/comment/yon"
-          success : (com) =>
-            $(".yes", @el).text("Да (" + com.yes + ")")
-            $(".no", @el).text("Нет (" + com.no + ")")
-
+        data = {key:key, id:@model['_id']}
+      else
+        colors_yon =  $.cookie "colors_yon"
+        console.log "colors_yon", colors_yon
+        if colors_yon
+          colors_yon = JSON.parse(colors_yon)
+          check = true
+          colors_yon.forEach (d) =>
+            check = false if d.toString() is @model['_id']
+          return if !check
+          colors_yon.push(@model['_id'])
+          $.cookie "colors_yon", JSON.stringify(colors_yon),
+            expires: 360
+            path:'/'
+          data = {key:key, id:@model['_id'], st:true}
+        else
+          obj = []
+          obj.push(@model['_id'])
+          $.cookie "colors_yon", JSON.stringify(obj),
+            expires: 360
+            path:'/'
+          data = {key:key, id:@model['_id'], st:true}
+      $.ajax
+        type    : 'POST'
+        data    : data
+        url     : "/comment/yon"
+        success : (com) =>
+          $(".yes", @el).text("Да (" + com.yes + ")")
+          $(".no", @el).text("Нет (" + com.no + ")")
+      
+      
     render: ->
       dateCom = new Date(@model.date)
       @model.time  = dateCom.toLocaleTimeString()
