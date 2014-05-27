@@ -89,40 +89,40 @@ exports.boot = (app) ->
       if user
         res.send "Пользователь с такой почтой уже зарегестрирован"
         return
-        password = Number(new Date()) + Math.ceil(Math.random()*9)
-        obj = {
-          email        : email
-          password     : password
-          confirm      : false
-          date_request : new Date()
-          name          : ""
-          vk            : ""
-          gender        : ""
-          town          : ""
-          aboutme       : ""
-        }
-        user = new User(obj)
-        user.save()
+      password = Number(new Date()) + Math.ceil(Math.random()*9)
+      obj = {
+        email        : email
+        password     : password
+        confirm      : false
+        date_request : new Date()
+        name          : ""
+        vk            : ""
+        gender        : ""
+        town          : ""
+        aboutme       : ""
+      }
+      user = new User(obj)
+      user.save()
 
-        smtpTransport = nodemailer.createTransport("SMTP",
-          service: "Gmail"
-          auth:
-            user: "colors.sup@gmail.com"
-            pass: "colors1!1"
-        )
+      smtpTransport = nodemailer.createTransport("SMTP",
+        service: "Gmail"
+        auth:
+          user: "colors.sup@gmail.com"
+          pass: "colors1!1"
+      )
 
-        mailOptions =
-          from: "mir.cook.sup@gmail.com"
-          to: email
-          subject: "Регестрация" # Subject line
-          html: "<div>Привет</div><div><a href='http://localhost:3000/create/confirm/?pass="+password+"'>перейти по ссылке</a></div><div>Ваш пароль: "+password+"</div>"
+      mailOptions =
+        from: "mir.cook.sup@gmail.com"
+        to: email
+        subject: "Регестрация" # Subject line
+        html: "<div>Привет</div><div><a href='http://localhost:3000/create/confirm/?pass="+password+"'>перейти по ссылке</a></div><div>Ваш пароль: "+password+"</div>"
 
-        smtpTransport.sendMail mailOptions, (error, response) ->
-          if error
-            console.log error
-          else
-            console.log "Message sent: " + response.message
-            res.send "Заявка отправленна. Проверьте свою электронную почту"
+      smtpTransport.sendMail mailOptions, (error, response) ->
+        if error
+          console.log error
+        else
+          console.log "Message sent: " + response.message
+          res.send "Заявка отправленна. Проверьте свою электронную почту"
 
   app.post '/send_pass', (req, res) ->
     email = req.body.email

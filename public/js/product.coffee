@@ -22,7 +22,8 @@ $(document).ready () ->
           
   getComments()
 
-  if cookies_fav and cookies_fav != "null" and !userTest
+#  if cookies_fav and cookies_fav != "null" and !userTest
+  if cookies_fav and cookies_fav != "null"
     idProdtest = $(".favorites").attr("id")
     cookieArr = JSON.parse(cookies_fav)
     cookieArr.forEach (idP) ->

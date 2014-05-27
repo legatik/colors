@@ -239,11 +239,12 @@ ul.navigation
       padding-left: 48px;
       position:relative
       z-index:10
+      
     .log-menu
       position: absolute;
       top: -4px;
       left: -75px;
-      display:none;
+      display: none
       .bord-log
         position: absolute
         background: url('../img/bord.png') no-repeat
@@ -253,45 +254,67 @@ ul.navigation
         left: 80px;
       .menu-body-log
         position: absolute
-        background: url('../img/agraege.png') no-repeat
         width: 244px
         height: 154px
         top: 52px
-        left: -7px
+        left: 80px
         z-index: 100
+        border: 1px solid
+        border-radius: 8px
+        background: #fff
         .title
+          position: absolute
+          left: -1px
+          font-size: 10px
+          top: -1px
+          background: #fff
+          width: 68px
+          text-align: center
+          border-left: 1px solid
+        p
+          position: absolute
+          left: 33px
+          top: 28px
+          font-size: 14px
+          font-family: CenturyGothic-Bold
+          color: #231f20
+          margin: 0
+          text-align: center
+          width: 180px
+        .send2
           position: absolute;
-          left: 107px;
-          font-size: 10px;
-          top: 1px;
-        .send
+          width: 138px
+          height: 39px
+          background: url("../img/but3.png") no-repeat;
+          top: 95px
+          left: 53px
+          cursor: pointer
+          font-family: CenturyGothic-Bold
+          font-size: 17.63px
+          color: #fff
+          text-align: center
+          line-height: 29px
+        input
           position: absolute;
-          width: 79px;
-          height: 30px;
-          background: url("../img/but.png") no-repeat;
-          top: 110px;
-          cursor: pointer;
-          font-family: CenturyGothic-Bold;
-          font-size: 9.51px;
-          color: #fff;
-          text-align: center;
-          padding-top: 6px;
-          left: 80px;
-        #mail-pod
-          position: absolute;
-          left: 30px;
-          top: 28px;
+          left: 32px;
+          top: 67px;
           display: block;
-          margin-top: 29px;
-          width: 174px;
-          height: 28px;
+          width: 177px;
+          height: 18px;
           outline: none;
-          border: 2px solid #333;
-          padding-left: 9px;
-
+          border: 1px solid #231f20
+          padding-left: 9px
+          font-size: 11px
+        a.auth
+          position: absolute
+          left: 73px
+          top: 131px
+          text-decoration: underline
+          color: #2E3192
+          font-size: 12px
 
     .fav-menu
-      display:none
+      display: none
       position: absolute
       top: 0px
       left: 0px
@@ -387,10 +410,124 @@ ul.navigation
           color: white
           text-align: center
           padding-top: 2px
+          margin-bottom: 10px
         .go-fav
           margin-left: 26px
         .go-bask
           margin-left: 30px
+    .bask-menu
+      position: absolute
+      top: 0px
+      left: 0px
+      display: none
+      .bord
+        position: absolute;
+        width: 70px;
+        height: 62px;
+        top: 0px;
+        left: 168px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        border-radius: 8px;
+        border-right: 1px solid;
+      .menu-body
+        position: absolute;
+        background: #FFF;
+        width: 244px;
+        top: 52px;
+        left: -6px;
+        z-index: 100;
+        border: 1px solid;
+        border-radius: 8px;
+        .title
+          position: absolute;
+          left: 175px;
+          font-size: 10px;
+          height: 20px;
+          z-index: 101;
+          background: #fff;
+          top: -2px;
+          width: 69px;
+          text-align: center;
+          line-height: 15px;
+          border-right: 1px solid;        
+        .line
+          position: relative
+          height: 42px
+          margin-top: 7px
+          img
+            border: 1px solid black
+            margin-left: 20px
+          .txt1
+            position: absolute
+            left: 66px
+            top: 10px
+            font-family: CenturyGothic-Bold
+            font-size: 9px
+          .txt2
+            position: absolute
+            left: 66px
+            top: 19px
+            font-size: 8px;
+            width: 124px;
+            max-height: 20px
+            overflow: hidden
+          .bask
+            width: 10px
+            height: 16px
+            background: url('../img/bask.png') no-repeat
+            position: absolute
+            left: 211px
+            top: 16px
+            cursor: pointer
+          .mini-line
+            width: 225px
+            height: 3px
+            position: absolute
+            background: url('../img/mini-line.png') no-repeat
+            left: 9px
+            top: 43px          
+        a
+          color:black
+          .more
+            margin-top: 6px
+            margin-left: 66px
+            font-family: CenturyGothic-Bold
+            font-size: 9px
+        #null-prod
+          display:none
+          text-align: center;
+          margin-top: 21px;
+        .go-to-bask
+        .fast-order
+          margin-top: 18px;
+          display: inline-block;
+          width: 78px
+          background: #f42c61
+          border-radius: 3px
+          -webkit-box-shadow: 2px 3px 0px 0px rgba(122,66,82,0.6)
+          -moz-box-shadow: 2px 3px 0px 0px rgba(122,66,82,0.6)
+          box-shadow: 2px 3px 0px 0px rgba(122,66,82,0.6)
+          top: 118px
+          cursor: pointer
+          font-family: CenturyGothic-Bold
+          font-size: 9.51px
+          color: #fff
+          text-align: center
+          vertical-align: middle
+          padding-top: 2px
+          padding-bottom: 2px
+          margin-bottom: 10px
+        .go-to-bask
+          margin-left: 26px
+        .fast-order
+          margin-left: 30px  
+           
+
+          
+
+         
+                 
 
 #navbar-my
   position: relative
