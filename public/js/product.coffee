@@ -127,6 +127,7 @@ $(document).ready () ->
       "click .yes"      : "yes",
       "click .no"       : "no",
       "click .answer"   : "answer"
+      "click .over"     : "showAllText"
 
     yes:() -> 
       @sendYoN("yes")
@@ -185,6 +186,11 @@ $(document).ready () ->
         success : (com) =>
           $(".yes", @el).text("Да (" + com.yes + ")")
           $(".no", @el).text("Нет (" + com.no + ")")
+      
+    showAllText: ->
+      $(".rewiew", @el).css("height", "100%")
+      $(".over", @el).hide()
+      
       
       
     render: ->
