@@ -113,11 +113,19 @@ $(document).ready () ->
     $(".fav-menu").hide()
 
   $("#login-btn").mouseenter ()->
-#    $(".log-menu").show()
+    $(".log-menu").show()
 
-  $("#login-btn").click ()->
+  $(".busket").mouseenter ()->
+    $(".bask-menu").show()
+
+  $(".bask-menu").mouseleave ()->
+    $(".bask-menu").hide()
+
+
+  $(".auth").click ()->
     $("#modal-bg").show()
     $(".type1").show()
+    $(".log-menu").hide()
 
   $(".register").click ()->
     $("#modal-bg").show()
