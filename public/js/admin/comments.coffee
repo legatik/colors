@@ -42,11 +42,10 @@ $(document).ready () ->
         idDel = $(@).attr("id")
         $.ajax
           method:"post"
-          url: "/tool/admin/del_user"
+          url: "/tool/admin/del_com"
           data: {id: idDel}
-          success: (data) ->
-            id = "#cont-" + idDel
-            $(id).remove()
+          success: (data) =>
+            delEl = $($($(@).parent()).parent()).remove()
 #  
 #  users = $("#first-data").attr("users")
 #  if users

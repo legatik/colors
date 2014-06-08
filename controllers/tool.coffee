@@ -144,6 +144,13 @@ exports.boot = (app) ->
       rimraf path, (err) ->
         res.send 200
 
+  app.post '/admin/del_com', (req, res) ->
+    data = req.body
+    console.log "data", data
+    Comment.findOne {_id: data.id}, (err, com) ->
+      com.remove()
+      res.send 200
+      
   app.post '/admin/del_news', (req, res) ->
     data = req.body
     New.findOne {_id: data.id}, (err, news) ->
