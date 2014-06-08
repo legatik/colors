@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment} = db.models
 
 exports.boot = (app) ->
 
@@ -29,6 +29,9 @@ exports.boot = (app) ->
 
   app.get '/admin/page/comments', (req, res) ->
       res.render 'admin/page/comments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
+  app.get '/admin/page/pComments', (req, res) ->
+      res.render 'admin/page/pComments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
 
 
 
@@ -88,6 +91,10 @@ exports.boot = (app) ->
     Comment.find {text: find}, (err, arrComm) ->
       res.send arrComm
 
+  app.get '/admin/q_pComments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    PComment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
 
       
   app.post '/admin/fn_act_brend', (req, res) ->
@@ -150,6 +157,17 @@ exports.boot = (app) ->
     Comment.findOne {_id: data.id}, (err, com) ->
       com.remove()
       res.send 200
+      
+  app.post '/admin/del_pCom', (req, res) ->
+    data = req.body
+    PComment.findOne {_id: data.id}, (err, pcom) ->
+      arrCom = pcom.comments
+      pcom.remove()
+      Comment.find { _id: { $in: arrCom } }, (err, comms) ->
+        comms.forEach (com) ->
+          com.remove()
+        res.send 200
+      
       
   app.post '/admin/del_news', (req, res) ->
     data = req.body
