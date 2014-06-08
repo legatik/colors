@@ -115,6 +115,33 @@ $(document).ready () ->
   $("#login-btn").mouseenter ()->
     $(".log-menu").show()
 
+  $(".busket").mouseenter ()->
+    $(".bask-menu").show()
+
+  $(".bask-menu").mouseleave ()->
+    $(".bask-menu").hide()
+
+
+  $(".auth").click ()->
+    $("#modal-bg").show()
+    $(".type1").show()
+    $(".log-menu").hide()
+
+  $(".register").click ()->
+    $("#modal-bg").show()
+    $(".popup-cont").hide()
+    $(".type2").show()
+
+  $(".close").click ()->
+    $(".popup-cont").hide()
+    $("#modal-bg").hide()
+
+  $(".forgot-pass").click ()->
+    $("#modal-bg").show()
+    $(".popup-cont").hide()
+    $(".type3").show()   
+
+
   $(".log-menu").mouseleave ()->
     $(".log-menu").hide()
 
@@ -122,15 +149,41 @@ $(document).ready () ->
   $(".send").click ()->
     mail = $("#mail-pod").val()
     reg = new RegExp("^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$")
-
+    console.log "@"
+    console.log "mail", mail
     if reg.test(mail)
       $.ajax
         type    : 'POST'
         url     : "/create/step1_user"
         data    : {email:mail}
-        success : (products) =>
-          alert("Заявка отправленна. Проверьте свою электронную почту")
+        success : (mess) =>
+          console.log "mess", mess
+          alert(mess)
 
+
+  $(".enter").click () ->
+    data = {}
+    data.email = $("#reg-email").val()
+    data.password  = $("#reg-pass").val()
+    $.ajax
+      type    : 'POST'
+      url     : "/login"
+      data    : data
+      success : (st) =>
+        alert("Пользователь с такой почтой и паролем не был найден") if !st
+        window.location.reload() if st
+
+  $(".send-pass").click () ->
+    email = $("#send-pass-inp").val()
+    console.log "email", email
+    $.ajax
+      type    : 'POST'
+      url     : "/create/send_pass"
+      data    : {email:email}
+      success : (mess) =>
+        alert(mess)
+    
+    
 
   $(liNav).click ()->
     window.location.href = $(@).attr("value")

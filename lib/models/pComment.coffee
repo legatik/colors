@@ -4,7 +4,7 @@ ObjectId = mongoose.Schema.Types.ObjectId
 Schema = mongoose.Schema
 
 pComment = new Schema
-  comments : Array
+  comments : [{type: ObjectId, ref: 'Comment'}]
   name     : String
   date     : Date
   text     : String

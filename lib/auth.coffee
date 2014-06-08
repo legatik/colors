@@ -10,6 +10,8 @@ exports.init = (app, passport) ->
 
 	# Local Strategy
 	localStrategy = new LocalStrategy (email, password, done) ->
+#	  console.log "email", email
+#	  console.log "password", password
 		User.findOne {email:email, password:password}, (err, user) ->
 			return done null, false unless user
 			done null, user

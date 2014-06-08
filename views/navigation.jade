@@ -49,8 +49,11 @@
       .bord-log
       .menu-body-log
         .title  Вход
-        input(value="legatik@list.ru")#mail-pod
-        .send ПОДПИСАТСЯ
+        p Хотите получить скидки, бонусы и подарки?
+        input(placeholder="Введите ваш e-mail")
+        .send2 ПОЛУЧИТЬ
+        a.auth(nohref="nohref", style="cursor:pointer") Авторизоваться 
+        
     .fav-menu
       .bord
       .menu-body
@@ -71,6 +74,30 @@
             a(href="/user/un-favorites", style="color:#FFF;position: relative; top: -2px;")
               ПЕРЕЙТИ В ИЗБРАННОЕ
         .go-bask ПЕРЕНЕСТИ В КОРЗИНУ
+        
+    .bask-menu   
+      .bord 
+      .menu-body
+        .title  Корзина 
+        .line-cont
+          .line
+            img(width="38px",height="38px",src="/img/products/537c64ad454b7cd13e000002/undefined")
+            .txt1 qwe
+            .txt2 agareg aerg aerg aerg aerg aerg err
+            .back.del-db
+            .mini-line
+          .line
+            img(width="38px",height="38px",src="/img/products/537c64ad454b7cd13e000002/undefined")
+            .txt1 qwe
+            .txt2 agareg aerg aerg aerg aerg aerg err
+            .back.del-db
+            .mini-line 
+        a(href="#")
+          .more Еще 11 продуктов.. 
+        #null-prod У вас нет продуктов в избранном
+        .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
+        .fast-order БЫСТРО ОФОРМИТЬ ЗАКАЗ        
+     
 #navbar-my
   ul.navigation
     li

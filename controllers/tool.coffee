@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment} = db.models
 
 exports.boot = (app) ->
 
@@ -26,6 +26,13 @@ exports.boot = (app) ->
   app.get '/admin/page/user', (req, res) ->
       User.find {confirm:true}, (err, users) ->
         res.render 'admin/page/user', {title: 'Админ - акции', user: req.user, loc:'home', users}
+
+  app.get '/admin/page/comments', (req, res) ->
+      res.render 'admin/page/comments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
+  app.get '/admin/page/pComments', (req, res) ->
+      res.render 'admin/page/pComments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
 
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
@@ -78,6 +85,16 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Action.find {title: find}, (err, arrAction) ->
       res.send arrAction
+
+  app.get '/admin/q_comments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    Comment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
+
+  app.get '/admin/q_pComments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    PComment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
 
       
   app.post '/admin/fn_act_brend', (req, res) ->
@@ -134,6 +151,24 @@ exports.boot = (app) ->
       rimraf path, (err) ->
         res.send 200
 
+  app.post '/admin/del_com', (req, res) ->
+    data = req.body
+    console.log "data", data
+    Comment.findOne {_id: data.id}, (err, com) ->
+      com.remove()
+      res.send 200
+      
+  app.post '/admin/del_pCom', (req, res) ->
+    data = req.body
+    PComment.findOne {_id: data.id}, (err, pcom) ->
+      arrCom = pcom.comments
+      pcom.remove()
+      Comment.find { _id: { $in: arrCom } }, (err, comms) ->
+        comms.forEach (com) ->
+          com.remove()
+        res.send 200
+      
+      
   app.post '/admin/del_news', (req, res) ->
     data = req.body
     New.findOne {_id: data.id}, (err, news) ->
