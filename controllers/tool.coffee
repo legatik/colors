@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment} = db.models
 
 exports.boot = (app) ->
 
@@ -26,6 +26,10 @@ exports.boot = (app) ->
   app.get '/admin/page/user', (req, res) ->
       User.find {confirm:true}, (err, users) ->
         res.render 'admin/page/user', {title: 'Админ - акции', user: req.user, loc:'home', users}
+
+  app.get '/admin/page/comments', (req, res) ->
+      res.render 'admin/page/comments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
 
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
@@ -78,6 +82,12 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Action.find {title: find}, (err, arrAction) ->
       res.send arrAction
+
+  app.get '/admin/q_comments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    Comment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
+
 
       
   app.post '/admin/fn_act_brend', (req, res) ->
