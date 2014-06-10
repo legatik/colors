@@ -84,7 +84,7 @@ block content
       .new-rew-block.rew-block
         .you-photo.photo
         .text-block#block-inp-com
-          input.inp-name(type="text",placeholder="Введите имя")
+          input.inp-name#inp-name-ot(type="text",placeholder="Введите имя")
           textarea.inp-rew.inp-rew-ob(placeholder="Напишите отзыв")
       #rew-block-cont
         .rew-block
@@ -120,17 +120,23 @@ block content
             span Показать полностью
         .actions
           .left
-            a#com-count(nohref="nohref", style="cursor:pointer") Комментарии (<%=data.comments.length%>)
-            a.answer(href="#go-link1") Ответить
+            a.com-count(nohref="nohref", style="cursor:pointer") Комментарии (<%=data.comments.length%>)
+            a.answer(nohref="nohref", style="cursor:pointer") Ответить
           .right  
             a.pol(nohref="nohref") Полезный отзыв?
             a.yes(nohref="nohref", style="cursor:pointer") Да (<%=data.yes%>) 
             a.no(nohref="nohref", style="cursor:pointer") Нет (<%=data.no%>) 
       .coments-cont(style="width: 716px; margin-left: 102px; margin-top: 10px; display:none")
-      
+        .new-rew-block.rew-block.add-com-cont(style="display:none")
+          .you-photo.photo
+          .text-block(style="width:400px")
+            input.inp-name.inp-name-com(type="text",placeholder="Введите имя")
+            textarea.inp-rew(placeholder="Напишите комментарий", style="width: 590px;margin-bottom: 10px;")
+            span.sbm-comment Отправить
+        .ap-coments-cont
       
     script#commentTemplate(type="text/template")
-      div
+      div(style="margin-bottom: 7px;")
         .photo
         .text-block(style="width: 601px;")
           .name <%=data.name%>
