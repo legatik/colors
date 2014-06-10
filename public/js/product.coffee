@@ -126,16 +126,28 @@ $(document).ready () ->
       console.log "@options", @options
    
     events:
-      "click .yes"      : "yes",
-      "click .no"       : "no",
-      "click .answer"   : "answer"
-      "click .over-pc"     : "showAllText"
+      "click .yes"       : "yes",
+      "click .no"        : "no",
+      "click .answer"    : "answer"
+      "click .over-pc"   : "showAllText"
+      "click #com-count" : "showComments"
 
     yes:() -> 
       @sendYoN("yes")
 
     no:() -> 
       @sendYoN("no")
+
+    showComments: () ->
+      st = $(".coments-cont", @el).css("display")
+      console.log "st", st
+      if st is "none"
+        $(".coments-cont", @el).fadeIn("slow")
+        $("#com-count", @el).text("Скрыть комментарии")
+      else
+        $(".coments-cont", @el).fadeOut("slow")
+        $("#com-count", @el).text("Комментарии (" + @model.comments.length + ")")
+
 
     setCom: (data) ->
       console.log "data", data
@@ -194,16 +206,17 @@ $(document).ready () ->
       $(".over-pc", @el).hide()
 
     renderComments: ->
+      if @model.text.length < 150
+        $(".over-pc", @el).hide()
       @model.comments.forEach (data) ->
         template = _.template(jQuery('#commentTemplate').html())
         dateCom = new Date(data.date)
         data.time  = dateCom.toLocaleTimeString()
         data.sDate = dateCom.toLocaleDateString()
-        console.log "data", data
-        console.log "template({data:data})", template({data:data})
         el = $(template({data:data}))
-        console.log "s", $(".coments-cont", @el)
         $(".coments-cont", @el).append(el)
+        if data.text.length < 125
+          $($(el).find(".over-c")).hide()
       
     render: ->
       dateCom = new Date(@model.date)

@@ -126,7 +126,7 @@ block content
             a.pol(nohref="nohref") Полезный отзыв?
             a.yes(nohref="nohref", style="cursor:pointer") Да (<%=data.yes%>) 
             a.no(nohref="nohref", style="cursor:pointer") Нет (<%=data.no%>) 
-      .coments-cont(style="width: 716px; margin-left: 102px; margin-top: 10px;")
+      .coments-cont(style="width: 716px; margin-left: 102px; margin-top: 10px; display:none")
       
       
     script#commentTemplate(type="text/template")
@@ -137,6 +137,6 @@ block content
           .date <%=data.sDate%>
           .time <%=data.time%>
           .rewiew(style="width:601px") <%=data.text%>
-            .over ... 
+            .over.over-c ... 
               span Показать полностью
       
