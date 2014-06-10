@@ -115,8 +115,8 @@ block content
         .name <%=data.name%>
         .date <%=data.sDate%>
         .time <%=data.time%>
-        .rewiew <%=data.text%>
-          .over ... 
+        .rewiew.rewiew-pc <%=data.text%>
+          .over.over-pc ... 
             span Показать полностью
         .actions
           .left
@@ -125,5 +125,18 @@ block content
           .right  
             a.pol(nohref="nohref") Полезный отзыв?
             a.yes(nohref="nohref", style="cursor:pointer") Да (<%=data.yes%>) 
-            a.no(nohref="nohref", style="cursor:pointer") Нет (<%=data.no%>)   
+            a.no(nohref="nohref", style="cursor:pointer") Нет (<%=data.no%>) 
+      .coments-cont(style="width: 716px; margin-left: 102px; margin-top: 10px;")
+      
+      
+    script#commentTemplate(type="text/template")
+      div
+        .photo
+        .text-block(style="width: 601px;")
+          .name <%=data.name%>
+          .date <%=data.sDate%>
+          .time <%=data.time%>
+          .rewiew(style="width:601px") <%=data.text%>
+            .over ... 
+              span Показать полностью
       

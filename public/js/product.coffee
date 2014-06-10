@@ -18,6 +18,7 @@ $(document).ready () ->
         arr.forEach (data) ->
           pCommentView = new PCommentView(data)
           $("#rew-block-cont").prepend(pCommentView.render())
+          pCommentView.renderComments()
           arrViwe.push pCommentView
           
   getComments()
@@ -87,6 +88,7 @@ $(document).ready () ->
             console.log "data", data
             pCommentView = new PCommentView(data)
             $("#rew-block-cont").prepend(pCommentView.render())
+            pCommentView.renderComments()
             arrViwe.push pCommentView
         
         
@@ -127,7 +129,7 @@ $(document).ready () ->
       "click .yes"      : "yes",
       "click .no"       : "no",
       "click .answer"   : "answer"
-      "click .over"     : "showAllText"
+      "click .over-pc"     : "showAllText"
 
     yes:() -> 
       @sendYoN("yes")
@@ -188,10 +190,20 @@ $(document).ready () ->
           $(".no", @el).text("Нет (" + com.no + ")")
       
     showAllText: ->
-      $(".rewiew", @el).css("height", "100%")
-      $(".over", @el).hide()
-      
-      
+      $(".rewiew-pc", @el).css("height", "100%")
+      $(".over-pc", @el).hide()
+
+    renderComments: ->
+      @model.comments.forEach (data) ->
+        template = _.template(jQuery('#commentTemplate').html())
+        dateCom = new Date(data.date)
+        data.time  = dateCom.toLocaleTimeString()
+        data.sDate = dateCom.toLocaleDateString()
+        console.log "data", data
+        console.log "template({data:data})", template({data:data})
+        el = $(template({data:data}))
+        console.log "s", $(".coments-cont", @el)
+        $(".coments-cont", @el).append(el)
       
     render: ->
       dateCom = new Date(@model.date)
