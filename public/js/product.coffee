@@ -61,14 +61,12 @@ $(document).ready () ->
 #      secure: true
 
   addCalssKeup = () ->
-    $(".inp-rew-ob").unbind("keyup")
 #    $(".inp-com").unbind("keyup")
-    $(".inp-rew-ob").keyup (e) ->
-      if e.which is 13
+    $(".sbm-pcom").click (e) ->
         message = false
         data = {}
         data.name = $("#inp-name-ot").val()
-        data.text = $(@).val()
+        data.text = $(".inp-rew-ob").val()
         message = "Введите имя" if !data.name
         message = "Введите тексит отзыва" if !data.text
         if message
@@ -90,6 +88,9 @@ $(document).ready () ->
             $("#rew-block-cont").prepend(pCommentView.render())
             pCommentView.renderComments()
             arrViwe.push pCommentView
+            $("#inp-name-ot").val("")
+            $(".inp-rew-ob").val("")
+            
         
         
 #    $(".inp-com").keyup (e) ->
@@ -144,7 +145,7 @@ $(document).ready () ->
     addComment: () ->
       message = false
       data = {}
-      data.name = $(".inp-name-com").val()
+      data.name = $(".inp-name-com", @el).val()
       data.text = $(".inp-rew", @el).val()
       data.date = new Date()
       data.user = gUser["_id"] if gUser
@@ -162,6 +163,8 @@ $(document).ready () ->
           @model.comments.push(com)
           @renderComments()
           $(".answer", @el).text("Ответить")
+          $(".inp-name-com", @el).val("")
+          $(".inp-rew", @el).val("")
 #          $(".com-count").text("Комментарии (" + @model.comments.length + ")")
 #          console.log "ok"
   
