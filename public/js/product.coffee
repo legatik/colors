@@ -161,6 +161,7 @@ $(document).ready () ->
           $(".add-com-cont",@el).hide()
           @model.comments.push(com)
           @renderComments()
+          $(".answer", @el).text("Ответить")
 #          $(".com-count").text("Комментарии (" + @model.comments.length + ")")
 #          console.log "ok"
   
@@ -238,21 +239,28 @@ $(document).ready () ->
       $(".over-hide-pc", @el).hide()
 
     renderComments: ->
-      console.log "@model", @model
       $(".ap-coments-cont", @el).empty()
       if @model.text.length < 150
         $(".over-pc", @el).hide()
+      if @model.user?.ava
+        $(".you-photo", @el).attr("src", "/img/users/" + @model.user["_id"] + "/ava." + @model.user.ava)
       @model.comments.forEach (data) ->
         template = _.template(jQuery('#commentTemplate').html())
         dateCom = new Date(data.date)
         data.time  = dateCom.toLocaleTimeString()
         data.sDate = dateCom.toLocaleDateString()
+        data.avaLink = "/img/add-bg.png"
+        if data.user and data.ava
+          data.avaLink = "/img/users/" + data.user + "/ava." + data.ava 
         el = $(template({data:data}))
         $(".ap-coments-cont", @el).prepend(el)
         if data.text.length < 125
           $($(el).find(".over-c")).hide()
       
     render: ->
+      @model.ava = "/img/add-bg.png"
+      @model.ava = "/img/users/" + @model.user["_id"] + "/ava." + @model.user.ava if @model.user?.ava
+      
       dateCom = new Date(@model.date)
       @model.time  = dateCom.toLocaleTimeString()
       @model.sDate = dateCom.toLocaleDateString()

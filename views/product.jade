@@ -82,7 +82,10 @@ block content
       .rewiew-title ОТЗЫВЫ
       .line
       .new-rew-block.rew-block
-        .you-photo.photo
+        - if(user && user.ava) 
+              img.you-photo.photo(src!="/img/users/" + user["_id"] + "/ava." + user["ava"])
+        - else
+          .you-photo.photo(src="/img/add-bg.png")
         .text-block#block-inp-com
           input.inp-name#inp-name-ot(type="text",placeholder="Введите имя")
           textarea.inp-rew.inp-rew-ob(placeholder="Напишите отзыв")
@@ -110,7 +113,7 @@ block content
     
     
     script#pCommentTemplate(type="text/template")
-      .photo
+      img(src!="<%=data.ava%>").photo
       .text-block
         .name <%=data.name%>
         .date <%=data.sDate%>
@@ -130,7 +133,7 @@ block content
             a.no(nohref="nohref", style="cursor:pointer") Нет (<%=data.no%>) 
       .coments-cont(style="width: 716px; margin-left: 102px; margin-top: 10px; display:none")
         .new-rew-block.rew-block.add-com-cont(style="display:none")
-          .you-photo.photo
+          img.you-photo.photo(src="/img/add-bg.png")
           .text-block(style="width:400px")
             input.inp-name.inp-name-com(type="text",placeholder="Введите имя")
             textarea.inp-rew(placeholder="Напишите комментарий", style="width: 590px;margin-bottom: 10px;")
@@ -139,7 +142,7 @@ block content
       
     script#commentTemplate(type="text/template")
       div(style="margin-bottom: 7px;")
-        .photo
+        img.photo(src!="<%=data.avaLink%>")
         .text-block(style="width: 601px;")
           .name <%=data.name%>
           .date <%=data.sDate%>
