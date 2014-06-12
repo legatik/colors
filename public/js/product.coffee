@@ -126,12 +126,13 @@ $(document).ready () ->
       console.log "@options", @options
    
     events:
-      "click .yes"         : "yes",
-      "click .no"          : "no",
-      "click .answer"      : "answer"
-      "click .over-pc"     : "showAllText"
-      "click .com-count"   : "showComments"
-      "click .sbm-comment" : "addComment"
+      "click .yes"          : "yes",
+      "click .no"           : "no",
+      "click .answer"       : "answer"
+      "click .over-pc"      : "showAllText"
+      "click .com-count"    : "showComments"
+      "click .over-hide-pc" : "hideAllText"
+      "click .sbm-comment"  : "addComment"
 
     yes:() -> 
       @sendYoN("yes")
@@ -227,6 +228,12 @@ $(document).ready () ->
     showAllText: ->
       $(".rewiew-pc", @el).css("height", "100%")
       $(".over-pc", @el).hide()
+      $(".over-hide-pc", @el).show()
+
+    hideAllText: ->
+      $(".rewiew-pc", @el).css("height", "30")
+      $(".over-pc", @el).show()
+      $(".over-hide-pc", @el).hide()
 
     renderComments: ->
       $(".ap-coments-cont", @el).empty()
