@@ -8,6 +8,8 @@ comment = new Schema
   name      : String
   text      : String
   date      : Date
+  user      : {type: ObjectId, ref: 'User'}
+  ava       : String
   
 Model = mongoose.model 'Comment', comment
 

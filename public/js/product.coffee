@@ -4,7 +4,7 @@ $(document).ready () ->
 #  $.cookie "colors_favorites", null
   cookies_fav =  $.cookie "colors_favorites"
   gUser = $("#firstData").attr("user")
-  gUser = JSON.stringify(gUser) if gUser
+  gUser = JSON.parse(gUser) if gUser
   gProduct = $("#firstData").attr("product")
   gProduct = JSON.parse(gProduct) if gProduct
   check = true
@@ -139,6 +139,7 @@ $(document).ready () ->
 
     no:() -> 
       @sendYoN("no")
+
   
     addComment: () ->
       message = false
@@ -146,6 +147,7 @@ $(document).ready () ->
       data.name = $(".inp-name-com").val()
       data.text = $(".inp-rew", @el).val()
       data.date = new Date()
+      data.user = gUser["_id"] if gUser
       message = "Введите имя" if !data.name
       message = "Введите тексит отзыва" if !data.text
       if message
@@ -236,6 +238,7 @@ $(document).ready () ->
       $(".over-hide-pc", @el).hide()
 
     renderComments: ->
+      console.log "@model", @model
       $(".ap-coments-cont", @el).empty()
       if @model.text.length < 150
         $(".over-pc", @el).hide()

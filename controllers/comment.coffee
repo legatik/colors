@@ -7,7 +7,6 @@ exports.boot = (app) ->
   app.post '/create/pComment', (req, res) ->
     body = req.body
     newCom = new PComment(body)
-    console.log "newCom", newCom
     newCom.save (err, com) ->
       res.send com
       
@@ -15,11 +14,11 @@ exports.boot = (app) ->
     id = req.body.id
     PComment.find({product:id})
     .populate("comments")
+    .populate("user")
     .exec (err, comms) ->
       res.send comms
 
   app.post '/yon', (req, res) ->
-    console.log "SSSSSS"
     id = req.body.id
     st = req.body.st
     if req.user
@@ -52,11 +51,14 @@ exports.boot = (app) ->
     data = req.body.data
     id   = req.body.id
     PComment.findById id, (err, pCom) ->
-      comment = new Comment(data)
-      comment.save (err, com) ->
-        pCom.comments.push com['_id']
-        pCom.save (err, s) ->
-        res.send com
+      if data.user
+        User.findById data.user, (err, user) ->
+          data.ava = user.ava if user.ava
+          comment = new Comment(data)
+          comment.save (err, com) ->
+            pCom.comments.push com['_id']
+            pCom.save (err, s) ->
+            res.send com
         
         
       
