@@ -131,8 +131,10 @@ $(document).ready () ->
       "click .no"           : "no",
       "click .answer"       : "answer"
       "click .over-pc"      : "showAllText"
+      "click .over-c"       : "showAllTextCom"
       "click .com-count"    : "showComments"
       "click .over-hide-pc" : "hideAllText"
+      "click .over-hide-c"  : "hideAllTextCom"
       "click .sbm-comment"  : "addComment"
 
     yes:() -> 
@@ -236,10 +238,22 @@ $(document).ready () ->
       $(".over-pc", @el).hide()
       $(".over-hide-pc", @el).show()
 
+    showAllTextCom: (e) ->
+      el = $($($(e.target).parent()).parent()).parent()
+      $($(el).find(".over-hide-c")).show()
+      $($(el).find(".rewiew-c")).css("height", "100%")
+      $($(el).find(".over-c")).hide()
+      
     hideAllText: ->
       $(".rewiew-pc", @el).css("height", "30")
       $(".over-pc", @el).show()
       $(".over-hide-pc", @el).hide()
+
+    hideAllTextCom: (e) ->
+      el = $($(e.target).parent()).parent()
+      $($(el).find(".over-hide-c")).hide()
+      $($(el).find(".rewiew-c")).css("height", "30")
+      $($(el).find(".over-c")).show()
 
     renderComments: ->
       $(".ap-coments-cont", @el).empty()
@@ -247,7 +261,8 @@ $(document).ready () ->
         $(".over-pc", @el).hide()
       if @model.user?.ava
         $(".you-photo", @el).attr("src", "/img/users/" + @model.user["_id"] + "/ava." + @model.user.ava)
-      @model.comments.forEach (data) ->
+      console.log "@model.comments", @model.comments
+      @model.comments.forEach (data) =>
         template = _.template(jQuery('#commentTemplate').html())
         dateCom = new Date(data.date)
         data.time  = dateCom.toLocaleTimeString()
