@@ -8,7 +8,11 @@ exports.boot = (app) ->
     body = req.body
     newCom = new PComment(body)
     newCom.save (err, com) ->
-      res.send com
+      if req.user
+        User.findById req.user["_id"], (err, user) ->
+          res.send {com:com, user:user}
+      else
+        res.send {com:com, user:false}
       
   app.post '/get/comments', (req, res) ->
     id = req.body.id

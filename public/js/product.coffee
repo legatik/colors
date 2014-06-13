@@ -83,8 +83,9 @@ $(document).ready () ->
           data    : data
           url     : "/comment/create/pComment"
           success : (data) =>
-            console.log "data", data
-            pCommentView = new PCommentView(data)
+            if data.user
+              data.com.user = data.user
+            pCommentView = new PCommentView(data.com)
             $("#rew-block-cont").prepend(pCommentView.render())
             pCommentView.renderComments()
             arrViwe.push pCommentView
