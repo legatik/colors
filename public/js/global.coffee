@@ -80,6 +80,8 @@ $(document).ready () ->
 
 
   showLastCartProd = () ->
+    $(".more").hide()
+    $("#null-prod-cart").hide()
     $.ajax
       type    : 'POST'
       url     : "/user/get/tow_cart"
@@ -91,7 +93,7 @@ $(document).ready () ->
             $(".more").show()
 
           if !data.products.length
-            $("#null-prod").show()
+            $("#null-prod-cart").show()
           else
             data.products.forEach (pr) ->
               el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
