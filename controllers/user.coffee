@@ -40,7 +40,6 @@ exports.boot = (app) ->
     else
       res.send {user:false}
 
-
   app.post '/get/tow_cart', (req, res) ->
     if req.user
       User.findOne({_id:req.user["_id"]})
@@ -101,6 +100,20 @@ exports.boot = (app) ->
         user.favorites = newArr
         user.save()
         res.send 200
+
+  app.post '/remove_cart', (req, res) ->
+    arrId = req.body.idDel
+    if req.user
+      User.findOne {_id:req.user["_id"]}, (err, user)->
+        Cart.findById user.cart, (err, cart) ->
+          newArr = []
+          cart.products.forEach (id) ->
+            newArr.push(id) if arrId.toString() != id.toString()
+          cart.products = []
+          cart.products = newArr
+          cart.save()
+          res.send 200
+
 
 
   app.post '/update', (req, res) ->

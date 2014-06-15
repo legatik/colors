@@ -40,7 +40,6 @@ $(document).ready () ->
       type    : 'POST'
       url     : "/user/get/tow_favorites"
       success : (data) =>
-        console.log "data", data
         if !data.user
           cookies_fav =  $.cookie "colors_favorites"
           if cookies_fav and cookies_fav != "null"
@@ -63,7 +62,6 @@ $(document).ready () ->
                     $(".line-cont").append(el)
                   addEventDel()
         else
-          console.log "ata.products",data
           $(".line-cont").empty()
           if data.col > 2
             $(".more").text("Еще " + (data.col-2) + " продуктов..")
@@ -96,13 +94,15 @@ $(document).ready () ->
             $("#null-prod-cart").show()
           else
             data.products.forEach (pr) ->
-              el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
+              el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db-cart" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
               $(".line-cont-cart").append(el)
+            addEventDel()
 
 
   addEventDel = () ->
     $(".del-cookie").unbind("click")
     $(".del-db").unbind("click")
+    $(".del-db-cart").unbind("click")
 
     $(".del-db").on "click", ->
       idDel = $(@).attr("id")
@@ -112,6 +112,16 @@ $(document).ready () ->
         url     : "/user/remove_favorites"
         success : (products) =>
           showLastFavProd()
+
+    $(".del-db-cart").on "click", ->
+      idDel = $(@).attr("id")
+      $.ajax
+        type    : 'POST'
+        data    : {idDel:idDel}
+        url     : "/user/remove_cart"
+        success : (products) =>
+          showLastCartProd()
+
 
     $(".del-cookie").on "click", ->
       idDel = $(@).attr("id")
