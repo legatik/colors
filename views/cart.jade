@@ -11,5 +11,5 @@ block content
           td #{pr.title}
           td(id!="cost#{pr['_id']}") #{pr.cost}
           td
-            input.cost-change-cart(type="number", id!="ch#{pr['_id']}")
-          td.result-change-cart(id!="res#{pr['_id']}")
+            input.cost-change-cart(type="number", id!="ch#{pr['_id']}", cost='#{pr.cost}')
+          td.result-change-cart(id!="res#{pr['_id']}") #{pr.cost}
