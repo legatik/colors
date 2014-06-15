@@ -83,7 +83,13 @@
         a(href="#")
           .more Еще 11 продуктов.. 
         #null-prod-cart(style="display:none") У вас нет продуктов в карзине
-        .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
+        if(user)
+          a(href="/user/cart")
+            .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
+        
+        if(!user)
+          a(href="/user/cart")
+            .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
         .fast-order БЫСТРО ОФОРМИТЬ ЗАКАЗ        
      
 #navbar-my

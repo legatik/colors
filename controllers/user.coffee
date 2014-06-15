@@ -22,6 +22,23 @@ exports.boot = (app) ->
   app.get '/reviews', (req, res) ->
     res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}
 
+  app.get '/cart', (req, res) ->
+    if req.user
+      User.findById req.user["_id"], (err, user) ->
+        if user.cart
+          Cart.findById(user.cart)
+          .populate("products")
+          .exec (err, cart) ->
+            products = cart.products
+            res.render 'cart', {title: 'Colors Карзина', user: req.user, loc:'home', products:products}
+        else
+          res.render 'cart', {title: 'Colors Карзина', user: req.user, loc:'home', products:[]}
+    else
+      res.render 'cart', {title: 'Colors Карзина', user: req.user, loc:'home', products:[]}
+          
+          
+
+
   app.get '/stockpiling', (req, res) ->
     res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}
 

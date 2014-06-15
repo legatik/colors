@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  include navigation
+  input#firstData(type="hidden", user=JSON.stringify(user))
+  != js("cart")
+  .cabinet-cont
+    table
+      - each pr in products
+        tr
+          td #{pr.title}
+          td(id!="cost#{pr['_id']}") #{pr.cost}
+          td
+            input.cost-change-cart(type="number", id!="ch#{pr['_id']}")
+          td.result-change-cart(id!="res#{pr['_id']}")
