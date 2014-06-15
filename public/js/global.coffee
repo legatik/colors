@@ -189,6 +189,15 @@ $(document).ready () ->
     window.location.href = $(@).attr("value")
 
 
+  $(".go-bask").click ()->
+    $.ajax
+      type    : 'POST'
+      url     : "/user/get/to_cart_fav"
+      success : (d) =>
+        showLastFavProd()
+        console.log "d", d
+
+
 
   window.nav = {
     face:{

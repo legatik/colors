@@ -4,7 +4,7 @@ nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 rimraf = require "rimraf"
 
-{Product, Brend, Action, New, User} = db.models
+{Product, Brend, Action, New, User, Cart} = db.models
 
 exports.boot = (app) ->
 
@@ -39,6 +39,36 @@ exports.boot = (app) ->
             res.send {user:true, products:products, col:col}
     else
       res.send {user:false}
+
+
+  app.post '/get/to_cart_fav', (req, res) ->
+    if req.user
+      User.findOne {_id:req.user["_id"]}, (err, user)->
+        if user.cart
+          Cart.findById user.cart, (err,cart) ->
+            cart.products  = _.uniq cart.products
+            user.favorites.forEach (idf) ->
+              check = true
+              cart.products.forEach (idc) ->
+                check = false if idc.toString() is idf.toString()
+              cart.products.push(idf) if check
+            cart.save()
+            user.favorites = []
+            user.save()
+            res.send {st:true}
+        else
+          console.log "net"
+          newCart = 
+            user     : user["_id"]
+            products : user.favorites
+          newCart = new Cart(newCart)
+          newCart.save (err, nCart) ->
+            user.favorites = []
+            user.cart = nCart["_id"]
+            user.save()
+            res.send {st:true}
+    else
+      res.send {st:false}
 
   app.post '/get/tow_favorites_byId', (req, res) ->
     arrId = req.body.prodArr
