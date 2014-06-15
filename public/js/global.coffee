@@ -101,7 +101,6 @@ $(document).ready () ->
           cookies_fav =  $.cookie "colors_cart"
           if cookies_fav and cookies_fav != "null"
             cookieArr = JSON.parse(cookies_fav)
-            console.log "cookieArr", cookieArr
             $.ajax
               type    : 'POST'
               data    : {prodArr:cookieArr}

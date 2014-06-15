@@ -5,7 +5,7 @@ block content
   input#firstData(type="hidden", user=JSON.stringify(user))
   != js("cart")
   .cabinet-cont
-    table
+    table#cont-cart
       - each pr in products
         tr
           td #{pr.title}
@@ -13,3 +13,15 @@ block content
           td
             input.cost-change-cart(type="number", id!="ch#{pr['_id']}", cost='#{pr.cost}')
           td.result-change-cart(id!="res#{pr['_id']}") #{pr.cost}
+          
+          
+          
+  script#productTemplate(type="text/template")
+    tr
+      td <%=pr.title%>
+      td(id!="cost<%=pr['_id']%>") <%=pr.cost%>
+      td
+        input.cost-change-cart(type="number", id!="ch<%=pr['_id']%>", cost!="<%=pr['cost']%>")
+      td.result-change-cart(id!="res<%=pr['_id']%>") <%=pr['cost']%>
+    
+    
