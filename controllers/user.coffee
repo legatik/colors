@@ -41,6 +41,21 @@ exports.boot = (app) ->
       res.send {user:false}
 
 
+  app.post '/get/tow_cart', (req, res) ->
+    if req.user
+      User.findOne({_id:req.user["_id"]})
+      .populate("cart")
+      .exec (err, user)->
+        if user.cart
+          Product.find({'_id': { $in: user.cart.products}}).limit(2).exec (err, products) ->
+            Product.find({'_id': { $in: user.cart.products}}).count().exec (err, col) ->
+              res.send {user:true, products:products, col:col}
+        else
+          res.send {user:true, products:[], col:0}
+    else
+      res.send {user:false}
+
+
   app.post '/get/to_cart_fav', (req, res) ->
     if req.user
       User.findOne {_id:req.user["_id"]}, (err, user)->

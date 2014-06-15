@@ -52,12 +52,9 @@ $(document).ready () ->
               url     : "/user/get/tow_favorites_byId"
               success : (products) =>
                 $(".line-cont").empty()
-                console.log "products.length", cookieArr.length
                 if cookieArr.length > 2
-                  console.log "cookieArr.length-2", cookieArr.length-2
                   $(".more").text("Еще " + (cookieArr.length-2) + " продуктов..")
                   $(".more").show()
-
                 if !products.length
                   $("#null-prod").show()
                 else
@@ -79,6 +76,26 @@ $(document).ready () ->
               el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
               $(".line-cont").append(el)
             addEventDel()
+
+
+
+  showLastCartProd = () ->
+    $.ajax
+      type    : 'POST'
+      url     : "/user/get/tow_cart"
+      success : (data) =>
+        if data.user
+          $(".line-cont-cart").empty()
+          if data.col > 2
+            $(".more").text("Еще " + (data.col-2) + " продуктов..")
+            $(".more").show()
+
+          if !data.products.length
+            $("#null-prod").show()
+          else
+            data.products.forEach (pr) ->
+              el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
+              $(".line-cont-cart").append(el)
 
 
   addEventDel = () ->
@@ -117,6 +134,7 @@ $(document).ready () ->
 
   $(".busket").mouseenter ()->
     $(".bask-menu").show()
+    showLastCartProd()
 
   $(".bask-menu").mouseleave ()->
     $(".bask-menu").hide()

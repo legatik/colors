@@ -8,7 +8,7 @@ Schema = mongoose.Schema
 
 user = new Schema(
 	favorites     : [{type: ObjectId, ref: 'Product'}]
-	cart          : {type: ObjectId, ref: 'Product'}
+	cart          : {type: ObjectId, ref: 'Cart'}
 	yesorno       : Array
 	name          : String
 	email         : String
