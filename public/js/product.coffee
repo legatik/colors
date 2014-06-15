@@ -51,7 +51,6 @@ $(document).ready () ->
   $(".setCookie").click ()->
     idProd = $(@).attr("id")
     cookieArr.push idProd
-    console.log "cookieArr", cookieArr
     $.cookie "colors_favorites", JSON.stringify(cookieArr),
       expires: 7
       path:'/'

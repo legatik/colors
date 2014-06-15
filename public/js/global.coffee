@@ -97,10 +97,31 @@ $(document).ready () ->
               el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-db-cart" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
               $(".line-cont-cart").append(el)
             addEventDel()
-
+        else
+          cookies_fav =  $.cookie "colors_cart"
+          if cookies_fav and cookies_fav != "null"
+            cookieArr = JSON.parse(cookies_fav)
+            console.log "cookieArr", cookieArr
+            $.ajax
+              type    : 'POST'
+              data    : {prodArr:cookieArr}
+              url     : "/user/get/tow_favorites_byId"
+              success : (products) =>
+                $(".line-cont-cart").empty()
+                if cookieArr.length > 2
+                  $(".more").text("Еще " + (cookieArr.length-2) + " продуктов..")
+                  $(".more").show()
+                if !products.length
+                  $("#null-prod-cart").show()
+                else
+                  products.forEach (pr) ->
+                    el = '<div class="line" id="line' + pr["_id"] + '"><img width="38px" height="38px" src="/img/products/'+ pr["_id"]+'/'+pr.picture[0]+'"><div class="txt1">'+pr.title+'</div><div class="txt2">'+pr.minOpisanie+'</div><div class="bask del-cookie-cart" id="'+pr["_id"]+'"></div><div class="mini-line"></div></div>'
+                    $(".line-cont-cart").append(el)
+                  addEventDel()
 
   addEventDel = () ->
     $(".del-cookie").unbind("click")
+    $(".del-cookie-cart").unbind("click")
     $(".del-db").unbind("click")
     $(".del-db-cart").unbind("click")
 
@@ -122,6 +143,16 @@ $(document).ready () ->
         success : (products) =>
           showLastCartProd()
 
+    $(".del-cookie-cart").on "click", ->
+      idDel = $(@).attr("id")
+      cookies_fav =  $.cookie "colors_cart"
+      cookieArr = JSON.parse(cookies_fav)
+      newArr = []
+      cookieArr.forEach (item) ->
+        newArr.push(item) if idDel.toString() != item.toString()
+      $.cookie "colors_cart", JSON.stringify(newArr),
+        expires: 7
+      showLastCartProd()
 
     $(".del-cookie").on "click", ->
       idDel = $(@).attr("id")
@@ -224,10 +255,25 @@ $(document).ready () ->
       type    : 'POST'
       url     : "/user/get/to_cart_fav"
       success : (d) =>
-        showLastFavProd()
-        console.log "d", d
-
-
+        if d.st
+          showLastFavProd()
+        else
+          cookies_fav =  $.cookie "colors_favorites"
+          cookieArrFav = []
+          cookieArrFav = JSON.parse(cookies_fav) if cookies_fav
+          cookies_cart =  $.cookie "colors_cart"
+          cookieArrCart = []
+          cookieArrCart = JSON.parse(cookies_cart) if cookieArrCart
+          cookieArrFav.forEach (idf) ->
+            check = true
+            cookieArrCart.forEach (idc) ->
+              check = false if idc.toString() is idf.toString()
+            cookieArrCart.push(idf) if check
+          $.cookie "colors_cart", JSON.stringify(cookieArrCart),
+            expires: 7
+          $.cookie "colors_favorites", JSON.stringify([]),
+            expires: 7
+          showLastFavProd()
 
   window.nav = {
     face:{
