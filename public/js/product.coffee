@@ -64,6 +64,18 @@ $(document).ready () ->
         $(".favorites").text("В избранном") if !data.err
         $(".favorites").removeClass("addFav")
 
+  $(".addCart").click ()->
+    idProd = $(@).attr("idProd")
+    url = "/product/addCartUser/" + idProd
+    $.ajax
+      type    : 'POST'
+      url     : url
+      success : (d) =>
+        if d.st
+            $(".in-basket").text("В карзине")
+            $(".in-basket").removeClass("addCart")
+
+
   $(".setCookieCart").click ()->
     idProd = $(@).attr("idProd")
     cookieArrCart.push idProd

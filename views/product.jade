@@ -42,9 +42,9 @@ block content
         br
         .buy-fast Купить быстро
         if user
-          if favAdded
-            .in-basket#addCart(idProd="#{product['_id']}") В корзину
-          if !favAdded
+          if cartAdded
+            .in-basket.addCart(idProd="#{product['_id']}") В корзину
+          if !cartAdded
             .in-basket(idProd="#{product['_id']}") В корзинe
         if !user
             .in-basket.setCookieCart(idProd="#{product['_id']}") В корзину
