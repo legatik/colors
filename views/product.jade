@@ -43,21 +43,21 @@ block content
         .buy-fast Купить быстро
         if user
           if cartAdded
-            .in-basket.addCart(idProd="#{product['_id']}") В корзину
+            .in-basket.addCart(idProd="#{product['_id']}", t="#{product['_id']}") В корзину
           if !cartAdded
-            .in-basket(idProd="#{product['_id']}") В корзинe
+            .in-basket(idProd="#{product['_id']}", t="#{product['_id']}") В корзинe
         if !user
-            .in-basket.setCookieCart(idProd="#{product['_id']}") В корзину
-            .in-basket.nsetCookieCart(idProd="#{product['_id']}", style="display:none") В корзинe
+            .in-basket.setCookieCart(idProd="#{product['_id']}", ts="#{product['_id']}") В корзину
+            .in-basket.nsetCookieCart(idProd="#{product['_id']}", style="display:none", th="#{product['_id']}") В корзинe
 
         if user
           if favAdded
-            .favorites.addFav(id="#{product['_id']}") В избранное
+            .favorites.addFav(id="#{product['_id']}", f="#{product['_id']}") В избранное
           if !favAdded
-            .favorites(id="#{product['_id']}") В избранном
+            .favorites(id="#{product['_id']}", f="#{product['_id']}") В избранном
         if !user
-            .favorites.setCookie(id="#{product['_id']}") В избранное
-            .favorites.nsetCookie.hide(id="#{product['_id']}") В избранном
+            .favorites.setCookie(id="#{product['_id']}", fs="#{product['_id']}") В избранное
+            .favorites.nsetCookie.hide(id="#{product['_id']}", fh="#{product['_id']}") В избранном
       #adv1-block
         div.line
         div.f1 ГАРАНТИЯ КАЧЕСТВА

@@ -124,6 +124,7 @@ $(document).ready () ->
     $(".del-db").unbind("click")
     $(".del-db-cart").unbind("click")
 
+
     $(".del-db").on "click", ->
       idDel = $(@).attr("id")
       $.ajax
@@ -132,7 +133,11 @@ $(document).ready () ->
         url     : "/user/remove_favorites"
         success : (products) =>
           showLastFavProd()
-
+          el = $("div[f=" +idDel+ "]")
+          $(el).addClass("addFav")
+          $(el).text("В избранное")
+          
+          
     $(".del-db-cart").on "click", ->
       idDel = $(@).attr("id")
       $.ajax
@@ -141,6 +146,9 @@ $(document).ready () ->
         url     : "/user/remove_cart"
         success : (products) =>
           showLastCartProd()
+          el = $("div[t=" +idDel+ "]")
+          $(el).addClass("addCart")
+          $(el).text("В КАРЗИНУ")
 
     $(".del-cookie-cart").on "click", ->
       idDel = $(@).attr("id")
@@ -152,6 +160,8 @@ $(document).ready () ->
       $.cookie "colors_cart", JSON.stringify(newArr),
         expires: 7
       showLastCartProd()
+      $("div[ts=" +idDel+ "]").show()
+      $("div[th=" +idDel+ "]").hide()
 
     $(".del-cookie").on "click", ->
       idDel = $(@).attr("id")
@@ -163,6 +173,9 @@ $(document).ready () ->
       $.cookie "colors_favorites", JSON.stringify(newArr),
         expires: 7
       showLastFavProd()
+      $("div[fs=" +idDel+ "]").show()
+      $("div[fh=" +idDel+ "]").hide()
+
 
   $(".stuff").mouseenter ()->
     $(".fav-menu").show()
