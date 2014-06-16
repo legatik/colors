@@ -41,7 +41,15 @@ block content
           span р
         br
         .buy-fast Купить быстро
-        .in-basket В корзину
+        if user
+          if favAdded
+            .in-basket#addCart(idProd="#{product['_id']}") В корзину
+          if !favAdded
+            .in-basket(idProd="#{product['_id']}") В корзинe
+        if !user
+            .in-basket.setCookieCart(idProd="#{product['_id']}") В корзину
+            .in-basket.nsetCookieCart(idProd="#{product['_id']}", style="display:none") В корзинe
+
         if user
           if favAdded
             .favorites.addFav(id="#{product['_id']}") В избранное

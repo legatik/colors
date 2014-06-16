@@ -1,8 +1,10 @@
 $(document).ready () ->
   arrViwe = []
   cookieArr = []
+  cookieArrCart = []
 #  $.cookie "colors_favorites", null
   cookies_fav =  $.cookie "colors_favorites"
+  cookies_cart =  $.cookie "colors_cart"
   gUser = $("#firstData").attr("user")
   gUser = JSON.parse(gUser) if gUser
   gProduct = $("#firstData").attr("product")
@@ -24,6 +26,21 @@ $(document).ready () ->
   getComments()
 
 #  if cookies_fav and cookies_fav != "null" and !userTest
+
+  if cookies_cart and cookies_cart != "null"
+    checkckCartFirst = true
+    idProdtest = $(".in-basket").attr("idProd")
+    cookieArrCart = JSON.parse(cookies_cart)
+    console.log "cookieArrCart", cookieArrCart
+    cookieArrCart.forEach (idP) ->
+      checkckCartFirst = false if idP.toString() is idProdtest.toString()
+    if !checkckCartFirst
+      $(".nsetCookieCart").show()
+      $(".setCookieCart").hide()
+    else
+      $(".nsetCookieCart").hide()
+      $(".setCookieCart").show()
+
   if cookies_fav and cookies_fav != "null"
     idProdtest = $(".favorites").attr("id")
     cookieArr = JSON.parse(cookies_fav)
@@ -46,6 +63,15 @@ $(document).ready () ->
       success : (data) =>
         $(".favorites").text("В избранном") if !data.err
         $(".favorites").removeClass("addFav")
+
+  $(".setCookieCart").click ()->
+    idProd = $(@).attr("idProd")
+    cookieArrCart.push idProd
+    $.cookie "colors_cart", JSON.stringify(cookieArrCart),
+      expires: 7
+      path:'/'
+    $(".nsetCookieCart").show()
+    $(".setCookieCart").hide()
 
 
   $(".setCookie").click ()->
