@@ -23,10 +23,10 @@ $(document).ready () ->
     newCalss = $($a).attr("hClass")
     $(".navigation > li").attr("class", "")
     $(@).addClass(newCalss)
-    $($(@).find(".menu-cont")).fadeIn(120)
+    $($(@).find(".menu-cont")).fadeIn(0)
 
   $(".navigation > li").mouseleave ()->
-    $($(@).find(".menu-cont")).fadeOut(120)
+    $($(@).find(".menu-cont")).fadeOut(0)
 
   $(".sub-title").click ()->
     window.location.href = $(@).attr("value")
