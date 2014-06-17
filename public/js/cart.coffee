@@ -1,6 +1,17 @@
 $(document).ready () ->
+  objProd = {}
   testUser = $("#firstData").attr("user")
-  console.log "testUser", testUser
+  tempProdObj = JSON.parse($("#firstData").attr("products"))
+  
+  if tempProdObj.length
+    tempProdObj.forEach (prod) ->
+      objProd[prod["_id"]] = {
+        sum  : Number(prod.cost)
+        cost : Number(prod.cost)
+        col  : 1
+      }
+    
+  console.log "objProd",objProd
 
   if !testUser
     cookies_cart =  $.cookie "colors_cart"
@@ -19,14 +30,40 @@ $(document).ready () ->
           onEvents()
 
   onEvents = () ->
-    $(".cost-change-cart").unbind("keyup")
-    $(".cost-change-cart").on "keyup", (e) ->
+    $(".cost-change-cart").unbind("change")
+    $(".cost-change-cart").on "change", (e) ->
       id = ($(@).attr("id")).replace("ch", "")
       val = $(@).val()
       cost = Number($(@).attr("cost"))
       if val
-        idres = "#res" + id
-        sum = cost * Number(val) 
-        $(idres).text(sum)
+        objProd[id].col = val
+        console.log "objProd[id]", objProd[id]
+        renderAllCost()
+    
+    
+  $(".del-prod-cart").click () ->
+    idProd = $(@).attr("idProd")
+    $.ajax
+      type    : 'POST'
+      data    : {idDel:idProd}
+      url     : "/user/remove_cart"
+      success : (products) =>
+        console.log "idProd", idProd
+        classDel = ".del" + idProd
+        $(classDel).remove()
+    
+    
+  renderAllCost = () ->
+    totalCost = 0
+    _.each objProd, (d, k) ->
+      d.sum = d.cost * d.col
+      idres = "#res" + k
+      $(idres).text(d.sum)
+      totalCost = totalCost + d.sum
+      
+    $("#total-cost").text(totalCost)
+  renderAllCost()
+    
   onEvents()
+    
     

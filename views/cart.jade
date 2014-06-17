@@ -2,7 +2,7 @@ extends layout
 
 block content
   include navigation
-  input#firstData(type="hidden", user=JSON.stringify(user))
+  input#firstData(type="hidden", user=JSON.stringify(user), products=JSON.stringify(products))
   != js("cart")
   #corzina
     .cabinet-cont
@@ -29,35 +29,39 @@ block content
           th Бонусные баллы
           th Стоимость
         - each pr in products
-          tr
+          tr(class="del#{pr['_id']}")
             td
-              img(src="../img/bask2.png")
+              img.del-prod-cart(src="../img/bask2.png", idProd="#{pr['_id']}")
             td.picture
-              img(src="../img/product.png", width="100%")
+              img(src!="../img/products/#{pr['_id']}/#{pr.picture[0]}", width="53px", height="53px")
             td.title
               .tit #{pr.title}
-              .descr  Компактные румяна с пуховкой, 5  оттенков
-            td.type 
-              select 
-                option ОттенокодинОттенокодинОттенокодин
-                option Оттенок два
-                option Оттенок три
+              .descr  #{pr.minOpisanie}
+            td.type
+              select
+                - if(pr.vid.length)
+                  -each vid in pr.vid 
+                    option #{vid}
+                - if(!pr.vid.length)
+                  option one kind
             td.count
-              input.cost-change-cart(type="number", id!="ch#{pr['_id']}", cost='#{pr.cost}')   
+              input.cost-change-cart(type="number", min=1, id!="ch#{pr['_id']}", cost='#{pr.cost}', value=1)   
             td.cost(id!="cost#{pr['_id']}") #{pr.cost} 
               span p
             td.promocode
               input(type="text")
             td.bonus  
               input(type="text")
-            td.result-change-cart(id!="res#{pr['_id']}") #{pr.cost} 
+            td.result-change-cart
+              span.cost-prod(id!="res#{pr['_id']}", style="font-size:28.14px") #{pr.cost} 
               span p
-          tr
+          tr(class!="del#{pr['_id']}")
             td.line(colspan="9")
               img(src="../img/line7.png", width="100%")
         tr
           td.summ(colspan="8") Сумма заказа
-          td.result-change-cart 339
+          td.result-change-cart 
+            span#total-cost(style="font-size: 28.14px;")
             span p
       .info При заказе от 1700 рублей доставка БЕСПЛАТНАЯ 
       .actions
