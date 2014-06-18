@@ -3,24 +3,43 @@ _ = require 'underscore'
 nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 rimraf = require "rimraf"
+moment = require "moment"
 
-{Product, Brend, Action, New, User, Cart, Voucher} = db.models
+{Product, Brend, Action, New, User, Cart, Voucher, PComment} = db.models
 
 exports.boot = (app) ->
 
   app.get '/profile', (req, res) ->
+    if !req.user
+      res.redirect "/"
+      return
     User.findOne {_id:req.user["_id"]}, (err, user)->
       res.render 'profile', {title: 'Colors Профиль', user: user, loc:'home'}
 
   app.get '/favorites', (req, res) ->
+    if !req.user
+      res.redirect "/"
+      return
     User.findOne {_id:req.user["_id"]}, (err, user)->
       res.render 'favorites', {title: 'Colors Избранное', user: user, loc:'home'}
 
   app.get '/un-favorites', (req, res) ->
+    if !req.user
+      res.redirect "/"
+      return
     res.render 'un-favorites', {title: 'Colors Избранное', user: req.user, loc:'home'}
 
   app.get '/reviews', (req, res) ->
-    res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home'}
+    if !req.user
+      res.redirect "/"
+      return
+    PComment.find({user : req.user["_id"]})
+    .populate("product", "_id dateAdding picture title")
+    .exec (err, pcoms) ->
+      moment
+      pcoms.forEach (p) ->
+        p.mdata = (moment(p.date)).format("DD/MM/YYYY")
+      res.render 'reviews', {title: 'Colors Отзывы', user: req.user, loc:'home', pcoms}
 
   app.get '/cart', (req, res) ->
     if req.user
