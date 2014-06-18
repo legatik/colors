@@ -26,6 +26,10 @@ block content
           td
             input#v-cod
         tr
+          td Процент&nbsp
+          td
+            input#v-ps(type="number")
+        tr
           td Активировать&nbsp
           td
             input#v-act(type="checkbox")
@@ -41,6 +45,7 @@ block content
           tr
             td(width=200, style="max-width:200px") Название
             td(width=100) Код
+            td(width=100) Процент
             td(width=200) Изменить статус
             td(width=200) Удаление
         tbody#list-v-body
@@ -50,6 +55,7 @@ block content
     tr
       td <%=v.name%>
       td <%=v.code%>
+      td <%=v.ps%>
       td
         <%if(v.active){%>
         button.fn-act(active="true", idV!="<%=v['_id']%>") Снять активность
