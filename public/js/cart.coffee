@@ -1,5 +1,6 @@
 $(document).ready () ->
   objProd = {}
+  testQTvoucherObj = {}
   testUser = $("#firstData").attr("user")
   tempProdObj = JSON.parse($("#firstData").attr("products"))
   
@@ -50,7 +51,11 @@ $(document).ready () ->
     idP = $(@).attr("idP")
     return if objProd[idP].ps is false
     
-    objProd[idP].ps = 0
+    objProd[idP].ps     = 0
+    objProd[idP].psName = ""
+    $('.promocode-input').attr("disabled", false)
+    
+    
     renderAllCost()
     val = $(@).val()
     col = val.length
@@ -61,7 +66,9 @@ $(document).ready () ->
         url     : "/user/check_voucher"
         success : (d) =>
           if d.st
-            objProd[idP].ps = Number(d.v.ps)
+            objProd[idP].ps     = Number(d.v.ps)
+            objProd[idP].psName = d.v.name
+            checkQTvoucher()
             renderAllCost()
     
     
@@ -75,8 +82,17 @@ $(document).ready () ->
         classDel = ".del" + idProd
         $(classDel).remove()
     
+  checkQTvoucher = () ->
+    _.each testQTvoucherObj, (d, k) ->
+      console.log "d.qt", d.qt
+      if d.qt >= 2
+        $(".promocode-input").attr("disabled", "disabled") 
+        d.idArr.forEach (id) ->
+          $('.promocode-input[idP="' + id + '"]').attr("disabled", false)
+        
     
   renderAllCost = () ->
+    testQTvoucherObj = {}
     totalCost = 0
     _.each objProd, (d, k) ->
       d.sum = d.cost * d.col
@@ -85,7 +101,18 @@ $(document).ready () ->
       idres = "#res" + k
       $(idres).text(d.sum)
       totalCost = totalCost + d.sum
-      
+      if d.psName
+        if testQTvoucherObj[d.psName]
+          tm = testQTvoucherObj[d.psName].qt
+          tm = tm + 1
+          testQTvoucherObj[d.psName].qt = tm
+          testQTvoucherObj[d.psName].idArr.push(k)
+        else
+          testQTvoucherObj[d.psName] = {}
+          testQTvoucherObj[d.psName].idArr = [k]
+          testQTvoucherObj[d.psName].qt = 1
+      checkQTvoucher()
+
     $("#total-cost").text(totalCost)
   renderAllCost()
     
