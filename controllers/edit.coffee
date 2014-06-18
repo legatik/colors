@@ -180,6 +180,7 @@ exports.boot = (app) ->
     prod.obem = body.product.obem
     prod.oldCost = body.product.oldCost
     prod.opisanie = body.product.opisanie
+    prod.balls = body.product.balls
     prod.ostatok = body.product.ostatok
     prod.primenenie = body.product.primenenie
     prod.title = body.product.title
