@@ -27,7 +27,6 @@ $(document).ready () ->
         data    : {prodArr:cookieArr}
         url     : "/user/get/favorites"
         success : (arrProd) =>
-          console.log "arrProd", arrProd
           arrProd.forEach (pr) -> 
             templateJQ = $("#productTemplate")
             template = _.template($(templateJQ[0]).html())
@@ -54,6 +53,8 @@ $(document).ready () ->
     objProd[idP].ps     = 0
     objProd[idP].psName = ""
     $('.promocode-input').attr("disabled", false)
+    $('.promocode-input').removeClass("voucher-disabled")
+    
     
     
     renderAllCost()
@@ -87,9 +88,11 @@ $(document).ready () ->
       console.log "d.qt", d.qt
       if d.qt >= 2
         $(".promocode-input").attr("disabled", "disabled") 
+        $(".promocode-input").addClass("voucher-disabled")
         d.idArr.forEach (id) ->
           $('.promocode-input[idP="' + id + '"]').attr("disabled", false)
-        
+          $('.promocode-input[idP="' + id + '"]').removeClass("voucher-disabled")
+    
     
   renderAllCost = () ->
     testQTvoucherObj = {}
