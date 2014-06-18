@@ -42,6 +42,10 @@ exports.boot = (app) ->
   app.get '/stockpiling', (req, res) ->
     res.render 'stockpiling', {title: 'Colors Накопление', user: req.user, loc:'home'}
 
+  app.get '/my_orders', (req, res) ->
+    res.render 'my_orders', {title: 'Colors Мои заказы', user: req.user, loc:'home'}
+
+
   app.post '/get/favorites', (req, res) ->
     arrId = req.body.prodArr
     Product.find ({'_id': { $in: arrId}}), (err, products) ->
