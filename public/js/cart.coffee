@@ -41,6 +41,19 @@ $(document).ready () ->
         renderAllCost()
     
     
+    
+  $(".promocode-input").keyup () ->
+    val = $(@).val()
+    col = val.length
+    if col is 4
+      $.ajax
+        type    : 'POST'
+        data    : {code:val}
+        url     : "/user/check_voucher"
+        success : (d) =>
+          console.log "d", d
+    
+    
   $(".del-prod-cart").click () ->
     idProd = $(@).attr("idProd")
     $.ajax

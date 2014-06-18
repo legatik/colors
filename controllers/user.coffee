@@ -4,7 +4,7 @@ nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 rimraf = require "rimraf"
 
-{Product, Brend, Action, New, User, Cart} = db.models
+{Product, Brend, Action, New, User, Cart, Voucher} = db.models
 
 exports.boot = (app) ->
 
@@ -168,6 +168,16 @@ exports.boot = (app) ->
                   user.save()
                   res.send 200
 
+  app.post '/check_voucher', (req, res) ->
+    data = req.body
+    
+    Voucher.findOne {code:data.code}, (err, voucher) ->
+      if voucher
+        res.send {st:true, v:voucher}
+        return
+      res.send {st:false}
+        
+    
 
 #        user.save()
 #        res.send 200

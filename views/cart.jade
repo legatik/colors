@@ -49,9 +49,9 @@ block content
             td.cost(id!="cost#{pr['_id']}") #{pr.cost} 
               span p
             td.promocode
-              input(type="text")
+              input.promocode-input(type="text")
             td.bonus  
-              input(type="text")
+              input(type="text", idP!="#{pr['_id']}")
             td.result-change-cart
               span.cost-prod(id!="res#{pr['_id']}", style="font-size:28.14px") #{pr.cost} 
               span p
