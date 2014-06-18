@@ -2,7 +2,12 @@ $(document).ready () ->
 
   $("#add-voucher").click () ->
     $("#add-voucher-cont").show()
+    $("#list-voucher-cont").hide()
 
+  $("#voucher-list").click () ->
+    $("#list-voucher-cont").show()
+    $("#add-voucher-cont").hide()
+    getVouchers()
 
 
   $("#add-voucher-btn").click () ->
@@ -20,6 +25,56 @@ $(document).ready () ->
         $("#v-cod").val("")
         $("#alert-add-voucher").fadeIn("slow")
 
+
+  getVouchers = () ->
+    console.log "#################"
+    $.ajax
+      method:"get"
+      url: "/tool/admin/get_vouchers"
+      success: (vouchers) ->
+        console.log "vouchers",vouchers
+        $("#list-v-body").empty()
+        vouchers.forEach (v) ->
+            templateJQ = $("#voucherListTemplate")
+            template = _.template($(templateJQ[0]).html())
+            $("#list-v-body").prepend(template({v:v}))
+        addEvent()
+  
+  addEvent = () ->
+    $(".fn-act").unbind("click")
+    $(".fn-del").unbind("click")
+    
+    $(".fn-del").click () ->
+      if confirm("Точно?")
+        id = ($(@).attr("idV"))
+        data = {id : id}
+        $.ajax
+          method:"post"
+          url: "/tool/admin/remove_voucher"
+          data: data
+          success: (data) =>
+            $($($(@).parent()).parent()).remove()
+    
+    $(".fn-act").click () ->
+      id = ($(@).attr("idV"))
+      act = $(@).attr("active")
+      data = {
+        id     : id
+        active : act
+      }
+      $.ajax
+        method:"post"
+        url: "/tool/admin/chanch_voucher_active"
+        data: data
+        success: (data) =>
+          if act is "false"
+            $(@).attr("active", "true") 
+            $(@).text("Снять активность")
+          else
+            $(@).attr("active", "false") 
+            $(@).text("Aктивировать")
+      
+  
 #  addEventDel = () ->
 #    $(".fn-del").click () ->
 #      if confirm("Вы уверенны")

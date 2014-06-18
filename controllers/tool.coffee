@@ -378,3 +378,23 @@ exports.boot = (app) ->
     voucher.save()
     res.send 200
     
+  app.get '/admin/get_vouchers', (req, res) ->
+    Voucher.find {}, (err, vouchers) -> 
+     console.log "vouchers", vouchers
+     res.send vouchers
+     
+  app.post '/admin/chanch_voucher_active', (req, res) ->
+    data = req.body
+    Voucher.findOne data.id, (err, voucher) -> 
+      if voucher
+        voucher.active = true if data.active == "false"
+        voucher.active = false if data.active == "true"
+        voucher.save()
+      res.send 200
+
+  app.post '/admin/remove_voucher', (req, res) ->
+    data = req.body
+    Voucher.findOne data.id, (err, voucher) -> 
+      voucher.remove() if voucher
+      res.send 200
+     

@@ -13,6 +13,7 @@ block content
       button#voucher-list Все промокоды
 
 
+
     #add-voucher-cont(style="display:none")
       h3 Добавить
       table
@@ -33,13 +34,29 @@ block content
             button(style="margin-left:0px")#add-voucher-btn Добавить
         tr#alert-add-voucher(style="display:none")
           td Промокод добавлен
+          
+    #list-voucher-cont(style="display:none")
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Название
+            td(width=100) Код
+            td(width=200) Изменить статус
+            td(width=200) Удаление
+        tbody#list-v-body
+
             
-  script#commentsListTemplate(type="text/template")
+  script#voucherListTemplate(type="text/template")
     tr
-      td <%=(new Date(com.date)).toDateString()%>
-      td <%=com.name%>
-      td <%=com.text%>
+      td <%=v.name%>
+      td <%=v.code%>
       td
-        button.fn-del(id!="<%=com['_id']%>") Удалить комментарий
+        <%if(v.active){%>
+        button.fn-act(active="true", idV!="<%=v['_id']%>") Снять активность
+        <%}else{%>
+        button.fn-act(active="false", idV!="<%=v['_id']%>") Активировать
+        <%}%>
+      td
+        button.fn-del(idV!="<%=v['_id']%>") Удалить
 
 
