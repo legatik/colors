@@ -171,7 +171,7 @@ exports.boot = (app) ->
   app.post '/check_voucher', (req, res) ->
     data = req.body
     
-    Voucher.findOne {code:data.code}, (err, voucher) ->
+    Voucher.findOne {code:data.code, active:true}, (err, voucher) ->
       if voucher
         res.send {st:true, v:voucher}
         return
