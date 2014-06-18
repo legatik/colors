@@ -9,7 +9,11 @@ $(document).ready () ->
         sum  : Number(prod.cost)
         cost : Number(prod.cost)
         col  : 1
+        ps   : 0
       }
+      objProd[prod["_id"]].ps = false if prod.oldCost
+      
+      
     
   console.log "objProd",objProd
 
@@ -43,6 +47,11 @@ $(document).ready () ->
     
     
   $(".promocode-input").keyup () ->
+    idP = $(@).attr("idP")
+    return if objProd[idP].ps is false
+    
+    objProd[idP].ps = 0
+    renderAllCost()
     val = $(@).val()
     col = val.length
     if col is 4
@@ -51,7 +60,9 @@ $(document).ready () ->
         data    : {code:val}
         url     : "/user/check_voucher"
         success : (d) =>
-          console.log "d", d
+          if d.st
+            objProd[idP].ps = Number(d.v.ps)
+            renderAllCost()
     
     
   $(".del-prod-cart").click () ->
@@ -61,7 +72,6 @@ $(document).ready () ->
       data    : {idDel:idProd}
       url     : "/user/remove_cart"
       success : (products) =>
-        console.log "idProd", idProd
         classDel = ".del" + idProd
         $(classDel).remove()
     
@@ -70,6 +80,8 @@ $(document).ready () ->
     totalCost = 0
     _.each objProd, (d, k) ->
       d.sum = d.cost * d.col
+      psVoucher = (d.sum/100) * d.ps
+      d.sum = d.sum - psVoucher
       idres = "#res" + k
       $(idres).text(d.sum)
       totalCost = totalCost + d.sum
