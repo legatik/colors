@@ -378,7 +378,7 @@ exports.boot = (app) ->
     voucher.save()
     res.send 200
     
-  app.get '/admin/get_vouchers', (req, res) ->
+  app.post '/admin/get_vouchers', (req, res) ->
     Voucher.find {}, (err, vouchers) -> 
      console.log "vouchers", vouchers
      res.send vouchers

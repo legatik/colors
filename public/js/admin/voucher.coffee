@@ -27,9 +27,8 @@ $(document).ready () ->
 
 
   getVouchers = () ->
-    console.log "#################"
     $.ajax
-      method:"get"
+      method:"post"
       url: "/tool/admin/get_vouchers"
       success: (vouchers) ->
         console.log "vouchers",vouchers
