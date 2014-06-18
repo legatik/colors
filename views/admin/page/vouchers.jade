@@ -1,0 +1,45 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/voucher')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    
+    .form-admin(style="display:block")
+      button#add-voucher Добавить промокод
+      button#voucher-list Все промокоды
+
+
+    #add-voucher-cont(style="display:none")
+      h3 Добавить
+      table
+        tr
+          td Название&nbsp
+          td
+            input#v-name
+        tr
+          td Код&nbsp
+          td
+            input#v-cod
+        tr
+          td Активировать&nbsp
+          td
+            input#v-act(type="checkbox")
+        tr
+          td 
+            button(style="margin-left:0px")#add-voucher-btn Добавить
+        tr#alert-add-voucher(style="display:none")
+          td Промокод добавлен
+            
+  script#commentsListTemplate(type="text/template")
+    tr
+      td <%=(new Date(com.date)).toDateString()%>
+      td <%=com.name%>
+      td <%=com.text%>
+      td
+        button.fn-del(id!="<%=com['_id']%>") Удалить комментарий
+
+

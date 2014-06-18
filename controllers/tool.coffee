@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment, Voucher} = db.models
 
 exports.boot = (app) ->
 
@@ -33,6 +33,8 @@ exports.boot = (app) ->
   app.get '/admin/page/pComments', (req, res) ->
       res.render 'admin/page/pComments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
 
+  app.get '/admin/page/voucher', (req, res) ->
+      res.render 'admin/page/vouchers', {title: 'Админ - Промокоды', user: req.user, loc:'home'}
 
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
@@ -370,5 +372,9 @@ exports.boot = (app) ->
 #        console.log "action",action
 #        action.save()
     
-    
+  app.post '/admin/create_voucher', (req, res) ->
+    data = req.body
+    voucher = new Voucher(data)
+    voucher.save()
+    res.send 200
     
