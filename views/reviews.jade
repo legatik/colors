@@ -14,43 +14,18 @@ block content
             li.active ОТЗЫВЫ
           a(href="/user/stockpiling")
             li НАКОПЛЕНИЕ
+          a(href="/user/my_orders")
+            li МОИ ЗАКАЗЫ
     .right  
       .reviews-cont
-        .review
-          a.go-rew(href="#") Перейти к отзыву
-          .date 23.05.14
-          .title SKINFOOD Rose Essense Blusher
-          .line
-          img(width="72px",height="72px")
-          .text Купила исключительно из-за большой скидки на продукт, на пробу... Когда открыла крышку, чуть было не разочаровалась - цвет румян выглядит ярче, чем на фото и бла бла бла бла блда
-        .review
-          a.go-rew(href="#") Перейти к отзыву
-          .date 23.05.14
-          .title SKINFOOD Rose Essense Blusher
-          .line
-          img(width="72px",height="72px")
-          .text Купила исключительно из-за большой скидки на продукт, на пробу... Когда открыла крышку, чуть было не разочаровалась - цвет румян выглядит ярче, чем на фото и бла бла бла бла блда
-        .review
-          a.go-rew(href="#") Перейти к отзыву
-          .date 23.05.14
-          .title SKINFOOD Rose Essense Blusher
-          .line
-          img(width="72px",height="72px")
-          .text Купила исключительно из-за большой скидки на продукт, на пробу... Когда открыла крышку, чуть было не разочаровалась - цвет румян выглядит ярче, чем на фото и бла бла бла бла блда          
-        .review
-          a.go-rew(href="#") Перейти к отзыву
-          .date 23.05.14
-          .title SKINFOOD Rose Essense Blusher
-          .line
-          img(width="72px",height="72px")
-          .text Купила исключительно из-за большой скидки на продукт, на пробу... Когда открыла крышку, чуть было не разочаровалась - цвет румян выглядит ярче, чем на фото и бла бла бла бла блда          
-        .review
-          a.go-rew(href="#") Перейти к отзыву
-          .date 23.05.14
-          .title SKINFOOD Rose Essense Blusher
-          .line
-          img(width="72px",height="72px")
-          .text Купила исключительно из-за большой скидки на продукт, на пробу... Когда открыла крышку, чуть было не разочаровалась - цвет румян выглядит ярче, чем на фото и бла бла бла бла блда
+          - each com in pcoms
+            .review
+              a.go-rew(href="/product/#{com.product["_id"]}") Перейти к отзыву
+              .date #{com.mdata}
+              .title #{com.product.title}
+              .line
+              img(src="/img/products/#{com.product["_id"]}/#{com.product.picture[0]}")(width="72px",height="72px")
+              .text #{com.text}
     .adv-div
       .txt1 
         div НАПИШИТЕ ОТЗЫВ 

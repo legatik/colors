@@ -35,10 +35,14 @@ block content
         .id #{product.id}
         br
         label.product-label.price-lab Цена:
-        .old-price #{product.oldCost}
-          span р
-        .new-price #{product.cost}
-          span р
+        -  if(product.oldCost)
+            .old-price #{product.oldCost}
+              span р
+            .new-price #{product.cost}
+              span р
+        -  if(!product.oldCost)
+            .new-price(style="margin-left:15px") #{product.cost}
+              span р
         br
         .buy-fast Купить быстро
         if user

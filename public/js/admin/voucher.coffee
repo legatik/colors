@@ -14,6 +14,7 @@ $(document).ready () ->
     newVoch = {
       name   : $("#v-name").val()
       code   : $("#v-cod").val()
+      ps     : $("#v-ps").val()
       active : $("#v-act").prop("checked")
     }
     $.ajax
@@ -23,6 +24,7 @@ $(document).ready () ->
       success: (data) ->
         $("#v-name").val("")
         $("#v-cod").val("")
+        $("#v-ps").val("")
         $("#alert-add-voucher").fadeIn("slow")
 
 

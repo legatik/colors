@@ -55,6 +55,7 @@ $(document).ready () ->
           id               : $("#brend-id").val()
           oldCost          : $("#brend-old-cost").val()
           cost             : $("#brend-cost").val()
+          balls            : $("#brend-balls").val()
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
           vetrina          : $("#vetrina").is(':checked')
@@ -237,6 +238,7 @@ $(document).ready () ->
         $("#brend-prim").val('')
         $("#ostatok").val('')
         $("#pic-tone").val("")
+        $("#brend-balls").val("")
         $("#tone-prev").attr "src", "/img/add-bg.png"
         $("#del-img-tone").hide()
         i = 0

@@ -19,6 +19,7 @@ product = new Schema
   vid              : Array
   imgVid           : String
   popular          : Number
+  balls            : String
   isFace           : {type: ObjectId, ref: 'Face'}
   isBody           : {type: ObjectId, ref: 'Body'}
   isMakeup         : {type: ObjectId, ref: 'Makeup'}

@@ -51,6 +51,7 @@ $(document).ready () ->
           cost             : $("#brend-cost").val()
           opisanie         : $("#brend-desc").val()
           primenenie       : $("#brend-prim").val()
+          balls            : $("#brend-balls").val()
           vetrina          : $("#vetrina").is(':checked')
           ostatok          : $("#ostatok").val()
           vid              : vidArr
@@ -144,6 +145,7 @@ $(document).ready () ->
         $("#brend-obem").val('')
         $("#brend-ves").val('')
         $("#brend-id").val('')
+        $("#brend-balls").val('')
         $("#brend-old-cost").val('')
         $("#brend-cost").val('')
         $("#brend-desc").val('')
