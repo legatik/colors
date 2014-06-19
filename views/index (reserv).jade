@@ -16,14 +16,14 @@ block content
     a.left.carousel-control(data-slide="prev",href="#myCarousel")
     a.right.carousel-control(data-slide="next",href="#myCarousel")
   #dop-cont
-    .sp1 Если привычная косметика не дает результата  - 
-    .sp2 попробуйте корейскую!
-    .line4
-    p Корейцы - самые требовательные к своей внешности азиаты. Их главное правило - 
-      span безупречная кожа и густые, блестящие волосы должны быть у каждого!
-    p По этой причине на корейском рынке косметики сильнейшая конкуренция - производители постоянно совершенствуют производство, сочетая передовые азиатские технологии и секреты восточной медицины. Поэтому качество у корейских продуктов становится все выше, а цена - ниже!  
-    .line4
-    .advantage-title От нас:
+    span.sp1 Привычная косметика не дает результата?
+    span.sp2 Попробуйте что-то новое!
+    span.line4
+    span.sp3 Сочетание передовых азиатских технологий,
+
+
+
+
 
   #advantage-cont
     .advantage.quality
@@ -44,26 +44,7 @@ block content
     .advantage.back-guarantee
       .pict
       .text Гарантия возврата
-  .free-delivery ДОСТАВКА ПО ВСЕЙ РОССИИ ДО ПОДЬЪЕЗДА
-  .from-you-cont
-    .from-you-title От вас только:
-    .actions
-      .num 1
-      .text1 выбрать продукцию 
-      .num.num2 2
-      .text2 оставить заявку в корзине или оформить заказ онлайн
-    .or или
-  .leave-request-cont
-    .text-block.block1 Оставить заявку и получить
-    .text-block.block2 бесплатную консультацию
-    .actions
-      input.name(type="text", placeholder="Ваше имя")
-      input.phone(type="text", placeholder="Ваш телефон")
-      .sen-req Отправить заявку
-
-
-      
-  .bestsellers-title НАШИ БЕСТСЕЛЛЕРЫ
+  .bestsellers-title Бестселлеры
   #myCarousel2.carousel.slide(data-ride="carousel")
     .carousel-inner
       - each itemArr in vetrina
@@ -92,10 +73,15 @@ block content
     a.left.carousel-control(data-slide="prev",href="#myCarousel2")
     a.right.carousel-control(data-slide="next",href="#myCarousel2")
 
-  .go-catalog.type1
+  .go-catalog
     a(href="#") Перейти к каталогу  >
+  .free-delivery Бесплатная доставка по всей россии от 3000 рублей!
+  .discount-cont
+    input.name(placeholder="Ваше имя")
+    input.email(placeholder="Ваш email")
+    a.discount(href="#") Получить скидку!
+  .novelty-title Новинки
 
-  .novelty-title НОВИНКИ
   #myCarousel4.carousel.slide(data-ride="carousel")
     ol.carousel-indicators
       - each item, index in news
@@ -132,5 +118,4 @@ block content
 
 
   .reviews-title Отзывы
-  .go-catalog.type1
-    a(href="#") Перейти к каталогу  >
+
