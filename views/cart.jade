@@ -69,11 +69,38 @@ block content
         .next Продолжить
       
     script#productTemplate(type="text/template")
-      tr
-        td <%=pr.title%>
-        td(id!="cost<%=pr['_id']%>") <%=pr.cost%>
-        td
-          input.cost-change-cart(type="number", id!="ch<%=pr['_id']%>", cost!="<%=pr['cost']%>")
-        td.result-change-cart(id!="res<%=pr['_id']%>") <%=pr['cost']%>
+          tr(class!="del<%=pr['_id']%>")
+            td
+              img.del-prod-cart(src="../img/bask2.png", idProd!="<%=pr['_id']%>")
+            td.picture
+              img(src!="../img/products/<%=pr['_id']%>/<%=pr.picture[0]%>", width="53px", height="53px")
+            td.title
+              .tit <%=pr['title']%>
+              .descr  <%=pr['minOpisanie']%>
+            td.type
+              select
+                <% if (pr.vid.length) { %>
+                <% _.each(pr.vid, function(vid) { %> 
+                option <%=vid%>
+                <% }); %>
+                <% } else{%>
+                option one kind
+                <%}%>
+            td.count
+              input.cost-change-cart(type="number", min=1, id!="ch<%=pr['_id']%>", cost!='<%=pr["cost"]%>', value=1)   
+            td.cost(id!="cost<%=pr['_id']%>") <%=pr['cost']%>
+              span p
+            td.promocode
+              input.promocode-input(type="text", idP!="<%=pr['_id']%>")
+            td.bonus  
+              input(type="text", idP!="<%=pr['_id']%>")
+            td.result-change-cart
+              span.cost-prod(id!="res<%=pr['_id']%>", style="font-size:28.14px") <%=pr['cost']%>
+              span p
+          tr(class!="del<%=pr['_id']%>")
+            td.line(colspan="9")
+              img(src="../img/line7.png", width="100%")
+
+
     
     
