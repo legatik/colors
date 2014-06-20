@@ -83,6 +83,13 @@ $(document).ready () ->
     $(".del-cart-cookie").click () ->
       idProd = $(@).attr("idProd")
       classDel = ".del" + idProd
+      cookies_fav =  $.cookie "colors_cart"
+      cookieArr = JSON.parse(cookies_fav)
+      newArr = []
+      cookieArr.forEach (item) ->
+        newArr.push(item) if idProd.toString() != item.toString()
+      $.cookie "colors_cart", JSON.stringify(newArr),
+        expires: 7
       $(classDel).remove()
       delete objProd[idProd]
       renderAllCost()
