@@ -4,8 +4,9 @@ extends layout
 block content
   include navigation
   != js('search')
-  input#firstData(type="hidden", search=search, sort=sort)
-  .for-afisha АФИИИИШШШШШШШШШШШШАААА!!!
+  input#firstData(type="hidden", search=search, sort=sort, oType=type, pType=pType)
+  - if(action)
+    img.for-afisha(src=action)
   .left-side
 
   .right-side

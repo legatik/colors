@@ -64,6 +64,10 @@ block content
           td
             input(type="number")#brend-cost
         tr
+          td Балы&nbsp
+          td
+            input#brend-balls
+        tr
           td Описание&nbsp
           td
             textarea#brend-desc.textarea-add-m
@@ -96,8 +100,6 @@ block content
           td Выберите тип товара&nbsp
           td
             select#gl-product-tip
-              option(value="face") Для лица
-              option(value="body") Для тела
       #im-cont-step(style="display:inline-block")
         div(style="text-align:center;height:35px")
           b Выберите картинки товара
@@ -107,8 +109,49 @@ block content
           img#del-step-0.del.del-step(src="/img/close.png")
       div(style="margin-top:8px")
         button#add-product-btn Добавить продукт
-  include ../template/face
-  include ../template/body
+
+
+  script#prodTypeTemplate(type="text/template")
+    <% _.each(data, function(item, key) { %>
+    option(value!="<%=key%>") <%=item.title%>
+    <% }); %>
+
+  script#prodPodTypeTemplate(type="text/template")
+      <% _.each(data, function(item, key) { %>  
+      <% print("<sc" + "ript type='text/template', id='"+key+"Template'>"); %>
+      tr.add-param
+        td Тип товара&nbsp
+        td
+          select#product-tip
+            <% _.each(item.tip, function(tip) { %> 
+            option(value!="<%=tip.key%>") <%=tip.title%>
+            <% }); %>
+      <% _.each(item.tip, function(tip) { %>
+      tr.add-param.podtip(id!="<%=tip.key%>")
+        td Подтип
+        td
+          select
+            <% _.each(tip.podtip, function(podtip) { %> 
+            option(value!="<%=podtip.key%>") <%=podtip.title%>
+            <% }); %>
+      <% }); %>
+      
+      <% _.each(item.dop, function(dop) { %>
+      tr.add-param.border-b
+        td <%=dop.title%>
+        td
+          div(id!="<%=key%>-<%=dop.key%>")
+            table
+                <% _.each(dop.list, function(sItem) { %> 
+                tr
+                  td(width=30)
+                    input( type="checkbox", value!="<%=sItem.key%>")
+                  td <%=sItem.title%>
+                <% }); %>
+      <% }); %>
+      
+      <% print("</sc"+"ript>"); %>
+      <% }); %>
 
 
   script#prodListTemplate(type="text/template")

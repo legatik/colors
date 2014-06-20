@@ -24,39 +24,270 @@
       a(href='/header/opt')  Опт
     li.contacts
       a(href='/header/contact')  Контакты
+
   #call-order-cont
     #call-order Заказать звонок
     #phone-number 8 928 604 78 71
+
 
 #header-bottom
   a(href="/")
     #logo
   #user-cont
-    .options.login
-      a Вход
+    if(user)
+      .options.login
+        a(style="position: absolute;top: 0px;left: 2px;z-index: 90;height: 65px;width: 84px;", href="/user/profile") Личный кабинет
+    if(!user)
+      #login-btn.options.login
+        a Вход
     .options.stuff
       a Избранное
     .options.busket
       a Корзина
     input#search-input
+    .log-menu
+      .bord-log
+      .menu-body-log
+        .title  Вход
+        p Хотите получить скидки, бонусы и подарки?
+        input(placeholder="Введите ваш e-mail")
+        .send2 ПОЛУЧИТЬ
+        a.auth(nohref="nohref", style="cursor:pointer") Авторизоваться 
+        
+    .fav-menu
+      .bord
+      .menu-body
+        .title  Избранное
+        .line-cont
+        if(user)
+          a(href="/user/favorites")
+            .more Еще 11 продуктов..
+        if(!user)
+          a(href="/user/un-favorites")
+            .more Еще 11 продуктов..
+        #null-prod У вас нет продуктов в избранном
+        .go-fav
+          if(user)
+            a(href="/user/favorites", style="color:#FFF;position: relative; top: -2px;")
+              ПЕРЕЙТИ В ИЗБРАННОЕ
+          if(!user)
+            a(href="/user/un-favorites", style="color:#FFF;position: relative; top: -2px;")
+              ПЕРЕЙТИ В ИЗБРАННОЕ
+        .go-bask ПЕРЕНЕСТИ В КОРЗИНУ
+        
+    .bask-menu   
+      .bord 
+      .menu-body
+        .title  Корзина 
+        .line-cont-cart
+        a(href="#")
+          .more Еще 11 продуктов.. 
+        #null-prod-cart(style="display:none") У вас нет продуктов в карзине
+        if(user)
+          a(href="/user/cart")
+            .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
+        
+        if(!user)
+          a(href="/user/cart")
+            .go-to-bask ПЕРЕЙТИ К КОРЗИНЕ
+        .fast-order БЫСТРО ОФОРМИТЬ ЗАКАЗ        
+     
 #navbar-my
   ul.navigation
     li
-      a(href='/nav/new') Новинки
+      a(href='/nav/new', hClass="news") Новинки
     li
-      a(href='/nav/brend')  Бренды
+      a(href='/nav/brend', hClass="brands")  Бренды
     li
-      a(href='/nav/face')  Для лица
+      a(href='/nav/product?search=face', hClass="face")  Для лица
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=face-ochishenie&search=face") ОЧИЩЕНИЕ
+            li(value="/nav/product?pType=face-ochishenie1&search=face") Для снятия макияжа
+            li(value="/nav/product?pType=face-ochishenie2&search=face") Гидрофильные масла
+            li(value="/nav/product?pType=face-ochishenie3&search=face") Гели для умывания
+            li(value="/nav/product?pType=face-ochishenie4&search=face") Пенки для умывания
+            li(value="/nav/product?pType=face-ochishenie5&search=face") Кремы, пудры
+            li(value="/nav/product?pType=face-ochishenie6&search=face") Мыло
+          ul.ul2
+            span(value="/nav/product?type=face-sonlce-zach&search=face").sub-title СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА
+        .col1
+          ul
+            span(value="/nav/product?type=face-tonizir&search=face").sub-title ТОНИЗИРОВАНИЕ
+            li(value="/nav/product?pType=face-tonizir1&search=face") Тонеры
+            li(value="/nav/product?pType=face-tonizir2&search=face") Спреи (мисты)
+          ul.ul2
+            span.sub-title(value="/nav/product?type=face-osnov-uhod&search=face") ОСНОВНОЙ УХОД
+            li(value="/nav/product?pType=face-osnov-uhod1&search=face") Ампулы
+            li(value="/nav/product?pType=face-osnov-uhod2&search=face") Сыворотки и эссенции
+            li(value="/nav/product?pType=face-osnov-uhod3&search=face") Лосьоны и эмульсии
+            li(value="/nav/product?pType=face-osnov-uhod4&search=face") Гели
+            li(value="/nav/product?pType=face-osnov-uhod5&search=face") Кремы
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=face-spec-uhod&search=face") СПЕЦИАЛЬНЫЙ УХОД
+            li(value="/nav/product?pType=face-spec-uhod1&search=face") Бальзамы и концентраты
+            li(value="/nav/product?pType=face-spec-uhod2&search=face", style="margin-top: 20px;") Точечные средства
+            li(value="/nav/product?pType=face-spec-uhod3&search=face") Масла
+            li(value="/nav/product?pType=face-spec-uhod4&search=face") Массажные средства
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=face-mask") МАСКИ
+            li(value="/nav/product?pType=face-mask1&search=face") Ночные маски
+            li(value="/nav/product?pType=face-mask2&search=face") Маски: пасты, кремы
+            li(value="/nav/product?pType=face-mask3&search=face") Листовые маски
+            li(value="/nav/product?pType=face-mask4&search=face") Точечные маски-патчи
+          ul.ul2
+            span.sub-title(value="/nav/product?type=face-otchelush&search=face") ОТШЕЛУШИВАНИЕ
+            li(value="/nav/product?pType=face-otchelush1&search=face") Скрабы и гоммажи
+            li(value="/nav/product?pType=face-otchelush2&search=face") Пилинги
     li
-      a(href='/nav/body')  Для тела
+      a(href='/nav/product?search=body', hClass="body")  Для тела
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=body-body&search=body") УХОД ЗА ТЕЛОМ
+            li(value="/nav/product?pType=body-body1&search=body") Для ванны и душа
+            li(value="/nav/product?pType=body-body2&search=body") Лосьоны, кремы, бальзамы
+            li(value="/nav/product?pType=body-body3&search=body") Спреи
+            li(value="/nav/product?pType=body-body4&search=body") Масла
+            li(value="/nav/product?pType=body-body5&search=body") Массажные средства
+            li(value="/nav/product?pType=body-body6&search=body") Скрабы
+          ul.ul2
+            span.sub-title(value="/nav/product?type=body-solnc&search=body") СОЛНЦЕЗАЩИТНЫЕ СРЕДСТВА
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=body-hend&search=body") УХОД ЗА РУКАМИ
+            li(value="/nav/product?pType=body-hend1&search=body") Кремы и лосьоны
+            li(value="/nav/product?pType=body-hend2&search=body") Маски и скрабы
+            li(value="/nav/product?pType=body-hend3&search=body") Уход за ногтями
+          ul.ul2
+            span.sub-title(value="/nav/product?type=body-footer&search=body") УХОД ЗА НОГАМИ
+            li(value="/nav/product?pType=body-footer1&search=body") Скрабы и пилинги
+            li(value="/nav/product?pType=body-footer2&search=body") Маски, патчи
+            li(value="/nav/product?pType=body-footer3&search=body") Лосьоны, кремы и спреи
+            li(value="/nav/product?pType=body-footer4&search=body") Дезодорирующие средства
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=body-stroin&search=body") ДЛЯ СТРОЙНОГО СИЛУЭТА
+            li(value="/nav/product?pType=body-stroin1&search=body") Гели, кремы, скрабы
+            li(value="/nav/product?pType=body-stroin2&search=body") Маски и патчи
+          ul.ul2
+            span.sub-title(value="/nav/product?type=body-epil&search=body") ЭПИЛЯЦИЯ И ДЕПИЛЯЦИЯ
+          ul.ul2
+            span.sub-title(value="/nav/product?type=body-porf&search=body") ПАРФЮМИРОВАННЫЕ И ДЕЗОДОРИРУЮЩИЕ СРЕДСТВА
+
     li
-      a(href='/nav/hair')  Для волос
+      a(href='/nav/product?search=hair', hClass="hair")  Для волос
+      .menu-cont
+        .col1
+          ul
+            li Шампуни
+            li Бальзамы-ополаскиватели
+            li 2 в 1 (шампуни+бальзамы)
+            li Сыворотки и эссенции
+            li Спреи
+            li Маски
+            li Масла
+            li Филлеры
+            li Ламинаты и Выпрямители
     li
-      a(href='/nav/makeup')  Макияж
+      a(href='/nav/product?search=makeup', hClass="make")  Макияж
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=makeup-face&search=makeup") ЛИЦО
+            li(value="/nav/product?pType=makeup-face1&search=makeup") Базы под макияж
+            li(value="/nav/product?pType=makeup-face2&search=makeup") ВВ-кремы
+            li(value="/nav/product?pType=makeup-face3&search=makeup") СС-кремы
+            li(value="/nav/product?pType=makeup-face4&search=makeup") Крем-пудры, бальзамы
+            li(value="/nav/product?pType=makeup-face5&search=makeup") Пудры сухие
+            li(value="/nav/product?pType=makeup-face6&search=makeup") Консилеры/корректоры
+            li(value="/nav/product?pType=makeup-face7&search=makeup") Хайлайтеры и бронзеры
+            li(value="/nav/product?pType=makeup-face8&search=makeup") Румяна
+            li(value="/nav/product?pType=makeup-face9&search=makeup") Фиксаторы макияжа
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=makeup-eyes&search=makeup") ГУБЫ
+            li(value="/nav/product?pType=makeup-eyes1&search=makeup") Базы под макияж губ
+            li(value="/nav/product?pType=makeup-eyes2&search=makeup") Тинты
+            li(value="/nav/product?pType=makeup-eyes3&search=makeup") Блески
+            li(value="/nav/product?pType=makeup-eyes4&search=makeup") Помады
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=makeup-lips&search=makeup") ГЛАЗА
+            li(value="/nav/product?pType=makeup-lips1&search=makeup") Базы под тушь, фиксаторы
+            li(value="/nav/product?pType=makeup-lips2&search=makeup") Туши
+            li(value="/nav/product?pType=makeup-lips3&search=makeup") Базы под тени
+            li(value="/nav/product?pType=makeup-lips4&search=makeup") Тени для век
+            li(value="/nav/product?pType=makeup-lips5&search=makeup") Карандаши для глаз
+            li(value="/nav/product?pType=makeup-lips6&search=makeup") Подводки
     li
-      a(href='/nav/accessories')  Аксессуары
+      a(href='/nav/product?search=accessories', hClass="acces")  Аксессуары
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=access-ochish&search=accessories") ДЛЯ ОЧИЩЕНИЯ КОЖИ
+            li(value="/nav/product?pType=access-ochish1&search=accessories") Щеточки, губки
+            li(value="/nav/product?pType=access-ochish2&search=accessories") Спонжи конняку
+            li(value="/nav/product?pType=access-ochish3&search=accessories") Хлопковые тампоны и диски
+            li(value="/nav/product?pType=access-ochish4&search=accessories") Прочее
+          ul.ul2
+            span.sub-title(value="/nav/product?type=access-mask&search=accessories") ДЛЯ МАСОК
+          ul.ul2
+            span.sub-title(value="/nav/product?type=access-massazh&search=accessories") ДЛЯ МАССАЖА
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=access-makeup&search=accessories") ДЛЯ МАКИЯЖА
+            li(value="/nav/product?pType=access-makeup1&search=accessories") Кисти для макияжа
+            li(value="/nav/product?pType=access-makeup2&search=accessories") Пуховки, спонжи
+            li(value="/nav/product?pType=access-makeup3&search=accessories") Матирующие салфетки
+            li.spec(value="/nav/product?pType=access-makeup4&search=accessories") Очищающие средства для спонжей и кистей
+          ul.ul4
+            span.sub-title(value="/nav/product?type=access-raznoe&search=accessories") РАЗНОЕ
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=access-manikur&search=accessories") ДЛЯ МАНИКЮРА И ПЕДИКЮРА
+          ul.ul3
+            span.sub-title(value="/nav/product?type=access-header&search=accessories") ДЛЯ ВОЛОС
+
+
     li
-      a(href='/nav/man')  Для мужчин
+      a(href='/nav/product?search=man', hClass="mans")  Для мужчин
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=forman-baza&search=man") БАЗОВЫЙ УХОД
+            li(value="/nav/product?pType=forman-baza1&search=man") Пенки, гели для умывания
+            li(value="/nav/product?pType=forman-baza2&search=man") Скрабы
+            li(value="/nav/product?pType=forman-baza3&search=man") Тонеры
+            li(value="/nav/product?pType=forman-baza4&search=man") Спреи (мисты)
+            li(value="/nav/product?pType=forman-baza5&search=man") Лосьоны, эмульсии, кремы
+            li(value="/nav/product?pType=forman-baza6&search=man") Бальзамы для губ
+            li(value="/nav/product?pType=forman-baza7&search=man") Листовые маски
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=forman-body&search=man") ДЛЯ ТЕЛА И ВОЛОС
+          ul.ul2
+            span.sub-title(value="/nav/product?type=forman-porf&search=man") ПАРФЮМИРОВАННЫЕ СРЕДСТВА
+          ul.ul2
+            span.sub-title(value="/nav/product?type=forman-brit&search=man") ПОСЛЕ БРИТЬЯ
+          ul.ul2
+            span.sub-title(value="/nav/product?type=forman-bbkrem&search=man") МУЖСКИЕ ВВ-КРЕМЫ
+
     li
-      a(href='/nav/sets')  Наборы
+      a(href='/nav/product?search=sets', hClass="sets")  Наборы
+      .menu-cont
+        .col1
+          ul
+            span.sub-title(value="/nav/product?type=set-set&search=sets") НАБОРЫ
+            li(value="/nav/product?pType=set-set1&search=sets") Уход за лицом
+            li(value="/nav/product?pType=set-set2&search=sets") Уход за телом
+            li(value="/nav/product?pType=set-set3&search=sets") Уход за волосами
+            li(value="/nav/product?pType=set-set4&search=sets") Для мужчин
+            li(value="/nav/product?pType=set-set5&search=sets") Макияж
+            li(value="/nav/product?pType=set-set6&search=sets") Маникюр
+          ul.ul2
+            span.sub-title(value="/nav/product?type=set-semple&search=sets") СЭМПЛ-НАБОРЫ
 

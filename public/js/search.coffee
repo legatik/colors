@@ -120,21 +120,23 @@ $(document).ready () ->
       collectParams()
 
     $(".filter-type").click (e) ->
+      $(".active-type").removeClass("active-type")
+      $(@).addClass("active-type")
       type = $(@).attr("value")
       searchParams.special = {}
-      searchParams.special.type = type
+      searchParams.special.type = type if type
       skip = 0
       collectParams()
 
     $(".filter-pod-type").click (e) ->
+      $(".active-type").removeClass("active-type")
+      $(@).addClass("active-type")
       searchParams.special = {}
       type = $(@).attr("value")
       searchParams.special.podType = type
       skip = 0
       collectParams()
 
-    $("#slider-price").change () ->
-      console.log "SS"
 
   collectOtherParams = (scrollWindow) ->
     searchParams.product.min_price = $(".min-price").val()
@@ -175,7 +177,8 @@ $(document).ready () ->
   sendRequest = (scrollWindow) =>
     searchParams.skip = skip
     type = $("#nav-type").val()
-    url = "/search/filter/" + type
+    searchParams.type = type
+    url = "/search/filter"
     $.ajax
       type    : 'POST'
       url     : url
@@ -190,7 +193,13 @@ $(document).ready () ->
 
   firstKey = $("#firstData").attr("search")
   firstSort = $("#firstData").attr("sort")
+  firstType = $("#firstData").attr("oType")
+  firstPType = $("#firstData").attr("pType")
   
+  searchParams.special.type = firstType if firstType
+  searchParams.special.podType = firstPType if firstPType
+  
+  console.log "searchParams", searchParams
   
   if firstSort == "new" 
     elFSort =$(".sort-product").find("option[value='popular']")

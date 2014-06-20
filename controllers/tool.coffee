@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment, Voucher} = db.models
 
 exports.boot = (app) ->
 
@@ -22,6 +22,19 @@ exports.boot = (app) ->
 
   app.get '/admin/page/action', (req, res) ->
       res.render 'admin/page/action', {title: 'Админ - акции', user: req.user, loc:'home'}
+
+  app.get '/admin/page/user', (req, res) ->
+      User.find {confirm:true}, (err, users) ->
+        res.render 'admin/page/user', {title: 'Админ - акции', user: req.user, loc:'home', users}
+
+  app.get '/admin/page/comments', (req, res) ->
+      res.render 'admin/page/comments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
+  app.get '/admin/page/pComments', (req, res) ->
+      res.render 'admin/page/pComments', {title: 'Админ - Комментарии', user: req.user, loc:'home'}
+
+  app.get '/admin/page/voucher', (req, res) ->
+      res.render 'admin/page/vouchers', {title: 'Админ - Промокоды', user: req.user, loc:'home'}
 
 
   app.get '/admin/edit/brend/:brendId', (req, res) ->
@@ -74,6 +87,16 @@ exports.boot = (app) ->
     find = new RegExp(req.query.title, "i")
     Action.find {title: find}, (err, arrAction) ->
       res.send arrAction
+
+  app.get '/admin/q_comments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    Comment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
+
+  app.get '/admin/q_pComments_by_com', (req, res) ->
+    find = new RegExp(req.query.title, "i")
+    PComment.find {text: find}, (err, arrComm) ->
+      res.send arrComm
 
       
   app.post '/admin/fn_act_brend', (req, res) ->
@@ -130,6 +153,24 @@ exports.boot = (app) ->
       rimraf path, (err) ->
         res.send 200
 
+  app.post '/admin/del_com', (req, res) ->
+    data = req.body
+    console.log "data", data
+    Comment.findOne {_id: data.id}, (err, com) ->
+      com.remove()
+      res.send 200
+      
+  app.post '/admin/del_pCom', (req, res) ->
+    data = req.body
+    PComment.findOne {_id: data.id}, (err, pcom) ->
+      arrCom = pcom.comments
+      pcom.remove()
+      Comment.find { _id: { $in: arrCom } }, (err, comms) ->
+        comms.forEach (com) ->
+          com.remove()
+        res.send 200
+      
+      
   app.post '/admin/del_news', (req, res) ->
     data = req.body
     New.findOne {_id: data.id}, (err, news) ->
@@ -142,7 +183,6 @@ exports.boot = (app) ->
   app.post '/admin/del_product', (req, res) ->
     data = req.body
     Product.findOne {_id: data.id}, (err, product) ->
-      console.log "product", product
       checkType(product, {del:true})
       res.send 200
 
@@ -189,7 +229,29 @@ exports.boot = (app) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
       body.remove() if body
       delProduct(product)
-      
+
+  delIsset = (product) ->
+    Set.findOne {_id: product.isSet}, (err, set) ->
+      set.remove() if set
+      delProduct(product)
+
+  delIsmakeup = (product) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, makeup) ->
+      makeup.remove() if makeup
+      delProduct(product)
+
+  delIsaccess = (product) ->
+    Access.findOne {_id: product.isAccess}, (err, access) ->
+      access.remove() if access
+      delProduct(product)
+
+  delIsforman = (product) ->
+    Forman.findOne {_id: product.isForman}, (err, forman) ->
+      forman.remove() if forman
+      delProduct(product)
+
+
+ #For Edit
 
   editFace = (product, cb) ->
     Face.findOne {_id: product.isFace}, (err, face) ->
@@ -205,6 +267,37 @@ exports.boot = (app) ->
         data : body
       cb(type) if body
       
+
+  editMakeup = (product, cb) ->
+    Makeup.findOne {_id: product.isMakeup}, (err, body) ->
+      type =
+        type : "makeup"
+        data : body
+      cb(type) if body
+
+
+
+  editSet = (product, cb) ->
+    Set.findOne {_id: product.isSet}, (err, body) ->
+      type =
+        type : "set"
+        data : body
+      cb(type) if body
+
+  editAccess = (product, cb) ->
+    Access.findOne {_id: product.isAccess}, (err, body) ->
+      type =
+        type : "access"
+        data : body
+      cb(type) if body
+
+
+  editForman = (product, cb) ->
+    Forman.findOne {_id: product.isForman}, (err, body) ->
+      type =
+        type : "forman"
+        data : body
+      cb(type) if body
       
       
   checkType = (product, param, cb) ->
@@ -212,10 +305,55 @@ exports.boot = (app) ->
       console.log "isface"
       delIsface(product) if param.del
       editFace(product, cb)  if param.edit
+      
     if product.isBody
       console.log "isbody"
       delIsbody(product) if param.del
       editBody(product, cb) if param.edit
+      
+    if product.isMakeup
+      console.log "isMakeup"
+      delIsmakeup(product) if param.del
+      editMakeup(product, cb)  if param.edit
+      
+    if product.isSet
+      console.log "isSet"
+      delIsset(product) if param.del
+      editSet(product, cb) if param.edit
+      
+    if product.isAccess
+      console.log "isAccess"
+      delIsaccess(product) if param.del
+      editAccess(product, cb)  if param.edit
+      
+    if product.isForman
+      console.log "isForman"
+      delIsforman(product) if param.del
+      editForman(product, cb) if param.edit
+
+
+  app.post '/admin/del_user', (req, res) ->
+    data = req.body
+    User.findOne {_id: data.id}, (err, user) ->
+      console.log "user", user
+      user.remove()
+      res.send 200
+
+#  app.get '/updateFavUser', (req, res) ->
+#    User.findById "536f8dff96a422ec11000001", (err, user) ->
+#      Product.find {}, (err, pr) ->
+#        pr.forEach (p) ->
+#          user.favorites.push p["_id"]
+#        user.save()
+#        res.send 200
+
+
+#  app.get '/updatecost', (req, res) ->
+#    console.log "@@@@@@@"
+#    Product.find {}, (err, pr) ->
+#      pr.forEach (p) ->
+#        p.cost = 100
+#        p.save()
 
 
 #  app.get '/updatecost', (req, res) ->
@@ -234,5 +372,29 @@ exports.boot = (app) ->
 #        console.log "action",action
 #        action.save()
     
+  app.post '/admin/create_voucher', (req, res) ->
+    data = req.body
+    voucher = new Voucher(data)
+    voucher.save()
+    res.send 200
     
-    
+  app.post '/admin/get_vouchers', (req, res) ->
+    Voucher.find {}, (err, vouchers) -> 
+     console.log "vouchers", vouchers
+     res.send vouchers
+     
+  app.post '/admin/chanch_voucher_active', (req, res) ->
+    data = req.body
+    Voucher.findOne data.id, (err, voucher) -> 
+      if voucher
+        voucher.active = true if data.active == "false"
+        voucher.active = false if data.active == "true"
+        voucher.save()
+      res.send 200
+
+  app.post '/admin/remove_voucher', (req, res) ->
+    data = req.body
+    Voucher.findOne data.id, (err, voucher) -> 
+      voucher.remove() if voucher
+      res.send 200
+     

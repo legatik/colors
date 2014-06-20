@@ -4,7 +4,7 @@ nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, New, Action} = db.models
+{User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access} = db.models
 
 exports.boot = (app) ->
 
@@ -62,7 +62,8 @@ exports.boot = (app) ->
 
 
 
-  app.post '/body', (req, res) ->
+
+  app.post '/product', (req, res) ->
     body = JSON.parse req.body.data
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
@@ -71,28 +72,54 @@ exports.boot = (app) ->
 
 #            Непосредственно для типа
 
-            newBody = new Body(body.type)
-            newBody.save (err, body) ->
-              prodUp3.isBody = body["_id"]
+
+            firstTypeProd = body.typeProd.charAt(0).toUpperCase()
+            typeProd = firstTypeProd + body.typeProd.substr(1)
+            
+            modelType = db.models[typeProd]
+            newType = new modelType(body.type)
+            
+            newType.save (err, typeObj) ->
+              idType = "is" + typeProd
+              prodUp3[idType] = typeObj["_id"]
               prodUp3.save ()->
                 res.send 200
 
 
-  app.post '/face', (req, res) ->
-    body = JSON.parse req.body.data
-    Product.findById body.product.findId, (err, prod) ->
-      delStepImg prod, body, (prodUp) ->
-        updateProd prodUp, body, req, (prodUp2) ->
-          deleteOldType prodUp2, (prodUp3) ->
 
-#            Непосредственно для типа
+#  app.post '/body', (req, res) ->
+#    body = JSON.parse req.body.data
+#    Product.findById body.product.findId, (err, prod) ->
+#      delStepImg prod, body, (prodUp) ->
+#        updateProd prodUp, body, req, (prodUp2) ->
+#          deleteOldType prodUp2, (prodUp3) ->
 
-            newFace = new Face(body.type)
-            newFace.save (err, face) ->
-              console.log "HEARE@@@@@@@@@@@@@@@"
-              prodUp3.isFace = face["_id"]
-              prodUp3.save ()->
-                res.send 200
+##            Непосредственно для типа
+
+#            newBody = new Body(body.type)
+#            newBody.save (err, body) ->
+#              prodUp3.isBody = body["_id"]
+#              prodUp3.save ()->
+#                res.send 200
+
+
+#  app.post '/face', (req, res) ->
+#    body = JSON.parse req.body.data
+#    Product.findById body.product.findId, (err, prod) ->
+#      delStepImg prod, body, (prodUp) ->
+#        updateProd prodUp, body, req, (prodUp2) ->
+#          deleteOldType prodUp2, (prodUp3) ->
+
+##            Непосредственно для типа
+
+#            newFace = new Face(body.type)
+#            newFace.save (err, face) ->
+#              console.log "HEARE@@@@@@@@@@@@@@@"
+#              prodUp3.isFace = face["_id"]
+#              prodUp3.save ()->
+#                res.send 200
+
+
 
 
   deleteOldType = (prod, cb) ->
@@ -112,6 +139,39 @@ exports.boot = (app) ->
           cb(prod)
 
 
+
+    if prod.isMakeup
+      Makeup.findById prod.isMakeup, (err, makeup) ->
+        makeup.remove() if makeup
+        prod.set('isMakeup', undefined)
+        prod.save () ->
+          cb(prod)
+
+
+    if prod.isSet
+      Set.findById prod.isSet, (err, set) ->
+        set.remove() if set
+        prod.set('isSet', undefined)
+        prod.save () ->
+          cb(prod)
+
+
+    if prod.isAccess
+      Access.findById prod.isAccess, (err, access) ->
+        access.remove() if access
+        prod.set('isAccess', undefined)
+        prod.save () ->
+          cb(prod)
+
+
+    if prod.isForman
+      Forman.findById prod.isForman, (err, forman) ->
+        forman.remove() if forman
+        prod.set('isForman', undefined)
+        prod.save () ->
+          cb(prod)
+
+
   updateProd = (prod, body, req, cb) ->
     prod.brend = body.product.brend
     prod.cost = body.product.cost
@@ -120,6 +180,7 @@ exports.boot = (app) ->
     prod.obem = body.product.obem
     prod.oldCost = body.product.oldCost
     prod.opisanie = body.product.opisanie
+    prod.balls = body.product.balls
     prod.ostatok = body.product.ostatok
     prod.primenenie = body.product.primenenie
     prod.title = body.product.title

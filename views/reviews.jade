@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  include navigation
+  .cabinet-cont.reviews
+    .left
+      .menu
+        ul
+          a(href="/user/profile")
+            li ПРОФИЛЬ
+          a(href="/user/favorites")
+            li ИЗБРАННОЕ
+          a(href="/user/reviews")
+            li.active ОТЗЫВЫ
+          a(href="/user/stockpiling")
+            li НАКОПЛЕНИЕ
+          a(href="/user/my_orders")
+            li МОИ ЗАКАЗЫ
+    .right  
+      .reviews-cont
+          - each com in pcoms
+            .review
+              a.go-rew(href="/product/#{com.product["_id"]}") Перейти к отзыву
+              .date #{com.mdata}
+              .title #{com.product.title}
+              .line
+              img(src="/img/products/#{com.product["_id"]}/#{com.product.picture[0]}")(width="72px",height="72px")
+              .text #{com.text}
+    .adv-div
+      .txt1 
+        div НАПИШИТЕ ОТЗЫВ 
+        div и получите бонусы и скидки!    
+      .txt2 УЗНАТЬ БОЛЬШЕ                      
+          
+          
+          
+          
+          
+          
+          
+          

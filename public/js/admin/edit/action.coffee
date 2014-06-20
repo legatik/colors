@@ -3,6 +3,7 @@ $(document).ready () ->
 
   delImg  = false
   delLogo = false
+  delPoster = false
   arrProductAct = []
 
   renderImg = () ->
@@ -15,6 +16,11 @@ $(document).ready () ->
       $("#logo-img-breng").attr("src",img)
       $("#logo-prev-fs-del").show()
     
+    if action.poster
+      img = "/img/actions/" + action["_id"] + "/poster." + action["poster"]
+      $("#poster-img-breng").attr("src",img)
+      $("#poster-prev-fs-del").show()
+    
     action.products.forEach (pr) ->
       arrProductAct.push(pr["_id"])
 
@@ -24,7 +30,9 @@ $(document).ready () ->
          
   $("#logo-breng").change () ->
     readURlLogo(@)
-          
+       
+  $("#poster-breng").change () ->
+    readURlPoster(@)   
           
   $("#img-prev-close").click () ->
     $("#img-breng").val('')
@@ -36,6 +44,11 @@ $(document).ready () ->
     $("#logo-breng").val('')
     $("#logo-img-breng").attr "src", "/img/add-bg.png"
     $("#logo-prev-close").hide()
+
+  $("#poster-prev-close").click () ->
+    $("#poster-breng").val('')
+    $("#poster-img-breng").attr "src", "/img/add-bg.png"
+    $("#poster-prev-close").hide()
           
   readURlLogo = (input) =>
     if input.files and input.files[0]
@@ -47,6 +60,18 @@ $(document).ready () ->
           $("#logo-prev-close").show()
       else
         alert("Такой фармат картинки не поддерживается")
+
+  readURlPoster = (input) =>
+    if input.files and input.files[0]
+      if input.files[0].type.indexOf("image") != -1
+        reader = new FileReader()
+        reader.readAsDataURL input.files[0]
+        reader.onload = (e) =>
+          $("#poster-img-breng").attr "src", e.target.result
+          $("#poster-prev-close").show()
+      else
+        alert("Такой фармат картинки не поддерживается")
+
           
   readURLImg = (input) =>
     if input.files and input.files[0]
@@ -70,6 +95,9 @@ $(document).ready () ->
     $("#logo-breng").val('')
     $("#logo-img-breng").attr "src", "/img/add-bg.png"
     $("#logo-prev-close").hide()
+    $("#poster-breng").val('')
+    $("#poster-img-breng").attr "src", "/img/add-bg.png"
+    $("#poster-prev-close").hide()
     $("#prod-ac-cont > div").remove()
     arrProductAct = []
 
@@ -112,33 +140,36 @@ $(document).ready () ->
   $("#add-brend").click (e) ->
     delImgF () ->
       delLogoF () ->
-        brendName = $("#brend-name").val()
-        desc = $("#brend-desc").val()
-        active = $("#active").is(':checked')
-        objSend = {
-          id          : action["_id"]
-          title       : brendName
-          description : desc
-          active      : active
-          products    : arrProductAct
-        }
-        img  = ($("#img-breng"))[0].files[0]
-        logo = ($("#logo-breng"))[0].files[0]
-        
-        newForm = new FormData()
-        newForm.append("data",JSON.stringify objSend)
-        newForm.append("img", img)
-        newForm.append("logo", logo)
-        
-        $.ajax
-          type    : 'POST'
-          data    : newForm
-          url     : "/edit/action"
-          cache: false
-          contentType: false
-          processData: false
-          success : (brend) ->
-            window.location.reload()
+        delLogoP () ->
+          brendName = $("#brend-name").val()
+          desc = $("#brend-desc").val()
+          active = $("#active").is(':checked')
+          objSend = {
+            id          : action["_id"]
+            title       : brendName
+            description : desc
+            active      : active
+            products    : arrProductAct
+          }
+          img  = ($("#img-breng"))[0].files[0]
+          logo = ($("#logo-breng"))[0].files[0]
+          poster = ($("#poster-breng"))[0].files[0]
+          
+          newForm = new FormData()
+          newForm.append("data",JSON.stringify objSend)
+          newForm.append("img", img)
+          newForm.append("logo", logo)
+          newForm.append("poster", poster)
+          
+          $.ajax
+            type    : 'POST'
+            data    : newForm
+            url     : "/edit/action"
+            cache: false
+            contentType: false
+            processData: false
+            success : (brend) ->
+              window.location.reload()
 
 
   delImgF = (cb) ->
@@ -163,12 +194,27 @@ $(document).ready () ->
         success : () ->
           cb()
 
+  delLogoP = (cb) ->
+    if !delPoster
+      cb()
+    else
+      $.ajax
+        type    : 'POST'
+        data    : {brend : action["_id"], key:"poster"}
+        url     : "/tool/admin/edit/action/del/file"
+        success : () ->
+          cb()
 
 
   $("#logo-prev-fs-del").click (e) ->
     delLogo = true
     $("#logo-prev-fs-del").hide()
     $("#logo-img-breng").attr("src", "/img/add-bg.png")
+
+  $("#poster-prev-fs-del").click (e) ->
+    delPoster = true
+    $("#poster-prev-fs-del").hide()
+    $("#poster-img-breng").attr("src", "/img/add-bg.png")
         
   $("#img-prev-fs-del").click (e) ->
     delImg = true

@@ -1,0 +1,33 @@
+extends ../../layout
+
+
+block content
+  include ../../navigation
+  != js('admin/pComments')
+  != css('admin')
+  #admin-cont
+    include admin-nav
+    
+    .form-admin(style="display:block")
+      input#in-comments-search
+      button#start-search-comments Найти
+      br
+      br
+      table.list-table
+        thead
+          tr
+            td(width=200, style="max-width:200px") Дата
+            td(width=100) Пользователь
+            td(width=500) Комментарий
+            td(width=200) Удаление
+        tbody#list-cm-body
+
+  script#commentsListTemplate(type="text/template")
+    tr
+      td <%=(new Date(com.date)).toDateString()%>
+      td <%=com.name%>
+      td <%=com.text%>
+      td
+        button.fn-del(id!="<%=com['_id']%>") Удалить комментарий
+
+

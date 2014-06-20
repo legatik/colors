@@ -13,7 +13,10 @@ html
     != js("libs/backbone-min")
     != js("libs/jquery-ui")
     != js("libs/moment")
+    != js('libs/jquery.cookie.js')
+    != js("libs/zopim.js")
     != js("global")
+
   body
     .header-fake
     .container
@@ -24,6 +27,26 @@ html
         include footer
 
 
+    #header-top-fixed
+      div#vn-cont
+        ul.navigation
+          li.about-us
+            a(href='/header/about') О нас
+          li.catalog
+            a(href='/nav/face')  Каталог
+          li.payment
+            a(href='/header/pay')  Доставка и оплата
+          li.promotions
+            a(href='/nav/promotions')  Акции
+          li.rewiews
+            a(href='/header/reviews')  Отзывы
+          li.opt
+            a(href='/header/opt')  Опт
+          li.contacts
+            a(href='/header/contact')  Контакты
+        #call-order-cont
+          #call-order Заказать звонок
+          #phone-number 8 928 604 78 71
 
     script#productTemplate(type="text/template")
       .prod
@@ -38,4 +61,20 @@ html
           span &nbsp;р
         a(href != "/product/<%=data['_id']%>")
           .in-basket В КОРЗИНУ
+    #modal-bg
+    .popup-cont.type1
+      .close
+      input.email#reg-email(type="text",placeholder="E-mail")
+      input.pass#reg-pass(type="password",placeholder="Пароль")
+      a(nohref="nohref", style="cursor:pointer").register Регистрация
+      a(nohref="nohref", style="cursor:pointer").forgot-pass Забыли пароль?
+      .enter.button Вход
+    .popup-cont.type2.type3
+      .close
+      input#send-pass-inp.email(type="text",placeholder="E-mail")
+      .send-pass.button Выслать пароль
+    .popup-cont.type2
+      .close
+      input.email#mail-pod(type="text",placeholder="E-mail")
+      .button.send Зарегистрироваться
 

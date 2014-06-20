@@ -17,17 +17,24 @@ exports.boot = (app) ->
     return arrSend
 
   app.get '/', (req, res) ->
+    console.log "req.user", req.user
     Product.find {vetrina:true}, (err, vetrins) ->
       vetrinaArr = separatorFn(vetrins, 4)
       Brend.find {active:true}, (err, brends) ->
         Action.find {active:true}, (err, actions) ->
           New.find {vetrina:true}, (err, news) ->
             brendArr = separatorFn(brends, 6)
-            res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news}
+            res.render 'index', {title: 'Colors Project', user: req.user, loc:'home', vetrina:vetrinaArr, brend:brendArr, action:actions, news:news, user:req.user}
 
 
-  app.get '/product/:idProd', (req, res) ->
-    idProd = req.params.idProd
-    Product.findById idProd, (err, product) ->
-      console.log "product", product
-      res.render 'product', {title: 'Colors - ' + product.title, product:product}
+  app.get '/lending', (req, res) -> 
+    res.render 'lending', {title: 'Colors lending', user: req.user, loc:'home'}       
+    
+  app.get '/popup1', (req, res) -> 
+    res.render 'popup1', {title: 'Colors lending', user: req.user, loc:'home'}     
+    
+  app.get '/popup2', (req, res) -> 
+    res.render 'popup2', {title: 'Colors lending', user: req.user, loc:'home'}        
+    
+  app.get '/popup3', (req, res) -> 
+    res.render 'popup3', {title: 'Colors lending', user: req.user, loc:'home'}      

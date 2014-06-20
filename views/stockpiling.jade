@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  include navigation
+  .cabinet-cont.stockpiling
+    .left
+      .menu
+        ul
+          a(href="/user/profile")
+            li ПРОФИЛЬ
+          a(href="/user/favorites")
+            li ИЗБРАННОЕ
+          a(href="/user/reviews")
+            li ОТЗЫВЫ
+          a(href="/user/stockpiling")
+            li.active НАКОПЛЕНИЕ
+          a(href="/user/my_orders")
+            li МОИ ЗАКАЗЫ
+    .right
+      .balance-cont
+        .label Баланс ваших балов
+        .balance 23,93 
+      a.link(href="#") Что такое баллы? 
+      a.link(href="#") За что начисляются баллы?
+      a.link(href="#") Как я могу потратить баллы?
+      a.link(href="#") Есть ли у баллов срок действия?
+    .podrobnee 
+      span ПОДРОБНЕЕ О ПРИВИЛЕНИЯХ ПОКУПАТЕЛЙ COLORS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+      
+        
