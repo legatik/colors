@@ -16,7 +16,6 @@ $(document).ready () ->
       
       
     
-  console.log "objProd",objProd
 
   if !testUser
     cookies_cart =  $.cookie "colors_cart"
@@ -27,14 +26,25 @@ $(document).ready () ->
         data    : {prodArr:cookieArr}
         url     : "/user/get/favorites"
         success : (arrProd) =>
-          arrProd.forEach (pr) -> 
+          arrProd.forEach (prod) -> 
             templateJQ = $("#productTemplate")
             template = _.template($(templateJQ[0]).html())
-            $("#cont-cart").prepend(template({pr:pr}))
+            $("#cont-cart").prepend(template({pr:prod}))
+            objProd[prod["_id"]] = {
+              sum  : Number(prod.cost)
+              cost : Number(prod.cost)
+              col  : 1
+              ps   : 0
+            }
+            objProd[prod["_id"]].ps = false if prod.oldCost
+          renderAllCost()
           onEvents()
 
   onEvents = () ->
     $(".cost-change-cart").unbind("change")
+    $(".promocode-input").unbind("keyup")
+    $(".del-cart-cookie").unbind("click")
+    
     $(".cost-change-cart").on "change", (e) ->
       id = ($(@).attr("id")).replace("ch", "")
       val = $(@).val()
@@ -44,34 +54,38 @@ $(document).ready () ->
         console.log "objProd[id]", objProd[id]
         renderAllCost()
     
-    
-    
-  $(".promocode-input").keyup () ->
-    idP = $(@).attr("idP")
-    return if objProd[idP].ps is false
-    
-    objProd[idP].ps     = 0
-    objProd[idP].psName = ""
-    $('.promocode-input').attr("disabled", false)
-    $('.promocode-input').removeClass("voucher-disabled")
+    $(".promocode-input").keyup () ->
+      idP = $(@).attr("idP")
+      return if objProd[idP].ps is false
+      
+      objProd[idP].ps     = 0
+      objProd[idP].psName = ""
+      $('.promocode-input').attr("disabled", false)
+      $('.promocode-input').removeClass("voucher-disabled")
     
     
     
-    renderAllCost()
-    val = $(@).val()
-    col = val.length
-    if col is 4
-      $.ajax
-        type    : 'POST'
-        data    : {code:val}
-        url     : "/user/check_voucher"
-        success : (d) =>
-          if d.st
-            objProd[idP].ps     = Number(d.v.ps)
-            objProd[idP].psName = d.v.name
-            checkQTvoucher()
-            renderAllCost()
+      renderAllCost()
+      val = $(@).val()
+      col = val.length
+      if col is 4
+        $.ajax
+          type    : 'POST'
+          data    : {code:val}
+          url     : "/user/check_voucher"
+          success : (d) =>
+            if d.st
+              objProd[idP].ps     = Number(d.v.ps)
+              objProd[idP].psName = d.v.name
+              checkQTvoucher()
+              renderAllCost()
     
+    $(".del-cart-cookie").click () ->
+      idProd = $(@).attr("idProd")
+      classDel = ".del" + idProd
+      $(classDel).remove()
+      delete objProd[idProd]
+      renderAllCost()
     
   $(".del-prod-cart").click () ->
     idProd = $(@).attr("idProd")
@@ -82,6 +96,8 @@ $(document).ready () ->
       success : (products) =>
         classDel = ".del" + idProd
         $(classDel).remove()
+        delete objProd[idProd]
+        renderAllCost()
     
   checkQTvoucher = () ->
     _.each testQTvoucherObj, (d, k) ->

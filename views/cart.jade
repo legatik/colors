@@ -71,7 +71,7 @@ block content
     script#productTemplate(type="text/template")
           tr(class!="del<%=pr['_id']%>")
             td
-              img.del-prod-cart(src="../img/bask2.png", idProd!="<%=pr['_id']%>")
+              img.del-cart-cookie(src="../img/bask2.png", idProd!="<%=pr['_id']%>", style="cursor:pointer")
             td.picture
               img(src!="../img/products/<%=pr['_id']%>/<%=pr.picture[0]%>", width="53px", height="53px")
             td.title
