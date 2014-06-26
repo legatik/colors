@@ -14,9 +14,10 @@ PComment = require './models/pComment'
 Comment = require './models/comment'
 Cart = require './models/cart'
 Voucher = require './models/voucher'
+Hair = require './models/hair'
 
 module.exports =
-	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access, PComment, Comment, Cart, Voucher}
+	models: {User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access, PComment, Comment, Cart, Voucher, Hair}
 	connection:
 		connect: (path) ->
 			db = mongoose.connect path

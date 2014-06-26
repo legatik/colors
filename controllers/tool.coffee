@@ -3,7 +3,7 @@ _ = require 'underscore'
 fs = require 'fs-extra'
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Comment, PComment, Voucher} = db.models
+{User, Product, Face, Brend, Body, Action, New, Makeup, Forman, Set, Access, Hair, Comment, PComment, Voucher} = db.models
 
 exports.boot = (app) ->
 

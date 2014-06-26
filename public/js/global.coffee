@@ -921,6 +921,57 @@ $(document).ready () ->
         ]
     }
 
+    hair:{
+        title : "Для волос"
+        key   : "hair"
+        tip   :[
+            {
+                title : "Общее"
+                key : "all-hair"
+                podtip: [
+                      {
+                        title : "Шампуни"
+                        key : "all-hair1"
+                      }
+                      {
+                        title : "Бальзамы-ополаскиватели"
+                        key : "all-hair2"
+                      }
+                      {
+                        title : "2 в 1 (шампуни+бальзамы)"
+                        key : "all-hair3"
+                      }
+                      {
+                        title : "Сыворотки и эссенции"
+                        key : "all-hair4"
+                      }
+                      {
+                        title : "Спреи"
+                        key : "all-hair5"
+                      }
+                      {
+                        title : "Маски"
+                        key : "all-hair6"
+                      }
+                      {
+                        title : "Масла"
+                        key : "all-hair7"
+                      }
+                      {
+                        title : "Филлеры"
+                        key : "all-hair8"
+                      }
+                      {
+                        title : "Ламинаты и Выпрямители"
+                        key : "all-hair9"
+                      }
+                      
+                ]
+            }
+        
+        ]
+    }  
+  
     access:{
         title : "Аксессуары"
         key   : "access"
