@@ -13,9 +13,10 @@ exports.boot = (app) ->
   getFilter = (data) ->
     filter = {}
     _.each data, (d, key) ->
-      if key isnt 'podType' and key isnt 'Type'
+      if key isnt 'podType' and key isnt 'Type' and key isnt 'type'
         filter[key] = $in: d
       filter.Type = data.Type  if data.Type
+      filter.type = data.type  if data.type
       filter.podType = data.podType  if data.podType
     filter
 
@@ -64,6 +65,7 @@ exports.boot = (app) ->
     typeProd = firstTypeProd + data.type.substr(1)
     special_filter = getFilter(data.special)
     db.models[typeProd].find special_filter, (err, prodArr) ->
+      console.log "err", err
       ids = getIds(prodArr)
       podTypeProd = "is" + typeProd
       product_filter = getProductFilter(data.product, ids, podTypeProd)
