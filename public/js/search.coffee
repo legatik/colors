@@ -98,7 +98,6 @@ $(document).ready () ->
       renderFilter(key)
 
     $(".select-params > li").click () ->
-      console.log "@", @
       checked = 0
       $ul = $(@).parent()
       liArr = $($ul).find("li")
@@ -199,13 +198,12 @@ $(document).ready () ->
   searchParams.special.type = firstType if firstType
   searchParams.special.podType = firstPType if firstPType
   
-  console.log "searchParams", searchParams
   
   if firstSort == "new" 
     elFSort =$(".sort-product").find("option[value='popular']")
     $(elFSort).attr('selected', true)
 
-
+  console.log "firstKey", firstKey
   if firstKey
     renderFilter(firstKey)
   else
