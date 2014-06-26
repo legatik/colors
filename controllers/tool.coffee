@@ -250,6 +250,10 @@ exports.boot = (app) ->
       forman.remove() if forman
       delProduct(product)
 
+  delIsHair = (product) ->
+    Hair.findOne {_id: product.isHair}, (err, hair) ->
+      hair.remove() if hair
+      delProduct(product)
 
  #For Edit
 
@@ -259,6 +263,13 @@ exports.boot = (app) ->
         type : "face"
         data : face
       cb(type) if face
+
+  editHair = (product, cb) ->
+    Hair.findOne {_id: product.isHair}, (err, hair) ->
+      type =
+        type : "hair"
+        data : hair
+      cb(type) if hair
 
   editBody = (product, cb) ->
     Body.findOne {_id: product.isBody}, (err, body) ->
@@ -331,6 +342,10 @@ exports.boot = (app) ->
       delIsforman(product) if param.del
       editForman(product, cb) if param.edit
 
+    if product.isHair
+      console.log "isHair"
+      delIsHair(product) if param.del
+      editHair(product, cb) if param.edit
 
   app.post '/admin/del_user', (req, res) ->
     data = req.body

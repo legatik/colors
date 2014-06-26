@@ -4,7 +4,7 @@ nodemailer = require 'nodemailer'
 fs = require "fs-extra"
 rimraf = require "rimraf"
 
-{User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access} = db.models
+{User, Product, Face, Brend, Body, New, Action, Makeup, Forman, Set, Access, Hair} = db.models
 
 exports.boot = (app) ->
 
@@ -65,6 +65,7 @@ exports.boot = (app) ->
 
   app.post '/product', (req, res) ->
     body = JSON.parse req.body.data
+    console.log "body", body
     Product.findById body.product.findId, (err, prod) ->
       delStepImg prod, body, (prodUp) ->
         updateProd prodUp, body, req, (prodUp2) ->
@@ -171,6 +172,12 @@ exports.boot = (app) ->
         prod.save () ->
           cb(prod)
 
+    if prod.isHair
+      Hair.findById prod.isForman, (err, hair) ->
+        hair.remove() if hair
+        prod.set('isHair', undefined)
+        prod.save () ->
+          cb(prod)
 
   updateProd = (prod, body, req, cb) ->
     prod.brend = body.product.brend
