@@ -91,6 +91,9 @@ app.get '/logout', (req,res) ->
 	req.logout()
 	res.redirect '/'
 
+app.get '/zakaz', (req,res) ->
+	res.render 'zakaz_call'
+
 
 http.createServer(app).listen app.get('port'), () ->
 	console.log "Express server listening on port " + app.get('port')

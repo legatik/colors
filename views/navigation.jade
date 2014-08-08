@@ -24,16 +24,18 @@
       a(href='/header/opt')  Опт
     li.contacts
       a(href='/header/contact')  Контакты
-
   #call-order-cont
+    #phone-number 8 (863) 2-297-397
+    #time-work круглосуточно, без выходных
     #call-order Заказать звонок
-    #phone-number 8 928 604 78 71
+    
 
 
 #header-bottom
   a(href="/")
     #logo
   #user-cont
+    input#search-input
     if(user)
       .options.login
         a(style="position: absolute;top: 0px;left: 2px;z-index: 90;height: 65px;width: 84px;", href="/user/profile") Личный кабинет
@@ -44,7 +46,6 @@
       a Избранное
     .options.busket
       a Корзина
-    input#search-input
     .log-menu
       .bord-log
       .menu-body-log

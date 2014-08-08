@@ -128,22 +128,41 @@ body
   #call-order-cont
     position: absolute
     right: 0
-    top: 10px
+    top: 0px
+    width: 279px
+    height: 99px
+    background: #BCBEC0
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow:    5px 5px 0px 0px rgba(0, 0, 0, 0.6);
+    box-shadow:         5px 5px 0px 0px rgba(0, 0, 0, 0.6);
     #call-order
     #phone-number
-      display: inline-block
-      vertical-align: middle
-    #call-order
-      width: 86px
-      height: 17px
-      background: #fff
-      font-size: 9.5px
+    #time-work 
       text-align: center
-      margin-right: 13px
+    #call-order
+      width: 197px
+      height: 23px
+      background: #fff
+      font-size: 13px
+      text-align: center
       cursor: pointer
+      margin: 0 auto
+      text-transform: uppercase
+      line-height: 23px
+      margin-top: 5px
     #phone-number
       color: #fff
-      font-size: 23px
+      font-size: 24.58px
+      margin-top: 17px
+    #time-work
+      color: #fff
+      font-size: 12px
 
 #header-top-fixed
   display:none;
@@ -207,7 +226,7 @@ ul.navigation
   #user-cont
     position: absolute
     right: 0
-    top: 20px
+    top: 50px
     .options
       display: inline-block
       vertical-align: bottom
@@ -237,7 +256,6 @@ ul.navigation
       a
         padding-left: 9px
     #search-input
-      display: block
       margin-top: 29px
       width: 196px
       height: 28px
@@ -250,8 +268,8 @@ ul.navigation
       
     .log-menu
       position: absolute;
-      top: -4px;
-      left: -75px;
+      top: 11px
+      left: 170px
       display: none
       .bord-log
         position: absolute
@@ -264,7 +282,7 @@ ul.navigation
         position: absolute
         width: 244px
         height: 154px
-        top: 52px
+        top: 54px
         left: 80px
         z-index: 100
         border: 1px solid
@@ -324,8 +342,8 @@ ul.navigation
     .fav-menu
       display: none
       position: absolute
-      top: 0px
-      left: 0px
+      top: 11px
+      left: 252px
       .bord
         position: absolute;
         width: 70px;
@@ -339,12 +357,12 @@ ul.navigation
       .menu-body
         position: absolute;
         background: #FFF;
-        width: 244px;
-        top: 52px;
-        left: -7px;
-        z-index: 100;
-        border: 1px solid;
-        border-radius: 8px;
+        width: 244px
+        top: 58px
+        left: -7px
+        z-index: 100
+        border: 1px solid
+        border-radius: 8px
         .title
           position: absolute;
           left: 87px;
@@ -425,8 +443,8 @@ ul.navigation
           margin-left: 30px
     .bask-menu
       position: absolute
-      top: 0px
-      left: 0px
+      top: 17px
+      left: 250px
       display: none
       .bord
         position: absolute;
@@ -2466,3 +2484,49 @@ ul.navigation
   
 .voucher-disabled
   background:#bcbec0 !important
+  
+#order-call
+  height: 169px
+  width: 279px
+  border: 1px solid #231F20
+  .inner-cont
+    width: 261px
+    height: 146px
+    border-radius: 5px
+    border: 1px solid #231F20
+    margin: 0 auto
+    margin-top: 11px
+    .title
+      position: absolute
+      font-size: 13px
+      width: 208px
+      text-align: center
+      background: #fff
+      top: 13px;
+      left: 45px;
+    input
+      width: 182px
+      height: 19px
+      font-size: 11.28px
+      border: 1px solid #231F20
+      margin: 0 auto
+      margin-top: 10px
+      margin-left: 37px
+      padding-left: 12px
+      &:first-of-type
+        margin-top: 15px
+    .order-but
+      width: 182px
+      height: 29px
+      background: #FF6E1D
+      border-radius: 3px
+      margin: 0 auto
+      margin-top: 15px
+      font-size: 14.61px
+      color: #fff
+      text-align: center
+      line-height: 29px
+      cursor: pointer
+      
+    
+  
